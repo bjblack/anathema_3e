@@ -8,7 +8,7 @@ import java.util.Properties;
 
 public class AnathemaBootLoader {
 
-	public static void main (String[] arguments) throws Exception
+	public static void main (String[] args) throws Exception
 	{
 		
 		ClassLoader loader = selectClassLoader ();
@@ -18,7 +18,8 @@ public class AnathemaBootLoader {
 		Method method = mainClass.getMethod ("startApplication");
 		// This is a method of the Anathema class, defined in the Platform_FX project.
 		
-		method.invoke (instance);
+		// B.J. Black: This function now passes the command-line arguments along.
+		method.invoke (instance, args);
 		
 	}
 
