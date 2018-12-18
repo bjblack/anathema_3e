@@ -8,33 +8,38 @@ import net.sf.anathema.hero.individual.change.ChangeAnnouncer;
 import net.sf.anathema.hero.individual.model.Hero;
 import net.sf.anathema.library.identifier.Identifier;
 
-public class DummyHeroConcept implements HeroConcept {
-
-  public NullCasteSelection caste = new NullCasteSelection();
-  private NullCasteCollection casteCollection = new NullCasteCollection();
-
-  @Override
-  public CasteSelection getCaste() {
-    return caste;
-  }
-
-  @Override
-  public CasteCollection getCasteCollection() {
-    return casteCollection;
-  }
-
-  @Override
-  public Identifier getId() {
-    return ID;
-  }
-
-  @Override
-  public void initialize(HeroEnvironment environment, Hero hero) {
-    // nothing to do
-  }
-
-  @Override
-  public void initializeListening(ChangeAnnouncer announcer) {
-    // nothing to do
-  }
+public class DummyHeroConcept implements HeroConcept
+{
+	public NullCasteSelection caste = new NullCasteSelection ();
+	private NullCasteCollection casteCollection = new NullCasteCollection ();
+	
+	@Override
+	public CasteSelection getCaste ()
+	{
+		return caste;
+	}
+	
+	@Override
+	public CasteCollection getCasteCollection ()
+	{
+		return casteCollection;
+	}
+	
+	@Override
+	public Identifier getId ()
+	{
+		return ID;
+	}
+	
+	@Override
+	public void initialize (HeroEnvironment environment, Hero hero)
+	{
+		// nothing to do
+	}
+	
+	@Override
+	public void initializeListening (ChangeAnnouncer announcer)
+	{
+		// nothing to do
+	}
 }

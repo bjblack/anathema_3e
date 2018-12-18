@@ -9,15 +9,16 @@ import org.junit.Test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class AgnosticPolygonPanelTest {
-
-  @Test
-  public void centersOnGivenCoordinate() throws Exception {
-    DisplayPolygonPanel displayPanel = mock(DisplayPolygonPanel.class);
-    AgnosticPolygonPanel polygonPanel = new AgnosticPolygonPanel(displayPanel);
-    polygonPanel.centerOn(new Coordinate(2, 3));
-    AgnosticTransform expected = new AgnosticTransform();
-    expected.preconcatenate(new Translation(-2, -3));
-    verify(displayPanel).setTransformation(expected);
-  }
+public class AgnosticPolygonPanelTest
+{
+	@Test
+	public void centersOnGivenCoordinate () throws Exception
+	{
+		DisplayPolygonPanel displayPanel = mock (DisplayPolygonPanel.class);
+		AgnosticPolygonPanel polygonPanel = new AgnosticPolygonPanel (displayPanel);
+		polygonPanel.centerOn (new Coordinate (2, 3));
+		AgnosticTransform expected = new AgnosticTransform ();
+		expected.preconcatenate (new Translation (-2, -3));
+		verify (displayPanel).setTransformation (expected);
+	}
 }

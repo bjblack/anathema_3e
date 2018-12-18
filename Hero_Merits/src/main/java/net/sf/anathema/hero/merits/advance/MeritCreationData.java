@@ -5,22 +5,27 @@ import net.sf.anathema.hero.merits.template.MeritPointsTemplate;
 
 import java.util.HashMap;
 
-public class MeritCreationData {
+public class MeritCreationData
+{
 	private final MeritPointsTemplate template;
 	
-	public MeritCreationData(MeritPointsTemplate template) {
+	public MeritCreationData (MeritPointsTemplate template)
+	{
 		this.template = template;
 	}
 	
-	public int getFreebiePoints() {
+	public int getFreebiePoints ()
+	{
 		return template.freebiePoints;
 	}
 	
-	public int getBonusPointCost() {
+	public int getBonusPointCost ()
+	{
 		return template.bonusPoints;
 	}
-
-  public FreeMerits createFreeMerits() {
-    return new FreeMerits(new HashMap<>(template.freeMerits));
-  }
+	
+	public FreeMerits createFreeMerits ()
+	{
+		return new FreeMerits (new HashMap<> (template.freeMerits));
+	}
 }

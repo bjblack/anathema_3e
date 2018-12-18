@@ -9,28 +9,32 @@ import java.util.List;
 
 import static java.lang.Math.max;
 
-public class AggregatedDynamicMinimum implements DynamicMinimum {
-
-  private final List<DynamicMinimum> minimums = new ArrayList<>();
-  private final Announcer<ChangeListener> announcer = Announcer.to(ChangeListener.class);
-
-  @Override
-  public int getMinimum() {
-    int overallMinimum = 0;
-    for (DynamicMinimum minimum : minimums) {
-      overallMinimum = max(overallMinimum, minimum.getMinimum());
-    }
-    return overallMinimum;
-  }
-
-  @Override
-  public void addChangedListener(ChangeListener listener) {
-    announcer.addListener(listener);
-  }
-
-  public void addMinimum(DynamicMinimum minimum) {
-    minimums.add(minimum);
-    announcer.announce().changeOccurred();
-    minimum.addChangedListener(() -> announcer.announce().changeOccurred());
-  }
+public class AggregatedDynamicMinimum implements DynamicMinimum
+{
+	private final List<DynamicMinimum> minimums = new ArrayList<> ();
+	private final Announcer<ChangeListener> announcer = Announcer.to (ChangeListener.class);
+	
+	@Override
+	public int getMinimum ()
+	{
+		int overallMinimum = 0;
+		for (DynamicMinimum minimum : minimums)
+		{
+			overallMinimum = max (overallMinimum, minimum.getMinimum ());
+		}
+		return overallMinimum;
+	}
+	
+	@Override
+	public void addChangedListener (ChangeListener listener)
+	{
+		announcer.addListener (listener);
+	}
+	
+	public void addMinimum (DynamicMinimum minimum)
+	{
+		minimums.add (minimum);
+		announcer.announce ().changeOccurred ();
+		minimum.addChangedListener ( () -> announcer.announce ().changeOccurred ());
+	}
 }

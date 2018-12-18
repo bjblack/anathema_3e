@@ -6,15 +6,17 @@ import net.sf.anathema.hero.sheet.pdf.encoder.boxes.ContentEncoder;
 import net.sf.anathema.hero.sheet.pdf.encoder.boxes.GlobalEncoderFactory;
 import net.sf.anathema.library.resources.Resources;
 
-@SuppressWarnings("UnusedDeclaration")
-public class SimpleWillpowerEncoderFactory extends GlobalEncoderFactory {
-
-  public SimpleWillpowerEncoderFactory() {
-    super(EncoderIds.WILLPOWER_SIMPLE);
-  }
-
-  @Override
-  public ContentEncoder create(Resources resources, BasicContent content) {
-    return new SimpleWillpowerEncoder();
-  }
+@SuppressWarnings ("UnusedDeclaration")
+public class SimpleWillpowerEncoderFactory extends GlobalEncoderFactory
+{
+	public SimpleWillpowerEncoderFactory ()
+	{
+		super (EncoderIds.WILLPOWER_SIMPLE);
+	}
+	
+	@Override
+	public ContentEncoder create (Resources resources, BasicContent content)
+	{
+		return new SimpleWillpowerEncoder ();
+	}
 }

@@ -6,10 +6,12 @@ import net.sf.anathema.platform.repository.printname.SimpleRepositoryId;
 
 import com.google.gson.Gson;
 
-public class CharacterReferenceBuilder implements ReferenceBuilder<CharacterReference> {
-  @Override
-  public CharacterReference create(String itemSaveData) {
-    HeroMainFileDto dto = new Gson().fromJson(itemSaveData, HeroMainFileDto.class);
-    return new CharacterReference(new SimpleRepositoryId(dto.repositoryId), dto.printName);
-  }
+public class CharacterReferenceBuilder implements ReferenceBuilder<CharacterReference>
+{
+	@Override
+	public CharacterReference create (String itemSaveData)
+	{
+		HeroMainFileDto dto = new Gson ().fromJson (itemSaveData, HeroMainFileDto.class);
+		return new CharacterReference (new SimpleRepositoryId (dto.repositoryId), dto.printName);
+	}
 }

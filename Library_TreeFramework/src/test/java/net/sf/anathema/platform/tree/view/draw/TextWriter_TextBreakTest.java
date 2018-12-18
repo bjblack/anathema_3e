@@ -18,38 +18,42 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class TextWriter_TextBreakTest {
-
-  private LineSuggestion lineSuggestion = mock(LineSuggestion.class);
-  private final Polygon shape = new Polygon();
-  private TextWriter writer = new TextWriter(shape, lineSuggestion);
-  private Canvas canvas = mock(Canvas.class);
-
-  @Before
-  public void setUp() throws Exception {
-    shape.addPoint(0, 0);
-    shape.addPoint(100, 100);
-    writer.setText("Forceful Arrow");
-  }
-
-  @Before
-  public void configureCanvas() throws Exception {
-    when(canvas.calculateBounds(any(AgnosticShape.class))).thenReturn(ANY_RECTANGLE);
-    when(canvas.measureText(anyString())).thenReturn(new Area(TEXT_WIDTH, TEXT_HEIGHT));
-  }
-
-  @Test
-  public void breaksText() throws Exception {
-    when(lineSuggestion.suggestNumberOfLines(any(Area.class))).thenReturn(2);
-    writer.write(canvas);
-    verify(canvas).drawString("Forceful", new Coordinate(25, 45));
-  }
-
-  @Test
-  public void keepsBreaksOnceEstablished() throws Exception {
-    when(lineSuggestion.suggestNumberOfLines(any(Area.class))).thenReturn(2, 1);
-    writer.write(canvas);
-    writer.write(canvas);
-    verify(canvas, times(2)).drawString("Forceful", new Coordinate(25, 45));
-  }
+public class TextWriter_TextBreakTest
+{
+	private LineSuggestion lineSuggestion = mock (LineSuggestion.class);
+	private final Polygon shape = new Polygon ();
+	private TextWriter writer = new TextWriter (shape, lineSuggestion);
+	private Canvas canvas = mock (Canvas.class);
+	
+	@Before
+	public void setUp () throws Exception
+	{
+		shape.addPoint (0, 0);
+		shape.addPoint (100, 100);
+		writer.setText ("Forceful Arrow");
+	}
+	
+	@Before
+	public void configureCanvas () throws Exception
+	{
+		when (canvas.calculateBounds (any (AgnosticShape.class))).thenReturn (ANY_RECTANGLE);
+		when (canvas.measureText (anyString ())).thenReturn (new Area (TEXT_WIDTH, TEXT_HEIGHT));
+	}
+	
+	@Test
+	public void breaksText () throws Exception
+	{
+		when (lineSuggestion.suggestNumberOfLines (any (Area.class))).thenReturn (2);
+		writer.write (canvas);
+		verify (canvas).drawString ("Forceful", new Coordinate (25, 45));
+	}
+	
+	@Test
+	public void keepsBreaksOnceEstablished () throws Exception
+	{
+		when (lineSuggestion.suggestNumberOfLines (any (Area.class))).thenReturn (2, 1);
+		writer.write (canvas);
+		writer.write (canvas);
+		verify (canvas, times (2)).drawString ("Forceful", new Coordinate (25, 45));
+	}
 }

@@ -19,68 +19,79 @@ import net.sf.anathema.library.resources.Resources;
 
 import static java.text.MessageFormat.format;
 
-@Weight(weight = 20)
-public class SpellPrinter implements MagicPrinter {
-  private final HeroEnvironment environment;
-  private final Resources resources;
-  private final MagicPartFactory partFactory;
-
-  public SpellPrinter(MagicPartFactory partFactory, HeroEnvironment environment) {
-    this.environment = environment;
-    this.resources = environment.getResources();
-    this.partFactory = partFactory;
-  }
-
-  @Override
-  public void print(MultiColumnTextReport report, Hero hero) throws DocumentException {
-    String currentGroup = "";
-    for (Spell spell : getCurrentSpells(hero)) {
-      report.startSimulation();
-      printSpell(report, currentGroup, spell);
-      report.simulateAndReset();
-      currentGroup = printSpell(report, currentGroup, spell);
-      report.printForReal();
-    }
-  }
-
-  @Override
-  public boolean hasData(Hero hero) {
-    return !getCurrentSpells(hero).isEmpty();
-  }
-
-  private String printSpell(MultiColumnTextReport report, String currentGroup, Spell spell) throws DocumentException {
-    SpellStats spellStats = createSpellStats(spell);
-    String nextGroupName = format("{0} {1}", spellStats.getType(resources), spellStats.getGroupName(resources));
-    if (!currentGroup.equals(nextGroupName)) {
-      currentGroup = nextGroupName;
-      report.addElement(partFactory.createGroupTitle(currentGroup));
-    }
-    MagicPrintSupport magicPrintSupport = new MagicPrintSupport(resources, partFactory, environment);
-    magicPrintSupport.addMagicName(spell, report);
-    addSpellCost(spell, report);
-    addSpellTarget(spellStats, report);
-    magicPrintSupport.addMagicDescription(spell, report);
-    return currentGroup;
-  }
-
-  private void addSpellCost(Spell spell, MultiColumnTextReport report) throws DocumentException {
-    String costsLabel = resources.getString("MagicReport.Costs.Label") + ": ";
-    String costsValue = new ScreenDisplayInfoContributor(resources).createCostString(spell);
-    report.addElement(partFactory.createDataPhrase(costsLabel, costsValue));
-  }
-
-  private void addSpellTarget(SpellStats spellStats, MultiColumnTextReport report) throws DocumentException {
-    String targetLabel = resources.getString("MagicReport.Target.Label") + ": ";
-    String target = Joiner.on(", ").join(spellStats.getDetailStrings(resources));
-    report.addElement(partFactory.createDataPhrase(targetLabel, target));
-  }
-
-  private SpellStats createSpellStats(Spell spell) {
-    return new SpellStats(spell);
-  }
-
-  private Spells getCurrentSpells(Hero hero) {
-    boolean experienced = ExperienceModelFetcher.fetch(hero).isExperienced();
-    return SpellsModelFetcher.fetch(hero).getLearnedSpells(experienced);
-  }
+@Weight (weight = 20)
+public class SpellPrinter implements MagicPrinter
+{
+	private final HeroEnvironment environment;
+	private final Resources resources;
+	private final MagicPartFactory partFactory;
+	
+	public SpellPrinter (MagicPartFactory partFactory, HeroEnvironment environment)
+	{
+		this.environment = environment;
+		this.resources = environment.getResources ();
+		this.partFactory = partFactory;
+	}
+	
+	@Override
+	public void print (MultiColumnTextReport report, Hero hero) throws DocumentException
+	{
+		String currentGroup = "";
+		for (Spell spell : getCurrentSpells (hero))
+		{
+			report.startSimulation ();
+			printSpell (report, currentGroup, spell);
+			report.simulateAndReset ();
+			currentGroup = printSpell (report, currentGroup, spell);
+			report.printForReal ();
+		}
+	}
+	
+	@Override
+	public boolean hasData (Hero hero)
+	{
+		return !getCurrentSpells (hero).isEmpty ();
+	}
+	
+	private String printSpell (MultiColumnTextReport report, String currentGroup, Spell spell) throws DocumentException
+	{
+		SpellStats spellStats = createSpellStats (spell);
+		String nextGroupName = format ("{0} {1}", spellStats.getType (resources), spellStats.getGroupName (resources));
+		if (!currentGroup.equals (nextGroupName))
+		{
+			currentGroup = nextGroupName;
+			report.addElement (partFactory.createGroupTitle (currentGroup));
+		}
+		MagicPrintSupport magicPrintSupport = new MagicPrintSupport (resources, partFactory, environment);
+		magicPrintSupport.addMagicName (spell, report);
+		addSpellCost (spell, report);
+		addSpellTarget (spellStats, report);
+		magicPrintSupport.addMagicDescription (spell, report);
+		return currentGroup;
+	}
+	
+	private void addSpellCost (Spell spell, MultiColumnTextReport report) throws DocumentException
+	{
+		String costsLabel = resources.getString ("MagicReport.Costs.Label") + ": ";
+		String costsValue = new ScreenDisplayInfoContributor (resources).createCostString (spell);
+		report.addElement (partFactory.createDataPhrase (costsLabel, costsValue));
+	}
+	
+	private void addSpellTarget (SpellStats spellStats, MultiColumnTextReport report) throws DocumentException
+	{
+		String targetLabel = resources.getString ("MagicReport.Target.Label") + ": ";
+		String target = Joiner.on (", ").join (spellStats.getDetailStrings (resources));
+		report.addElement (partFactory.createDataPhrase (targetLabel, target));
+	}
+	
+	private SpellStats createSpellStats (Spell spell)
+	{
+		return new SpellStats (spell);
+	}
+	
+	private Spells getCurrentSpells (Hero hero)
+	{
+		boolean experienced = ExperienceModelFetcher.fetch (hero).isExperienced ();
+		return SpellsModelFetcher.fetch (hero).getLearnedSpells (experienced);
+	}
 }

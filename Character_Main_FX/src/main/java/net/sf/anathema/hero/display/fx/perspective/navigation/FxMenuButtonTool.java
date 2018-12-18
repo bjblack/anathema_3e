@@ -12,33 +12,38 @@ import net.sf.anathema.library.interaction.view.MenuTool;
 import net.sf.anathema.platform.fx.menu.FxMenuTool;
 
 
-public class FxMenuButtonTool extends FxBaseTool implements MenuTool {
-  public static FxMenuButtonTool ForToolbar() {
-    ImageView mainIcon = new ImageView();
-    ImageView miniIcon = new ImageView();
-    SplitMenuButton button = new SplitMenuButton();
-    button.setGraphic(mainIcon);
-    AdjustSize adjustSize = new AdjustSize(button);
-    adjustSize.addExtraWidth(30);
-    return new FxMenuButtonTool(button, miniIcon, adjustSize, new SetImage(mainIcon));
-  }
-
-  private final SplitMenuButton button;
-
-  public FxMenuButtonTool(SplitMenuButton button, ImageView overlay, ImageClosure... actionsOnLoad) {
-    super(button, overlay, actionsOnLoad);
-    this.button = button;
-  }
-
-  @Override
-  public void clearMenu() {
-    button.getItems().clear();
-  }
-
-  @Override
-  public Tool addMenuEntry() {
-    FxMenuTool tool = new FxMenuTool();
-    button.getItems().add(tool.getNode());
-    return tool;
-  }
+public class FxMenuButtonTool extends FxBaseTool implements MenuTool
+{
+	public static FxMenuButtonTool ForToolbar ()
+	{
+		ImageView mainIcon = new ImageView ();
+		ImageView miniIcon = new ImageView ();
+		SplitMenuButton button = new SplitMenuButton ();
+		button.setGraphic (mainIcon);
+		AdjustSize adjustSize = new AdjustSize (button);
+		adjustSize.addExtraWidth (30);
+		return new FxMenuButtonTool (button, miniIcon, adjustSize, new SetImage (mainIcon));
+	}
+	
+	private final SplitMenuButton button;
+	
+	public FxMenuButtonTool (SplitMenuButton button, ImageView overlay, ImageClosure... actionsOnLoad)
+	{
+		super (button, overlay, actionsOnLoad);
+		this.button = button;
+	}
+	
+	@Override
+	public void clearMenu ()
+	{
+		button.getItems ().clear ();
+	}
+	
+	@Override
+	public Tool addMenuEntry ()
+	{
+		FxMenuTool tool = new FxMenuTool ();
+		button.getItems ().add (tool.getNode ());
+		return tool;
+	}
 }

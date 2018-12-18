@@ -10,17 +10,19 @@ import net.sf.anathema.hero.individual.model.SimpleModelTreeEntry;
 import net.sf.anathema.hero.spiritual.model.traits.SpiritualTraitModel;
 import net.sf.anathema.hero.traits.model.TraitModel;
 
-@SuppressWarnings("UnusedDeclaration")
-public class AbilityModelFactory extends SimpleModelTreeEntry implements HeroModelFactory {
-
-  public AbilityModelFactory() {
-    super(AbilitiesModel.ID, SpiritualTraitModel.ID, TraitModel.ID, HeroConcept.ID, ExperienceModel.ID);
-  }
-
-  @SuppressWarnings("unchecked")
-  @Override
-  public AbilitiesModelImpl create(TemplateFactory templateFactory, String templateId) {
-    AbilitiesTemplate template = AbilitiesTemplateLoader.loadTemplate(templateFactory, templateId);
-    return new AbilitiesModelImpl(template);
-  }
+@SuppressWarnings ("UnusedDeclaration")
+public class AbilityModelFactory extends SimpleModelTreeEntry implements HeroModelFactory
+{
+	public AbilityModelFactory ()
+	{
+		super (AbilitiesModel.ID, SpiritualTraitModel.ID, TraitModel.ID, HeroConcept.ID, ExperienceModel.ID);
+	}
+	
+	@SuppressWarnings ("unchecked")
+	@Override
+	public AbilitiesModelImpl create (TemplateFactory templateFactory, String templateId)
+	{
+		AbilitiesTemplate template = AbilitiesTemplateLoader.loadTemplate (templateFactory, templateId);
+		return new AbilitiesModelImpl (template);
+	}
 }

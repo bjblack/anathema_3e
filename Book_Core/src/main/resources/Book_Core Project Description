@@ -1,0 +1,6 @@
+
+The Java Project Book_Core contains resources for other projects. It contains no code.
+
+These resources are in Properties format (if the file extension is .properties), or in JSON format, or, if the file extension is .template (except *MeritPoints_*.template, which is in JSON format), some form of JSON-like format I don't recognize (GSON perhaps).
+
+I assess that this project will be entirely worthless.

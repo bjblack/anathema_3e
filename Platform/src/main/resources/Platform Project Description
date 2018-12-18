@@ -1,0 +1,6 @@
+
+The Java Project Platform contains much. Notably, it has the classes for the splashscreen displayed while the program loads. It contains one hundred sixty-four source files (excluding test files), with a cumulative total of six (6) line comments (one of which says "nothing to do"), one (1) block comment, and five (5) JavaDoc comments.
+
+Two line comments, the block comment, and all the JavaDoc comments are in net.sf.anathema.platform.persistence.RuntimeTypeAdapterFactory, and the class is "Copyright (C) 2011 Google Inc." By all appearances, it is largely taken as found from Google, with the package name, and possibly the class name, changed for this project. Also, one function- create- does not have a JavaDoc comment; this function may have been added for Anathema.
+
+I will scrap this project, except for the splashscreen files.

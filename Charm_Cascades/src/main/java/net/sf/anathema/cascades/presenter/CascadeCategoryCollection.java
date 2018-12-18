@@ -9,21 +9,26 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-public class CascadeCategoryCollection implements CategoryCollection  {
-  private CharmProvider charmProvider;
-
-  public CascadeCategoryCollection(CharmProvider charmProvider) {
-    this.charmProvider = charmProvider;
-  }
-
-  @Override
-  public List<CategoryReference> getCurrentCategories() {
-  	Set<CategoryReference> set = new LinkedHashSet<>();
-    for (CategoryReference category : charmProvider.getAllCategories()) {
-      if (!charmProvider.getCharms(category).isEmpty()) {
-        set.add(category);
-      }
-    }
-    return new ArrayList<>(set);
-  }
+public class CascadeCategoryCollection implements CategoryCollection
+{
+	private CharmProvider charmProvider;
+	
+	public CascadeCategoryCollection (CharmProvider charmProvider)
+	{
+		this.charmProvider = charmProvider;
+	}
+	
+	@Override
+	public List<CategoryReference> getCurrentCategories ()
+	{
+		Set<CategoryReference> set = new LinkedHashSet<> ();
+		for (CategoryReference category : charmProvider.getAllCategories ())
+		{
+			if (!charmProvider.getCharms (category).isEmpty ())
+			{
+				set.add (category);
+			}
+		}
+		return new ArrayList<> (set);
+	}
 }

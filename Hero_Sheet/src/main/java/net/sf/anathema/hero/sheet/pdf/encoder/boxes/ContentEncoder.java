@@ -6,11 +6,11 @@ import net.sf.anathema.hero.sheet.pdf.session.ReportSession;
 
 import com.itextpdf.text.DocumentException;
 
-public interface ContentEncoder {
-
-  void encode(SheetGraphics graphics, ReportSession reportSession, Bounds bounds) throws DocumentException;
-
-  boolean hasContent(ReportSession session);
-
-  String getHeader(ReportSession session);
+public interface ContentEncoder
+{
+	void encode (SheetGraphics graphics, ReportSession reportSession, Bounds bounds) throws DocumentException;
+	
+	boolean hasContent (ReportSession session);
+	
+	String getHeader (ReportSession session);
 }

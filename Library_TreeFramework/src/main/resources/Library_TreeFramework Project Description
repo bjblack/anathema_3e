@@ -1,0 +1,8 @@
+
+The Java Project Library_TreeFramework seems to be an extension of Library_GraphLayout; it deals further with charm cascades. It contains one hundred twenty-one source files, with a cumulative total of seventy-two (72) line comments (thirteen of which say "nothing to do"), and one (1) JavaDoc comments.
+
+Forty-eight of the line comments occur in a sequence (in net.sf.anathema.platform.tree.document.visualizer.BottomUpGraphPositioner), which would have made them a good candidate for a block comment. It does appear to describe an algorithm well- a first.
+
+The package is net.sf.anathema.platform.tree, instead of net.sf.anathema.library.tree, which might have been a better fit to naming conventions. Not that the distinction between platform and library is clear to begin with.
+
+I will set this project aside for reference purposes.

@@ -10,22 +10,25 @@ import net.sf.anathema.hero.sheet.pdf.content.AbstractSubContent;
 import net.sf.anathema.hero.sheet.pdf.content.stats.FixedLineStatsContent;
 import net.sf.anathema.library.resources.Resources;
 
-public abstract class AbstractEquipmentContent<STATS extends IEquipmentStats> extends AbstractSubContent implements FixedLineStatsContent<STATS> {
-
-  private Hero hero;
-
-  public AbstractEquipmentContent(Hero hero, Resources resources) {
-    super(resources);
-    this.hero = hero;
-  }
-
-  protected Hero getHero() {
-    return hero;
-  }
-
-  protected IEquipmentPrintModel getEquipmentModel() {
-    EquipmentModel model = EquipmentModelFetcher.fetch(hero);
-    IArmourStats naturalArmor = model.getNaturalArmor();
-    return new EquipmentPrintModel(model, naturalArmor);
-  }
+public abstract class AbstractEquipmentContent<STATS extends IEquipmentStats> extends AbstractSubContent implements FixedLineStatsContent<STATS>
+{
+	private Hero hero;
+	
+	public AbstractEquipmentContent (Hero hero, Resources resources)
+	{
+		super (resources);
+		this.hero = hero;
+	}
+	
+	protected Hero getHero ()
+	{
+		return hero;
+	}
+	
+	protected IEquipmentPrintModel getEquipmentModel ()
+	{
+		EquipmentModel model = EquipmentModelFetcher.fetch (hero);
+		IArmourStats naturalArmor = model.getNaturalArmor ();
+		return new EquipmentPrintModel (model, naturalArmor);
+	}
 }

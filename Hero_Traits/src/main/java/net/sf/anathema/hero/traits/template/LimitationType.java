@@ -1,5 +1,6 @@
 package net.sf.anathema.hero.traits.template;
 
-public enum LimitationType {
-  Essence, Static, Experience
+public enum LimitationType
+{
+	Essence, Static, Experience
 }

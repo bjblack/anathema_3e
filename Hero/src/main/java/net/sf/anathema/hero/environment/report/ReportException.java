@@ -1,20 +1,24 @@
 package net.sf.anathema.hero.environment.report;
 
-public class ReportException extends RuntimeException {
-
-  public ReportException() {
-    super();
-  }
-
-  public ReportException(String message) {
-    super(message);
-  }
-
-  public ReportException(String message, Throwable cause) {
-    super(message, cause);
-  }
-
-  public ReportException(Throwable cause) {
-    super(cause);
-  }
+public class ReportException extends RuntimeException
+{
+	public ReportException ()
+	{
+		super ();
+	}
+	
+	public ReportException (String message)
+	{
+		super (message);
+	}
+	
+	public ReportException (String message, Throwable cause)
+	{
+		super (message, cause);
+	}
+	
+	public ReportException (Throwable cause)
+	{
+		super (cause);
+	}
 }

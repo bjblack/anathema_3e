@@ -8,15 +8,15 @@ import net.sf.anathema.magic.data.source.SourceBook;
 
 import java.util.List;
 
-public interface Magic {
-
-  MagicName getName();
-
-  Iterable<MagicAttribute> getAttributes();
-
-  List<SourceBook> getSources();
-
-  CostList getTemporaryCost();
-
-  boolean hasAttribute(Identifier attribute);
+public interface Magic
+{
+	MagicName getName ();
+	
+	Iterable<MagicAttribute> getAttributes ();
+	
+	List<SourceBook> getSources ();
+	
+	CostList getTemporaryCost ();
+	
+	boolean hasAttribute (Identifier attribute);
 }

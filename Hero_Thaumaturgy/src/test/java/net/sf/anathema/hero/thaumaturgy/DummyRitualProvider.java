@@ -10,29 +10,32 @@ import net.sf.anathema.library.model.OptionalEntryReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DummyRitualProvider implements ThaumaturgyRitualCache {
+public class DummyRitualProvider implements ThaumaturgyRitualCache
+{
+	private final List<ThaumaturgyRitual> rituals = new ArrayList<> ();
 	
-	private final List<ThaumaturgyRitual> rituals = new ArrayList<>();
-	
-	public DummyRitualProvider() {
-		rituals.add(new RitualImpl(new RitualTemplate("Second Bread", true, false)));
-		rituals.add(new RitualImpl(new RitualTemplate("Read The Tea Leaves", true, true)));
-		rituals.add(new RitualImpl(new RitualTemplate("Speak To Ozashun", false, true)));
+	public DummyRitualProvider ()
+	{
+		rituals.add (new RitualImpl (new RitualTemplate ("Second Bread", true, false)));
+		rituals.add (new RitualImpl (new RitualTemplate ("Read The Tea Leaves", true, true)));
+		rituals.add (new RitualImpl (new RitualTemplate ("Speak To Ozashun", false, true)));
 	}
-
+	
 	@Override
-	public List<ThaumaturgyRitual> getAllOptions() {
+	public List<ThaumaturgyRitual> getAllOptions ()
+	{
 		return rituals;
 	}
-
+	
 	@Override
-	public List<ThaumaturgyRitual> getAllOptionsForCategory(OptionalEntryCategory category) {
+	public List<ThaumaturgyRitual> getAllOptionsForCategory (OptionalEntryCategory category)
+	{
 		return null;
 	}
-
+	
 	@Override
-	public ThaumaturgyRitual getOptionByReference(OptionalEntryReference reference) {
-		return rituals.stream().filter(ritual -> ritual.getTraitType().toString().equals(reference.name)).findFirst().get();
+	public ThaumaturgyRitual getOptionByReference (OptionalEntryReference reference)
+	{
+		return rituals.stream ().filter (ritual -> ritual.getTraitType ().toString ().equals (reference.name)).findFirst ().get ();
 	}
-
 }

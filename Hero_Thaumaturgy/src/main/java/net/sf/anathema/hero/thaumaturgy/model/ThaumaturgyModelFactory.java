@@ -9,16 +9,18 @@ import net.sf.anathema.hero.merits.model.MeritsModel;
 import net.sf.anathema.hero.traits.model.TraitModel;
 import net.sf.anathema.points.model.PointsModel;
 
-@SuppressWarnings("UnusedDeclaration")
-public class ThaumaturgyModelFactory extends SimpleModelTreeEntry implements HeroModelFactory {
-
-  public ThaumaturgyModelFactory() {
-    super(ThaumaturgyModel.ID, TraitModel.ID, ExperienceModel.ID, HeroConcept.ID, PointsModel.ID, MeritsModel.ID);
-  }
-
-  @SuppressWarnings("unchecked")
-  @Override
-  public ThaumaturgyModel create(TemplateFactory templateFactory, String templateId) {
-    return new ThaumaturgyModelImpl();
-  }
+@SuppressWarnings ("UnusedDeclaration")
+public class ThaumaturgyModelFactory extends SimpleModelTreeEntry implements HeroModelFactory
+{
+	public ThaumaturgyModelFactory ()
+	{
+		super (ThaumaturgyModel.ID, TraitModel.ID, ExperienceModel.ID, HeroConcept.ID, PointsModel.ID, MeritsModel.ID);
+	}
+	
+	@SuppressWarnings ("unchecked")
+	@Override
+	public ThaumaturgyModel create (TemplateFactory templateFactory, String templateId)
+	{
+		return new ThaumaturgyModelImpl ();
+	}
 }

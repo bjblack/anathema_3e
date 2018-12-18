@@ -4,13 +4,14 @@ import net.sf.anathema.magic.data.prerequisite.AnyOneTraitCharmPrerequisite;
 import net.sf.anathema.magic.data.prerequisite.CharmPrerequisite;
 import net.sf.anathema.platform.persistence.JsonType;
 
-@JsonType("anyOneTraitWithCountCharms")
-public class AnyOneTraitCharmPrerequisiteTemplate implements CharmPrerequisiteTemplate {
-
+@JsonType ("anyOneTraitWithCountCharms")
+public class AnyOneTraitCharmPrerequisiteTemplate implements CharmPrerequisiteTemplate
+{
 	public int threshold;
 	
 	@Override
-	public CharmPrerequisite generate(CharmMap charms) {
-		return new AnyOneTraitCharmPrerequisite(threshold);
+	public CharmPrerequisite generate (CharmMap charms)
+	{
+		return new AnyOneTraitCharmPrerequisite (threshold);
 	}
 }

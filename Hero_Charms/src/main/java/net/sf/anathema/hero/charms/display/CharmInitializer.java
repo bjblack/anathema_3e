@@ -21,38 +21,42 @@ import net.sf.anathema.platform.tree.document.visualizer.TreePresentationPropert
 
 import static net.sf.anathema.hero.individual.overview.HeroModelGroup.Charms;
 
-@RegisteredInitializer(Charms)
-@Weight(weight = 0)
-public class CharmInitializer implements HeroModelInitializer {
-
-  private HeroEnvironment environment;
-
-  public CharmInitializer(HeroEnvironment environment) {
-    this.environment = environment;
-  }
-
-  @Override
-  public void initialize(SectionView sectionView, Hero hero) {
-    MagicDescriptionProvider provider = MagicDescriptionProviderExtractor.CreateFor(environment);
-    CharmBorderColorEvaluator evaluator = new CharmBorderColorEvaluator(environment.getObjectFactory());
-    CharmDisplayModel model = new CharmDisplayModel(hero, evaluator, provider);
-    HeroType heroType = hero.getSplat().getTemplateType().getHeroType();
-    CharmDisplayPropertiesMap propertiesMap = new CharmDisplayPropertiesMap(environment.getObjectFactory());
-    TreePresentationProperties presentationProperties = propertiesMap.getDisplayProperties(heroType);
-    String header = environment.getResources().getString("CardView.CharmConfiguration.CharmSelection.Title");
-    CharmView charmView = sectionView.addView(header, CharmView.class);
-    CharmMap charmCache = getCharmIdMap();
-    CharacterCharmTreePresenter treePresenter = new CharacterCharmTreePresenter(environment.getResources(), charmView,
-      model, presentationProperties, charmCache, provider);
-    treePresenter.initPresentation();
-  }
-
-  @Override
-  public boolean canWorkForHero(Hero hero) {
-    return CharmsModelFetcher.fetch(hero) != null;
-  }
-
-  private CharmMap getCharmIdMap() {
-    return environment.getDataSet(CharmCache.class);
-  }
+@RegisteredInitializer (Charms)
+@Weight (weight = 0)
+public class CharmInitializer implements HeroModelInitializer
+{
+	private HeroEnvironment environment;
+	
+	public CharmInitializer (HeroEnvironment environment)
+	{
+		this.environment = environment;
+	}
+	
+	@Override
+	public void initialize (SectionView sectionView, Hero hero)
+	{
+		MagicDescriptionProvider provider = MagicDescriptionProviderExtractor.CreateFor (environment);
+		CharmBorderColorEvaluator evaluator = new CharmBorderColorEvaluator (environment.getObjectFactory ());
+		CharmDisplayModel model = new CharmDisplayModel (hero, evaluator, provider);
+		HeroType heroType = hero.getSplat ().getTemplateType ().getHeroType ();
+		CharmDisplayPropertiesMap propertiesMap = new CharmDisplayPropertiesMap (environment.getObjectFactory ());
+		TreePresentationProperties presentationProperties = propertiesMap.getDisplayProperties (heroType);
+		String header = environment.getResources ().getString ("CardView.CharmConfiguration.CharmSelection.Title");
+		CharmView charmView = sectionView.addView (header, CharmView.class);
+		CharmMap charmCache = getCharmIdMap ();
+		CharacterCharmTreePresenter treePresenter = new CharacterCharmTreePresenter (environment.getResources (), charmView,
+		model, presentationProperties, charmCache, provider);
+		treePresenter.initPresentation ();
+	}
+	
+	@Override
+	public boolean canWorkForHero (Hero hero)
+	{
+		return CharmsModelFetcher.fetch (hero) != null;
+	}
+	
+	private CharmMap getCharmIdMap ()
+	{
+		return environment.getDataSet (CharmCache.class);
+	}
 }

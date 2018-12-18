@@ -16,31 +16,43 @@ import net.sf.anathema.hero.traits.model.TraitMap;
 import net.sf.anathema.hero.traits.model.TraitModelFetcher;
 import net.sf.anathema.library.resources.Resources;
 
-public class SocialCombatStatsTableEncoder extends AbstractFixedLineStatsTableEncoder<ISocialCombatStats> {
-
-  private final Resources resources;
-
-  public SocialCombatStatsTableEncoder(Resources resources) {
-    this.resources = resources;
-  }
-
-  @SuppressWarnings("unchecked")
-  @Override
-  protected IStatsGroup<ISocialCombatStats>[] createStatsGroups(ReportSession session) {
-    return new IStatsGroup[]{new SocialCombatNameStatsGroup(resources), new SocialSpeedStatsGroup(
-            resources), new HonestyStatsGroup(resources), new DeceptionStatsGroup(resources), new SocialRateStatsGroup(
-            resources)};
-  }
-
-  @Override
-  protected int getLineCount(ReportSession session) {
-    return 3;
-  }
-
-  @Override
-  protected ISocialCombatStats[] getPrintStats(ReportSession session) {
-    TraitMap traitCollection = TraitModelFetcher.fetch(session.getHero());
-    return new ISocialCombatStats[]{new PresenceSocialAttack(traitCollection), new PerformanceSocialAttack(
-            traitCollection), new InvestigationSocialAttack(traitCollection)};
-  }
+public class SocialCombatStatsTableEncoder extends AbstractFixedLineStatsTableEncoder<ISocialCombatStats>
+{
+	private final Resources resources;
+	
+	public SocialCombatStatsTableEncoder (Resources resources)
+	{
+		this.resources = resources;
+	}
+	
+	@SuppressWarnings ("unchecked")
+	@Override
+	protected IStatsGroup<ISocialCombatStats>[] createStatsGroups (ReportSession session)
+	{
+		return new IStatsGroup[]
+		{
+			new SocialCombatNameStatsGroup (resources), new SocialSpeedStatsGroup (
+			resources), new HonestyStatsGroup (resources), new DeceptionStatsGroup (resources), new SocialRateStatsGroup (
+			resources)
+		}
+		;
+	}
+	
+	@Override
+	protected int getLineCount (ReportSession session)
+	{
+		return 3;
+	}
+	
+	@Override
+	protected ISocialCombatStats[] getPrintStats (ReportSession session)
+	{
+		TraitMap traitCollection = TraitModelFetcher.fetch (session.getHero ());
+		return new ISocialCombatStats[]
+		{
+			new PresenceSocialAttack (traitCollection), new PerformanceSocialAttack (
+			traitCollection), new InvestigationSocialAttack (traitCollection)
+		}
+		;
+	}
 }

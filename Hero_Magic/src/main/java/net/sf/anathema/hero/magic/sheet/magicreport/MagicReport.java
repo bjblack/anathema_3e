@@ -12,42 +12,52 @@ import net.sf.anathema.hero.sheet.text.MultiColumnTextReport;
 
 import java.util.Collection;
 
-public class MagicReport extends AbstractPdfReport {
-
-  private final MagicPartFactory partFactory;
-  private final HeroEnvironment environment;
-
-  public MagicReport(HeroEnvironment environment) {
-    this.environment = environment;
-    this.partFactory = new MagicPartFactory(new PdfReportUtils());
-  }
-
-  @Override
-  public String toString() {
-    return environment.getResources().getString("MagicReport.Name");
-  }
-
-  @Override
-  public void performPrint(Hero hero, Document document, PdfWriter writer) throws ReportException {
-    try {
-      MultiColumnTextReport report = new MultiColumnTextReport(document, writer);
-      Collection<MagicPrinter> printers = environment.getObjectFactory().instantiateAllImplementersOrdered(MagicPrinter.class, partFactory, environment);
-      for (MagicPrinter printer : printers) {
-        printer.print(report, hero);
-      }
-    } catch (DocumentException e) {
-      throw new ReportException(e);
-    }
-  }
-
-  @Override
-  public boolean supports(Hero hero) {
-    Collection<MagicPrinter> printers = environment.getObjectFactory().instantiateAllImplementersOrdered(MagicPrinter.class, partFactory, environment);
-    for (MagicPrinter printer : printers) {
-      if (printer.hasData(hero)){
-        return true;
-      }
-    }
-    return false;
-  }
+public class MagicReport extends AbstractPdfReport
+{
+	private final MagicPartFactory partFactory;
+	private final HeroEnvironment environment;
+	
+	public MagicReport (HeroEnvironment environment)
+	{
+		this.environment = environment;
+		this.partFactory = new MagicPartFactory (new PdfReportUtils ());
+	}
+	
+	@Override
+	public String toString ()
+	{
+		return environment.getResources ().getString ("MagicReport.Name");
+	}
+	
+	@Override
+	public void performPrint (Hero hero, Document document, PdfWriter writer) throws ReportException
+	{
+		try
+		{
+			MultiColumnTextReport report = new MultiColumnTextReport (document, writer);
+			Collection<MagicPrinter> printers = environment.getObjectFactory ().instantiateAllImplementersOrdered (MagicPrinter.class, partFactory, environment);
+			for (MagicPrinter printer : printers)
+			{
+				printer.print (report, hero);
+			}
+		}
+		catch (DocumentException e)
+		{
+			throw new ReportException (e);
+		}
+	}
+	
+	@Override
+	public boolean supports (Hero hero)
+	{
+		Collection<MagicPrinter> printers = environment.getObjectFactory ().instantiateAllImplementersOrdered (MagicPrinter.class, partFactory, environment);
+		for (MagicPrinter printer : printers)
+		{
+			if (printer.hasData (hero))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 }

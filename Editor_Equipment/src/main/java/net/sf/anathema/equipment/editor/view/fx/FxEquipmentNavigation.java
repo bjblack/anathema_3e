@@ -9,27 +9,31 @@ import net.sf.anathema.library.view.Vetor;
 import net.sf.anathema.platform.fx.navigation.Navigation;
 import net.sf.anathema.platform.fx.repositorytree.FxVetor;
 
-public class FxEquipmentNavigation extends Navigation implements EquipmentNavigation {
-
-  private ListSelectionView<String> listView = new ListSelectionView<>();
-
-  public FxEquipmentNavigation(AcceleratorMap acceleratorMap) {
-    super(acceleratorMap);
-    addContainerToNavigation(listView.getNode());
-  }
-
-  @Override
-  public VetoableObjectSelectionView<String> getTemplateListView() {
-    return listView;
-  }
-
-  @Override
-  public Tool addEditTemplateTool() {
-    return addTool();
-  }
-
-  @Override
-  public Vetor createVetor(String title, String message) {
-    return new FxVetor(title, message);
-  }
+public class FxEquipmentNavigation extends Navigation implements EquipmentNavigation
+{
+	private ListSelectionView<String> listView = new ListSelectionView<> ();
+	
+	public FxEquipmentNavigation (AcceleratorMap acceleratorMap)
+	{
+		super (acceleratorMap);
+		addContainerToNavigation (listView.getNode ());
+	}
+	
+	@Override
+	public VetoableObjectSelectionView<String> getTemplateListView ()
+	{
+		return listView;
+	}
+	
+	@Override
+	public Tool addEditTemplateTool ()
+	{
+		return addTool ();
+	}
+	
+	@Override
+	public Vetor createVetor (String title, String message)
+	{
+		return new FxVetor (title, message);
+	}
 }

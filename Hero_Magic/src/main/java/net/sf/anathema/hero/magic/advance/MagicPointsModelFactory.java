@@ -7,17 +7,19 @@ import net.sf.anathema.hero.individual.model.HeroModelFactory;
 import net.sf.anathema.hero.individual.model.SimpleModelTreeEntry;
 import net.sf.anathema.points.model.PointsModel;
 
-@SuppressWarnings("UnusedDeclaration")
-public class MagicPointsModelFactory extends SimpleModelTreeEntry implements HeroModelFactory {
-
-  public MagicPointsModelFactory() {
-    super(MagicPointsModel.ID, PointsModel.ID);
-  }
-
-  @SuppressWarnings("unchecked")
-  @Override
-  public MagicPointsModel create(TemplateFactory templateFactory, String templateId) {
-    MagicPointsTemplate template = MagicPointsTemplateLoader.loadTemplate(templateFactory, templateId);
-    return new MagicPointsModel(template);
-  }
+@SuppressWarnings ("UnusedDeclaration")
+public class MagicPointsModelFactory extends SimpleModelTreeEntry implements HeroModelFactory
+{
+	public MagicPointsModelFactory ()
+	{
+		super (MagicPointsModel.ID, PointsModel.ID);
+	}
+	
+	@SuppressWarnings ("unchecked")
+	@Override
+	public MagicPointsModel create (TemplateFactory templateFactory, String templateId)
+	{
+		MagicPointsTemplate template = MagicPointsTemplateLoader.loadTemplate (templateFactory, templateId);
+		return new MagicPointsModel (template);
+	}
 }

@@ -17,43 +17,49 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
-public class ExternalPrerequisitesColorerTest {
-
-  public static final String CURRENT_GROUP = "CurrentGroup";
-  private final CharmColoring coloring = mock(CharmColoring.class);
-  private final CharmGroupInformer informer = mock(CharmGroupInformer.class);
-
-  @Test
-  public void doesNotColorParentCharmFromCurrentGroup() throws Exception {
-    DummyCharm parent = createParentCharmFromGroup(CURRENT_GROUP);
-    Charm child = createChildCharm(parent);
-    CharmTree currentGroup = createGroupWithCharms(parent, child);
-    selectGroup(currentGroup);
-    colorAllPrerequisitesOfChild(child);
-    verifyZeroInteractions(coloring);
-  }
-
-  private void colorAllPrerequisitesOfChild(Charm child) {
-    ExternalPrerequisitesBrush colorer = new ExternalPrerequisitesBrush(informer, coloring);
-    colorer.color(child);
-  }
-
-  private void selectGroup(CharmTree currentGroup) {
-    when(informer.getCurrentTree()).thenReturn(currentGroup);
-  }
-
-  private CharmTree createGroupWithCharms(DummyCharm parent, Charm child) {
-    TreeReference treeReference = child.getTreeReference();
-    return new CharmTreeImpl(treeReference, Lists.newArrayList(parent, child ));
-  }
-
-  private DummyCharm createParentCharmFromGroup(String treeName) {
-    return DummyCharm.ForIdAndTree("parent", treeName);
-  }
-
-  private Charm createChildCharm(DummyCharm parent) {
-    DummyCharm child = new DummyCharm("child", parent);
-    child.treeReference = parent.treeReference;
-    return child;
-  }
+public class ExternalPrerequisitesColorerTest
+{
+	public static final String CURRENT_GROUP = "CurrentGroup";
+	private final CharmColoring coloring = mock (CharmColoring.class);
+	private final CharmGroupInformer informer = mock (CharmGroupInformer.class);
+	
+	@Test
+	public void doesNotColorParentCharmFromCurrentGroup () throws Exception
+	{
+		DummyCharm parent = createParentCharmFromGroup (CURRENT_GROUP);
+		Charm child = createChildCharm (parent);
+		CharmTree currentGroup = createGroupWithCharms (parent, child);
+		selectGroup (currentGroup);
+		colorAllPrerequisitesOfChild (child);
+		verifyZeroInteractions (coloring);
+	}
+	
+	private void colorAllPrerequisitesOfChild (Charm child)
+	{
+		ExternalPrerequisitesBrush colorer = new ExternalPrerequisitesBrush (informer, coloring);
+		colorer.color (child);
+	}
+	
+	private void selectGroup (CharmTree currentGroup)
+	{
+		when (informer.getCurrentTree ()).thenReturn (currentGroup);
+	}
+	
+	private CharmTree createGroupWithCharms (DummyCharm parent, Charm child)
+	{
+		TreeReference treeReference = child.getTreeReference ();
+		return new CharmTreeImpl (treeReference, Lists.newArrayList (parent, child ));
+	}
+	
+	private DummyCharm createParentCharmFromGroup (String treeName)
+	{
+		return DummyCharm.ForIdAndTree ("parent", treeName);
+	}
+	
+	private Charm createChildCharm (DummyCharm parent)
+	{
+		DummyCharm child = new DummyCharm ("child", parent);
+		child.treeReference = parent.treeReference;
+		return child;
+	}
 }

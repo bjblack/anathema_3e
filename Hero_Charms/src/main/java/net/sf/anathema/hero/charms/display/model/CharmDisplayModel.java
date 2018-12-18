@@ -17,52 +17,63 @@ import net.sf.anathema.magic.description.model.MagicDescriptionProvider;
 
 import java.util.List;
 
-public class CharmDisplayModel {
-  private Hero hero;
-  private MagicDescriptionProvider magicDescriptionProvider;
-  private CharmBorderColorEvaluator evaluator;
-
-  public CharmDisplayModel(Hero hero, CharmBorderColorEvaluator evaluator,
-  		MagicDescriptionProvider magicDescriptionProvider) {
-    this.hero = hero;
-    this.magicDescriptionProvider = magicDescriptionProvider;
-    this.evaluator = evaluator;
-  }
-
-  public boolean isAllowedAlienCharms() {
-    return getCharmModel().getOptions().isAlienCharmsAllowedForHero();
-  }
-
-  public void addCasteChangeListener(ChangeListener listener) {
-    getCaste().addChangeListener(listener);
-  }
-
-  public CharmsModel getCharmModel() {
-    return CharmsModelFetcher.fetch(hero);
-  }
-  
-  public RGBColor getBorderColorForCharm(Charm charm) {
-  	return evaluator.getBorderColorForCharm(charm);
-  }
-
-  private CasteSelection getCaste() {
-    return HeroConceptFetcher.fetch(hero).getCaste();
-  }
-
-  public void toggleLearned(CharmName charmId) {
-    CharmsModel charms = getCharmModel();
-    LearningModel learningModel = getCharmModel().getLearningModel();
-    Charm charmToLearn = charms.getCharmById(charmId);
-    if (!charmToLearn.hasAttribute(CommonMagicAttributes.NO_MANUAL_CONTROL)) {
-    	learningModel.toggleLearned(charmToLearn);
-    }
-  }
-
-  public MagicDescriptionProvider getMagicDescriptionProvider() {
-    return magicDescriptionProvider;
-  }
-
-  public List<CategoryReference> getValidCategoriesForHero() {
-    return getCharmModel().getOptions().getValidCategoryReferencesForHero();
-  }
+public class CharmDisplayModel
+{
+	private Hero hero;
+	private MagicDescriptionProvider magicDescriptionProvider;
+	private CharmBorderColorEvaluator evaluator;
+	
+	public CharmDisplayModel (Hero hero, CharmBorderColorEvaluator evaluator,
+	MagicDescriptionProvider magicDescriptionProvider)
+	{
+		this.hero = hero;
+		this.magicDescriptionProvider = magicDescriptionProvider;
+		this.evaluator = evaluator;
+	}
+	
+	public boolean isAllowedAlienCharms ()
+	{
+		return getCharmModel ().getOptions ().isAlienCharmsAllowedForHero ();
+	}
+	
+	public void addCasteChangeListener (ChangeListener listener)
+	{
+		getCaste ().addChangeListener (listener);
+	}
+	
+	public CharmsModel getCharmModel ()
+	{
+		return CharmsModelFetcher.fetch (hero);
+	}
+	
+	public RGBColor getBorderColorForCharm (Charm charm)
+	{
+		return evaluator.getBorderColorForCharm (charm);
+	}
+	
+	private CasteSelection getCaste ()
+	{
+		return HeroConceptFetcher.fetch (hero).getCaste ();
+	}
+	
+	public void toggleLearned (CharmName charmId)
+	{
+		CharmsModel charms = getCharmModel ();
+		LearningModel learningModel = getCharmModel ().getLearningModel ();
+		Charm charmToLearn = charms.getCharmById (charmId);
+		if (!charmToLearn.hasAttribute (CommonMagicAttributes.NO_MANUAL_CONTROL))
+		{
+			learningModel.toggleLearned (charmToLearn);
+		}
+	}
+	
+	public MagicDescriptionProvider getMagicDescriptionProvider ()
+	{
+		return magicDescriptionProvider;
+	}
+	
+	public List<CategoryReference> getValidCategoriesForHero ()
+	{
+		return getCharmModel ().getOptions ().getValidCategoryReferencesForHero ();
+	}
 }

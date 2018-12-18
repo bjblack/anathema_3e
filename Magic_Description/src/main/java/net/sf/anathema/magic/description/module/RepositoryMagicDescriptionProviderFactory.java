@@ -10,14 +10,15 @@ import net.sf.anathema.magic.description.persistence.RepositoryMagicDescriptionD
 import net.sf.anathema.platform.frame.ApplicationModel;
 
 @RegisteredMagicDescriptionProviderFactory
-public class RepositoryMagicDescriptionProviderFactory implements MagicDescriptionProviderFactory {
-
-  @Inject
-  public ApplicationModel applicationModel;
-
-  @Override
-  public MagicDescriptionProvider create(HeroEnvironment environment) {
-    MagicDescriptionDataBase dataBase = RepositoryMagicDescriptionDataBase.CreateFrom(applicationModel);
-    return new RepositoryMagicDescriptionProvider(dataBase);
-  }
+public class RepositoryMagicDescriptionProviderFactory implements MagicDescriptionProviderFactory
+{
+	@Inject
+	public ApplicationModel applicationModel;
+	
+	@Override
+	public MagicDescriptionProvider create (HeroEnvironment environment)
+	{
+		MagicDescriptionDataBase dataBase = RepositoryMagicDescriptionDataBase.CreateFrom (applicationModel);
+		return new RepositoryMagicDescriptionProvider (dataBase);
+	}
 }

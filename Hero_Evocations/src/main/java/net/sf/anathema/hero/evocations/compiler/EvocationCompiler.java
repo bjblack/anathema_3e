@@ -23,49 +23,55 @@ import java.util.ArrayList;
 import java.util.List;
 
 @net.sf.anathema.platform.initialization.ExtensibleDataSetCompiler
-@Weight(weight = 100)
-public class EvocationCompiler implements ExtensibleDataSetCompiler {
-
-  private static final String Charm_File_Recognition_Pattern = ".+?\\.charms";
-  private final List<ResourceFile> resourceFiles = new ArrayList<>();
-
-  @Inject
-  public ObjectFactory objectFactory;
-  @Inject
-  public InterfaceFinder finder;
-  @Inject
-  public ExtensibleDataSetProvider cacheProvider;
-
-  @Override
-  public String getName() {
-    return "Evocations";
-  }
-
-  @Override
-  public String getRecognitionPattern() {
-    return Charm_File_Recognition_Pattern;
-  }
-
-  @Override
-  public void registerFile(ResourceFile resource) {
-    resourceFiles.add(resource);
-  }
-
-  @Override
-  public ExtensibleDataSet build() {
-    RuntimeTypeAdapterFactory[] charmFactories =
-            new PolymorphicTypeAdapterFactoryFactory(finder).generateFactories(CharmPrerequisiteTemplate.class);
-    TemplateLoader<EvocationArtifactTemplate> evocationLoader = new GenericTemplateLoader<>(EvocationArtifactTemplate.class);
-    TemplateLoader<CharmListTemplate> charmsLoader = new GenericTemplateLoader<>(CharmListTemplate.class, charmFactories);
-    CharmCacheImpl cache = (CharmCacheImpl) cacheProvider.getDataSet(CharmCache.class);
-    EvocationsBuilder evocationBuilder = new EvocationsBuilder();
-    resourceFiles.forEach(resourceFile -> {
-      EvocationArtifactTemplate asEvocationsTemplate = evocationLoader.load(resourceFile);
-      CharmListTemplate asCharmsTemplate = charmsLoader.load(resourceFile);
-      evocationBuilder.addTemplate(asEvocationsTemplate);
-      evocationBuilder.addCharmTemplates(asCharmsTemplate);
-    });
-    evocationBuilder.apply(cache);
-    return new EvocationsCache();
-  }
+@Weight (weight = 100)
+public class EvocationCompiler implements ExtensibleDataSetCompiler
+{
+	private static final String Charm_File_Recognition_Pattern = ".+?\\.charms";
+	private final List<ResourceFile> resourceFiles = new ArrayList<> ();
+	
+	@Inject
+	public ObjectFactory objectFactory;
+	@Inject
+	public InterfaceFinder finder;
+	@Inject
+	public ExtensibleDataSetProvider cacheProvider;
+	
+	@Override
+	public String getName ()
+	{
+		return "Evocations";
+	}
+	
+	@Override
+	public String getRecognitionPattern ()
+	{
+		return Charm_File_Recognition_Pattern;
+	}
+	
+	@Override
+	public void registerFile (ResourceFile resource)
+	{
+		resourceFiles.add (resource);
+	}
+	
+	@Override
+	public ExtensibleDataSet build ()
+	{
+		RuntimeTypeAdapterFactory[] charmFactories =
+		new PolymorphicTypeAdapterFactoryFactory (finder).generateFactories (CharmPrerequisiteTemplate.class);
+		TemplateLoader<EvocationArtifactTemplate> evocationLoader = new GenericTemplateLoader<> (EvocationArtifactTemplate.class);
+		TemplateLoader<CharmListTemplate> charmsLoader = new GenericTemplateLoader<> (CharmListTemplate.class, charmFactories);
+		CharmCacheImpl cache = (CharmCacheImpl) cacheProvider.getDataSet (CharmCache.class);
+		EvocationsBuilder evocationBuilder = new EvocationsBuilder ();
+		resourceFiles.forEach (resourceFile ->
+		{
+			EvocationArtifactTemplate asEvocationsTemplate = evocationLoader.load (resourceFile);
+			CharmListTemplate asCharmsTemplate = charmsLoader.load (resourceFile);
+			evocationBuilder.addTemplate (asEvocationsTemplate);
+			evocationBuilder.addCharmTemplates (asCharmsTemplate);
+		}
+		);
+		evocationBuilder.apply (cache);
+		return new EvocationsCache ();
+	}
 }

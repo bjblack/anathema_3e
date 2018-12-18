@@ -6,11 +6,11 @@ import net.sf.anathema.library.identifier.Identifier;
 
 import java.util.Collection;
 
-public interface CharmTree extends Identifier {
-
-  Collection<Charm> getAllCharms();
-
-  TreeReference getReference();
-
-  boolean isCharmFromTree(Charm charm);
+public interface CharmTree extends Identifier
+{
+	Collection<Charm> getAllCharms ();
+	
+	TreeReference getReference ();
+	
+	boolean isCharmFromTree (Charm charm);
 }

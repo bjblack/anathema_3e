@@ -6,15 +6,18 @@ import net.sf.anathema.hero.charms.model.special.CharmSpecialLearning;
 
 import java.util.Iterator;
 
-public class CharacterSpecialCharmSet implements SpecialCharmSet {
-  private CharmDisplayModel model;
-
-  public CharacterSpecialCharmSet(CharmDisplayModel model) {
-    this.model = model;
-  }
-
-  @Override
-  public Iterator<CharmSpecialLearning> iterator() {
-    return model.getCharmModel().getOptions().getSpecialLearningCharms().iterator();
-  }
+public class CharacterSpecialCharmSet implements SpecialCharmSet
+{
+	private CharmDisplayModel model;
+	
+	public CharacterSpecialCharmSet (CharmDisplayModel model)
+	{
+		this.model = model;
+	}
+	
+	@Override
+	public Iterator<CharmSpecialLearning> iterator ()
+	{
+		return model.getCharmModel ().getOptions ().getSpecialLearningCharms ().iterator ();
+	}
 }

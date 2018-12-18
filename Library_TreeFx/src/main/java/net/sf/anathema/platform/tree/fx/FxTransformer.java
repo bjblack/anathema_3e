@@ -10,30 +10,38 @@ import net.sf.anathema.platform.tree.display.shape.Polygon;
 import net.sf.anathema.platform.tree.display.shape.ShapeVisitor;
 import net.sf.anathema.platform.tree.display.transform.AgnosticTransform;
 
-public class FxTransformer {
-  public static Transform convert(AgnosticTransform transform) {
-    return Transform.affine(transform.a1, transform.a2, transform.b1, transform.b2, transform.c1, transform.c2);
-  }
-
-  public static Shape convert(AgnosticShape shape) {
-    Shape[] result = new Shape[1];
-    shape.accept(new ShapeVisitor() {
-      @Override
-      public void visitPolygon(Polygon polygon) {
-        javafx.scene.shape.Polygon fxPolygon = new javafx.scene.shape.Polygon();
-        for (Coordinate coordinate : polygon.coordinates) {
-          fxPolygon.getPoints().addAll((double) coordinate.x, (double) coordinate.y);
-        }
-        result[0] = fxPolygon;
-      }
-
-      @Override
-      public void visitCircle(Circle circle) {
-        int radius = circle.diameter / 2;
-        javafx.scene.shape.Circle fxCircle = new javafx.scene.shape.Circle(circle.centerX, circle.centerY, radius);
-        result[0] = fxCircle;
-      }
-    });
-    return result[0];
-  }
+public class FxTransformer
+{
+	public static Transform convert (AgnosticTransform transform)
+	{
+		return Transform.affine (transform.a1, transform.a2, transform.b1, transform.b2, transform.c1, transform.c2);
+	}
+	
+	public static Shape convert (AgnosticShape shape)
+	{
+		Shape[] result = new Shape[1];
+		shape.accept (new ShapeVisitor ()
+		{
+			@Override
+			public void visitPolygon (Polygon polygon)
+			{
+				javafx.scene.shape.Polygon fxPolygon = new javafx.scene.shape.Polygon ();
+				for (Coordinate coordinate : polygon.coordinates)
+				{
+					fxPolygon.getPoints ().addAll ( (double) coordinate.x, (double) coordinate.y);
+				}
+				result[0] = fxPolygon;
+			}
+			
+			@Override
+			public void visitCircle (Circle circle)
+			{
+				int radius = circle.diameter / 2;
+				javafx.scene.shape.Circle fxCircle = new javafx.scene.shape.Circle (circle.centerX, circle.centerY, radius);
+				result[0] = fxCircle;
+			}
+		}
+		);
+		return result[0];
+	}
 }

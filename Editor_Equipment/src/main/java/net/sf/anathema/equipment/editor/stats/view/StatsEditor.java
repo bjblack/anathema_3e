@@ -6,8 +6,9 @@ import net.sf.anathema.equipment.stats.IEquipmentStats;
 import net.sf.anathema.library.collection.Closure;
 import net.sf.anathema.library.resources.Resources;
 
-public interface StatsEditor {
-  void editStats(Resources resources, IEquipmentStatisticsCreationModel model, EquipmentStatsDialog view);
-
-  void whenChangesAreConfirmed(Closure<IEquipmentStats> action);
+public interface StatsEditor
+{
+	void editStats (Resources resources, IEquipmentStatisticsCreationModel model, EquipmentStatsDialog view);
+	
+	void whenChangesAreConfirmed (Closure<IEquipmentStats> action);
 }

@@ -13,36 +13,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 @net.sf.anathema.platform.initialization.ExtensibleDataSetCompiler
-public class ThaumaturgyCacheCompiler implements ExtensibleDataSetCompiler {
-
-  private static final String Ritual_File_Recognition_Pattern = ".+?\\.rituals";
-  private final List<ResourceFile> resourceFiles = new ArrayList<>();
-  @Inject
-  public InterfaceFinder finder;
-
-  @Override
-  public String getName() {
-    return "Rituals";
-  }
-
-  @Override
-  public String getRecognitionPattern() {
-    return Ritual_File_Recognition_Pattern;
-  }
-
-  @Override
-  public void registerFile(ResourceFile resource) {
-    resourceFiles.add(resource);
-  }
-
-  @Override
-  public ExtensibleDataSet build() {
-    TemplateLoader<RitualListTemplate> ritualsLoader = new GenericTemplateLoader<>(RitualListTemplate.class);
-    ThaumaturgyCacheBuilder ritualsBuilder = new ThaumaturgyCacheBuilder();
-    resourceFiles.forEach(resourceFile -> {
-      RitualListTemplate ritualsTemplate = ritualsLoader.load(resourceFile);
-      ritualsBuilder.addTemplate(ritualsTemplate);
-    });
-    return ritualsBuilder.createCache();
-  }
+public class ThaumaturgyCacheCompiler implements ExtensibleDataSetCompiler
+{
+	private static final String Ritual_File_Recognition_Pattern = ".+?\\.rituals";
+	private final List<ResourceFile> resourceFiles = new ArrayList<> ();
+	@Inject
+	public InterfaceFinder finder;
+	
+	@Override
+	public String getName ()
+	{
+		return "Rituals";
+	}
+	
+	@Override
+	public String getRecognitionPattern ()
+	{
+		return Ritual_File_Recognition_Pattern;
+	}
+	
+	@Override
+	public void registerFile (ResourceFile resource)
+	{
+		resourceFiles.add (resource);
+	}
+	
+	@Override
+	public ExtensibleDataSet build ()
+	{
+		TemplateLoader<RitualListTemplate> ritualsLoader = new GenericTemplateLoader<> (RitualListTemplate.class);
+		ThaumaturgyCacheBuilder ritualsBuilder = new ThaumaturgyCacheBuilder ();
+		resourceFiles.forEach (resourceFile ->
+		{
+			RitualListTemplate ritualsTemplate = ritualsLoader.load (resourceFile);
+			ritualsBuilder.addTemplate (ritualsTemplate);
+		}
+		);
+		return ritualsBuilder.createCache ();
+	}
 }

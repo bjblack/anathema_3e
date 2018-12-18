@@ -13,15 +13,16 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
-public class EssenceLimitationListenerTest {
-
-  @Test
-  public void doesNotTriggerResetUntilCharacterIsFullyLoaded() throws Exception {
-    Hero hero = mock(Hero.class);
-    TraitIterable traits = mock(TraitIterable.class);
-    Trait trait = mock(Trait.class);
-    when(traits.iterator()).thenReturn(Lists.newArrayList(trait).iterator());
-    new EssenceLimitationListener(traits, hero).valueChanged(7);
-    verifyZeroInteractions(trait);
-  }
+public class EssenceLimitationListenerTest
+{
+	@Test
+	public void doesNotTriggerResetUntilCharacterIsFullyLoaded () throws Exception
+	{
+		Hero hero = mock (Hero.class);
+		TraitIterable traits = mock (TraitIterable.class);
+		Trait trait = mock (Trait.class);
+		when (traits.iterator ()).thenReturn (Lists.newArrayList (trait).iterator ());
+		new EssenceLimitationListener (traits, hero).valueChanged (7);
+		verifyZeroInteractions (trait);
+	}
 }

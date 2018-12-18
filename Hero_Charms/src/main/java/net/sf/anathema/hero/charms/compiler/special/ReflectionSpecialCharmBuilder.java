@@ -8,26 +8,31 @@ import net.sf.anathema.library.initialization.ObjectFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReflectionSpecialCharmBuilder {
-
-  private final List<CharmSpecialLearningBuilder> builders = new ArrayList<>();
-
-  public ReflectionSpecialCharmBuilder(ObjectFactory objectFactory) {
-    this.builders.addAll(objectFactory.instantiateAllImplementers(CharmSpecialLearningBuilder.class));
-  }
-
-  public CharmSpecialLearning readCharmLearning(SpecialCharmTemplate overallDto,
-  		AdditionalCharmFactory factory,
-  		ExistingMechanicTemplateSupplier supplier) {
-    return findBuilder(overallDto).readCharm(overallDto, factory, supplier);
-  }
-
-  private CharmSpecialLearningBuilder findBuilder(SpecialCharmTemplate dto) {
-    for (CharmSpecialLearningBuilder builder : builders) {
-      if (builder.supports(dto)) {
-        return builder;
-      }
-    }
-    return new NullSpecialCharmBuilder();
-  }
+public class ReflectionSpecialCharmBuilder
+{
+	private final List<CharmSpecialLearningBuilder> builders = new ArrayList<> ();
+	
+	public ReflectionSpecialCharmBuilder (ObjectFactory objectFactory)
+	{
+		this.builders.addAll (objectFactory.instantiateAllImplementers (CharmSpecialLearningBuilder.class));
+	}
+	
+	public CharmSpecialLearning readCharmLearning (SpecialCharmTemplate overallDto,
+	AdditionalCharmFactory factory,
+	ExistingMechanicTemplateSupplier supplier)
+	{
+		return findBuilder (overallDto).readCharm (overallDto, factory, supplier);
+	}
+	
+	private CharmSpecialLearningBuilder findBuilder (SpecialCharmTemplate dto)
+	{
+		for (CharmSpecialLearningBuilder builder : builders)
+		{
+			if (builder.supports (dto))
+			{
+				return builder;
+			}
+		}
+		return new NullSpecialCharmBuilder ();
+	}
 }

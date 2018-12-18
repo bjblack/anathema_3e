@@ -14,41 +14,46 @@ import net.sf.anathema.equipment.stats.IEquipmentStats;
 import net.sf.anathema.equipment.stats.presentation.EquipmentStatsUIConfiguration;
 import net.sf.anathema.library.resources.Resources;
 
-public class EquipmentEditStatsPresenter {
-
-  private final Resources resources;
-  private final EquipmentDetails equipmentView;
-  private final StatsEditModel model;
-
-  public EquipmentEditStatsPresenter(Resources resources, StatsEditModel model, EquipmentDetails equipmentView) {
-    this.resources = resources;
-    this.model = model;
-    this.equipmentView = equipmentView;
-  }
-
-  public void initPresentation() {
-    String title = resources.getString("Equipment.Creation.Stats");
-    ToolListView<IEquipmentStats> statsListView = equipmentView.initStatsListView(title,
-            new EquipmentStatsUIConfiguration(resources));
-    initListening(statsListView);
-    initButtons(statsListView);
-  }
-
-  private void initListening(final ToolListView<IEquipmentStats> view) {
-    model.addStatsChangeListener(() -> updateStatListContent(view));
-    view.addListSelectionListener(model::selectStats);
-  }
-
-  private void initButtons(ToolListView<IEquipmentStats> statsListView) {
-    AddNewStatsTool addNewStats = new AddNewStatsTool(resources, model, model.getStatsCreationFactory());
-    addNewStats.addTool(new WeaponStatsConfiguration(), statsListView);
-    addNewStats.addTool(new ArmourStatsConfiguration(), statsListView);
-    addNewStats.addTool(new ArtifactStatsConfiguration(), statsListView);
-    new EditStatsTool(resources, model, new AgnosticStatsEditor(), equipmentView).addToolTo(statsListView);
-    new RemoveStatsTool(resources, model).addToolTo(statsListView);
-  }
-
-  private void updateStatListContent(ToolListView<IEquipmentStats> statsListView) {
-    statsListView.setObjects(model.getStats());
-  }
+public class EquipmentEditStatsPresenter
+{
+	private final Resources resources;
+	private final EquipmentDetails equipmentView;
+	private final StatsEditModel model;
+	
+	public EquipmentEditStatsPresenter (Resources resources, StatsEditModel model, EquipmentDetails equipmentView)
+	{
+		this.resources = resources;
+		this.model = model;
+		this.equipmentView = equipmentView;
+	}
+	
+	public void initPresentation ()
+	{
+		String title = resources.getString ("Equipment.Creation.Stats");
+		ToolListView<IEquipmentStats> statsListView = equipmentView.initStatsListView (title,
+		new EquipmentStatsUIConfiguration (resources));
+		initListening (statsListView);
+		initButtons (statsListView);
+	}
+	
+	private void initListening (final ToolListView<IEquipmentStats> view)
+	{
+		model.addStatsChangeListener ( () -> updateStatListContent (view));
+		view.addListSelectionListener (model::selectStats);
+	}
+	
+	private void initButtons (ToolListView<IEquipmentStats> statsListView)
+	{
+		AddNewStatsTool addNewStats = new AddNewStatsTool (resources, model, model.getStatsCreationFactory ());
+		addNewStats.addTool (new WeaponStatsConfiguration (), statsListView);
+		addNewStats.addTool (new ArmourStatsConfiguration (), statsListView);
+		addNewStats.addTool (new ArtifactStatsConfiguration (), statsListView);
+		new EditStatsTool (resources, model, new AgnosticStatsEditor (), equipmentView).addToolTo (statsListView);
+		new RemoveStatsTool (resources, model).addToolTo (statsListView);
+	}
+	
+	private void updateStatListContent (ToolListView<IEquipmentStats> statsListView)
+	{
+		statsListView.setObjects (model.getStats ());
+	}
 }

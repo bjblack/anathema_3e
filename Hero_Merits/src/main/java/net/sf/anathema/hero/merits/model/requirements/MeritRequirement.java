@@ -4,9 +4,9 @@ import net.sf.anathema.hero.individual.model.Hero;
 
 import java.util.List;
 
-public interface MeritRequirement {
+public interface MeritRequirement
+{
+	boolean isSatisfied (Hero hero);
 	
-	boolean isSatisfied(Hero hero);
-	
-	List<String> getContingentTraitTypes();
+	List<String> getContingentTraitTypes ();
 }

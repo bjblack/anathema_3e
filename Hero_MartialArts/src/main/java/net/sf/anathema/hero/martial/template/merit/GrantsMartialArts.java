@@ -5,10 +5,12 @@ import net.sf.anathema.hero.merits.model.mechanics.GenericMechanicalDetail;
 import net.sf.anathema.hero.merits.model.mechanics.MechanicalDetail;
 import net.sf.anathema.platform.persistence.JsonType;
 
-@JsonType("GrantsMartialArts")
-public class GrantsMartialArts extends MeritMechanicalDetailTemplate {
-  @Override
-  public MechanicalDetail generate() {
-    return new GenericMechanicalDetail("GrantsMartialArts");
-  }
+@JsonType ("GrantsMartialArts")
+public class GrantsMartialArts extends MeritMechanicalDetailTemplate
+{
+	@Override
+	public MechanicalDetail generate ()
+	{
+		return new GenericMechanicalDetail ("GrantsMartialArts");
+	}
 }

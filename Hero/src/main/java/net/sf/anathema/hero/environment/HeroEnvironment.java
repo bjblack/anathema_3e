@@ -8,21 +8,21 @@ import net.sf.anathema.library.io.DataFileProvider;
 import net.sf.anathema.library.message.Messaging;
 import net.sf.anathema.library.resources.Resources;
 
-public interface HeroEnvironment {
-
-  Resources getResources();
-
-  TemplateRegistry getTemplateRegistry();
-
-  DataFileProvider getDataFileProvider();
-
-  <T extends ExtensibleDataSet> T getDataSet(Class<T> set);
-
-  ObjectFactory getObjectFactory();
-
-  HeroTypes getHeroTypes();
-
-  Messaging getMessaging();
-
-  String getPreference(String key);
+public interface HeroEnvironment
+{
+	Resources getResources ();
+	
+	TemplateRegistry getTemplateRegistry ();
+	
+	DataFileProvider getDataFileProvider ();
+	
+	<T extends ExtensibleDataSet> T getDataSet (Class<T> set);
+	
+	ObjectFactory getObjectFactory ();
+	
+	HeroTypes getHeroTypes ();
+	
+	Messaging getMessaging ();
+	
+	String getPreference (String key);
 }

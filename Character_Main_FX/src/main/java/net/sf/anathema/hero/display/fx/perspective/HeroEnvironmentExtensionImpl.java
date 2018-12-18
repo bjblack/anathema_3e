@@ -10,18 +10,20 @@ import net.sf.anathema.platform.environment.Environment;
 import net.sf.anathema.platform.frame.AnathemaExtension;
 import net.sf.anathema.platform.frame.ApplicationModel;
 
-public class HeroEnvironmentExtensionImpl implements HeroEnvironmentExtension, AnathemaExtension {
-
-  private HeroEnvironment heroEnvironment;
-
-  @Override
-  public HeroEnvironment getEnvironment() {
-    return heroEnvironment;
-  }
-
-  public void initialize(ApplicationModel model, Environment environment) {
-    ExtensibleDataSetProvider dataSetProvider = new DataSetInitializer(environment, environment.getObjectFactory(), environment.getInterfaceFinder()).initializeExtensibleResources();
-    this.heroEnvironment = new HeroEnvironmentImpl(model, environment, dataSetProvider);
-    new CharacterTemplateInitializer(this.heroEnvironment).addHeroSplats();
-  }
+public class HeroEnvironmentExtensionImpl implements HeroEnvironmentExtension, AnathemaExtension
+{
+	private HeroEnvironment heroEnvironment;
+	
+	@Override
+	public HeroEnvironment getEnvironment ()
+	{
+		return heroEnvironment;
+	}
+	
+	public void initialize (ApplicationModel model, Environment environment)
+	{
+		ExtensibleDataSetProvider dataSetProvider = new DataSetInitializer (environment, environment.getObjectFactory (), environment.getInterfaceFinder ()).initializeExtensibleResources ();
+		this.heroEnvironment = new HeroEnvironmentImpl (model, environment, dataSetProvider);
+		new CharacterTemplateInitializer (this.heroEnvironment).addHeroSplats ();
+	}
 }

@@ -6,6 +6,7 @@ import net.sf.anathema.library.model.OptionalEntryCategorySupplier;
 import net.sf.anathema.library.model.OptionalEntryOptionSupplier;
 
 public interface MeritCache extends ExtensibleDataSet,
-  OptionalEntryCategorySupplier,
-  OptionalEntryOptionSupplier<MeritOption> {
+OptionalEntryCategorySupplier,
+OptionalEntryOptionSupplier<MeritOption>
+{
 }

@@ -5,14 +5,17 @@ import net.sf.anathema.equipment.character.UnarmedModificationProvider;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UnarmedModificationProviderCollection {
-	private List<UnarmedModificationProvider> providers = new ArrayList<>();
+public class UnarmedModificationProviderCollection
+{
+	private List<UnarmedModificationProvider> providers = new ArrayList<> ();
 	
-	public void addProvider(UnarmedModificationProvider provider) {
-		providers.add(provider);
+	public void addProvider (UnarmedModificationProvider provider)
+	{
+		providers.add (provider);
 	}
 	
-	public UnarmedModificationProvider[] getProviders() {
-		return providers.toArray(new UnarmedModificationProvider[0]);
+	public UnarmedModificationProvider[] getProviders ()
+	{
+		return providers.toArray (new UnarmedModificationProvider[0]);
 	}
 }

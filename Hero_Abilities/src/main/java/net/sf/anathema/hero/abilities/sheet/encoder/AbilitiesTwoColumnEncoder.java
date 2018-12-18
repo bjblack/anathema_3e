@@ -9,19 +9,21 @@ import net.sf.anathema.library.resources.Resources;
 
 import static net.sf.anathema.hero.sheet.pdf.page.IVoidStateFormatConstants.PADDING;
 
-public class AbilitiesTwoColumnEncoder extends FavorableTraitContentEncoder<AbilitiesContent> {
-
-  public AbilitiesTwoColumnEncoder(Resources resources) {
-    super(AbilitiesContent.class);
-  }
-
-  @Override
-  public void encode(SheetGraphics graphics, ReportSession reportSession, Bounds bounds) {
-    float columnWidth = (bounds.getWidth() - PADDING - PADDING) / 2f;
-    Bounds firstColumnBounds = new Bounds(bounds.x, bounds.y, columnWidth, bounds.height);
-    super.encode(graphics, reportSession, firstColumnBounds);
-    float secondColumnX = bounds.x + columnWidth + PADDING + PADDING;
-    float craftHeight = bounds.height * 2f / 5f;
-    // Encode crafts
-  }
+public class AbilitiesTwoColumnEncoder extends FavorableTraitContentEncoder<AbilitiesContent>
+{
+	public AbilitiesTwoColumnEncoder (Resources resources)
+	{
+		super (AbilitiesContent.class);
+	}
+	
+	@Override
+	public void encode (SheetGraphics graphics, ReportSession reportSession, Bounds bounds)
+	{
+		float columnWidth = (bounds.getWidth () - PADDING - PADDING) / 2f;
+		Bounds firstColumnBounds = new Bounds (bounds.x, bounds.y, columnWidth, bounds.height);
+		super.encode (graphics, reportSession, firstColumnBounds);
+		float secondColumnX = bounds.x + columnWidth + PADDING + PADDING;
+		float craftHeight = bounds.height * 2f / 5f;
+		// Encode crafts
+	}
 }

@@ -6,13 +6,13 @@ import net.sf.anathema.library.exception.PersistenceException;
 import net.sf.anathema.library.identifier.Identifier;
 import net.sf.anathema.library.message.Messaging;
 
-public interface HeroModelPersister {
-
-  void setMessaging(Messaging messaging);
-
-  Identifier getModelId();
-
-  void load(Hero hero, HeroModel model, HeroModelLoader loader) throws PersistenceException;
-
-  void save(HeroModel heroModel, HeroModelSaver saver);
+public interface HeroModelPersister
+{
+	void setMessaging (Messaging messaging);
+	
+	Identifier getModelId ();
+	
+	void load (Hero hero, HeroModel model, HeroModelLoader loader) throws PersistenceException;
+	
+	void save (HeroModel heroModel, HeroModelSaver saver);
 }

@@ -6,45 +6,53 @@ import net.sf.anathema.library.event.IntegerChangedListener;
 
 import org.jmock.example.announcer.Announcer;
 
-public class ProxyTraitValueStrategy implements TraitValueStrategy {
-
-  private TraitValueStrategy strategy;
-
-  public ProxyTraitValueStrategy(TraitValueStrategy strategy) {
-    this.strategy = strategy;
-  }
-
-  @Override
-  public int getCurrentValue(Trait trait) {
-    return strategy.getCurrentValue(trait);
-  }
-
-  @Override
-  public int getMinimalValue(Trait trait) {
-    return strategy.getMinimalValue(trait);
-  }
-
-  @Override
-  public void setValue(Trait trait, int value) {
-    strategy.setValue(trait, value);
-  }
-
-  @Override
-  public void notifyOnCreationValueChange(int value, Announcer<IntegerChangedListener> currentValueControl) {
-    strategy.notifyOnCreationValueChange(value, currentValueControl);
-  }
-
-  public void setStrategy(TraitValueStrategy strategy) {
-    this.strategy = strategy;
-  }
-
-  @Override
-  public void notifyOnLearnedValueChange(int value, Announcer<IntegerChangedListener> currentValueControl) {
-    strategy.notifyOnLearnedValueChange(value, currentValueControl);
-  }
-
-  @Override
-  public void resetCurrentValue(Trait trait) {
-    strategy.resetCurrentValue(trait);
-  }
+public class ProxyTraitValueStrategy implements TraitValueStrategy
+{
+	private TraitValueStrategy strategy;
+	
+	public ProxyTraitValueStrategy (TraitValueStrategy strategy)
+	{
+		this.strategy = strategy;
+	}
+	
+	@Override
+	public int getCurrentValue (Trait trait)
+	{
+		return strategy.getCurrentValue (trait);
+	}
+	
+	@Override
+	public int getMinimalValue (Trait trait)
+	{
+		return strategy.getMinimalValue (trait);
+	}
+	
+	@Override
+	public void setValue (Trait trait, int value)
+	{
+		strategy.setValue (trait, value);
+	}
+	
+	@Override
+	public void notifyOnCreationValueChange (int value, Announcer<IntegerChangedListener> currentValueControl)
+	{
+		strategy.notifyOnCreationValueChange (value, currentValueControl);
+	}
+	
+	public void setStrategy (TraitValueStrategy strategy)
+	{
+		this.strategy = strategy;
+	}
+	
+	@Override
+	public void notifyOnLearnedValueChange (int value, Announcer<IntegerChangedListener> currentValueControl)
+	{
+		strategy.notifyOnLearnedValueChange (value, currentValueControl);
+	}
+	
+	@Override
+	public void resetCurrentValue (Trait trait)
+	{
+		strategy.resetCurrentValue (trait);
+	}
 }

@@ -1,0 +1,6 @@
+
+The Java Project Platform_FX contains a bunch of bullshit that's impossible to sort out. It contains fifty-nine source files, with a cumulative total of eleven (11) line comments (five of which say "nothing to do"), and one (1) block comment.
+
+Anathema.java's Anathema.startApplication is the effective starting point of the program, called by the boot loader.
+
+I will set this project aside for reference purposes, especially the Anathema class.

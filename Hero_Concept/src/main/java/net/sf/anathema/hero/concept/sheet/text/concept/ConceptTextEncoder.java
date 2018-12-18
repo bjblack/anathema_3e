@@ -16,45 +16,52 @@ import com.itextpdf.text.Chunk;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Phrase;
 
-public class ConceptTextEncoder implements HeroTextEncoder {
-
-  private final TextPartFactory partFactory;
-  private Resources resources;
-
-  public ConceptTextEncoder(PdfReportUtils utils, Resources resources) {
-    this.resources = resources;
-    this.partFactory = new TextPartFactory(utils);
-  }
-
-  public void createParagraphs(MultiColumnTextReport report, Hero hero) throws DocumentException {
-    createCasteParagraph(report, hero);
-    createConceptParagraph(report, hero);
-  }
-
-  private void createCasteParagraph(MultiColumnTextReport report, Hero hero) throws DocumentException {
-    CasteType casteType = HeroConceptFetcher.fetch(hero).getCaste().getType();
-    HeroType heroType = hero.getSplat().getTemplateType().getHeroType();
-    String labelKey = "Sheet.Label.Caste." + heroType.getId();
-    addLabeledText(report, labelKey, casteType.getId());
-  }
-
-  private void createConceptParagraph(MultiColumnTextReport report, Hero hero) throws DocumentException {
-    String conceptText = HeroDescriptionFetcher.fetch(hero).getConcept().getText();
-    if (!Strings.isNullOrEmpty(conceptText)) {
-      String labelKey = "Sheet.Label.Concept";
-      addLabeledText(report, labelKey, conceptText);
-    }
-  }
-
-  private void addLabeledText(MultiColumnTextReport report, String labelKey, String text) throws DocumentException {
-    Phrase phrase = createLabelPhrase(labelKey);
-    phrase.add(partFactory.createTextChunk(text));
-    report.addElement(phrase);
-  }
-
-  private Phrase createLabelPhrase(String key) {
-    String label = resources.getString(key) + ": ";
-    Chunk labelChunk = partFactory.createBoldChunk(label);
-    return partFactory.createTextParagraph(labelChunk);
-  }
+public class ConceptTextEncoder implements HeroTextEncoder
+{
+	private final TextPartFactory partFactory;
+	private Resources resources;
+	
+	public ConceptTextEncoder (PdfReportUtils utils, Resources resources)
+	{
+		this.resources = resources;
+		this.partFactory = new TextPartFactory (utils);
+	}
+	
+	public void createParagraphs (MultiColumnTextReport report, Hero hero) throws DocumentException
+	{
+		createCasteParagraph (report, hero);
+		createConceptParagraph (report, hero);
+	}
+	
+	private void createCasteParagraph (MultiColumnTextReport report, Hero hero) throws DocumentException
+	{
+		CasteType casteType = HeroConceptFetcher.fetch (hero).getCaste ().getType ();
+		HeroType heroType = hero.getSplat ().getTemplateType ().getHeroType ();
+		String labelKey = "Sheet.Label.Caste." + heroType.getId ();
+		addLabeledText (report, labelKey, casteType.getId ());
+	}
+	
+	private void createConceptParagraph (MultiColumnTextReport report, Hero hero) throws DocumentException
+	{
+		String conceptText = HeroDescriptionFetcher.fetch (hero).getConcept ().getText ();
+		if (!Strings.isNullOrEmpty (conceptText))
+		{
+			String labelKey = "Sheet.Label.Concept";
+			addLabeledText (report, labelKey, conceptText);
+		}
+	}
+	
+	private void addLabeledText (MultiColumnTextReport report, String labelKey, String text) throws DocumentException
+	{
+		Phrase phrase = createLabelPhrase (labelKey);
+		phrase.add (partFactory.createTextChunk (text));
+		report.addElement (phrase);
+	}
+	
+	private Phrase createLabelPhrase (String key)
+	{
+		String label = resources.getString (key) + ": ";
+		Chunk labelChunk = partFactory.createBoldChunk (label);
+		return partFactory.createTextParagraph (labelChunk);
+	}
 }

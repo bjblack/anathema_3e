@@ -11,41 +11,41 @@ import net.sf.anathema.library.identifier.SimpleIdentifier;
 
 import java.util.Collection;
 
-public interface SpellsModel extends HeroModel {
-
-  Identifier ID = new SimpleIdentifier("Spells");
-
-  void removeSpells(Spells removedSpells);
-
-  void addSpells(Spells addedSpells);
-
-  Spells getLearnedSpells();
-
-  void addChangeListener(ChangeListener listener);
-
-  boolean isSpellAllowed(Spell spell);
-
-  Spell getSpellById(String string);
-
-  boolean isLearnedOnCreation(Spell spell);
-
-  Spells getLearnedSpells(boolean experienced);
-
-  void addSpells(Spells addedSpells, boolean experienced);
-
-  void removeSpells(Spells removedSpells, boolean experienced);
-
-  boolean isSpellAllowed(Spell spell, boolean experienced);
-
-  boolean isLearnedOnCreationOrExperience(Spell spell);
-
-  Spells getAvailableSpellsInCircle(CircleType circle);
-
-  Spells getLearnedSpellsInCircles(Collection<CircleType> eligibleCircles);
-
-  boolean canLearnSorcery();
-
-  Collection<CircleType> getSorceryCircles();
-
-  TraitType getFavoringTraitType();
+public interface SpellsModel extends HeroModel
+{
+	Identifier ID = new SimpleIdentifier ("Spells");
+	
+	void removeSpells (Spells removedSpells);
+	
+	void addSpells (Spells addedSpells);
+	
+	Spells getLearnedSpells ();
+	
+	void addChangeListener (ChangeListener listener);
+	
+	boolean isSpellAllowed (Spell spell);
+	
+	Spell getSpellById (String string);
+	
+	boolean isLearnedOnCreation (Spell spell);
+	
+	Spells getLearnedSpells (boolean experienced);
+	
+	void addSpells (Spells addedSpells, boolean experienced);
+	
+	void removeSpells (Spells removedSpells, boolean experienced);
+	
+	boolean isSpellAllowed (Spell spell, boolean experienced);
+	
+	boolean isLearnedOnCreationOrExperience (Spell spell);
+	
+	Spells getAvailableSpellsInCircle (CircleType circle);
+	
+	Spells getLearnedSpellsInCircles (Collection<CircleType> eligibleCircles);
+	
+	boolean canLearnSorcery ();
+	
+	Collection<CircleType> getSorceryCircles ();
+	
+	TraitType getFavoringTraitType ();
 }

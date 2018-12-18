@@ -5,10 +5,11 @@ import net.sf.anathema.hero.individual.splat.HeroType;
 import net.sf.anathema.hero.individual.splat.SplatType;
 import net.sf.anathema.library.identifier.Identifier;
 
-public interface HeroReferenceScanner {
-  HeroType getCharacterType(CharacterReference reference);
-
-  Identifier getCasteType(CharacterReference reference);
-
-  SplatType getTemplateType(CharacterReference reference);
+public interface HeroReferenceScanner
+{
+	HeroType getCharacterType (CharacterReference reference);
+	
+	Identifier getCasteType (CharacterReference reference);
+	
+	SplatType getTemplateType (CharacterReference reference);
 }

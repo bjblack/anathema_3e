@@ -8,15 +8,18 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 
-public class HealthLevelReader extends TypeAdapter<HealthLevelType> {
-  @Override
-  public void write(JsonWriter out, HealthLevelType value) throws IOException {
-    //nothing to do
-  }
-
-  @Override
-  public HealthLevelType read(JsonReader in) throws IOException {
-    String gameNotation = in.nextString();
-    return HealthLevelType.byGameNotation(gameNotation);
-  }
+public class HealthLevelReader extends TypeAdapter<HealthLevelType>
+{
+	@Override
+	public void write (JsonWriter out, HealthLevelType value) throws IOException
+	{
+		//nothing to do
+	}
+	
+	@Override
+	public HealthLevelType read (JsonReader in) throws IOException
+	{
+		String gameNotation = in.nextString ();
+		return HealthLevelType.byGameNotation (gameNotation);
+	}
 }

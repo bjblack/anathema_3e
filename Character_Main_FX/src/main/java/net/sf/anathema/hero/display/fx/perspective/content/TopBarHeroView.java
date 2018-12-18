@@ -32,88 +32,101 @@ import java.util.Collection;
 
 import static net.sf.anathema.library.fx.layout.LayoutUtils.withoutInsets;
 
-public class TopBarHeroView implements HeroView, NodeHolder {
-
-  private MigPane content = new MigPane(withoutInsets().wrapAfter(1), new AC().index(0).shrink().shrinkPrio(200));
-  private final SubViewRegistry subViewFactory;
-  private final RasterLayoutMap layoutMap;
-  private final BorderPane navigationBar = new BorderPane();
-  private final MigPane sectionBar = new MigPane(withoutInsets().gridGap("10", "0"));
-  private final MigPane interactionBar = new MigPane(withoutInsets().gridGap("10", "0"));
-  private final MigPane stackContainer = new MigPane(new LC().insets("0", "5", "0", "5").fill());
-  private final FxStack stack = new FxStack(stackContainer);
-  private final AcceleratorMap acceleratorMap;
-
-  public TopBarHeroView(SubViewRegistry viewFactory, Collection<Stylesheet> stylesheets, RasterLayoutMap layoutMap,
-                        AcceleratorMap acceleratorMap) {
-    this.subViewFactory = viewFactory;
-    this.layoutMap = layoutMap;
-    this.acceleratorMap = acceleratorMap;
-    stylesheets.forEach(sheet -> sheet.applyToParent(content));
-    new Stylesheet("skin/character/hero-view.css").applyToParent(content);
-    navigationBar.getStyleClass().add("hero-link-bar");
-    navigationBar.setLeft(sectionBar);
-    navigationBar.setRight(interactionBar);
-    content.add(navigationBar, new CC().growX());
-    content.add(stackContainer, new CC().grow().push());
-  }
-
-  @Override
-  public SectionView addSection(String title) {
-    RasterSectionView rasterSectionView = new RasterSectionView(subViewFactory, layoutMap.get(title), () -> {
-      Node navigationLabel = createNavigationLabel(title);
-      sectionBar.getChildren().add(navigationLabel);
-    });
-    boolean isFirstSection = stack.isEmpty();
-    stack.add(new SimpleIdentifier(title), rasterSectionView.getNode());
-    if(isFirstSection){
-      stack.showFirst();
-    }
-    return rasterSectionView;
-  }
-
-  @Override
-  public InteractionView getInteractionView() {
-    return new InteractionView() {
-      @Override
-      public Tool addTool() {
-        FxBaseTool tool = new FxBaseTool(new Hyperlink(), new ImageView());
-        tool.getNode().getStyleClass().add("hero-link-button");
-        interactionBar.getChildren().add(tool.getNode());
-        tool.registerHotkeyIn(acceleratorMap);
-        return tool;
-      }
-
-      @Override
-      public ToggleTool addToggleTool() {
-        HyperlinkToggleTool tool = new HyperlinkToggleTool();
-        tool.getNode().getStyleClass().add("hero-link-button");
-        interactionBar.getChildren().add(tool.getNode());
-        tool.registerHotkeyIn(acceleratorMap);
-        return tool;
-      }
-
-      @Override
-      public MenuTool addMenuTool() {
-        SplitMenuButton menuButton = new SplitMenuButton();
-        FxMenuButtonTool tool = new FxMenuButtonTool(menuButton, new ImageView());
-        tool.getNode().getStyleClass().add("hero-link-button");
-        interactionBar.getChildren().add(tool.getNode());
-        tool.registerHotkeyIn(acceleratorMap);
-        return tool;
-      }
-    };
-  }
-
-  @Override
-  public Node getNode() {
-    return content;
-  }
-
-  private Node createNavigationLabel(String text) {
-    ButtonBase button = new Hyperlink(text);
-    button.getStyleClass().add("hero-link-button");
-    button.setOnAction(actionEvent -> stack.show(new SimpleIdentifier(text)));
-    return button;
-  }
+public class TopBarHeroView implements HeroView, NodeHolder
+{
+	private MigPane content = new MigPane (withoutInsets ().wrapAfter (1), new AC ().index (0).shrink ().shrinkPrio (200));
+	private final SubViewRegistry subViewFactory;
+	private final RasterLayoutMap layoutMap;
+	private final BorderPane navigationBar = new BorderPane ();
+	private final MigPane sectionBar = new MigPane (withoutInsets ().gridGap ("10", "0"));
+	private final MigPane interactionBar = new MigPane (withoutInsets ().gridGap ("10", "0"));
+	private final MigPane stackContainer = new MigPane (new LC ().insets ("0", "5", "0", "5").fill ());
+	private final FxStack stack = new FxStack (stackContainer);
+	private final AcceleratorMap acceleratorMap;
+	
+	public TopBarHeroView (SubViewRegistry viewFactory, Collection<Stylesheet> stylesheets, RasterLayoutMap layoutMap,
+	AcceleratorMap acceleratorMap)
+	{
+		this.subViewFactory = viewFactory;
+		this.layoutMap = layoutMap;
+		this.acceleratorMap = acceleratorMap;
+		stylesheets.forEach (sheet -> sheet.applyToParent (content));
+		new Stylesheet ("skin/character/hero-view.css").applyToParent (content);
+		navigationBar.getStyleClass ().add ("hero-link-bar");
+		navigationBar.setLeft (sectionBar);
+		navigationBar.setRight (interactionBar);
+		content.add (navigationBar, new CC ().growX ());
+		content.add (stackContainer, new CC ().grow ().push ());
+	}
+	
+	@Override
+	public SectionView addSection (String title)
+	{
+		RasterSectionView rasterSectionView = new RasterSectionView (subViewFactory, layoutMap.get (title), () ->
+		{
+			Node navigationLabel = createNavigationLabel (title);
+			sectionBar.getChildren ().add (navigationLabel);
+		}
+		);
+		boolean isFirstSection = stack.isEmpty ();
+		stack.add (new SimpleIdentifier (title), rasterSectionView.getNode ());
+		if (isFirstSection)
+		{
+			stack.showFirst ();
+		}
+		return rasterSectionView;
+	}
+	
+	@Override
+	public InteractionView getInteractionView ()
+	{
+		return new InteractionView ()
+		{
+			@Override
+			public Tool addTool ()
+			{
+				FxBaseTool tool = new FxBaseTool (new Hyperlink (), new ImageView ());
+				tool.getNode ().getStyleClass ().add ("hero-link-button");
+				interactionBar.getChildren ().add (tool.getNode ());
+				tool.registerHotkeyIn (acceleratorMap);
+				return tool;
+			}
+			
+			@Override
+			public ToggleTool addToggleTool ()
+			{
+				HyperlinkToggleTool tool = new HyperlinkToggleTool ();
+				tool.getNode ().getStyleClass ().add ("hero-link-button");
+				interactionBar.getChildren ().add (tool.getNode ());
+				tool.registerHotkeyIn (acceleratorMap);
+				return tool;
+			}
+			
+			@Override
+			public MenuTool addMenuTool ()
+			{
+				SplitMenuButton menuButton = new SplitMenuButton ();
+				FxMenuButtonTool tool = new FxMenuButtonTool (menuButton, new ImageView ());
+				tool.getNode ().getStyleClass ().add ("hero-link-button");
+				interactionBar.getChildren ().add (tool.getNode ());
+				tool.registerHotkeyIn (acceleratorMap);
+				return tool;
+			}
+		}
+		;
+	}
+	
+	@Override
+	public Node getNode ()
+	{
+		return content;
+	}
+	
+	private Node createNavigationLabel (String text)
+	{
+		ButtonBase button = new Hyperlink (text);
+		button.getStyleClass ().add ("hero-link-button");
+		button.setOnAction (actionEvent -> stack.show (new SimpleIdentifier (text)));
+		return button;
+	}
 }

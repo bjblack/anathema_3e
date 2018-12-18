@@ -5,9 +5,10 @@ import net.sf.anathema.hero.traits.model.lists.DefaultTraitTypeList;
 
 import java.util.List;
 
-public class AllAbilityTraitTypeList extends DefaultTraitTypeList {
-
-  public AllAbilityTraitTypeList(List<TraitType> abilityTypes) {
-    super(abilityTypes);
-  }
+public class AllAbilityTraitTypeList extends DefaultTraitTypeList
+{
+	public AllAbilityTraitTypeList (List<TraitType> abilityTypes)
+	{
+		super (abilityTypes);
+	}
 }

@@ -9,26 +9,30 @@ import net.sf.anathema.hero.individual.model.Hero;
 import net.sf.anathema.hero.traits.model.TraitModel;
 import net.sf.anathema.hero.traits.model.TraitModelFetcher;
 
-public class CharmSpecialistImpl implements CharmSpecialist {
-
-  private Hero hero;
-
-  public CharmSpecialistImpl(Hero hero) {
-    this.hero = hero;
-  }
-
-  @Override
-  public TraitModel getTraits() {
-    return TraitModelFetcher.fetch(hero);
-  }
-
-  @Override
-  public ExperienceModel getExperience() {
-    return ExperienceModelFetcher.fetch(hero);
-  }
-
-  @Override
-  public HealthModel getHealth() {
-    return HealthModelFetcher.fetch(hero);
-  }
+public class CharmSpecialistImpl implements CharmSpecialist
+{
+	private Hero hero;
+	
+	public CharmSpecialistImpl (Hero hero)
+	{
+		this.hero = hero;
+	}
+	
+	@Override
+	public TraitModel getTraits ()
+	{
+		return TraitModelFetcher.fetch (hero);
+	}
+	
+	@Override
+	public ExperienceModel getExperience ()
+	{
+		return ExperienceModelFetcher.fetch (hero);
+	}
+	
+	@Override
+	public HealthModel getHealth ()
+	{
+		return HealthModelFetcher.fetch (hero);
+	}
 }

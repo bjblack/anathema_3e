@@ -18,18 +18,20 @@ import net.sf.anathema.hero.thaumaturgy.model.ThaumaturgyModel;
 import net.sf.anathema.hero.traits.model.TraitModel;
 import net.sf.anathema.points.model.PointsModel;
 
-@SuppressWarnings("UnusedDeclaration")
-public class CharmsModelFactory extends SimpleModelTreeEntry implements HeroModelFactory {
-
-  public CharmsModelFactory() {
-    super(CharmsModel.ID, EssencePoolModel.ID, AttributeModel.ID, AbilitiesModel.ID, SpiritualTraitModel.ID, TraitModel.ID, ExperienceModel.ID,
-            HeroConcept.ID, HealthModel.ID, MagicPointsModel.ID, PointsModel.ID, ThaumaturgyModel.ID, MagicModel.ID);
-  }
-
-  @SuppressWarnings("unchecked")
-  @Override
-  public CharmsModel create(TemplateFactory templateFactory, String templateId) {
-  	CharmsTemplate charmsTemplate = CharmsTemplateLoader.loadTemplate(templateFactory, templateId);
-    return new CharmsModelImpl(charmsTemplate);
-  }
+@SuppressWarnings ("UnusedDeclaration")
+public class CharmsModelFactory extends SimpleModelTreeEntry implements HeroModelFactory
+{
+	public CharmsModelFactory ()
+	{
+		super (CharmsModel.ID, EssencePoolModel.ID, AttributeModel.ID, AbilitiesModel.ID, SpiritualTraitModel.ID, TraitModel.ID, ExperienceModel.ID,
+		HeroConcept.ID, HealthModel.ID, MagicPointsModel.ID, PointsModel.ID, ThaumaturgyModel.ID, MagicModel.ID);
+	}
+	
+	@SuppressWarnings ("unchecked")
+	@Override
+	public CharmsModel create (TemplateFactory templateFactory, String templateId)
+	{
+		CharmsTemplate charmsTemplate = CharmsTemplateLoader.loadTemplate (templateFactory, templateId);
+		return new CharmsModelImpl (charmsTemplate);
+	}
 }

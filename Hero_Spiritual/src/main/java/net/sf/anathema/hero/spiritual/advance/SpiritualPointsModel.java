@@ -17,47 +17,54 @@ import net.sf.anathema.library.identifier.SimpleIdentifier;
 import net.sf.anathema.points.model.PointModelFetcher;
 import net.sf.anathema.points.model.PointsModel;
 
-public class SpiritualPointsModel implements HeroModel {
-
-  public static final SimpleIdentifier ID = new SimpleIdentifier("SpiritualPoints");
-  private SpiritualPointsTemplate template;
-
-  public SpiritualPointsModel(SpiritualPointsTemplate template) {
-    this.template = template;
-  }
-
-  @Override
-  public Identifier getId() {
-    return ID;
-  }
-
-  @Override
-  public void initialize(HeroEnvironment environment, Hero hero) {
-    initializeBonusPoints(hero);
-    initializeExperience(hero);
-  }
-
-  @Override
-  public void initializeListening(ChangeAnnouncer announcer) {
-    // nothing to do, until bonus points are created the way, they should be
-  }
-
-  private void initializeBonusPoints(Hero hero) {
-    SpiritualBonusPointsCalculator calculator = createBonusCalculator(hero);
-    PointModelFetcher.fetch(hero).addBonusPointCalculator(calculator);
-  }
-
-  private SpiritualBonusPointsCalculator createBonusCalculator(Hero hero) {
-    SpiritualTraitModel model = SpiritualTraitModelFetcher.fetch(hero);
-    DefaultSpiritualCreationData creationData = new DefaultSpiritualCreationData(template);
-    return new SpiritualBonusPointsCalculator(model, creationData);
-  }
-
-  private void initializeExperience(Hero hero) {
-    PointsModel pointsModel = PointModelFetcher.fetch(hero);
-    SpiritualTraitModel model = SpiritualTraitModelFetcher.fetch(hero);
-    SpiritualExperienceData experienceData = new SpiritualExperienceData(template);
-    SpiritualExperienceCalculator calculator = new SpiritualExperienceCalculator(experienceData);
-    pointsModel.addToExperienceOverview(new WillpowerExperienceModel(model, calculator));
-  }
+public class SpiritualPointsModel implements HeroModel
+{
+	public static final SimpleIdentifier ID = new SimpleIdentifier ("SpiritualPoints");
+	private SpiritualPointsTemplate template;
+	
+	public SpiritualPointsModel (SpiritualPointsTemplate template)
+	{
+		this.template = template;
+	}
+	
+	@Override
+	public Identifier getId ()
+	{
+		return ID;
+	}
+	
+	@Override
+	public void initialize (HeroEnvironment environment, Hero hero)
+	{
+		initializeBonusPoints (hero);
+		initializeExperience (hero);
+	}
+	
+	@Override
+	public void initializeListening (ChangeAnnouncer announcer)
+	{
+		// nothing to do, until bonus points are created the way, they should be
+	}
+	
+	private void initializeBonusPoints (Hero hero)
+	{
+		SpiritualBonusPointsCalculator calculator = createBonusCalculator (hero);
+		PointModelFetcher.fetch (hero).addBonusPointCalculator (calculator);
+	}
+	
+	private SpiritualBonusPointsCalculator createBonusCalculator (Hero hero)
+	{
+		SpiritualTraitModel model = SpiritualTraitModelFetcher.fetch (hero);
+		DefaultSpiritualCreationData creationData = new DefaultSpiritualCreationData (template);
+		return new SpiritualBonusPointsCalculator (model, creationData);
+	}
+	
+	private void initializeExperience (Hero hero)
+	{
+		PointsModel pointsModel = PointModelFetcher.fetch (hero);
+		SpiritualTraitModel model = SpiritualTraitModelFetcher.fetch (hero);
+		SpiritualExperienceData experienceData = new SpiritualExperienceData (template);
+		SpiritualExperienceCalculator calculator = new SpiritualExperienceCalculator (experienceData);
+		pointsModel.addToExperienceOverview (new WillpowerExperienceModel (model, calculator));
+	}
 }

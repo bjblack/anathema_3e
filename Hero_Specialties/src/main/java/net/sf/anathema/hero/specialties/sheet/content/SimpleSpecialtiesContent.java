@@ -10,40 +10,45 @@ import net.sf.anathema.library.resources.Resources;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SimpleSpecialtiesContent implements ListSubBoxContent {
-
-  private Hero hero;
-  private Resources resources;
-
-  public SimpleSpecialtiesContent(Hero hero, Resources resources) {
-    this.hero = hero;
-    this.resources = resources;
-  }
-
-  @Override
-  public List<String> getPrintEntries() {
-    List<String> printEntries = new ArrayList<>();
-    SpecialtiesModel specialtiesModel = SpecialtiesModelFetcher.fetch(hero);
-    TraitReferenceI18n traitI18n = new TraitReferenceI18n(resources);
-    // todo sort by ability name
-    /*for (Specialty specialty : specialtiesModel.getAllSpecialties()) {
-    	printEntries.add(traitI18n.getSheetName(new NamedSpecialtyReference(specialty, specialty.getBasicTraitType())));
-    }*/
-    return printEntries;
-  }
-
-  @Override
-  public boolean useNewLineForEachEntry() {
-    return false;
-  }
-
-  @Override
-  public String getHeader() {
-    return resources.getString("Sheet.Header.Specialties");
-  }
-
-  @Override
-  public boolean hasContent() {
-    return true;
-  }
+public class SimpleSpecialtiesContent implements ListSubBoxContent
+{
+	private Hero hero;
+	private Resources resources;
+	
+	public SimpleSpecialtiesContent (Hero hero, Resources resources)
+	{
+		this.hero = hero;
+		this.resources = resources;
+	}
+	
+	@Override
+	public List<String> getPrintEntries ()
+	{
+		List<String> printEntries = new ArrayList<> ();
+		SpecialtiesModel specialtiesModel = SpecialtiesModelFetcher.fetch (hero);
+		TraitReferenceI18n traitI18n = new TraitReferenceI18n (resources);
+		// todo sort by ability name
+		/*for (Specialty specialty : specialtiesModel.getAllSpecialties()) {
+		printEntries.add(traitI18n.getSheetName(new NamedSpecialtyReference(specialty, specialty.getBasicTraitType())));
+		}*/
+		return printEntries;
+	}
+	
+	@Override
+	public boolean useNewLineForEachEntry ()
+	{
+		return false;
+	}
+	
+	@Override
+	public String getHeader ()
+	{
+		return resources.getString ("Sheet.Header.Specialties");
+	}
+	
+	@Override
+	public boolean hasContent ()
+	{
+		return true;
+	}
 }

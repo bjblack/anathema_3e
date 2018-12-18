@@ -9,19 +9,21 @@ import net.sf.anathema.magic.description.model.RegisteredMagicDescriptionProvide
 
 import java.util.Collection;
 
-public class MagicDescriptionProviderExtractor {
-
-  public static MagicDescriptionProvider CreateFor(HeroEnvironment environment) {
-    AggregatedMagicDescriptionProvider provider = new AggregatedMagicDescriptionProvider(environment.getResources());
-    for (MagicDescriptionProviderFactory factory : findFactories(environment)) {
-      provider.addProvider(factory.create(environment));
-    }
-    return provider;
-  }
-
-  private static Collection<MagicDescriptionProviderFactory> findFactories(HeroEnvironment environment) {
-    ObjectFactory objectFactory = environment.getObjectFactory();
-    return objectFactory.instantiateAll(RegisteredMagicDescriptionProviderFactory.class);
-  }
-
+public class MagicDescriptionProviderExtractor
+{
+	public static MagicDescriptionProvider CreateFor (HeroEnvironment environment)
+	{
+		AggregatedMagicDescriptionProvider provider = new AggregatedMagicDescriptionProvider (environment.getResources ());
+		for (MagicDescriptionProviderFactory factory : findFactories (environment))
+		{
+			provider.addProvider (factory.create (environment));
+		}
+		return provider;
+	}
+	
+	private static Collection<MagicDescriptionProviderFactory> findFactories (HeroEnvironment environment)
+	{
+		ObjectFactory objectFactory = environment.getObjectFactory ();
+		return objectFactory.instantiateAll (RegisteredMagicDescriptionProviderFactory.class);
+	}
 }

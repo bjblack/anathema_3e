@@ -5,13 +5,15 @@ import net.sf.anathema.hero.individual.view.SubViewFactory;
 import net.sf.anathema.library.dependencies.Produces;
 import net.sf.anathema.library.fx.Stylesheet;
 
-@Produces(CasteView.class)
-public class CasteViewFactory implements SubViewFactory {
-  @SuppressWarnings("unchecked")
-  @Override
-  public <T> T create() {
-    FxCasteView fxView = new FxCasteView();
-    new Stylesheet("skin/concept/concept.css").applyToParent(fxView.getNode());
-    return (T) fxView;
-  }
+@Produces (CasteView.class)
+public class CasteViewFactory implements SubViewFactory
+{
+	@SuppressWarnings ("unchecked")
+	@Override
+	public <T> T create ()
+	{
+		FxCasteView fxView = new FxCasteView ();
+		new Stylesheet ("skin/concept/concept.css").applyToParent (fxView.getNode ());
+		return (T) fxView;
+	}
 }

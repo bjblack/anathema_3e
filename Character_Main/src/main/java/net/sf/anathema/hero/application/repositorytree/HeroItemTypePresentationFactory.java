@@ -14,14 +14,15 @@ import net.sf.anathema.platform.repository.IRepositoryFileResolver;
 import static net.sf.anathema.hero.application.item.HeroItemType.CHARACTER_ITEM_TYPE_ID;
 import static net.sf.anathema.hero.application.item.HeroItemTypeRetrieval.retrieveCharacterItemType;
 
-@ForItemType(CHARACTER_ITEM_TYPE_ID)
-public class HeroItemTypePresentationFactory implements ItemTypePresentationFactory {
-
-  @Override
-  public IItemTypeViewProperties createItemTypeCreationProperties(ApplicationModel anathemaModel, Resources resources) {
-    HeroEnvironment generics = HeroEnvironmentFetcher.fetch(anathemaModel);
-    IRepositoryFileResolver fileResolver = anathemaModel.getRepository().getRepositoryFileResolver();
-    HeroReferenceScanner scanner = new JsonHeroReferenceScanner(generics.getHeroTypes(), fileResolver);
-    return new HeroViewProperties(retrieveCharacterItemType(), resources, scanner);
-  }
+@ForItemType (CHARACTER_ITEM_TYPE_ID)
+public class HeroItemTypePresentationFactory implements ItemTypePresentationFactory
+{
+	@Override
+	public IItemTypeViewProperties createItemTypeCreationProperties (ApplicationModel anathemaModel, Resources resources)
+	{
+		HeroEnvironment generics = HeroEnvironmentFetcher.fetch (anathemaModel);
+		IRepositoryFileResolver fileResolver = anathemaModel.getRepository ().getRepositoryFileResolver ();
+		HeroReferenceScanner scanner = new JsonHeroReferenceScanner (generics.getHeroTypes (), fileResolver);
+		return new HeroViewProperties (retrieveCharacterItemType (), resources, scanner);
+	}
 }

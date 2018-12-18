@@ -1,0 +1,6 @@
+
+The Java Project Library_CategorizedAllocation seems to be some attempt at codifying abstract types with general applicability. It contains forty-seven source files, with a cumulative total of zero (0) comments.
+
+The highlight of the project is OptionalEntryCategory.java, which is a perfectly empty interface. No member variables, no member functions. There is one (1) class implementing it, and it's an enumerated type. Either it is completely worthless or hilariously underdeveloped. Bet on the former.
+
+I will scrap this project.

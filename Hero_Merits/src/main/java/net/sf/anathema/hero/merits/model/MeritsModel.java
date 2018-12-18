@@ -11,17 +11,17 @@ import java.util.Collection;
 import java.util.List;
 
 public interface MeritsModel extends RemovableEntryModel<Merit>, HeroModel,
-	OptionalTraitsModel<MeritOption, Merit>{
-
-  Identifier ID = new SimpleIdentifier("Merits");
-
-  boolean hasMeritsMatchingReference(OptionalEntryReference reference);
-
-  List<Merit> getMeritsMatchingReference(OptionalEntryReference option);
-
-  boolean isEntryAllowed();
-
-  boolean isAllowedOption(MeritOption option);
-
-  void addSuggestions(OptionalEntryReference merit, Collection<String> suggestions);
+OptionalTraitsModel<MeritOption, Merit>
+{
+	Identifier ID = new SimpleIdentifier ("Merits");
+	
+	boolean hasMeritsMatchingReference (OptionalEntryReference reference);
+	
+	List<Merit> getMeritsMatchingReference (OptionalEntryReference option);
+	
+	boolean isEntryAllowed ();
+	
+	boolean isAllowedOption (MeritOption option);
+	
+	void addSuggestions (OptionalEntryReference merit, Collection<String> suggestions);
 }

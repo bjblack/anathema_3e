@@ -7,18 +7,22 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
-public class CharmImplMap implements CharmMap {
-  private final Map<CharmName, CharmImpl> charmsByName = new HashMap<>();
-
-  public void forEachCharm(Consumer<CharmImpl> consumer) {
-    charmsByName.values().forEach(consumer);
-  }
-
-  public void put(CharmName charmName, CharmImpl charm) {
-    charmsByName.put(charmName, charm);
-  }
-
-  public CharmImpl get(CharmName name) {
-    return charmsByName.get(name);
-  }
+public class CharmImplMap implements CharmMap
+{
+	private final Map<CharmName, CharmImpl> charmsByName = new HashMap<> ();
+	
+	public void forEachCharm (Consumer<CharmImpl> consumer)
+	{
+		charmsByName.values ().forEach (consumer);
+	}
+	
+	public void put (CharmName charmName, CharmImpl charm)
+	{
+		charmsByName.put (charmName, charm);
+	}
+	
+	public CharmImpl get (CharmName name)
+	{
+		return charmsByName.get (name);
+	}
 }

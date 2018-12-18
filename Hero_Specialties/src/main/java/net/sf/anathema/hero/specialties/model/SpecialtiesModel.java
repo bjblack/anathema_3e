@@ -9,11 +9,11 @@ import net.sf.anathema.library.model.property.OptionalPropertiesModel;
 import java.util.List;
 
 public interface SpecialtiesModel extends HeroModel,
-	OptionalPropertiesModel<SpecialtyType, Specialty> {
-
-  Identifier ID = new SimpleIdentifier("Specialties");
-  
-  List<Specialty> getAllSpecialtiesOfType(TraitType type);
-
-  List<TraitType> getAllEligibleParentTraits();
+OptionalPropertiesModel<SpecialtyType, Specialty>
+{
+	Identifier ID = new SimpleIdentifier ("Specialties");
+	
+	List<Specialty> getAllSpecialtiesOfType (TraitType type);
+	
+	List<TraitType> getAllEligibleParentTraits ();
 }

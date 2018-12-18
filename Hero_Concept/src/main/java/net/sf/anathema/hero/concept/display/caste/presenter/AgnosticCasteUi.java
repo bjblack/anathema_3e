@@ -6,19 +6,24 @@ import net.sf.anathema.library.presenter.SelectObjectConfiguration;
 import net.sf.anathema.library.resources.RelativePath;
 import net.sf.anathema.library.resources.Resources;
 
-public class AgnosticCasteUi extends SelectObjectConfiguration<CasteType> {
-  private final CasteUI casteUI;
-
-  public AgnosticCasteUi(Resources resources, PresentationProperties properties) {
-    super(resources, (resources1, object) -> {
-      String key = "Caste." + object.getId();
-      return resources1.getString(key);
-    });
-    this.casteUI = new CasteUI(properties);
-  }
-
-  @Override
-  protected RelativePath getIconForObject(CasteType value) {
-    return casteUI.getSmallCasteIconPath(value);
-  }
+public class AgnosticCasteUi extends SelectObjectConfiguration<CasteType>
+{
+	private final CasteUI casteUI;
+	
+	public AgnosticCasteUi (Resources resources, PresentationProperties properties)
+	{
+		super (resources, (resources1, object) ->
+		{
+			String key = "Caste." + object.getId ();
+			return resources1.getString (key);
+		}
+		);
+		this.casteUI = new CasteUI (properties);
+	}
+	
+	@Override
+	protected RelativePath getIconForObject (CasteType value)
+	{
+		return casteUI.getSmallCasteIconPath (value);
+	}
 }

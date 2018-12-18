@@ -10,53 +10,61 @@ import net.sf.anathema.hero.traits.model.lists.IdentifiedTraitTypeList;
 import net.sf.anathema.hero.traits.sheet.content.FavorableTraitContent;
 import net.sf.anathema.library.resources.Resources;
 
-public class AbilitiesContent extends FavorableTraitContent {
-
-  private Hero hero;
-
-  public AbilitiesContent(Hero hero, Resources resources) {
-    super(AbilitiesModelFetcher.fetch(hero), resources);
-    this.hero = hero;
-  }
-
-  @Override
-  public TraitTypeList getMarkedTraitTypes() {
-    TraitTypeList typeList = new TraitTypeList();
-    typeList.add("Athletics");
-    typeList.add("Dodge");
-    typeList.add("Larceny");
-    typeList.add("Ride");
-    typeList.add("Stealth");
-    return typeList;
-  }
-
-  @Override
-  public IdentifiedTraitTypeList[] getIdentifiedTraitTypeGroups() {
-    return AbilitiesModelFetcher.fetch(hero).getGroups();
-  }
-
-  @Override
-  public TraitMap getTraitMap() {
-    return TraitModelFetcher.fetch(hero);
-  }
-
-  @Override
-  public String getGroupNamePrefix() {
-    return "AbilityGroup.";
-  }
-
-  @Override
-  public String getTraitTypePrefix() {
-    return "";
-  }
-
-  @Override
-  public String getMarkerCommentKey() {
-    return "Sheet.Comment.AbilityMobility";
-  }
-
-  @Override
-  public String getHeaderKey() {
-    return "Abilities";
-  }
+public class AbilitiesContent extends FavorableTraitContent
+{
+	private Hero hero;
+	
+	public AbilitiesContent (Hero hero, Resources resources)
+	{
+		super (AbilitiesModelFetcher.fetch (hero), resources);
+		this.hero = hero;
+	}
+	
+	@Override
+	public TraitTypeList getMarkedTraitTypes ()
+	{
+		TraitTypeList typeList = new TraitTypeList ();
+		typeList.add ("Athletics");
+		typeList.add ("Dodge");
+		typeList.add ("Larceny");
+		typeList.add ("Ride");
+		typeList.add ("Stealth");
+		return typeList;
+	}
+	
+	@Override
+	public IdentifiedTraitTypeList[] getIdentifiedTraitTypeGroups ()
+	{
+		return AbilitiesModelFetcher.fetch (hero).getGroups ();
+	}
+	
+	@Override
+	public TraitMap getTraitMap ()
+	{
+		return TraitModelFetcher.fetch (hero);
+	}
+	
+	@Override
+	public String getGroupNamePrefix ()
+	{
+		return "AbilityGroup.";
+	}
+	
+	@Override
+	public String getTraitTypePrefix ()
+	{
+		return "";
+	}
+	
+	@Override
+	public String getMarkerCommentKey ()
+	{
+		return "Sheet.Comment.AbilityMobility";
+	}
+	
+	@Override
+	public String getHeaderKey ()
+	{
+		return "Abilities";
+	}
 }

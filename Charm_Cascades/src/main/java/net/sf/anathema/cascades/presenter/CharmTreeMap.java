@@ -8,20 +8,23 @@ import net.sf.anathema.hero.charms.model.options.CharmTreeCategory;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CharmTreeMap implements CharmTreeCollectionMap {
-
-  Map<CategoryReference, CharmTreeCategory> charmTreesById = new HashMap<>();
-
-  public void put(CategoryReference id, CharmTreeCategory tree) {
-    charmTreesById.put(id, tree);
-  }
-
-  @Override
-  public CharmTreeCollection getCharmTree(CategoryReference type) {
-    return charmTreesById.get(type);
-  }
-
-  public boolean isEmpty() {
-    return charmTreesById.isEmpty();
-  }
+public class CharmTreeMap implements CharmTreeCollectionMap
+{
+	Map<CategoryReference, CharmTreeCategory> charmTreesById = new HashMap<> ();
+	
+	public void put (CategoryReference id, CharmTreeCategory tree)
+	{
+		charmTreesById.put (id, tree);
+	}
+	
+	@Override
+	public CharmTreeCollection getCharmTree (CategoryReference type)
+	{
+		return charmTreesById.get (type);
+	}
+	
+	public boolean isEmpty ()
+	{
+		return charmTreesById.isEmpty ();
+	}
 }

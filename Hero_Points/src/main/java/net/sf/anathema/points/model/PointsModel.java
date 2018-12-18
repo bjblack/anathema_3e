@@ -8,27 +8,27 @@ import net.sf.anathema.points.model.overview.IValueModel;
 import net.sf.anathema.points.model.overview.WeightedCategory;
 import net.sf.anathema.points.model.xp.ExperiencePoints;
 
-public interface PointsModel extends HeroModel {
-
-  Identifier ID = new SimpleIdentifier("Points");
-
-  void addBonusPointCalculator(BonusPointCalculator bonusPointCalculator);
-
-  void addBonusCategory(WeightedCategory category);
-
-  void addToBonusOverview(IOverviewModel bonusPointModel);
-
-  void addToExperienceOverview(IValueModel<Integer> model);
-
-  Iterable<IValueModel<Integer>> getExperienceOverviewModels();
-
-  Iterable<IOverviewModel> getBonusOverviewModels();
-
-  Iterable<WeightedCategory> getBonusCategories();
-
-  BonusPointManagement getBonusPointManagement();
-  
-  ExperiencePointManagement getExperiencePointManagement();
-
-  ExperiencePoints getExperiencePoints();
+public interface PointsModel extends HeroModel
+{
+	Identifier ID = new SimpleIdentifier ("Points");
+	
+	void addBonusPointCalculator (BonusPointCalculator bonusPointCalculator);
+	
+	void addBonusCategory (WeightedCategory category);
+	
+	void addToBonusOverview (IOverviewModel bonusPointModel);
+	
+	void addToExperienceOverview (IValueModel<Integer> model);
+	
+	Iterable<IValueModel<Integer>> getExperienceOverviewModels ();
+	
+	Iterable<IOverviewModel> getBonusOverviewModels ();
+	
+	Iterable<WeightedCategory> getBonusCategories ();
+	
+	BonusPointManagement getBonusPointManagement ();
+	
+	ExperiencePointManagement getExperiencePointManagement ();
+	
+	ExperiencePoints getExperiencePoints ();
 }

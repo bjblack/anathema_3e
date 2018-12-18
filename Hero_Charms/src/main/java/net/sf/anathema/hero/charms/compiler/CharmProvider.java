@@ -9,15 +9,15 @@ import net.sf.anathema.hero.charms.model.special.CharmSpecialMechanic;
 import java.util.Collection;
 import java.util.List;
 
-public interface CharmProvider {
-
-  List<CategoryReference> getAllCategories();
-
-  List<Charm> getCharms(CategoryReference category);
-
-  List<CharmSpecialLearning> getSpecialLearningCharms(CategoryReference category);
-  
-  Collection<Charm> getCharmsWithSpecialMechanics();
-  
-  Collection<CharmSpecialMechanic> getSpecialMechanicsForCharm(CharmName name);
+public interface CharmProvider
+{
+	List<CategoryReference> getAllCategories ();
+	
+	List<Charm> getCharms (CategoryReference category);
+	
+	List<CharmSpecialLearning> getSpecialLearningCharms (CategoryReference category);
+	
+	Collection<Charm> getCharmsWithSpecialMechanics ();
+	
+	Collection<CharmSpecialMechanic> getSpecialMechanicsForCharm (CharmName name);
 }

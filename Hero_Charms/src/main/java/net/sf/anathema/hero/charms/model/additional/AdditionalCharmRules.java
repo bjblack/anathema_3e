@@ -1,9 +1,9 @@
 package net.sf.anathema.hero.charms.model.additional;
 
 
-public interface AdditionalCharmRules {
+public interface AdditionalCharmRules
+{
+	String getId ();
 	
-	String getId();
-	
-	void initialize();
+	void initialize ();
 }

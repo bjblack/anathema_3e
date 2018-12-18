@@ -6,10 +6,11 @@ import net.sf.anathema.hero.charms.model.CharmTree;
 
 import java.util.Collection;
 
-public class FriendlyCharmTreeArbitrator implements CharmTreeArbitrator {
-
-  @Override
-  public Collection<Charm> filterAvailableCharms(CharmTree charmGroup) {
-    return charmGroup.getAllCharms();
-  }
+public class FriendlyCharmTreeArbitrator implements CharmTreeArbitrator
+{
+	@Override
+	public Collection<Charm> filterAvailableCharms (CharmTree charmGroup)
+	{
+		return charmGroup.getAllCharms ();
+	}
 }

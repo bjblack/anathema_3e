@@ -5,15 +5,16 @@ import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 
-public class EquipmentCardData implements ICardData {
-
+public class EquipmentCardData implements ICardData
+{
 	private final String title;
 	private final Paragraph headerText;
 	private final Phrase[] bodyText;
 	private final Image icon;
 	
-	public EquipmentCardData(String title, Paragraph headerText, 
-			Phrase[] bodyText, Image icon) {
+	public EquipmentCardData (String title, Paragraph headerText, 
+	Phrase[] bodyText, Image icon)
+	{
 		this.title = title;
 		this.headerText = headerText;
 		this.bodyText = bodyText;
@@ -21,43 +22,50 @@ public class EquipmentCardData implements ICardData {
 	}
 	
 	@Override
-	public String getTitle() {
+	public String getTitle ()
+	{
 		return title;
 	}
-
+	
 	@Override
-	public Image getPrimaryIcon() {
+	public Image getPrimaryIcon ()
+	{
 		return icon;
 	}
-
+	
 	@Override
-	public Image getSecondaryIcon() {
+	public Image getSecondaryIcon ()
+	{
 		return null;
 	}
-
+	
 	@Override
-	public Paragraph getStats() {
+	public Paragraph getStats ()
+	{
 		return headerText;
 	}
-
+	
 	@Override
-	public String getKeywords() {
+	public String getKeywords ()
+	{
 		return null;
 	}
-
+	
 	@Override
-	public Element[] getBody(int contentHeight) {
+	public Element[] getBody (int contentHeight)
+	{
 		return bodyText;
 	}
-
+	
 	@Override
-	public String getSource() {
+	public String getSource ()
+	{
 		return null;
 	}
-
+	
 	@Override
-	public boolean wantsNewPage() {
+	public boolean wantsNewPage ()
+	{
 		return false;
 	}
-
 }

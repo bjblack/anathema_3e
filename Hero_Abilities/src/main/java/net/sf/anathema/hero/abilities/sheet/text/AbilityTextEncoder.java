@@ -10,27 +10,31 @@ import net.sf.anathema.hero.traits.model.state.TraitState;
 import net.sf.anathema.hero.traits.sheet.encoder.AbstractTraitTextEncoder;
 import net.sf.anathema.library.resources.Resources;
 
-public class AbilityTextEncoder extends AbstractTraitTextEncoder {
-
-  public AbilityTextEncoder(PdfReportUtils utils, Resources resources) {
-    super(utils, resources);
-  }
-
-  @Override
-  protected TraitTypeList getTypes(Hero hero) {
-    TraitTypeList traitTypes = new TraitTypeList();
-    AbilitiesModel abilitiesModel = AbilitiesModelFetcher.fetch(hero);
-    traitTypes.addAll(abilitiesModel.getAllAbilityTypes());
-    return traitTypes;
-  }
-
-  @Override
-  protected TraitState getTraitState(Hero hero, Trait trait) {
-    return AbilitiesModelFetcher.fetch(hero).getState(trait);
-  }
-
-  @Override
-  protected String getLabelKey() {
-    return "TextDescription.Label.Abilities";
-  }
+public class AbilityTextEncoder extends AbstractTraitTextEncoder
+{
+	public AbilityTextEncoder (PdfReportUtils utils, Resources resources)
+	{
+		super (utils, resources);
+	}
+	
+	@Override
+	protected TraitTypeList getTypes (Hero hero)
+	{
+		TraitTypeList traitTypes = new TraitTypeList ();
+		AbilitiesModel abilitiesModel = AbilitiesModelFetcher.fetch (hero);
+		traitTypes.addAll (abilitiesModel.getAllAbilityTypes ());
+		return traitTypes;
+	}
+	
+	@Override
+	protected TraitState getTraitState (Hero hero, Trait trait)
+	{
+		return AbilitiesModelFetcher.fetch (hero).getState (trait);
+	}
+	
+	@Override
+	protected String getLabelKey ()
+	{
+		return "TextDescription.Label.Abilities";
+	}
 }

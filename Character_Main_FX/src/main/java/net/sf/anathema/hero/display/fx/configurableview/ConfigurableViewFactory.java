@@ -5,12 +5,14 @@ import net.sf.anathema.library.dependencies.Produces;
 import net.sf.anathema.library.fx.configurableview.FxConfigurableView;
 import net.sf.anathema.library.view.ConfigurableCharacterView;
 
-@Produces(ConfigurableCharacterView.class)
-public class ConfigurableViewFactory implements SubViewFactory {
-  @SuppressWarnings("unchecked")
-  @Override
-  public <T> T create() {
-    FxConfigurableView view = new FxConfigurableView();
-    return (T) view;
-  }
+@Produces (ConfigurableCharacterView.class)
+public class ConfigurableViewFactory implements SubViewFactory
+{
+	@SuppressWarnings ("unchecked")
+	@Override
+	public <T> T create ()
+	{
+		FxConfigurableView view = new FxConfigurableView ();
+		return (T) view;
+	}
 }

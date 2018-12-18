@@ -6,13 +6,13 @@ import net.sf.anathema.library.interaction.model.Tool;
 import net.sf.anathema.library.view.ObjectSelectionView;
 import net.sf.anathema.library.view.VetoableObjectSelectionView;
 
-public interface EquipmentView {
-
-  VetoableObjectSelectionView<String> getEquipmentTemplatePickList();
-
-  Tool addToolButton();
-
-  ObjectSelectionView<IEquipmentItem> addOwnedEquipmentList(EquipmentItemRenderer renderer);
-
-  EquipmentObjectView addItemEditView();
+public interface EquipmentView
+{
+	VetoableObjectSelectionView<String> getEquipmentTemplatePickList ();
+	
+	Tool addToolButton ();
+	
+	ObjectSelectionView<IEquipmentItem> addOwnedEquipmentList (EquipmentItemRenderer renderer);
+	
+	EquipmentObjectView addItemEditView ();
 }

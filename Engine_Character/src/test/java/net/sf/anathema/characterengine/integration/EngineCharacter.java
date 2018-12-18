@@ -13,48 +13,58 @@ import net.sf.anathema.characterengine.quality.Type;
 import com.google.inject.Inject;
 
 @ScenarioScoped
-public class EngineCharacter implements Persona {
-  private final Engine engine;
-  private Persona persona;
-
-  @Inject
-  public EngineCharacter(Engine engine) {
-    this.engine = engine;
-  }
-
-  public void create() {
-    if (persona == null) {
-      this.persona = engine.createCharacter();
-    }
-  }
-
-  @Override
-  public void execute(Command command) {
-    persona.execute(command);
-  }
-
-  @Override
-  public void doFor(QualityKey qualityKey, QualityClosure closure) {
-    persona.doFor(qualityKey, closure);
-  }
-
-  @Override
-  public void doForEach(Type type, QualityClosure closure) {
-    persona.doForEach(type, closure);
-  }
-
-  @Override
-  public void doForEachDisregardingRules(Type type, QualityClosure closure) {
-    persona.doForEachDisregardingRules(type, closure);
-  }
-
-  @Override
-  public void observe(QualityKey qualityKey, QualityListener listener) {
-    persona.observe(qualityKey, listener);
-  }
-
-  @Override
-  public void stopObservation(QualityKey qualityKey, QualityListener listener) {
-    persona.stopObservation(qualityKey, listener);
-  }
+public class EngineCharacter implements Persona
+{
+	private final Engine engine;
+	private Persona persona;
+	
+	@Inject
+	public EngineCharacter (Engine engine)
+	{
+		this.engine = engine;
+	}
+	
+	public void create ()
+	{
+		if (persona == null)
+		{
+			this.persona = engine.createCharacter ();
+		}
+	}
+	
+	@Override
+	public void execute (Command command)
+	{
+		persona.execute (command);
+	}
+	
+	@Override
+	public void doFor (QualityKey qualityKey, QualityClosure closure)
+	{
+		persona.doFor (qualityKey, closure);
+	}
+	
+	@Override
+	public void doForEach (Type type, QualityClosure closure)
+	{
+		persona.doForEach (type, closure);
+	}
+	
+	@Override
+	public void doForEachDisregardingRules (Type type, QualityClosure closure)
+	{
+		persona.doForEachDisregardingRules (type, closure);
+	}
+	
+	@Override
+	public void observe (QualityKey qualityKey, QualityListener listener)
+	{
+		persona.observe (qualityKey, listener);
+	}
+	
+	@Override
+	public void stopObservation (QualityKey qualityKey, QualityListener listener)
+	{
+		persona.stopObservation (qualityKey, listener);
+	}
 }

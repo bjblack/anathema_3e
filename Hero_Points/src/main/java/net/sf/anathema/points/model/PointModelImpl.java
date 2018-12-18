@@ -16,82 +16,96 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class PointModelImpl implements PointsModel {
-
-  private final ExperiencePoints experiencePoints = new DefaultExperiencePointConfiguration();
-  private final List<IValueModel<Integer>> experienceOverviewModels = new ArrayList<>();
-  private final List<IOverviewModel> bonusOverviewModels = new ArrayList<>();
-  private final List<WeightedCategory> bonusCategories = new ArrayList<>();
-  private BonusPointManagementImpl bonusPointManagement;
-  private ExperiencePointManagement experiencePointManagement;
-
-  public PointModelImpl(PointsTemplate template) {
-    this.bonusPointManagement = new BonusPointManagementImpl(new PointsCreationData(template));
-    this.experiencePointManagement = new ExperiencePointManagementImpl(this);
-  }
-
-  @Override
-  public void initialize(HeroEnvironment environment, Hero hero) {
-    // nothing to do
-  }
-
-  @Override
-  public void initializeListening(ChangeAnnouncer announcer) {
-    experiencePoints.addExperiencePointConfigurationListener(new AnnounceExperiencePointChange(announcer));
-  }
-
-  @Override
-  public void addBonusPointCalculator(BonusPointCalculator calculator) {
-    bonusPointManagement.addBonusPointCalculator(calculator);
-  }
-
-  @Override
-  public void addBonusCategory(WeightedCategory category) {
-    bonusCategories.add(category);
-    Collections.sort(bonusCategories);
-  }
-
-  @Override
-  public void addToBonusOverview(IOverviewModel bonusPointModel) {
-    bonusOverviewModels.add(bonusPointModel);
-  }
-
-  @Override
-  public void addToExperienceOverview(IValueModel<Integer> model) {
-    experienceOverviewModels.add(model);
-  }
-
-  @Override
-  public Iterable<IValueModel<Integer>> getExperienceOverviewModels() {
-    return experienceOverviewModels;
-  }
-
-  @Override
-  public Iterable<IOverviewModel> getBonusOverviewModels() {
-    return bonusOverviewModels;
-  }
-
-  @Override
-  public Iterable<WeightedCategory> getBonusCategories() {
-    return bonusCategories;
-  }
-
-  @Override
-  public Identifier getId() {
-    return ID;
-  }
-
-  public BonusPointManagementImpl getBonusPointManagement() {
-    return bonusPointManagement;
-  }
-  
-  @Override
-	public ExperiencePointManagement getExperiencePointManagement() {
+public class PointModelImpl implements PointsModel
+{
+	private final ExperiencePoints experiencePoints = new DefaultExperiencePointConfiguration ();
+	private final List<IValueModel<Integer>> experienceOverviewModels = new ArrayList<> ();
+	private final List<IOverviewModel> bonusOverviewModels = new ArrayList<> ();
+	private final List<WeightedCategory> bonusCategories = new ArrayList<> ();
+	private BonusPointManagementImpl bonusPointManagement;
+	private ExperiencePointManagement experiencePointManagement;
+	
+	public PointModelImpl (PointsTemplate template)
+	{
+		this.bonusPointManagement = new BonusPointManagementImpl (new PointsCreationData (template));
+		this.experiencePointManagement = new ExperiencePointManagementImpl (this);
+	}
+	
+	@Override
+	public void initialize (HeroEnvironment environment, Hero hero)
+	{
+		// nothing to do
+	}
+	
+	@Override
+	public void initializeListening (ChangeAnnouncer announcer)
+	{
+		experiencePoints.addExperiencePointConfigurationListener (new AnnounceExperiencePointChange (announcer));
+	}
+	
+	@Override
+	public void addBonusPointCalculator (BonusPointCalculator calculator)
+	{
+		bonusPointManagement.addBonusPointCalculator (calculator);
+	}
+	
+	@Override
+	public void addBonusCategory (WeightedCategory category)
+	{
+		bonusCategories.add (category);
+		Collections.sort (bonusCategories);
+	}
+	
+	@Override
+	public void addToBonusOverview (IOverviewModel bonusPointModel)
+	{
+		bonusOverviewModels.add (bonusPointModel);
+	}
+	
+	@Override
+	public void addToExperienceOverview (IValueModel<Integer> model)
+	{
+		experienceOverviewModels.add (model);
+	}
+	
+	@Override
+	public Iterable<IValueModel<Integer>> getExperienceOverviewModels ()
+	{
+		return experienceOverviewModels;
+	}
+	
+	@Override
+	public Iterable<IOverviewModel> getBonusOverviewModels ()
+	{
+		return bonusOverviewModels;
+	}
+	
+	@Override
+	public Iterable<WeightedCategory> getBonusCategories ()
+	{
+		return bonusCategories;
+	}
+	
+	@Override
+	public Identifier getId ()
+	{
+		return ID;
+	}
+	
+	public BonusPointManagementImpl getBonusPointManagement ()
+	{
+		return bonusPointManagement;
+	}
+	
+	@Override
+	public ExperiencePointManagement getExperiencePointManagement ()
+	{
 		return experiencePointManagement;
 	}
-
-  @Override
-  public ExperiencePoints getExperiencePoints() {
-    return experiencePoints;
-  }
+	
+	@Override
+	public ExperiencePoints getExperiencePoints ()
+	{
+		return experiencePoints;
+	}
 }

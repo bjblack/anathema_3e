@@ -7,17 +7,19 @@ import net.sf.anathema.hero.sheet.pdf.encoder.general.Bounds;
 import net.sf.anathema.hero.sheet.pdf.encoder.graphics.SheetGraphics;
 import net.sf.anathema.hero.sheet.pdf.session.ReportSession;
 
-public class SimpleMagicEncoder extends AbstractContentEncoder<AllMagicContent> {
-
-  public SimpleMagicEncoder() {
-    super(AllMagicContent.class);
-  }
-
-  @Override
-  public void encode(SheetGraphics graphics, ReportSession reportSession, Bounds bounds) throws DocumentException {
-    float top = bounds.getMinY();
-    Bounds remainingBounds = new Bounds(bounds.getMinX(), top, bounds.getWidth(), bounds.getMaxY() - top);
-    MagicTableEncoder tableEncoder = new MagicTableEncoder(false, AllMagicContent.class);
-    tableEncoder.encodeTable(graphics, reportSession, remainingBounds);
-  }
+public class SimpleMagicEncoder extends AbstractContentEncoder<AllMagicContent>
+{
+	public SimpleMagicEncoder ()
+	{
+		super (AllMagicContent.class);
+	}
+	
+	@Override
+	public void encode (SheetGraphics graphics, ReportSession reportSession, Bounds bounds) throws DocumentException
+	{
+		float top = bounds.getMinY ();
+		Bounds remainingBounds = new Bounds (bounds.getMinX (), top, bounds.getWidth (), bounds.getMaxY () - top);
+		MagicTableEncoder tableEncoder = new MagicTableEncoder (false, AllMagicContent.class);
+		tableEncoder.encodeTable (graphics, reportSession, remainingBounds);
+	}
 }

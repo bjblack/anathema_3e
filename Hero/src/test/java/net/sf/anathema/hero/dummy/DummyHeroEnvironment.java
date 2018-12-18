@@ -14,50 +14,58 @@ import org.mockito.Mockito;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DummyHeroEnvironment implements HeroEnvironment {
-
-  public DummyHeroTypes characterTypes = new DummyHeroTypes();
-  public DataFileProvider mockFileProvider = Mockito.mock(DataFileProvider.class);
-  public ObjectFactory mockObjectFactory = Mockito.mock(ObjectFactory.class);
-  public List<ExtensibleDataSet> dataSets = new ArrayList<>();
-
-  @Override
-  public HeroTypes getHeroTypes() {
-    return characterTypes;
-  }
-
-  @Override
-  public Messaging getMessaging() {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override
-  public String getPreference(String key) {
-    return null;
-  }
-
-  @Override
-  public ObjectFactory getObjectFactory() {
-    return mockObjectFactory;
-  }
-
-  @Override
-  public Resources getResources() {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override
-  public TemplateRegistry getTemplateRegistry() {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override
-  public DataFileProvider getDataFileProvider() {
-    return mockFileProvider;
-  }
-
-  @Override
-  public <T extends ExtensibleDataSet> T getDataSet(Class<T> set) {
-    return (T)dataSets.stream().filter(item -> set.isInstance(item)).findFirst().get();
-  }
+public class DummyHeroEnvironment implements HeroEnvironment
+{
+	public DummyHeroTypes characterTypes = new DummyHeroTypes ();
+	public DataFileProvider mockFileProvider = Mockito.mock (DataFileProvider.class);
+	public ObjectFactory mockObjectFactory = Mockito.mock (ObjectFactory.class);
+	public List<ExtensibleDataSet> dataSets = new ArrayList<> ();
+	
+	@Override
+	public HeroTypes getHeroTypes ()
+	{
+		return characterTypes;
+	}
+	
+	@Override
+	public Messaging getMessaging ()
+	{
+		throw new UnsupportedOperationException ();
+	}
+	
+	@Override
+	public String getPreference (String key)
+	{
+		return null;
+	}
+	
+	@Override
+	public ObjectFactory getObjectFactory ()
+	{
+		return mockObjectFactory;
+	}
+	
+	@Override
+	public Resources getResources ()
+	{
+		throw new UnsupportedOperationException ();
+	}
+	
+	@Override
+	public TemplateRegistry getTemplateRegistry ()
+	{
+		throw new UnsupportedOperationException ();
+	}
+	
+	@Override
+	public DataFileProvider getDataFileProvider ()
+	{
+		return mockFileProvider;
+	}
+	
+	@Override
+	public <T extends ExtensibleDataSet> T getDataSet (Class<T> set)
+	{
+		return (T)dataSets.stream ().filter (item -> set.isInstance (item)).findFirst ().get ();
+	}
 }

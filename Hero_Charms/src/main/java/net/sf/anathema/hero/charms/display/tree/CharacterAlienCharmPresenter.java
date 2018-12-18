@@ -8,24 +8,29 @@ import net.sf.anathema.library.view.ObjectSelectionView;
 
 import java.util.List;
 
-public class CharacterAlienCharmPresenter implements AlienCharmPresenter {
-
-  private CharmDisplayModel model;
-
-  public CharacterAlienCharmPresenter(CharmDisplayModel model) {
-    this.model = model;
-  }
-
-  @Override
-  public void initPresentation(final ObjectSelectionView<CategoryReference> typeSelector) {
-    model.addCasteChangeListener(() -> {
-      boolean alienCharms = model.isAllowedAlienCharms();
-      CharmsModel charmConfiguration = model.getCharmModel();
-      if (!alienCharms) {
-        charmConfiguration.forgetAllAlienCharms();
-      }
-      List<CategoryReference> categories = new CharacterCategoryCollection(model).getCurrentCategories();
-      typeSelector.setObjects(categories);
-    });
-  }
+public class CharacterAlienCharmPresenter implements AlienCharmPresenter
+{
+	private CharmDisplayModel model;
+	
+	public CharacterAlienCharmPresenter (CharmDisplayModel model)
+	{
+		this.model = model;
+	}
+	
+	@Override
+	public void initPresentation (final ObjectSelectionView<CategoryReference> typeSelector)
+	{
+		model.addCasteChangeListener ( () ->
+		{
+			boolean alienCharms = model.isAllowedAlienCharms ();
+			CharmsModel charmConfiguration = model.getCharmModel ();
+			if (!alienCharms)
+			{
+				charmConfiguration.forgetAllAlienCharms ();
+			}
+			List<CategoryReference> categories = new CharacterCategoryCollection (model).getCurrentCategories ();
+			typeSelector.setObjects (categories);
+		}
+		);
+	}
 }

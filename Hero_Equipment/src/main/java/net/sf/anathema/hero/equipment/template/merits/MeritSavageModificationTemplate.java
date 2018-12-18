@@ -10,16 +10,18 @@ import net.sf.anathema.platform.persistence.JsonType;
 import java.util.List;
 import java.util.Map;
 
-@JsonType("AddsSavageModification")
-public class MeritSavageModificationTemplate extends MeritMechanicalDetailTemplate {
-  public List<Integer> levels;
-  public Map<WeaponTag, WeaponTag> transformations;
-
-  @Override
-  public MechanicalDetail generate() {
-    GenericMechanicalDetail detail = new GenericMechanicalDetail("AddsSavageModification");
-    detail.addDetailEntry(new DetailEntryReference("levels"), levels);
-    detail.addDetailEntry(new DetailEntryReference("transformations"), transformations);
-    return detail;
-  }
+@JsonType ("AddsSavageModification")
+public class MeritSavageModificationTemplate extends MeritMechanicalDetailTemplate
+{
+	public List<Integer> levels;
+	public Map<WeaponTag, WeaponTag> transformations;
+	
+	@Override
+	public MechanicalDetail generate ()
+	{
+		GenericMechanicalDetail detail = new GenericMechanicalDetail ("AddsSavageModification");
+		detail.addDetailEntry (new DetailEntryReference ("levels"), levels);
+		detail.addDetailEntry (new DetailEntryReference ("transformations"), transformations);
+		return detail;
+	}
 }

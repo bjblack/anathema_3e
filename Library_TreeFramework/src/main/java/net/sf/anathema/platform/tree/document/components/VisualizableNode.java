@@ -7,28 +7,33 @@ import net.sf.anathema.library.number.Area;
 
 import java.util.Map;
 
-public class VisualizableNode extends AbstractSingleVisualizableNode {
-
-  @Override
-  public void accept(IVisualizableNodeVisitor visitor) {
-    visitor.visitSingleNode(this);
-  }
-
-  public VisualizableNode(IIdentifiedRegularNode contentNode, Map<ISimpleNode, IVisualizableNode> map,
-                          Area nodeDimension, MultiEntryMap<ISimpleNode, ISimpleNode> leafNodesByAncestors) {
-    super(contentNode, map, nodeDimension, leafNodesByAncestors);
-  }
-
-  @Override
-  protected IIdentifiedRegularNode getContentNode() {
-    return (IIdentifiedRegularNode) super.getContentNode();
-  }
-
-  public String getId(){
-    return getContentNode().getId();
-  }
-
-  public String toString() {
-    return getId();
-  }
+public class VisualizableNode extends AbstractSingleVisualizableNode
+{
+	@Override
+	public void accept (IVisualizableNodeVisitor visitor)
+	{
+		visitor.visitSingleNode (this);
+	}
+	
+	public VisualizableNode (IIdentifiedRegularNode contentNode, Map<ISimpleNode, IVisualizableNode> map,
+	Area nodeDimension, MultiEntryMap<ISimpleNode, ISimpleNode> leafNodesByAncestors)
+	{
+		super (contentNode, map, nodeDimension, leafNodesByAncestors);
+	}
+	
+	@Override
+	protected IIdentifiedRegularNode getContentNode ()
+	{
+		return (IIdentifiedRegularNode) super.getContentNode ();
+	}
+	
+	public String getId ()
+	{
+		return getContentNode ().getId ();
+	}
+	
+	public String toString ()
+	{
+		return getId ();
+	}
 }

@@ -8,16 +8,18 @@ import net.sf.anathema.hero.sheet.pdf.encoder.boxes.ContentEncoder;
 import net.sf.anathema.hero.sheet.pdf.encoder.boxes.GlobalEncoderFactory;
 import net.sf.anathema.library.resources.Resources;
 
-@SuppressWarnings("UnusedDeclaration")
-public class PanoplyEncoderFactory extends GlobalEncoderFactory {
-
-  public PanoplyEncoderFactory() {
-    super(EncoderIds.PANOPLY);
-    setPreferredHeight(new PreferredWeaponryHeight());
-  }
-
-  @Override
-  public ContentEncoder create(Resources resources, BasicContent content) {
-    return new ArmourEncoder(resources, new ArmourTableEncoder(ArmourContent.class));
-  }
+@SuppressWarnings ("UnusedDeclaration")
+public class PanoplyEncoderFactory extends GlobalEncoderFactory
+{
+	public PanoplyEncoderFactory ()
+	{
+		super (EncoderIds.PANOPLY);
+		setPreferredHeight (new PreferredWeaponryHeight ());
+	}
+	
+	@Override
+	public ContentEncoder create (Resources resources, BasicContent content)
+	{
+		return new ArmourEncoder (resources, new ArmourTableEncoder (ArmourContent.class));
+	}
 }

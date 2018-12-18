@@ -22,104 +22,117 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class ThaumaturgyTests {
-	
-	DummyHero hero = new DummyHero();
-	ThaumaturgyModel model = new ThaumaturgyModelImpl();
-	PointsModel points = new PointModelImpl(new PointsTemplate());
+public class ThaumaturgyTests
+{
+	DummyHero hero = new DummyHero ();
+	ThaumaturgyModel model = new ThaumaturgyModelImpl ();
+	PointsModel points = new PointModelImpl (new PointsTemplate ());
 	ExperienceModel xp;
 	
 	
 	@Before
-  public void setUp() throws Exception {
-    DummyTraitModel traits = new DummyTraitModel();
-    hero.addModel(traits);
-    hero.addModel(model);
-    hero.addModel(points);
-    hero.addModel(new MeritsModelImpl());
-    
-    DummyHeroEnvironment dummyEnvironment = new DummyHeroEnvironment();
-    DummyRitualProvider provider = new DummyRitualProvider();
-    dummyEnvironment.dataSets.add(provider);
-    
-    xp = new ExperienceModelImpl();
-    xp.setExperienced(true);
-    hero.addModel(xp);
-    
-    model.initialize(dummyEnvironment, hero);
-  }
-	
-	@Test
-	public void verifyNoThaumaturgyIfNotGranted() {
-		model.selectFirstEntryOption();
-		assertThat(model.isEntryAllowed(), is(false));
+	public void setUp () throws Exception
+	{
+		DummyTraitModel traits = new DummyTraitModel ();
+		hero.addModel (traits);
+		hero.addModel (model);
+		hero.addModel (points);
+		hero.addModel (new MeritsModelImpl ());
+		
+		DummyHeroEnvironment dummyEnvironment = new DummyHeroEnvironment ();
+		DummyRitualProvider provider = new DummyRitualProvider ();
+		dummyEnvironment.dataSets.add (provider);
+		
+		xp = new ExperienceModelImpl ();
+		xp.setExperienced (true);
+		hero.addModel (xp);
+		
+		model.initialize (dummyEnvironment, hero);
 	}
 	
 	@Test
-	public void verifyThaumaturgyLearnableIfGranted() {
-		model.addThaumaturgyProvider(getAllowsThaumaturgyProvider());
-		model.selectFirstEntryOption();
-		assertThat(model.isEntryAllowed(), is(true));
+	public void verifyNoThaumaturgyIfNotGranted ()
+	{
+		model.selectFirstEntryOption ();
+		assertThat (model.isEntryAllowed (), is (false));
 	}
 	
 	@Test
-	public void verifyThaumaturgyBasicCost() {
-		model.addThaumaturgyProvider(getAllowsThaumaturgyProvider());
-		model.setSelectedEntryOption(getOption("Second Bread"));
-		model.commitSelection();
-		assertThat(points.getExperiencePointManagement().getTotalCosts(),
-				is(ThaumaturgyExperienceModel.BASIC_RITUAL_COST));
+	public void verifyThaumaturgyLearnableIfGranted ()
+	{
+		model.addThaumaturgyProvider (getAllowsThaumaturgyProvider ());
+		model.selectFirstEntryOption ();
+		assertThat (model.isEntryAllowed (), is (true));
 	}
 	
 	@Test
-	public void verifyThaumaturgyAdvancedCost() {
-		model.addThaumaturgyProvider(getAllowsThaumaturgyProvider());
-		model.setSelectedEntryOption(getOption("Speak To Ozashun"));
-		model.commitSelection();
-		assertThat(points.getExperiencePointManagement().getTotalCosts(),
-				is(ThaumaturgyExperienceModel.ADVANCED_RITUAL_COST));
+	public void verifyThaumaturgyBasicCost ()
+	{
+		model.addThaumaturgyProvider (getAllowsThaumaturgyProvider ());
+		model.setSelectedEntryOption (getOption ("Second Bread"));
+		model.commitSelection ();
+		assertThat (points.getExperiencePointManagement ().getTotalCosts (),
+		is (ThaumaturgyExperienceModel.BASIC_RITUAL_COST));
 	}
 	
 	@Test
-	public void verifyThaumaturgyFreeRitualDiscountCost() {
-		model.addThaumaturgyProvider(getFreeRitualProvider());
-		model.setSelectedEntryOption(getOption("Second Bread"));
-		model.commitSelection();
-		model.setSelectedEntryOption(getOption("Read The Tea Leaves"));
-		model.commitSelection();
-		model.setSelectedEntryOption(getOption("Speak To Ozashun"));
-		model.commitSelection();
-		assertThat(points.getExperiencePointManagement().getTotalCosts(),
-				is(2 * ThaumaturgyExperienceModel.BASIC_RITUAL_COST));
+	public void verifyThaumaturgyAdvancedCost ()
+	{
+		model.addThaumaturgyProvider (getAllowsThaumaturgyProvider ());
+		model.setSelectedEntryOption (getOption ("Speak To Ozashun"));
+		model.commitSelection ();
+		assertThat (points.getExperiencePointManagement ().getTotalCosts (),
+		is (ThaumaturgyExperienceModel.ADVANCED_RITUAL_COST));
 	}
 	
-	private ThaumaturgyRitual getOption(String name) {
-		return model.findOptionByReference(new OptionalEntryReference(name));
+	@Test
+	public void verifyThaumaturgyFreeRitualDiscountCost ()
+	{
+		model.addThaumaturgyProvider (getFreeRitualProvider ());
+		model.setSelectedEntryOption (getOption ("Second Bread"));
+		model.commitSelection ();
+		model.setSelectedEntryOption (getOption ("Read The Tea Leaves"));
+		model.commitSelection ();
+		model.setSelectedEntryOption (getOption ("Speak To Ozashun"));
+		model.commitSelection ();
+		assertThat (points.getExperiencePointManagement ().getTotalCosts (),
+		is (2 * ThaumaturgyExperienceModel.BASIC_RITUAL_COST));
 	}
 	
-	private ThaumaturgyProvider getAllowsThaumaturgyProvider() {
-		return new TestThaumaturgyProvider(true, 0);
+	private ThaumaturgyRitual getOption (String name)
+	{
+		return model.findOptionByReference (new OptionalEntryReference (name));
 	}
 	
-	private ThaumaturgyProvider getFreeRitualProvider() {
-		return new TestThaumaturgyProvider(true, 1);
+	private ThaumaturgyProvider getAllowsThaumaturgyProvider ()
+	{
+		return new TestThaumaturgyProvider (true, 0);
 	}
 	
-	private class TestThaumaturgyProvider implements ThaumaturgyProvider {
+	private ThaumaturgyProvider getFreeRitualProvider ()
+	{
+		return new TestThaumaturgyProvider (true, 1);
+	}
+	
+	private class TestThaumaturgyProvider implements ThaumaturgyProvider
+	{
 		private final boolean grantsThaumaturgy;
 		private final int grantsFreeRituals;
 		
-		public TestThaumaturgyProvider(boolean grants, int freeRituals) {
+		public TestThaumaturgyProvider (boolean grants, int freeRituals)
+		{
 			this.grantsThaumaturgy = grants;
 			this.grantsFreeRituals = freeRituals;
 		}
 		
 		@Override
-		public boolean grantsThaumaturgy() {
+		public boolean grantsThaumaturgy ()
+		{
 			return grantsThaumaturgy;
 		}
 		@Override
-		public int numberOfRitualsProvided() {
+		public int numberOfRitualsProvided ()
+		{
 			return grantsFreeRituals;
 		}
 	}

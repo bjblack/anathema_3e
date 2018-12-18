@@ -12,28 +12,33 @@ import net.sf.anathema.library.resources.Resources;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AddNewStatsTool {
-  protected final Resources resources;
-  protected final StatsEditModel editModel;
-  protected final EquipmentStatsFactory statsFactory;
-
-  public AddNewStatsTool(Resources resources, StatsEditModel editModel,
-                     EquipmentStatsFactory statsFactory) {
-    this.editModel = editModel;
-    this.statsFactory = statsFactory;
-    this.resources = resources;
-  }
-
-  public void addTool(final NewStatsConfiguration newStatsConfiguration, ToolListView<IEquipmentStats> statsListView) {
-    final Tool newTool = statsListView.addTool();
-    newTool.setTooltip(resources.getString(newStatsConfiguration.getTooltipKey()));
-    newTool.setIcon(newStatsConfiguration.getIconPath());
-    newTool.setOverlay(new RelativePath("icons/ButtonPlus16.png"));
-    newTool.setCommand(() -> {
-      List<String> definedNames = editModel.getStats().stream().map(stats -> stats.getName().getId()).collect(Collectors.toList());
-      String nameProposal = resources.getString(newStatsConfiguration.getNameKey());
-      IEquipmentStats equipmentStats = statsFactory.createNewStats(definedNames, nameProposal, newStatsConfiguration.getType());
-      editModel.addStatistics(equipmentStats);
-    });
-  }
+public class AddNewStatsTool
+{
+	protected final Resources resources;
+	protected final StatsEditModel editModel;
+	protected final EquipmentStatsFactory statsFactory;
+	
+	public AddNewStatsTool (Resources resources, StatsEditModel editModel,
+	EquipmentStatsFactory statsFactory)
+	{
+		this.editModel = editModel;
+		this.statsFactory = statsFactory;
+		this.resources = resources;
+	}
+	
+	public void addTool (final NewStatsConfiguration newStatsConfiguration, ToolListView<IEquipmentStats> statsListView)
+	{
+		final Tool newTool = statsListView.addTool ();
+		newTool.setTooltip (resources.getString (newStatsConfiguration.getTooltipKey ()));
+		newTool.setIcon (newStatsConfiguration.getIconPath ());
+		newTool.setOverlay (new RelativePath ("icons/ButtonPlus16.png"));
+		newTool.setCommand ( () ->
+		{
+			List<String> definedNames = editModel.getStats ().stream ().map (stats -> stats.getName ().getId ()).collect (Collectors.toList ());
+			String nameProposal = resources.getString (newStatsConfiguration.getNameKey ());
+			IEquipmentStats equipmentStats = statsFactory.createNewStats (definedNames, nameProposal, newStatsConfiguration.getType ());
+			editModel.addStatistics (equipmentStats);
+		}
+		);
+	}
 }

@@ -13,19 +13,22 @@ import net.sf.anathema.platform.preferences.PreferenceView;
 
 import org.tbee.javafx.scene.layout.MigPane;
 
-@SuppressWarnings("UnusedDeclaration")
-public class FxSheetPreferenceView implements PreferenceView, NodeHolder, SheetPreferenceView {
-  private final MigPane pane = new MigPane(LayoutUtils.fillWithoutInsets());
-
-  @Override
-  public ObjectSelectionView<PageSize> addObjectSelectionView(String title, AgnosticUIConfiguration<PageSize> uiConfiguration) {
-    ComboBoxSelectionView<PageSize> view = new ComboBoxSelectionView<>(title, uiConfiguration);
-    pane.add(view.getNode(), new CC().alignY("top"));
-    return view;
-  }
-
-  @Override
-  public Node getNode() {
-    return pane;
-  }
+@SuppressWarnings ("UnusedDeclaration")
+public class FxSheetPreferenceView implements PreferenceView, NodeHolder, SheetPreferenceView
+{
+	private final MigPane pane = new MigPane (LayoutUtils.fillWithoutInsets ());
+	
+	@Override
+	public ObjectSelectionView<PageSize> addObjectSelectionView (String title, AgnosticUIConfiguration<PageSize> uiConfiguration)
+	{
+		ComboBoxSelectionView<PageSize> view = new ComboBoxSelectionView<> (title, uiConfiguration);
+		pane.add (view.getNode (), new CC ().alignY ("top"));
+		return view;
+	}
+	
+	@Override
+	public Node getNode ()
+	{
+		return pane;
+	}
 }

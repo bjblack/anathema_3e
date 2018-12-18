@@ -4,10 +4,11 @@ import net.sf.anathema.library.interaction.model.Tool;
 import net.sf.anathema.library.presenter.AgnosticUIConfiguration;
 import net.sf.anathema.library.text.ITextView;
 
-public interface OptionalPropertyEntryView {
-  Tool addTool();
-
-  ITextView addDescriptionBox(String label);
-
-  <T> ObjectSelectionView<T> addSelection(AgnosticUIConfiguration<T> uiConfiguration);
+public interface OptionalPropertyEntryView
+{
+	Tool addTool ();
+	
+	ITextView addDescriptionBox (String label);
+	
+	<T> ObjectSelectionView<T> addSelection (AgnosticUIConfiguration<T> uiConfiguration);
 }

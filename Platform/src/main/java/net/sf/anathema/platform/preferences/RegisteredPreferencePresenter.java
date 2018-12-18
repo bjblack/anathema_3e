@@ -1,4 +1,5 @@
 package net.sf.anathema.platform.preferences;
 
-public @interface RegisteredPreferencePresenter {
+public @interface RegisteredPreferencePresenter
+{
 }

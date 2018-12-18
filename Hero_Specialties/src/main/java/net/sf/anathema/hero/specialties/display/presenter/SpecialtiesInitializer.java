@@ -12,27 +12,30 @@ import net.sf.anathema.library.initialization.Weight;
 import net.sf.anathema.library.presenter.CategorizedOptionalPropertyPresenter;
 import net.sf.anathema.library.view.property.OptionalPropertiesView;
 
-@RegisteredInitializer(HeroModelGroup.Mundane)
-@Weight(weight = 300)
-public class SpecialtiesInitializer implements HeroModelInitializer {
-
-  private HeroEnvironment environment;
-
-  @SuppressWarnings("UnusedParameters")
-  public SpecialtiesInitializer(HeroEnvironment environment) {
-    this.environment = environment;
-  }
-
-  @Override
-  public void initialize(SectionView sectionView, Hero hero) {
-    String viewName = environment.getResources().getString("AdditionalTemplateView.TabName.Specialties");
-    OptionalPropertiesView view = sectionView.addView(viewName, OptionalPropertiesView.class);
-    SpecialtiesModel specialtiesModel = SpecialtiesModelFetcher.fetch(hero);
-    new CategorizedOptionalPropertyPresenter(hero, specialtiesModel, view, environment.getResources()).initPresentation();
-  }
-
-  @Override
-  public boolean canWorkForHero(Hero hero) {
-    return SpecialtiesModelFetcher.fetch(hero) != null;
-  }
+@RegisteredInitializer (HeroModelGroup.Mundane)
+@Weight (weight = 300)
+public class SpecialtiesInitializer implements HeroModelInitializer
+{
+	private HeroEnvironment environment;
+	
+	@SuppressWarnings ("UnusedParameters")
+	public SpecialtiesInitializer (HeroEnvironment environment)
+	{
+		this.environment = environment;
+	}
+	
+	@Override
+	public void initialize (SectionView sectionView, Hero hero)
+	{
+		String viewName = environment.getResources ().getString ("AdditionalTemplateView.TabName.Specialties");
+		OptionalPropertiesView view = sectionView.addView (viewName, OptionalPropertiesView.class);
+		SpecialtiesModel specialtiesModel = SpecialtiesModelFetcher.fetch (hero);
+		new CategorizedOptionalPropertyPresenter (hero, specialtiesModel, view, environment.getResources ()).initPresentation ();
+	}
+	
+	@Override
+	public boolean canWorkForHero (Hero hero)
+	{
+		return SpecialtiesModelFetcher.fetch (hero) != null;
+	}
 }

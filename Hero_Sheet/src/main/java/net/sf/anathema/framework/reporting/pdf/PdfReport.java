@@ -7,7 +7,7 @@ import net.sf.anathema.hero.individual.model.Hero;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.pdf.PdfWriter;
 
-public interface PdfReport extends Report {
-
-  void performPrint(Hero hero, Document document, PdfWriter writer) throws ReportException;
+public interface PdfReport extends Report
+{
+	void performPrint (Hero hero, Document document, PdfWriter writer) throws ReportException;
 }

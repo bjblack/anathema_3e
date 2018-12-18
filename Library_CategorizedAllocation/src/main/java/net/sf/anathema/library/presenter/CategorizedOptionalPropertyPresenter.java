@@ -12,22 +12,24 @@ import net.sf.anathema.library.view.property.OptionalPropertiesView;
 import net.sf.anathema.library.view.property.OptionalPropertyItemView;
 import net.sf.anathema.platform.taskbar.BasicUi;
 
-public class CategorizedOptionalPropertyPresenter extends AbstractCategorizedOptionalPresenter {
-
-  private final OptionalPropertiesView view;
-
-  public CategorizedOptionalPropertyPresenter(Hero hero,
-                                              OptionalPropertiesModel<?, ?> model, OptionalPropertiesView view,
-                                              Resources resources) {
-    super(hero, model, view, resources);
-    this.view = view;
-  }
-
-  @Override
-  protected void addSubView(PossessedOptionalEntry<?> entry) {
-    RelativePath deleteIcon = new BasicUi().getRemoveIconPath();
-    OptionalPropertyItemView itemView = view.addItemView(entry.toString(), deleteIcon);
-    itemView.addButtonListener(() -> model.forget(entry));
-    viewsByEntry.put(entry, itemView);
-  }
+public class CategorizedOptionalPropertyPresenter extends AbstractCategorizedOptionalPresenter
+{
+	private final OptionalPropertiesView view;
+	
+	public CategorizedOptionalPropertyPresenter (Hero hero,
+	OptionalPropertiesModel<?, ?> model, OptionalPropertiesView view,
+	Resources resources)
+	{
+		super (hero, model, view, resources);
+		this.view = view;
+	}
+	
+	@Override
+	protected void addSubView (PossessedOptionalEntry<?> entry)
+	{
+		RelativePath deleteIcon = new BasicUi ().getRemoveIconPath ();
+		OptionalPropertyItemView itemView = view.addItemView (entry.toString (), deleteIcon);
+		itemView.addButtonListener ( () -> model.forget (entry));
+		viewsByEntry.put (entry, itemView);
+	}
 }

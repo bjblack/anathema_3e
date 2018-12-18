@@ -26,69 +26,83 @@ import java.util.Collection;
 import static net.sf.anathema.library.fx.layout.LayoutUtils.fillWithoutInsets;
 import static net.sf.anathema.library.fx.layout.LayoutUtils.withoutInsets;
 
-public class FxCharmView implements CharmView, NodeHolder {
-  private final MigPane selectionPanel = new MigPane(withoutInsets().wrapAfter(4));
-  private final MigPane content = new MigPane(fillWithoutInsets().wrapAfter(1));
-  private final FxPolygonPanel viewComponent = new FxPolygonPanel();
-  private final AgnosticTreeView treeView = new AgnosticTreeView(new AgnosticPolygonPanel(viewComponent));
-
-  public FxCharmView() {
-    content.add(selectionPanel, new CC().growX().pushX());
-    content.add(viewComponent.getNode(), new CC().grow().push());
-  }
-
-  @Override
-  public TreeView addTreeView() {
-    return treeView;
-  }
-
-  @Override
-  public <T> ComboBoxSelectionView<T> addSelectionView(String title, AgnosticUIConfiguration<T> uiConfig) {
-    final BorderPane borderPane = new BorderPane();
-    ComboBoxSelectionView<T> selectionView = new ComboBoxSelectionView<>(title, uiConfig);
-    borderPane.centerProperty().set(selectionView.getNode());
-    selectionPanel.add(borderPane);
-    return selectionView;
-  }
-
-  @Override
-  public <T> ObjectSelectionView<T> addSelectionViewAndSizeItFor(String title, AgnosticUIConfiguration<T> uiConfig,
-                                                                 Collection<T> objects) {
-    return addSelectionView(title, uiConfig);
-  }
-
-  @Override
-  public void whenCursorLeavesCharmAreaResetAllPopups() {
-    viewComponent.addMouseBorderListener(new MouseBorderClosure() {
-      @Override
-      public void mouseEntered() {
-        //nothing to do
-      }
-
-      @Override
-      public void mouseExited() {
-        viewComponent.resetAllTooltips();
-      }
-    });
-  }
-
-  @Override
-  public void registerSpecialType(Class contentClass, ContentFactory factory) {
-    treeView.registerSpecialType(contentClass, factory);
-  }
-
-  @Override
-  public ToggleButtonSpecialNodeView createToggleButtonSpecialView() {
-    return new BooleanSelectionSpecialNodeView();
-  }
-
-  @Override
-  public CategorizedSpecialNodeView createCategorizedSpecialView() {
-    return new CategorizedSpecialView();
-  }
-
-  @Override
-  public Node getNode() {
-    return content;
-  }
+public class FxCharmView implements CharmView, NodeHolder
+{
+	private final MigPane selectionPanel = new MigPane (withoutInsets ().wrapAfter (4));
+	private final MigPane content = new MigPane (fillWithoutInsets ().wrapAfter (1));
+	private final FxPolygonPanel viewComponent = new FxPolygonPanel ();
+	private final AgnosticTreeView treeView = new AgnosticTreeView (new AgnosticPolygonPanel (viewComponent));
+	
+	public FxCharmView ()
+	{
+		content.add (selectionPanel, new CC ().growX ().pushX ());
+		content.add (viewComponent.getNode (), new CC ().grow ().push ());
+	}
+	
+	@Override
+	public TreeView addTreeView ()
+	{
+		return treeView;
+	}
+	
+	@Override
+	public <T> ComboBoxSelectionView<T> addSelectionView (String title, AgnosticUIConfiguration<T> uiConfig)
+	{
+		final BorderPane borderPane = new BorderPane ();
+		ComboBoxSelectionView<T> selectionView = new ComboBoxSelectionView<> (title, uiConfig);
+		borderPane.centerProperty ().set (selectionView.getNode ());
+		selectionPanel.add (borderPane);
+		return selectionView;
+	}
+	
+	@Override
+	public <T> ObjectSelectionView<T> addSelectionViewAndSizeItFor (String title, AgnosticUIConfiguration<T> uiConfig,
+	Collection<T> objects)
+	{
+		return addSelectionView (title, uiConfig);
+	}
+	
+	@Override
+	public void whenCursorLeavesCharmAreaResetAllPopups ()
+	{
+		viewComponent.addMouseBorderListener (new MouseBorderClosure ()
+		{
+			@Override
+			public void mouseEntered ()
+			{
+				//nothing to do
+			}
+			
+			@Override
+			public void mouseExited ()
+			{
+				viewComponent.resetAllTooltips ();
+			}
+		}
+		);
+	}
+	
+	@Override
+	public void registerSpecialType (Class contentClass, ContentFactory factory)
+	{
+		treeView.registerSpecialType (contentClass, factory);
+	}
+	
+	@Override
+	public ToggleButtonSpecialNodeView createToggleButtonSpecialView ()
+	{
+		return new BooleanSelectionSpecialNodeView ();
+	}
+	
+	@Override
+	public CategorizedSpecialNodeView createCategorizedSpecialView ()
+	{
+		return new CategorizedSpecialView ();
+	}
+	
+	@Override
+	public Node getNode ()
+	{
+		return content;
+	}
 }

@@ -13,50 +13,59 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class PossessionsContent extends AbstractSubBoxContent implements ListSubBoxContent {
-
-  private Hero hero;
-
-  public PossessionsContent(Hero hero, Resources resources) {
-    super(resources);
-    this.hero = hero;
-  }
-
-  @Override
-  public String getHeaderKey() {
-    return "Possessions";
-  }
-
-  @Override
-  public List<String> getPrintEntries() {
-    List<String> printPossessions = new ArrayList<>();
-    for (IEquipmentItem item : getEquipmentItems()) {
-      if (isInArsenalOrPanopoly(item)) {
-        continue;
-      }
-      String possession = item.getTitle();
-      printPossessions.add(possession);
-    }
-    return printPossessions;
-  }
-
-  @Override
-  public boolean useNewLineForEachEntry() {
-    return false;
-  }
-
-  private boolean isInArsenalOrPanopoly(IEquipmentItem item) {
-    for (IEquipmentStats stats : item.getStats()) {
-      if (stats.representsItemForUseInCombat() && item.isPrintEnabled(stats)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  private Collection<IEquipmentItem> getEquipmentItems() {
-    EquipmentModel model = EquipmentModelFetcher.fetch(hero);
-    return model.getEquipmentItems();
-  }
-
+public class PossessionsContent extends AbstractSubBoxContent implements ListSubBoxContent
+{
+	private Hero hero;
+	
+	public PossessionsContent (Hero hero, Resources resources)
+	{
+		super (resources);
+		this.hero = hero;
+	}
+	
+	@Override
+	public String getHeaderKey ()
+	{
+		return "Possessions";
+	}
+	
+	@Override
+	public List<String> getPrintEntries ()
+	{
+		List<String> printPossessions = new ArrayList<> ();
+		for (IEquipmentItem item : getEquipmentItems ())
+		{
+			if (isInArsenalOrPanopoly (item))
+			{
+				continue;
+			}
+			String possession = item.getTitle ();
+			printPossessions.add (possession);
+		}
+		return printPossessions;
+	}
+	
+	@Override
+	public boolean useNewLineForEachEntry ()
+	{
+		return false;
+	}
+	
+	private boolean isInArsenalOrPanopoly (IEquipmentItem item)
+	{
+		for (IEquipmentStats stats : item.getStats ())
+		{
+			if (stats.representsItemForUseInCombat () && item.isPrintEnabled (stats))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private Collection<IEquipmentItem> getEquipmentItems ()
+	{
+		EquipmentModel model = EquipmentModelFetcher.fetch (hero);
+		return model.getEquipmentItems ();
+	}
 }

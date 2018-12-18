@@ -8,17 +8,19 @@ import net.sf.anathema.hero.individual.model.HeroModelFactory;
 import net.sf.anathema.hero.individual.model.SimpleModelTreeEntry;
 import net.sf.anathema.points.model.PointsModel;
 
-@SuppressWarnings("UnusedDeclaration")
-public class AttributePointsModelFactory extends SimpleModelTreeEntry implements HeroModelFactory {
-
-  public AttributePointsModelFactory() {
-    super(AttributePointsModel.ID, AttributeModel.ID, PointsModel.ID);
-  }
-
-  @SuppressWarnings("unchecked")
-  @Override
-  public AttributePointsModel create(TemplateFactory templateFactory, String templateId) {
-    AttributePointsTemplate template = AttributePointsTemplateLoader.loadTemplate(templateFactory, templateId);
-    return new AttributePointsModel(template);
-  }
+@SuppressWarnings ("UnusedDeclaration")
+public class AttributePointsModelFactory extends SimpleModelTreeEntry implements HeroModelFactory
+{
+	public AttributePointsModelFactory ()
+	{
+		super (AttributePointsModel.ID, AttributeModel.ID, PointsModel.ID);
+	}
+	
+	@SuppressWarnings ("unchecked")
+	@Override
+	public AttributePointsModel create (TemplateFactory templateFactory, String templateId)
+	{
+		AttributePointsTemplate template = AttributePointsTemplateLoader.loadTemplate (templateFactory, templateId);
+		return new AttributePointsModel (template);
+	}
 }

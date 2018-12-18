@@ -16,40 +16,45 @@ import static net.sf.anathema.hero.traits.model.types.CommonTraitTypes.Athletics
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class TraitsTest {
-  private final DummyTrait firstTrait = new DummyTrait(Archery);
-  private final DummyTrait secondTrait = new DummyTrait(Athletics);
-
-  @Test
-  public void startsOffEmpty() throws Exception {
-    Traits traits = new Traits();
-    assertThat(traits.iterator().hasNext(), is(false));
-  }
-
-  @Test
-  public void iteratesOverAddedTraits() throws Exception {
-    Traits traits = new Traits();
-    traits.add(firstTrait);
-    traits.add(secondTrait);
-    Iterator<Trait> iterator = traits.iterator();
-    assertThat(iterator.next(), is(firstTrait));
-    assertThat(iterator.next(), is(secondTrait));
-  }
-
-  @Test
-  public void hasSingleTraitIfCreatedThatWay() throws Exception {
-    Traits single = new Traits(secondTrait);
-    Iterator<Trait> iterator = single.iterator();
-    iterator.next();
-    assertThat(iterator.hasNext(), is(false));
-  }
-
-  @Test
-  public void hasTraitsFromListIfCreatedThatWay() throws Exception {
-    List<Trait> traitList = Lists.newArrayList(firstTrait, secondTrait);
-    Traits fromList = new Traits(traitList);
-    Iterator<Trait> iterator = fromList.iterator();
-    assertThat(iterator.next(), is(firstTrait));
-    assertThat(iterator.next(), is(secondTrait));
-  }
+public class TraitsTest
+{
+	private final DummyTrait firstTrait = new DummyTrait (Archery);
+	private final DummyTrait secondTrait = new DummyTrait (Athletics);
+	
+	@Test
+	public void startsOffEmpty () throws Exception
+	{
+		Traits traits = new Traits ();
+		assertThat (traits.iterator ().hasNext (), is (false));
+	}
+	
+	@Test
+	public void iteratesOverAddedTraits () throws Exception
+	{
+		Traits traits = new Traits ();
+		traits.add (firstTrait);
+		traits.add (secondTrait);
+		Iterator<Trait> iterator = traits.iterator ();
+		assertThat (iterator.next (), is (firstTrait));
+		assertThat (iterator.next (), is (secondTrait));
+	}
+	
+	@Test
+	public void hasSingleTraitIfCreatedThatWay () throws Exception
+	{
+		Traits single = new Traits (secondTrait);
+		Iterator<Trait> iterator = single.iterator ();
+		iterator.next ();
+		assertThat (iterator.hasNext (), is (false));
+	}
+	
+	@Test
+	public void hasTraitsFromListIfCreatedThatWay () throws Exception
+	{
+		List<Trait> traitList = Lists.newArrayList (firstTrait, secondTrait);
+		Traits fromList = new Traits (traitList);
+		Iterator<Trait> iterator = fromList.iterator ();
+		assertThat (iterator.next (), is (firstTrait));
+		assertThat (iterator.next (), is (secondTrait));
+	}
 }

@@ -10,25 +10,29 @@ import net.sf.anathema.library.identifier.SimpleIdentifier;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DummyHeroSplat implements HeroSplat {
-
-  public SplatType type = new SplatTypeImpl(new DummyMundaneHeroType(), new SimpleIdentifier("Test"));
-
-  @Override
-  public SplatType getTemplateType() {
-    return type;
-  }
-
-  @Override
-  public List<ConfiguredModel> getModels() {
-    return new ArrayList<>();
-  }
-
-  public void setCharacterType(HeroType heroType) {
-    this.type = new SplatTypeImpl(heroType, type.getSubType());
-  }
-
-  public void setSubType(String subtype) {
-    this.type = new SplatTypeImpl(type.getHeroType(), new SimpleIdentifier(subtype));
-  }
+public class DummyHeroSplat implements HeroSplat
+{
+	public SplatType type = new SplatTypeImpl (new DummyMundaneHeroType (), new SimpleIdentifier ("Test"));
+	
+	@Override
+	public SplatType getTemplateType ()
+	{
+		return type;
+	}
+	
+	@Override
+	public List<ConfiguredModel> getModels ()
+	{
+		return new ArrayList<> ();
+	}
+	
+	public void setCharacterType (HeroType heroType)
+	{
+		this.type = new SplatTypeImpl (heroType, type.getSubType ());
+	}
+	
+	public void setSubType (String subtype)
+	{
+		this.type = new SplatTypeImpl (type.getHeroType (), new SimpleIdentifier (subtype));
+	}
 }

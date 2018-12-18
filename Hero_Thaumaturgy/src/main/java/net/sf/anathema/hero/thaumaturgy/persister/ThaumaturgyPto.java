@@ -6,12 +6,13 @@ import net.sf.anathema.library.persister.PossessedOptionalTraitPto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ThaumaturgyPto implements OptionalEntriesModelPto<PossessedOptionalTraitPto> {
-
-  public List<PossessedOptionalTraitPto> rituals = new ArrayList<>();
-
+public class ThaumaturgyPto implements OptionalEntriesModelPto<PossessedOptionalTraitPto>
+{
+	public List<PossessedOptionalTraitPto> rituals = new ArrayList<> ();
+	
 	@Override
-	public List<PossessedOptionalTraitPto> getOptionalTraitPtoList() {
+	public List<PossessedOptionalTraitPto> getOptionalTraitPtoList ()
+	{
 		return rituals;
 	}
 }

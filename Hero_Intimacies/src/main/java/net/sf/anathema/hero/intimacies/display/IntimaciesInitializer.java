@@ -11,27 +11,30 @@ import net.sf.anathema.library.initialization.Weight;
 
 import static net.sf.anathema.hero.individual.overview.HeroModelGroup.Perks;
 
-@RegisteredInitializer(Perks)
-@Weight(weight = 200)
-public class IntimaciesInitializer implements HeroModelInitializer {
-
-  private HeroEnvironment environment;
-
-  @SuppressWarnings("UnusedParameters")
-  public IntimaciesInitializer(HeroEnvironment environment) {
-    this.environment = environment;
-  }
-
-  @Override
-  public void initialize(SectionView sectionView, Hero hero) {
-    String viewName = environment.getResources().getString("AdditionalTemplateView.TabName.Intimacies");
-    IntimaciesView view = sectionView.addView(viewName, IntimaciesView.class);
-    IntimaciesModel intimaciesModel = IntimaciesModelFetcher.fetch(hero);
-    new IntimaciesPresenter(intimaciesModel, view, environment.getResources()).initPresentation();
-  }
-
-  @Override
-  public boolean canWorkForHero(Hero hero) {
-    return IntimaciesModelFetcher.fetch(hero) != null;
-  }
+@RegisteredInitializer (Perks)
+@Weight (weight = 200)
+public class IntimaciesInitializer implements HeroModelInitializer
+{
+	private HeroEnvironment environment;
+	
+	@SuppressWarnings ("UnusedParameters")
+	public IntimaciesInitializer (HeroEnvironment environment)
+	{
+		this.environment = environment;
+	}
+	
+	@Override
+	public void initialize (SectionView sectionView, Hero hero)
+	{
+		String viewName = environment.getResources ().getString ("AdditionalTemplateView.TabName.Intimacies");
+		IntimaciesView view = sectionView.addView (viewName, IntimaciesView.class);
+		IntimaciesModel intimaciesModel = IntimaciesModelFetcher.fetch (hero);
+		new IntimaciesPresenter (intimaciesModel, view, environment.getResources ()).initPresentation ();
+	}
+	
+	@Override
+	public boolean canWorkForHero (Hero hero)
+	{
+		return IntimaciesModelFetcher.fetch (hero) != null;
+	}
 }

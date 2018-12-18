@@ -9,44 +9,50 @@ import net.sf.anathema.equipment.stats.IEquipmentStats;
 
 import java.util.Collection;
 
-public class SimpleEquipmentStatsFactory implements EquipmentStatsFactory {
-
-  private final ModelToStats modelToStats = new ModelToStats();
-
-  @Override
-  public IEquipmentStats createNewStats(Collection<String> definedNames, String nameProposal, EquipmentStatisticsType type) {
-    IEquipmentStatisticsCreationModel model = new EquipmentStatisticsCreationModel();
-    model.setForbiddenNames(definedNames);
-    model.setEquipmentType(type);
-    String finalName = createUniqueName(nameProposal, model);
-    setNameOnCorrectModel(model, finalName);
-    return modelToStats.createStats(model);
-  }
-
-  private void setNameOnCorrectModel(IEquipmentStatisticsCreationModel model, String finalName) {
-    findMatchingModel(model).getName().setText(finalName);
-  }
-
-  private IEquipmentStatisticsModel findMatchingModel(IEquipmentStatisticsCreationModel model) {
-    switch (model.getEquipmentType()) {
-      case Weapon:
-        return model.getWeaponModel();
-      case Armor:
-        return model.getArmorModel();
-      case Artifact:
-        return model.getArtifactStatisticsModel();
-      default:
-        throw new IllegalStateException("Type not seleted.");
-    }
-  }
-
-  private String createUniqueName(String nameProposal, IEquipmentStatisticsCreationModel model) {
-    int count = 1;
-    String finalName = nameProposal;
-    while (!model.isNameUnique(finalName)) {
-      count++;
-      finalName = nameProposal + " " + count;
-    }
-    return finalName;
-  }
+public class SimpleEquipmentStatsFactory implements EquipmentStatsFactory
+{
+	private final ModelToStats modelToStats = new ModelToStats ();
+	
+	@Override
+	public IEquipmentStats createNewStats (Collection<String> definedNames, String nameProposal, EquipmentStatisticsType type)
+	{
+		IEquipmentStatisticsCreationModel model = new EquipmentStatisticsCreationModel ();
+		model.setForbiddenNames (definedNames);
+		model.setEquipmentType (type);
+		String finalName = createUniqueName (nameProposal, model);
+		setNameOnCorrectModel (model, finalName);
+		return modelToStats.createStats (model);
+	}
+	
+	private void setNameOnCorrectModel (IEquipmentStatisticsCreationModel model, String finalName)
+	{
+		findMatchingModel (model).getName ().setText (finalName);
+	}
+	
+	private IEquipmentStatisticsModel findMatchingModel (IEquipmentStatisticsCreationModel model)
+	{
+		switch (model.getEquipmentType ())
+		{
+			case Weapon:
+			return model.getWeaponModel ();
+			case Armor:
+			return model.getArmorModel ();
+			case Artifact:
+			return model.getArtifactStatisticsModel ();
+			default:
+			throw new IllegalStateException ("Type not seleted.");
+		}
+	}
+	
+	private String createUniqueName (String nameProposal, IEquipmentStatisticsCreationModel model)
+	{
+		int count = 1;
+		String finalName = nameProposal;
+		while (!model.isNameUnique (finalName))
+		{
+			count++;
+			finalName = nameProposal + " " + count;
+		}
+		return finalName;
+	}
 }

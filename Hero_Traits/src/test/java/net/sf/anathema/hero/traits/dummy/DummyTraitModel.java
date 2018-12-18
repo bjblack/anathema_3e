@@ -18,42 +18,50 @@ import net.sf.anathema.library.identifier.Identifier;
 
 import java.util.Iterator;
 
-public class DummyTraitModel extends DefaultTraitMap implements TraitModel, HeroModel {
-  public TraitValueStrategy valueStrategy = new CreationTraitValueStrategy();
-  private DynamicMinimumMap minimumMap = new DynamicMinimumMap();
-
-  @Override
-  public Iterator<Trait> iterator() {
-    throw new NotYetImplementedException();
-  }
-
-  @Override
-  public Identifier getId() {
-    return ID;
-  }
-
-  @Override
-  public void initialize(HeroEnvironment environment, Hero hero) {
-    // nothing to do
-  }
-
-  @Override
-  public void initializeListening(ChangeAnnouncer announcer) {
-    // nothing to do
-  }
-
-  @Override
-  public TraitValueStrategy getValueStrategy() {
-    return valueStrategy;
-  }
-
-  @Override
-  public TraitLimitation createLimitation(LimitationTemplate limitation) {
-    return new StaticTraitLimitation(5);
-  }
-
-  @Override
-  public DynamicMinimumMap getMinimumMap() {
-    return minimumMap;
-  }
+public class DummyTraitModel extends DefaultTraitMap implements TraitModel, HeroModel
+{
+	public TraitValueStrategy valueStrategy = new CreationTraitValueStrategy ();
+	private DynamicMinimumMap minimumMap = new DynamicMinimumMap ();
+	
+	@Override
+	public Iterator<Trait> iterator ()
+	{
+		throw new NotYetImplementedException ();
+	}
+	
+	@Override
+	public Identifier getId ()
+	{
+		return ID;
+	}
+	
+	@Override
+	public void initialize (HeroEnvironment environment, Hero hero)
+	{
+		// nothing to do
+	}
+	
+	@Override
+	public void initializeListening (ChangeAnnouncer announcer)
+	{
+		// nothing to do
+	}
+	
+	@Override
+	public TraitValueStrategy getValueStrategy ()
+	{
+		return valueStrategy;
+	}
+	
+	@Override
+	public TraitLimitation createLimitation (LimitationTemplate limitation)
+	{
+		return new StaticTraitLimitation (5);
+	}
+	
+	@Override
+	public DynamicMinimumMap getMinimumMap ()
+	{
+		return minimumMap;
+	}
 }

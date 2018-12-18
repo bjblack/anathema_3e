@@ -11,15 +11,15 @@ import net.sf.anathema.library.identifier.SimpleIdentifier;
 import java.util.Collection;
 import java.util.List;
 
-public interface AttributeModel extends GroupedTraitsModel {
-
-  Identifier ID = new SimpleIdentifier("Attributes");
-
-  Collection<TraitGroup> getTraitGroups();
-
-  GroupedTraitType[] getAttributeGroups();
-
-  TraitStateMap getStateMap();
-
-  List<TraitType> getAllAttributeTypes();
+public interface AttributeModel extends GroupedTraitsModel
+{
+	Identifier ID = new SimpleIdentifier ("Attributes");
+	
+	Collection<TraitGroup> getTraitGroups ();
+	
+	GroupedTraitType[] getAttributeGroups ();
+	
+	TraitStateMap getStateMap ();
+	
+	List<TraitType> getAllAttributeTypes ();
 }

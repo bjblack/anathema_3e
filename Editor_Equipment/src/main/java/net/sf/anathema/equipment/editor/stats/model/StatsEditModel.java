@@ -5,26 +5,27 @@ import net.sf.anathema.library.event.ChangeListener;
 
 import java.util.List;
 
-public interface StatsEditModel {
-  void addStatsChangeListener(ChangeListener changeListener);
-
-  EquipmentStatsFactory getStatsCreationFactory();
-
-  List<IEquipmentStats> getStats();
-
-  void addStatistics(IEquipmentStats equipmentStats);
-
-  void replaceSelectedStatistics(IEquipmentStats newStats);
-
-  void removeSelectedStatistics();
-
-  void selectStats(IEquipmentStats selected);
-
-  IEquipmentStats getSelectedStats();
-
-  void whenSelectedStatsChanges(ChangeListener changeListener);
-
-  boolean hasSelectedStats();
-
-  void clearStatsSelection();
+public interface StatsEditModel
+{
+	void addStatsChangeListener (ChangeListener changeListener);
+	
+	EquipmentStatsFactory getStatsCreationFactory ();
+	
+	List<IEquipmentStats> getStats ();
+	
+	void addStatistics (IEquipmentStats equipmentStats);
+	
+	void replaceSelectedStatistics (IEquipmentStats newStats);
+	
+	void removeSelectedStatistics ();
+	
+	void selectStats (IEquipmentStats selected);
+	
+	IEquipmentStats getSelectedStats ();
+	
+	void whenSelectedStatsChanges (ChangeListener changeListener);
+	
+	boolean hasSelectedStats ();
+	
+	void clearStatsSelection ();
 }

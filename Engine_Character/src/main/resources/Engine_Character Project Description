@@ -1,0 +1,4 @@
+
+The Java Project Engine_Character seems to be a system of creating characters by starting with a blank character and adding "qualities" to him, which change his traits. It contains twenty-six source files (excluding test files), with a cumulative total of one (1) line comment.
+
+There are aspects of this system that I intend to implement. However, I assess that sorting out the code is not worth it (I'm likely to have incompatible data types anyway), so I will scrap it.

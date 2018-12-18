@@ -7,27 +7,32 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ExtensibleHeroTypes implements HeroTypes {
-
-  private final List<HeroType> types = new ArrayList<>();
-
-  public void add(HeroType type) {
-    types.add(type);
-    types.sort(null);
-  }
-  
-  @Override
-  public HeroType findById(String id) {
-    for (HeroType type : types) {
-      if (type.getId().equals(id)) {
-        return type;
-      }
-    }
-    throw new IllegalArgumentException("No type defined for id:" + id);
-  }
-
-  @Override
-  public Iterator<HeroType> iterator() {
-    return types.iterator();
-  }
+public class ExtensibleHeroTypes implements HeroTypes
+{
+	private final List<HeroType> types = new ArrayList<> ();
+	
+	public void add (HeroType type)
+	{
+		types.add (type);
+		types.sort (null);
+	}
+	
+	@Override
+	public HeroType findById (String id)
+	{
+		for (HeroType type : types)
+		{
+			if (type.getId ().equals (id))
+			{
+				return type;
+			}
+		}
+		throw new IllegalArgumentException ("No type defined for id:" + id);
+	}
+	
+	@Override
+	public Iterator<HeroType> iterator ()
+	{
+		return types.iterator ();
+	}
 }

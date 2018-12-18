@@ -18,51 +18,60 @@ import java.util.Map;
 
 import static net.sf.anathema.library.fx.layout.LayoutUtils.clipToSize;
 
-public class HeroPoolFxView implements UpdatingHeroesGridView {
-  private final HBox gridPane = new HBox();
-  private final Map<HeroIdentifier, HeroPoolButton> buttonsByIdentifier = new HashMap<>();
-  private ToggleGroup toggleGroup;
-
-  public HeroPoolFxView(ToggleGroup toggleGroup) {
-    gridPane.setMinWidth(0);
-    clipToSize(gridPane);
-    this.toggleGroup = toggleGroup;
-  }
-
-  @Override
-  public void addButton(CharacterButtonDto dto, Selector<HeroIdentifier> characterSelector) {
-    HeroPoolButton heroGridButton = new HeroPoolButton();
-    heroGridButton.initContent(dto, characterSelector);
-    heroGridButton.setToggleGroup(toggleGroup);
-    buttonsByIdentifier.put(dto.identifier, heroGridButton);
-    gridPane.getChildren().add(heroGridButton.getNode());
-  }
-
-  @Override
-  public void selectButton(HeroIdentifier identifier) {
-    buttonsByIdentifier.get(identifier).setSelected(true);
-  }
-
-  @Override
-  public void updateButton(CharacterButtonDto dto) {
-    buttonsByIdentifier.get(dto.identifier).setContent(dto);
-  }
-
-  @Override
-  public CharacterTemplateCreator createNewCharacter(Tool caller) {
-    return new FxHeroSplatCreator(((FxBaseTool) caller).getNode());
-  }
-
-  @Override
-  public void clearAllButtons() {
-    gridPane.getChildren().clear();
-  }
-
-  public Node getNode() {
-    return gridPane;
-  }
-
-  public void clear() {
-    gridPane.getChildren().clear();
-  }
+public class HeroPoolFxView implements UpdatingHeroesGridView
+{
+	private final HBox gridPane = new HBox ();
+	private final Map<HeroIdentifier, HeroPoolButton> buttonsByIdentifier = new HashMap<> ();
+	private ToggleGroup toggleGroup;
+	
+	public HeroPoolFxView (ToggleGroup toggleGroup)
+	{
+		gridPane.setMinWidth (0);
+		clipToSize (gridPane);
+		this.toggleGroup = toggleGroup;
+	}
+	
+	@Override
+	public void addButton (CharacterButtonDto dto, Selector<HeroIdentifier> characterSelector)
+	{
+		HeroPoolButton heroGridButton = new HeroPoolButton ();
+		heroGridButton.initContent (dto, characterSelector);
+		heroGridButton.setToggleGroup (toggleGroup);
+		buttonsByIdentifier.put (dto.identifier, heroGridButton);
+		gridPane.getChildren ().add (heroGridButton.getNode ());
+	}
+	
+	@Override
+	public void selectButton (HeroIdentifier identifier)
+	{
+		buttonsByIdentifier.get (identifier).setSelected (true);
+	}
+	
+	@Override
+	public void updateButton (CharacterButtonDto dto)
+	{
+		buttonsByIdentifier.get (dto.identifier).setContent (dto);
+	}
+	
+	@Override
+	public CharacterTemplateCreator createNewCharacter (Tool caller)
+	{
+		return new FxHeroSplatCreator ( ( (FxBaseTool) caller).getNode ());
+	}
+	
+	@Override
+	public void clearAllButtons ()
+	{
+		gridPane.getChildren ().clear ();
+	}
+	
+	public Node getNode ()
+	{
+		return gridPane;
+	}
+	
+	public void clear ()
+	{
+		gridPane.getChildren ().clear ();
+	}
 }

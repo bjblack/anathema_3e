@@ -4,7 +4,7 @@ import net.sf.anathema.magic.data.reference.CategoryReference;
 import net.sf.anathema.hero.charms.model.CharmMap;
 import net.sf.anathema.hero.charms.model.CharmTreeCollection;
 
-public interface CharmTreeCategory extends CharmMap, CharmTreeCollection {
-
-  CategoryReference getReference();
+public interface CharmTreeCategory extends CharmMap, CharmTreeCollection
+{
+	CategoryReference getReference ();
 }

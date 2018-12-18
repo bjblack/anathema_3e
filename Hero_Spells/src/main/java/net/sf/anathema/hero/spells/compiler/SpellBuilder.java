@@ -11,19 +11,22 @@ import net.sf.anathema.magic.data.source.SourceListImpl;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpellBuilder {
-
-  public List<Spell> buildSpells(SpellListTemplate listTemplate) {
-    List<Spell> spells = new ArrayList<>();
-    listTemplate.spells.forEach((name, template) -> {
-      CostList costList = new CostParser().parse(template.cost);
-      List<String> keywords = template.keywords;
-      String duration = template.duration;
-      SourceListImpl sourceList = new SourceListImpl();
-      
-      template.source.forEach(source -> sourceList.addSource(new SourceBookImpl(source)));
-      spells.add(new SpellImpl(new SpellName(name), template.circle, costList, sourceList, duration, keywords));
-    });
-    return spells;
-  }
+public class SpellBuilder
+{
+	public List<Spell> buildSpells (SpellListTemplate listTemplate)
+	{
+		List<Spell> spells = new ArrayList<> ();
+		listTemplate.spells.forEach ( (name, template) ->
+		{
+			CostList costList = new CostParser ().parse (template.cost);
+			List<String> keywords = template.keywords;
+			String duration = template.duration;
+			SourceListImpl sourceList = new SourceListImpl ();
+			
+			template.source.forEach (source -> sourceList.addSource (new SourceBookImpl (source)));
+			spells.add (new SpellImpl (new SpellName (name), template.circle, costList, sourceList, duration, keywords));
+		}
+		);
+		return spells;
+	}
 }

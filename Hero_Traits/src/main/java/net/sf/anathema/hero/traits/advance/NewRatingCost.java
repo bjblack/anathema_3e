@@ -1,4 +1,5 @@
 package net.sf.anathema.hero.traits.advance;
 
-public interface NewRatingCost extends RatingCost {
+public interface NewRatingCost extends RatingCost
+{
 }

@@ -10,20 +10,23 @@ import net.sf.anathema.library.resources.Resources;
 
 import static net.sf.anathema.hero.traits.model.types.CommonTraitTypes.Essence;
 
-@SuppressWarnings("UnusedDeclaration")
-public class EssenceDotEncoderFactory extends AbstractEncoderFactory {
-
-  public EssenceDotEncoderFactory() {
-    super(EncoderIds.ESSENCE_DOTS);
-  }
-
-  @Override
-  public ContentEncoder create(Resources resources, BasicContent content) {
-    return new DotBoxContentEncoder(Essence, SystemConstants.SYSTEM_ESSENCE_MAX, resources, "Essence");
-  }
-
-  @Override
-  public boolean supports(BasicContent content) {
-    return true;
-  }
+@SuppressWarnings ("UnusedDeclaration")
+public class EssenceDotEncoderFactory extends AbstractEncoderFactory
+{
+	public EssenceDotEncoderFactory ()
+	{
+		super (EncoderIds.ESSENCE_DOTS);
+	}
+	
+	@Override
+	public ContentEncoder create (Resources resources, BasicContent content)
+	{
+		return new DotBoxContentEncoder (Essence, SystemConstants.SYSTEM_ESSENCE_MAX, resources, "Essence");
+	}
+	
+	@Override
+	public boolean supports (BasicContent content)
+	{
+		return true;
+	}
 }

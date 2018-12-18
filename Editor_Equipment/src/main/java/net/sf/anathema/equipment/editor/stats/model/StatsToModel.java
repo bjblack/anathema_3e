@@ -9,34 +9,42 @@ import net.sf.anathema.equipment.stats.WeaponTag;
 import net.sf.anathema.equipment.stats.impl.ArtifactStats;
 import net.sf.anathema.library.identifier.Identifier;
 
-public class StatsToModel {
-
-  public IEquipmentStatisticsCreationModel createModel(IEquipmentStats stats) {
-    EquipmentStatisticsCreationModel model = new EquipmentStatisticsCreationModel();
-    if (stats instanceof IWeaponStats) {
-      IWeaponStats weaponStats = (IWeaponStats) stats;
-      model.setEquipmentType(EquipmentStatisticsType.Weapon);
-      model.getWeaponModel().getName().setText(weaponStats.getName().getId());
-      for (Identifier tag : weaponStats.getTags()) {
-        model.getWeaponTagsModel().getSelectedModel((WeaponTag) tag).setValue(true);
-      }
-      model.getWeaponTagsModel().makeValid();
-    } else if (stats instanceof IArmourStats) {
-      IArmourStats armourStats = (IArmourStats) stats;
-      model.setEquipmentType(EquipmentStatisticsType.Armor);
-      model.getArmorModel().getName().setText(armourStats.getName().getId());
-      for (Identifier tag : armourStats.getTags()) {
-        model.getArmorTagsModel().getSelectedModel((ArmourTag) tag).setValue(true);
-      }
-      model.getArmorTagsModel().makeValid();
-    } else if (stats instanceof ArtifactStats) {
-      ArtifactStats artifactStats = (ArtifactStats) stats;
-      model.setEquipmentType(EquipmentStatisticsType.Artifact);
-      IArtifactStatisticsModel artifactModel = model.getArtifactStatisticsModel();
-      artifactModel.getName().setText(artifactStats.getName().getId());
-      artifactModel.getAttuneCostModel().setValue(artifactStats.getAttuneCost());
-    }
-
-    return model;
-  }
+public class StatsToModel
+{
+	public IEquipmentStatisticsCreationModel createModel (IEquipmentStats stats)
+	{
+		EquipmentStatisticsCreationModel model = new EquipmentStatisticsCreationModel ();
+		if (stats instanceof IWeaponStats)
+		{
+			IWeaponStats weaponStats = (IWeaponStats) stats;
+			model.setEquipmentType (EquipmentStatisticsType.Weapon);
+			model.getWeaponModel ().getName ().setText (weaponStats.getName ().getId ());
+			for (Identifier tag : weaponStats.getTags ())
+			{
+				model.getWeaponTagsModel ().getSelectedModel ( (WeaponTag) tag).setValue (true);
+			}
+			model.getWeaponTagsModel ().makeValid ();
+		}
+		else if (stats instanceof IArmourStats)
+		{
+			IArmourStats armourStats = (IArmourStats) stats;
+			model.setEquipmentType (EquipmentStatisticsType.Armor);
+			model.getArmorModel ().getName ().setText (armourStats.getName ().getId ());
+			for (Identifier tag : armourStats.getTags ())
+			{
+				model.getArmorTagsModel ().getSelectedModel ( (ArmourTag) tag).setValue (true);
+			}
+			model.getArmorTagsModel ().makeValid ();
+		}
+		else if (stats instanceof ArtifactStats)
+		{
+			ArtifactStats artifactStats = (ArtifactStats) stats;
+			model.setEquipmentType (EquipmentStatisticsType.Artifact);
+			IArtifactStatisticsModel artifactModel = model.getArtifactStatisticsModel ();
+			artifactModel.getName ().setText (artifactStats.getName ().getId ());
+			artifactModel.getAttuneCostModel ().setValue (artifactStats.getAttuneCost ());
+		}
+		
+		return model;
+	}
 }

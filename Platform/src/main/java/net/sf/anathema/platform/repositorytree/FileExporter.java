@@ -13,40 +13,48 @@ import java.nio.file.Path;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-public class FileExporter {
-  private RepositoryZipPathCreator creator;
-  private ExportModel model;
-  private Resources resources;
-
-  public FileExporter(RepositoryZipPathCreator repositoryZipPathCreator, ExportModel model, Resources resources) {
-    this.creator = repositoryZipPathCreator;
-    this.model = model;
-    this.resources = resources;
-  }
-
-  public PrintNameFile[] exportToZip(Path saveFile) throws IOException {
-    PrintNameFile[] printNameFiles = model.getPrintNameFilesInSelection();
-    try (ZipOutputStream zipOutputStream = new ZipOutputStream(Files.newOutputStream(saveFile))) {
-      zipOutputStream.setComment(resources.getString("Anathema.Version.Numeric"));
-      for (PrintNameFile printNameFile : printNameFiles) {
-        RepositoryFileAccess access = model.getFileAccess(printNameFile);
-        for (File file : access.getFiles()) {
-          ZipEntry entry = createZipEntry(file, printNameFile);
-          try (InputStream inputStream = access.openInputStream(file)) {
-            zipOutputStream.putNextEntry(entry);
-            InputOutput.copy(inputStream, zipOutputStream);
-            zipOutputStream.closeEntry();
-          }
-        }
-      }
-    }
-    return printNameFiles;
-  }
-
-  ZipEntry createZipEntry(File file, PrintNameFile printNameFile) {
-    ZipEntry entry = new ZipEntry(creator.createZipPath(file));
-    entry.setComment(resources.getString(
-            "Anathema.Version.Numeric") + "#" + printNameFile.getItemType() + "#" + printNameFile.getRepositoryId());
-    return entry;
-  }
+public class FileExporter
+{
+	private RepositoryZipPathCreator creator;
+	private ExportModel model;
+	private Resources resources;
+	
+	public FileExporter (RepositoryZipPathCreator repositoryZipPathCreator, ExportModel model, Resources resources)
+	{
+		this.creator = repositoryZipPathCreator;
+		this.model = model;
+		this.resources = resources;
+	}
+	
+	public PrintNameFile[] exportToZip (Path saveFile) throws IOException
+	{
+		PrintNameFile[] printNameFiles = model.getPrintNameFilesInSelection ();
+		try (ZipOutputStream zipOutputStream = new ZipOutputStream (Files.newOutputStream (saveFile)))
+		{
+			zipOutputStream.setComment (resources.getString ("Anathema.Version.Numeric"));
+			for (PrintNameFile printNameFile : printNameFiles)
+			{
+				RepositoryFileAccess access = model.getFileAccess (printNameFile);
+				for (File file : access.getFiles ())
+				{
+					ZipEntry entry = createZipEntry (file, printNameFile);
+					try (InputStream inputStream = access.openInputStream (file))
+					{
+						zipOutputStream.putNextEntry (entry);
+						InputOutput.copy (inputStream, zipOutputStream);
+						zipOutputStream.closeEntry ();
+					}
+				}
+			}
+		}
+		return printNameFiles;
+	}
+	
+	ZipEntry createZipEntry (File file, PrintNameFile printNameFile)
+	{
+		ZipEntry entry = new ZipEntry (creator.createZipPath (file));
+		entry.setComment (resources.getString (
+		"Anathema.Version.Numeric") + "#" + printNameFile.getItemType () + "#" + printNameFile.getRepositoryId ());
+		return entry;
+	}
 }

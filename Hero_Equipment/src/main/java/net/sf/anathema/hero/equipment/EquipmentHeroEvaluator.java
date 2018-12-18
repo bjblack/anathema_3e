@@ -5,9 +5,9 @@ import net.sf.anathema.hero.traits.model.TraitType;
 
 import java.util.Collection;
 
-public interface EquipmentHeroEvaluator {
-
-  IEquipmentStatsOption getCharacterSpecialtyOption(String name, String type);
-
-  Collection<Specialty> getSpecialties(TraitType trait);
+public interface EquipmentHeroEvaluator
+{
+	IEquipmentStatsOption getCharacterSpecialtyOption (String name, String type);
+	
+	Collection<Specialty> getSpecialties (TraitType trait);
 }

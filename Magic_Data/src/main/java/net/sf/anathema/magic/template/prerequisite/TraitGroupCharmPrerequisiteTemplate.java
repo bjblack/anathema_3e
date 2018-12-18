@@ -10,17 +10,18 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-@JsonType("numberOfTraitCharms")
-public class TraitGroupCharmPrerequisiteTemplate implements CharmPrerequisiteTemplate {
-
-  public List<String> options;
-  public int threshold;
-  public int minimumEssence = 1;
-  public String category;
-
-  @Override
-  public CharmPrerequisite generate(CharmMap charms) {
-    return new TraitGroupCharmPrerequisite(Lists.transform(options, RequiredTraitType::new),
-    		category != null ? new CategoryReference(category) : null, threshold, minimumEssence);
-  }
+@JsonType ("numberOfTraitCharms")
+public class TraitGroupCharmPrerequisiteTemplate implements CharmPrerequisiteTemplate
+{
+	public List<String> options;
+	public int threshold;
+	public int minimumEssence = 1;
+	public String category;
+	
+	@Override
+	public CharmPrerequisite generate (CharmMap charms)
+	{
+		return new TraitGroupCharmPrerequisite (Lists.transform (options, RequiredTraitType::new),
+		category != null ? new CategoryReference (category) : null, threshold, minimumEssence);
+	}
 }

@@ -7,26 +7,31 @@ import net.sf.anathema.library.identifier.Identifier;
 import net.sf.anathema.library.message.Messaging;
 import net.sf.anathema.platform.repository.access.RepositoryReadAccess;
 
-public class LoadingCharacterInitializer implements CharacterInitializer{
-  private final RepositoryReadAccess readAccess;
-  private final HeroPersisterList persisterList;
-  private final Messaging messaging;
-
-  public LoadingCharacterInitializer(RepositoryReadAccess readAccess, HeroPersisterList persisterList,
-                                     Messaging messaging) {
-    this.readAccess = readAccess;
-    this.persisterList = persisterList;
-    this.messaging = messaging;
-  }
-
-  public void initialize(Hero hero) {
-    for (HeroModelPersister persister : persisterList.iterator(hero)) {
-      Identifier modelId = persister.getModelId();
-      HeroModel heroModel = hero.getModel(modelId);
-      if (heroModel != null) {
-        persister.setMessaging(messaging);
-        persister.load(hero, heroModel, new HeroModelLoaderImpl(readAccess));
-      }
-    }
-  }
+public class LoadingCharacterInitializer implements CharacterInitializer
+{
+	private final RepositoryReadAccess readAccess;
+	private final HeroPersisterList persisterList;
+	private final Messaging messaging;
+	
+	public LoadingCharacterInitializer (RepositoryReadAccess readAccess, HeroPersisterList persisterList,
+	Messaging messaging)
+	{
+		this.readAccess = readAccess;
+		this.persisterList = persisterList;
+		this.messaging = messaging;
+	}
+	
+	public void initialize (Hero hero)
+	{
+		for (HeroModelPersister persister : persisterList.iterator (hero))
+		{
+			Identifier modelId = persister.getModelId ();
+			HeroModel heroModel = hero.getModel (modelId);
+			if (heroModel != null)
+			{
+				persister.setMessaging (messaging);
+				persister.load (hero, heroModel, new HeroModelLoaderImpl (readAccess));
+			}
+		}
+	}
 }

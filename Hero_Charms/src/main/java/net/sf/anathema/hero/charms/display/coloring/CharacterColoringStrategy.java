@@ -9,43 +9,48 @@ import net.sf.anathema.platform.tree.display.TreeView;
 
 import static net.sf.anathema.hero.charms.model.learn.prerequisites.IsSatisfied.isSatisfied;
 
-public class CharacterColoringStrategy implements CharmColoring {
-
-  private static final int MAXIMUM_OPACITY = 255;
-  private static final int REDUCED_OPACITY = 70;
-  private static final RGBColor UNSELECTED_COLOR = RGBColor.White;
-
-  private final RGBColor characterColor;
-  private final CharmDisplayModel model;
-  private TreeView treeView;
-
-  public CharacterColoringStrategy(RGBColor characterColor, CharmDisplayModel model) {
-    this.characterColor = characterColor;
-    this.model = model;
-  }
-
-  @Override
-  public void colorCharm(Charm charm) {
-    String id = charm.getName().text;
-    RGBColor color = getCharmModel().getLearningModel().isCurrentlyLearned(charm) ? characterColor : UNSELECTED_COLOR;
-    int opacity = getCharmModel().isLearnable(charm) ? MAXIMUM_OPACITY : REDUCED_OPACITY;
-    RGBColor borderColor = model.getBorderColorForCharm(charm);
-    treeView.colorNode(id, new RGBColor(color, opacity), new RGBColor(borderColor, opacity));
-  }
-
-  @Override
-  public void colorNonCharmPrerequisite(String nodeId, CharmPrerequisite prerequisite) {
-    boolean fulfilled = isSatisfied(prerequisite, getCharmModel());
-    RGBColor color = fulfilled ? characterColor.brighter() : UNSELECTED_COLOR;
-    treeView.colorNode(nodeId, new RGBColor(color, MAXIMUM_OPACITY), RGBColor.Black);
-  }
-
-  @Override
-  public void operateOn(TreeView treeView) {
-    this.treeView = treeView;
-  }
-
-  private CharmsModel getCharmModel() {
-    return model.getCharmModel();
-  }
+public class CharacterColoringStrategy implements CharmColoring
+{
+	private static final int MAXIMUM_OPACITY = 255;
+	private static final int REDUCED_OPACITY = 70;
+	private static final RGBColor UNSELECTED_COLOR = RGBColor.White;
+	
+	private final RGBColor characterColor;
+	private final CharmDisplayModel model;
+	private TreeView treeView;
+	
+	public CharacterColoringStrategy (RGBColor characterColor, CharmDisplayModel model)
+	{
+		this.characterColor = characterColor;
+		this.model = model;
+	}
+	
+	@Override
+	public void colorCharm (Charm charm)
+	{
+		String id = charm.getName ().text;
+		RGBColor color = getCharmModel ().getLearningModel ().isCurrentlyLearned (charm) ? characterColor : UNSELECTED_COLOR;
+		int opacity = getCharmModel ().isLearnable (charm) ? MAXIMUM_OPACITY : REDUCED_OPACITY;
+		RGBColor borderColor = model.getBorderColorForCharm (charm);
+		treeView.colorNode (id, new RGBColor (color, opacity), new RGBColor (borderColor, opacity));
+	}
+	
+	@Override
+	public void colorNonCharmPrerequisite (String nodeId, CharmPrerequisite prerequisite)
+	{
+		boolean fulfilled = isSatisfied (prerequisite, getCharmModel ());
+		RGBColor color = fulfilled ? characterColor.brighter () : UNSELECTED_COLOR;
+		treeView.colorNode (nodeId, new RGBColor (color, MAXIMUM_OPACITY), RGBColor.Black);
+	}
+	
+	@Override
+	public void operateOn (TreeView treeView)
+	{
+		this.treeView = treeView;
+	}
+	
+	private CharmsModel getCharmModel ()
+	{
+		return model.getCharmModel ();
+	}
 }

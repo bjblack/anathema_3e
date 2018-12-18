@@ -7,17 +7,17 @@ import net.sf.anathema.magic.template.special.learning.MultiEffect;
 import net.sf.anathema.magic.template.special.mechanics.AddsHealthLevelsByTraitTemplate;
 import net.sf.anathema.magic.template.special.mechanics.ThaumaturgyTemplate;
 
-public class SpecialCharmTemplate {
-	
+public class SpecialCharmTemplate
+{
 	public String charmId;
-  
+	
 	// Learning
-  public Repurchase repurchase;
-  public MultiEffect multiEffect;
-  public Upgradable upgradable;
-  public SubEffect subEffect;
-  
-  // Mechanics
-  public AddsHealthLevelsByTraitTemplate addsHealthLevelsByTrait;
-  public ThaumaturgyTemplate thaumaturgy;
+	public Repurchase repurchase;
+	public MultiEffect multiEffect;
+	public Upgradable upgradable;
+	public SubEffect subEffect;
+	
+	// Mechanics
+	public AddsHealthLevelsByTraitTemplate addsHealthLevelsByTrait;
+	public ThaumaturgyTemplate thaumaturgy;
 }

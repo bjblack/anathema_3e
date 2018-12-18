@@ -7,17 +7,19 @@ import net.sf.anathema.hero.sheet.pdf.encoder.boxes.ContentEncoder;
 import net.sf.anathema.hero.sheet.pdf.encoder.boxes.GlobalEncoderFactory;
 import net.sf.anathema.library.resources.Resources;
 
-@SuppressWarnings("UnusedDeclaration")
-public class ArsenalEncoderFactory extends GlobalEncoderFactory {
-
-  public ArsenalEncoderFactory() {
-    super(EncoderIds.ARSENAL);
-    setPreferredHeight(new PreferredWeaponryHeight());
-  }
-
-  @SuppressWarnings("unchecked")
-  @Override
-  public ContentEncoder create(Resources resources, BasicContent content) {
-    return new WeaponEncoder(WeaponContent.class);
-  }
+@SuppressWarnings ("UnusedDeclaration")
+public class ArsenalEncoderFactory extends GlobalEncoderFactory
+{
+	public ArsenalEncoderFactory ()
+	{
+		super (EncoderIds.ARSENAL);
+		setPreferredHeight (new PreferredWeaponryHeight ());
+	}
+	
+	@SuppressWarnings ("unchecked")
+	@Override
+	public ContentEncoder create (Resources resources, BasicContent content)
+	{
+		return new WeaponEncoder (WeaponContent.class);
+	}
 }

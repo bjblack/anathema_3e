@@ -4,12 +4,13 @@ import net.sf.anathema.cards.data.ICardData;
 
 import com.itextpdf.text.pdf.PdfContentByte;
 
-public interface ICard {
-	PdfContentByte getPdfContent();
+public interface ICard
+{
+	PdfContentByte getPdfContent ();
 	
-	float getX();
+	float getX ();
 	
-	float getY();
+	float getY ();
 	
-	ICardData getData();
+	ICardData getData ();
 }

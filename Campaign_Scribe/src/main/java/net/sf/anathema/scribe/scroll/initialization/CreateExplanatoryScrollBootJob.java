@@ -8,12 +8,13 @@ import net.sf.anathema.platform.initialization.RegisteredBootJob;
 import net.sf.anathema.platform.item.ItemInitializer;
 
 @RegisteredBootJob
-@Weight(weight = 12)
-public class CreateExplanatoryScrollBootJob implements BootJob {
-
-  @Override
-  public void run(Environment environment, ApplicationModel anathemaModel) {
-    ScrollInitializationStrategy strategy = new ScrollInitializationStrategy(anathemaModel);
-    new ItemInitializer(environment, strategy).initialize();
-  }
+@Weight (weight = 12)
+public class CreateExplanatoryScrollBootJob implements BootJob
+{
+	@Override
+	public void run (Environment environment, ApplicationModel anathemaModel)
+	{
+		ScrollInitializationStrategy strategy = new ScrollInitializationStrategy (anathemaModel);
+		new ItemInitializer (environment, strategy).initialize ();
+	}
 }

@@ -9,29 +9,33 @@ import net.sf.anathema.hero.traits.model.TraitType;
 import net.sf.anathema.hero.traits.model.state.TraitState;
 import net.sf.anathema.magic.data.Magic;
 
-public class IsFavoredSpell implements CheapenedChecker, CostAnalyzer {
-
-  private Hero hero;
-
-  public IsFavoredSpell(Hero hero) {
-    this.hero = hero;
-  }
-
-  @Override
-  public boolean supportsMagic(Magic magic) {
-    return magic instanceof Spell;
-  }
-
-  @Override
-  public boolean isMagicFavored(Magic magic) {
-    return isCheapened(magic);
-  }
-
-  @Override
-  public boolean isCheapened(Magic magic) {
-    TraitType traitType = SpellsModelFetcher.fetch(hero).getFavoringTraitType();
-    // todo (sandra) model that spells might be favored non-ability
-    TraitState traitState = AbilitiesModelFetcher.fetch(hero).getState(traitType);
-    return traitState.isCheapened();
-  }
+public class IsFavoredSpell implements CheapenedChecker, CostAnalyzer
+{
+	private Hero hero;
+	
+	public IsFavoredSpell (Hero hero)
+	{
+		this.hero = hero;
+	}
+	
+	@Override
+	public boolean supportsMagic (Magic magic)
+	{
+		return magic instanceof Spell;
+	}
+	
+	@Override
+	public boolean isMagicFavored (Magic magic)
+	{
+		return isCheapened (magic);
+	}
+	
+	@Override
+	public boolean isCheapened (Magic magic)
+	{
+		TraitType traitType = SpellsModelFetcher.fetch (hero).getFavoringTraitType ();
+		// todo (sandra) model that spells might be favored non-ability
+		TraitState traitState = AbilitiesModelFetcher.fetch (hero).getState (traitType);
+		return traitState.isCheapened ();
+	}
 }

@@ -18,41 +18,46 @@ import net.sf.anathema.platform.fx.environment.DialogFactory;
 
 import org.tbee.javafx.scene.layout.MigPane;
 
-public class FxEquipmentDetails implements EquipmentDetails {
-
-  private final FxToolListView<IEquipmentStats> listView = new FxToolListView<>();
-  private final FxEquipmentDescriptionPanel descriptionPanel;
-  private MigPane outerPane = new MigPane(LayoutUtils.fillWithoutInsets().wrapAfter(1), new AC().grow().fill());
-  private final DialogFactory dialogFactory;
-
-  public FxEquipmentDetails(SelectionViewFactory selectionFactory, DialogFactory dialogFactory) {
-    this.dialogFactory = dialogFactory;
-    this.descriptionPanel = new FxEquipmentDescriptionPanel(selectionFactory);
-  }
-
-  public Node getNode() {
-    return outerPane;
-  }
-
-  @Override
-  public ToolListView<IEquipmentStats> initStatsListView(final String title,
-                                                         AgnosticUIConfiguration<IEquipmentStats> configuration) {
-    listView.setUiConfiguration(configuration);
-        Node node = listView.getNode();
-        Node titledPane = StyledTitledPane.Create(title, node);
-        outerPane.add(titledPane, new CC().push().grow());
-    return listView;
-  }
-
-  @Override
-  public EquipmentDescriptionPanel addDescriptionPanel(final String title) {
-        Node titledPane = StyledTitledPane.Create(title, descriptionPanel.getNode());
-        outerPane.add(titledPane, new CC().grow().push());
-    return descriptionPanel;
-  }
-
-  @Override
-  public EquipmentStatsDialog createEquipmentStatsDialog() {
-    return new FxEditStatsDialog(dialogFactory);
-  }
+public class FxEquipmentDetails implements EquipmentDetails
+{
+	private final FxToolListView<IEquipmentStats> listView = new FxToolListView<> ();
+	private final FxEquipmentDescriptionPanel descriptionPanel;
+	private MigPane outerPane = new MigPane (LayoutUtils.fillWithoutInsets ().wrapAfter (1), new AC ().grow ().fill ());
+	private final DialogFactory dialogFactory;
+	
+	public FxEquipmentDetails (SelectionViewFactory selectionFactory, DialogFactory dialogFactory)
+	{
+		this.dialogFactory = dialogFactory;
+		this.descriptionPanel = new FxEquipmentDescriptionPanel (selectionFactory);
+	}
+	
+	public Node getNode ()
+	{
+		return outerPane;
+	}
+	
+	@Override
+	public ToolListView<IEquipmentStats> initStatsListView (final String title,
+	AgnosticUIConfiguration<IEquipmentStats> configuration)
+	{
+		listView.setUiConfiguration (configuration);
+		Node node = listView.getNode ();
+		Node titledPane = StyledTitledPane.Create (title, node);
+		outerPane.add (titledPane, new CC ().push ().grow ());
+		return listView;
+	}
+	
+	@Override
+	public EquipmentDescriptionPanel addDescriptionPanel (final String title)
+	{
+		Node titledPane = StyledTitledPane.Create (title, descriptionPanel.getNode ());
+		outerPane.add (titledPane, new CC ().grow ().push ());
+		return descriptionPanel;
+	}
+	
+	@Override
+	public EquipmentStatsDialog createEquipmentStatsDialog ()
+	{
+		return new FxEditStatsDialog (dialogFactory);
+	}
 }

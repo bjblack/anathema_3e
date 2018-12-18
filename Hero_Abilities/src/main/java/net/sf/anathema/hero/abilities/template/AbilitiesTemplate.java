@@ -7,8 +7,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AbilitiesTemplate extends GroupedTraitsTemplate {
-
-  public List<CasteTraitTemplate> casteAbilities = new ArrayList<>();
-  public Map<String, Integer> picks = new LinkedHashMap<>();
+public class AbilitiesTemplate extends GroupedTraitsTemplate
+{
+	public List<CasteTraitTemplate> casteAbilities = new ArrayList<> ();
+	public Map<String, Integer> picks = new LinkedHashMap<> ();
 }

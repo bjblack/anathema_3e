@@ -6,11 +6,11 @@ import net.sf.anathema.hero.individual.splat.SplatType;
 
 import java.util.Collection;
 
-public interface TemplateRegistry {
-
-  Collection<HeroSplat> getAllSupportedTemplates(HeroType type);
-
-  void register(HeroSplat template);
-
-  HeroSplat getTemplate(SplatType type);
+public interface TemplateRegistry
+{
+	Collection<HeroSplat> getAllSupportedTemplates (HeroType type);
+	
+	void register (HeroSplat template);
+	
+	HeroSplat getTemplate (SplatType type);
 }

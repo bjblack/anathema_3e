@@ -24,105 +24,129 @@ import static net.sf.anathema.hero.concept.model.concept.ConceptChange.FLAVOR_CA
 import static net.sf.anathema.hero.experience.model.ExperienceChange.FLAVOR_EXPERIENCE_STATE;
 import static net.sf.anathema.hero.traits.model.state.CasteTraitStateType.Caste;
 
-public class StatedTraitModelPresenter {
-
-  public static final Style STATE_SELECTION_BUTTON = new Style("caste-button");
-  public static final Style POSSIBLE_CASTE_BUTTON = new Style("possible-caste-button");
-  private final GroupedStatedDotsView view;
-  private final IdentityMapping<Trait, ToggleTool> casteToggleByTrait = new IdentityMapping<>();
-  private final Resources resources;
-  private Hero hero;
-  private GroupedTraitsModel model;
-
-  public StatedTraitModelPresenter(Hero hero, GroupedTraitsModel model, GroupedStatedDotsView view, Resources resources) {
-    this.model = model;
-    this.hero = hero;
-    this.resources = resources;
-    this.view = view;
-  }
-
-  public void init(String typePrefix) {
-    for (IdentifiedTraitTypeList traitTypeGroup : model.getGroups()) {
-      view.startNewTraitGroup(resources.getString(typePrefix + "." + traitTypeGroup.getListId().getId()));
-      List<TraitType> allTraitTypes = traitTypeGroup.getAll();
-      addTraitViews(model.getTraits(allTraitTypes.toArray(new TraitType[allTraitTypes.size()])));
-    }
-    hero.getChangeAnnouncer().addListener(flavor -> {
-      if (asList(FLAVOR_EXPERIENCE_STATE, FLAVOR_CASTE).contains(flavor)) {
-        updateButtons();
-      }
-    });
-    updateButtons();
-  }
-
-  private void updateButtons() {
-    for (Trait trait : getAllTraits()) {
-      ToggleTool view = casteToggleByTrait.get(trait);
-      boolean disabled = ExperienceModelFetcher.fetch(hero).isExperienced();
-      boolean cheapened = model.getState(trait).isCheapened();
-      setButtonState(view, cheapened, !disabled);
-      Style style = model.getState(trait).isSelectableForState(Caste) ? POSSIBLE_CASTE_BUTTON : STATE_SELECTION_BUTTON;
-      view.setStyle(style);
-    }
-  }
-
-  private Traits getAllTraits() {
-    return model.getAll();
-  }
-
-  private void addTraitViews(Traits traits) {
-    for (Trait trait : traits) {
-      addTraitView(trait);
-    }
-  }
-
-  private void addTraitView(Trait favorableTrait) {
-    ExtensibleDotView traitView = createTraitView(favorableTrait);
-    addCasteAndFavoredToggle(favorableTrait, traitView);
-  }
-
-  private ExtensibleDotView createTraitView(Trait favorableTrait) {
-    String traitName = resources.getString(favorableTrait.getType().getId());
-    ExtensibleDotView traitView = view.addExtensibleTraitView(traitName, favorableTrait.getMaximalValue());
-    new TraitPresenter(favorableTrait, traitView.getIntValueView()).initPresentation();
-    return traitView;
-  }
-
-  private void addCasteAndFavoredToggle(Trait trait, ExtensibleDotView traitView) {
-    ToggleTool casteTool = traitView.addToggleInFront();
-    casteTool.setStyle(STATE_SELECTION_BUTTON);
-    TraitState traitState = model.getState(trait);
-    casteTool.setCommand(traitState::advanceState);
-    traitState.addTraitStateChangedListener(state -> updateView(casteTool, state));
-    updateView(casteTool, traitState.getType());
-    casteToggleByTrait.put(trait, casteTool);
-  }
-
-  private void updateView(final ToggleTool view, TraitStateType state) {
-    boolean select = TraitStateImpl.isCheapened(state);
-    setButtonState(view, select, true);
-    PresentationPropertiesImpl properties = new PresentationPropertiesImpl(hero.getSplat());
-    new FavoredIconSelector(view, properties).setIconFor(hero, state);
-  }
-
-  private void setButtonState(ToggleTool view, boolean select, boolean enable) {
-    select(view, select);
-    enable(view, enable);
-  }
-
-  private void select(ToggleTool view, boolean select) {
-    if (select) {
-      view.select();
-    } else {
-      view.deselect();
-    }
-  }
-
-  private void enable(ToggleTool view, boolean enable) {
-    if (enable) {
-      view.enable();
-    } else {
-      view.disable();
-    }
-  }
+public class StatedTraitModelPresenter
+{
+	public static final Style STATE_SELECTION_BUTTON = new Style ("caste-button");
+	public static final Style POSSIBLE_CASTE_BUTTON = new Style ("possible-caste-button");
+	private final GroupedStatedDotsView view;
+	private final IdentityMapping<Trait, ToggleTool> casteToggleByTrait = new IdentityMapping<> ();
+	private final Resources resources;
+	private Hero hero;
+	private GroupedTraitsModel model;
+	
+	public StatedTraitModelPresenter (Hero hero, GroupedTraitsModel model, GroupedStatedDotsView view, Resources resources)
+	{
+		this.model = model;
+		this.hero = hero;
+		this.resources = resources;
+		this.view = view;
+	}
+	
+	public void init (String typePrefix)
+	{
+		for (IdentifiedTraitTypeList traitTypeGroup : model.getGroups ())
+		{
+			view.startNewTraitGroup (resources.getString (typePrefix + "." + traitTypeGroup.getListId ().getId ()));
+			List<TraitType> allTraitTypes = traitTypeGroup.getAll ();
+			addTraitViews (model.getTraits (allTraitTypes.toArray (new TraitType[allTraitTypes.size ()])));
+		}
+		hero.getChangeAnnouncer ().addListener (flavor ->
+		{
+			if (asList (FLAVOR_EXPERIENCE_STATE, FLAVOR_CASTE).contains (flavor))
+			{
+				updateButtons ();
+			}
+		}
+		);
+		updateButtons ();
+	}
+	
+	private void updateButtons ()
+	{
+		for (Trait trait : getAllTraits ())
+		{
+			ToggleTool view = casteToggleByTrait.get (trait);
+			boolean disabled = ExperienceModelFetcher.fetch (hero).isExperienced ();
+			boolean cheapened = model.getState (trait).isCheapened ();
+			setButtonState (view, cheapened, !disabled);
+			Style style = model.getState (trait).isSelectableForState (Caste) ? POSSIBLE_CASTE_BUTTON : STATE_SELECTION_BUTTON;
+			view.setStyle (style);
+		}
+	}
+	
+	private Traits getAllTraits ()
+	{
+		return model.getAll ();
+	}
+	
+	private void addTraitViews (Traits traits)
+	{
+		for (Trait trait : traits)
+		{
+			addTraitView (trait);
+		}
+	}
+	
+	private void addTraitView (Trait favorableTrait)
+	{
+		ExtensibleDotView traitView = createTraitView (favorableTrait);
+		addCasteAndFavoredToggle (favorableTrait, traitView);
+	}
+	
+	private ExtensibleDotView createTraitView (Trait favorableTrait)
+	{
+		String traitName = resources.getString (favorableTrait.getType ().getId ());
+		ExtensibleDotView traitView = view.addExtensibleTraitView (traitName, favorableTrait.getMaximalValue ());
+		new TraitPresenter (favorableTrait, traitView.getIntValueView ()).initPresentation ();
+		return traitView;
+	}
+	
+	private void addCasteAndFavoredToggle (Trait trait, ExtensibleDotView traitView)
+	{
+		ToggleTool casteTool = traitView.addToggleInFront ();
+		casteTool.setStyle (STATE_SELECTION_BUTTON);
+		TraitState traitState = model.getState (trait);
+		casteTool.setCommand (traitState::advanceState);
+		traitState.addTraitStateChangedListener (state -> updateView (casteTool, state));
+		updateView (casteTool, traitState.getType ());
+		casteToggleByTrait.put (trait, casteTool);
+	}
+	
+	private void updateView (final ToggleTool view, TraitStateType state)
+	{
+		boolean select = TraitStateImpl.isCheapened (state);
+		setButtonState (view, select, true);
+		PresentationPropertiesImpl properties = new PresentationPropertiesImpl (hero.getSplat ());
+		new FavoredIconSelector (view, properties).setIconFor (hero, state);
+	}
+	
+	private void setButtonState (ToggleTool view, boolean select, boolean enable)
+	{
+		select (view, select);
+		enable (view, enable);
+	}
+	
+	private void select (ToggleTool view, boolean select)
+	{
+		if (select)
+		{
+			view.select ();
+		}
+		else
+		{
+			view.deselect ();
+		}
+	}
+	
+	private void enable (ToggleTool view, boolean enable)
+	{
+		if (enable)
+		{
+			view.enable ();
+		}
+		else
+		{
+			view.disable ();
+		}
+	}
 }

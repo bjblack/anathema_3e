@@ -24,49 +24,55 @@ import net.sf.anathema.platform.messaging.MessageCategory;
 import net.sf.anathema.platform.stance.StanceAutoCollector;
 
 @StanceAutoCollector
-@Weight(weight = 1)
-public class HeroesStance implements Stance {
-  private final CharacterMessaging characterMessaging = new CharacterMessaging();
-  private HeroesStanceView view;
-
-  @Override
-  public void initContent(Container container, ApplicationModel model, Environment environment, UiEnvironment uiEnvironment) {
-    new HeroPoolInitializer(model, environment).initializeCharacterSystem();
-    characterMessaging.setDelegate(model.getMessaging());
-    HeroEnvironment heroEnvironment = HeroEnvironmentFetcher.fetch(model);
-    HeroPoolModel heroPool = createHeroPool(model);
-    this.view = new HeroesStanceView();
-    container.setContent(view.getNode());
-    HeroViewFactory viewFactory = new HeroViewFactory(heroEnvironment.getObjectFactory(), uiEnvironment);
-    HeroStackBridge bridge = new HeroStackFxBridge(viewFactory, view.getStackView());
-    HeroStackPresenter stackPresenter = new HeroStackPresenter(bridge, heroPool, heroEnvironment, environment, uiEnvironment);
-    ShowOnSelect showOnSelect = new ShowOnSelect(characterMessaging, stackPresenter);
-    new RecentHeroesPresenter(heroPool, view.getGridView(), showOnSelect, environment).initPresentation();
-    new HeroRosterPresenter(heroPool, view, showOnSelect, environment).initPresentation();
-    new NewHeroPresenter(heroPool, view.getCenterInteractionView(), environment, view.getGridView(), showOnSelect).initPresentation();
-  }
-
-  private HeroPoolModel createHeroPool(ApplicationModel model) {
-    PreferencesPersister preferencesPersister = new PropertiesPreferencesPersister("recentheroes.properties");
-    HeroPoolModel heroPool = new HeroPoolModel(model, preferencesPersister);
-    heroPool.collectAllExistingHeroes();
-    heroPool.loadRecentHeroes();
-    return heroPool;
-  }
-
-  @Override
-  public MessageCategory getMessageCategory() {
-    return characterMessaging.getActiveCategory();
-  }
-
-  @Override
-  public Tool createLeaveTool() {
-    return view.createLeaveTool();
-  }
-
-  @Override
-  public void configureEnterTool(Tool tool) {
-    tool.setText("Heroes");
-    tool.setTooltip("Create and advance heroes");
-  }
+@Weight (weight = 1)
+public class HeroesStance implements Stance
+{
+	private final CharacterMessaging characterMessaging = new CharacterMessaging ();
+	private HeroesStanceView view;
+	
+	@Override
+	public void initContent (Container container, ApplicationModel model, Environment environment, UiEnvironment uiEnvironment)
+	{
+		new HeroPoolInitializer (model, environment).initializeCharacterSystem ();
+		characterMessaging.setDelegate (model.getMessaging ());
+		HeroEnvironment heroEnvironment = HeroEnvironmentFetcher.fetch (model);
+		HeroPoolModel heroPool = createHeroPool (model);
+		this.view = new HeroesStanceView ();
+		container.setContent (view.getNode ());
+		HeroViewFactory viewFactory = new HeroViewFactory (heroEnvironment.getObjectFactory (), uiEnvironment);
+		HeroStackBridge bridge = new HeroStackFxBridge (viewFactory, view.getStackView ());
+		HeroStackPresenter stackPresenter = new HeroStackPresenter (bridge, heroPool, heroEnvironment, environment, uiEnvironment);
+		ShowOnSelect showOnSelect = new ShowOnSelect (characterMessaging, stackPresenter);
+		new RecentHeroesPresenter (heroPool, view.getGridView (), showOnSelect, environment).initPresentation ();
+		new HeroRosterPresenter (heroPool, view, showOnSelect, environment).initPresentation ();
+		new NewHeroPresenter (heroPool, view.getCenterInteractionView (), environment, view.getGridView (), showOnSelect).initPresentation ();
+	}
+	
+	private HeroPoolModel createHeroPool (ApplicationModel model)
+	{
+		PreferencesPersister preferencesPersister = new PropertiesPreferencesPersister ("recentheroes.properties");
+		HeroPoolModel heroPool = new HeroPoolModel (model, preferencesPersister);
+		heroPool.collectAllExistingHeroes ();
+		heroPool.loadRecentHeroes ();
+		return heroPool;
+	}
+	
+	@Override
+	public MessageCategory getMessageCategory ()
+	{
+		return characterMessaging.getActiveCategory ();
+	}
+	
+	@Override
+	public Tool createLeaveTool ()
+	{
+		return view.createLeaveTool ();
+	}
+	
+	@Override
+	public void configureEnterTool (Tool tool)
+	{
+		tool.setText ("Heroes");
+		tool.setTooltip ("Create and advance heroes");
+	}
 }

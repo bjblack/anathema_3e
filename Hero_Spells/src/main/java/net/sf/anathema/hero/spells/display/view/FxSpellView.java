@@ -21,39 +21,45 @@ import java.util.Collection;
 
 import static net.sf.anathema.library.fx.layout.LayoutUtils.fillWithoutInsets;
 
-public class FxSpellView implements SpellView, NodeHolder {
-  private final MigPane content = new MigPane(fillWithoutInsets());
-  private final Announcer<ObjectChangedListener> circleControl = Announcer.to(ObjectChangedListener.class);
-  private ComboBoxSelectionView<Identifier> selectionView;
-
-  @Override
-  public void addCircleSelection(Collection<Identifier> circles, SpellViewProperties properties) {
-    this.selectionView = new ComboBoxSelectionView<>(properties.getCircleLabel(),
-            properties.getCircleSelectionRenderer());
-    selectionView.setObjects(circles);
-    content.add(selectionView.getNode(), new CC().wrap());
-    selectionView.addObjectSelectionChangedListener(newValue -> circleControl.announce().valueChanged(newValue));
-  }
-
-  @Override
-  public void showSelectedCircle(CircleType newValue) {
-    selectionView.setSelectedObject(newValue);
-  }
-
-  @Override
-  public MagicLearnView addMagicLearnView(MagicLearnProperties properties) {
-    FxMagicLearnView magicLearnView = new FxMagicLearnView(properties);
-    content.add(magicLearnView.getNode(), new CC().grow().push());
-    return magicLearnView;
-  }
-
-  @Override
-  public void addCircleSelectionListener(ObjectChangedListener<CircleType> listener) {
-    circleControl.addListener(listener);
-  }
-
-  @Override
-  public Node getNode() {
-    return content;
-  }
+public class FxSpellView implements SpellView, NodeHolder
+{
+	private final MigPane content = new MigPane (fillWithoutInsets ());
+	private final Announcer<ObjectChangedListener> circleControl = Announcer.to (ObjectChangedListener.class);
+	private ComboBoxSelectionView<Identifier> selectionView;
+	
+	@Override
+	public void addCircleSelection (Collection<Identifier> circles, SpellViewProperties properties)
+	{
+		this.selectionView = new ComboBoxSelectionView<> (properties.getCircleLabel (),
+		properties.getCircleSelectionRenderer ());
+		selectionView.setObjects (circles);
+		content.add (selectionView.getNode (), new CC ().wrap ());
+		selectionView.addObjectSelectionChangedListener (newValue -> circleControl.announce ().valueChanged (newValue));
+	}
+	
+	@Override
+	public void showSelectedCircle (CircleType newValue)
+	{
+		selectionView.setSelectedObject (newValue);
+	}
+	
+	@Override
+	public MagicLearnView addMagicLearnView (MagicLearnProperties properties)
+	{
+		FxMagicLearnView magicLearnView = new FxMagicLearnView (properties);
+		content.add (magicLearnView.getNode (), new CC ().grow ().push ());
+		return magicLearnView;
+	}
+	
+	@Override
+	public void addCircleSelectionListener (ObjectChangedListener<CircleType> listener)
+	{
+		circleControl.addListener (listener);
+	}
+	
+	@Override
+	public Node getNode ()
+	{
+		return content;
+	}
 }

@@ -8,19 +8,20 @@ import net.sf.anathema.hero.charms.model.special.CharmSpecialMechanic;
 import net.sf.anathema.hero.charms.model.special.mechanics.ThaumaturgyMechanic;
 import net.sf.anathema.hero.individual.persistence.values.ValueFactory;
 
-public class ThaumaturgyCharmBuilder implements CharmSpecialMechanicsBuilder{
+public class ThaumaturgyCharmBuilder implements CharmSpecialMechanicsBuilder
+{
+	@Override
+	public CharmSpecialMechanic readCharm (SpecialCharmTemplate dto, String id, ValueFactory valueFactory)
+	{
+		ThaumaturgyTemplate template = dto.thaumaturgy;
+		return new ThaumaturgyMechanic (new CharmName (id),
+		template.grantsAccess,
+		valueFactory.getValueForTemplate (template.grantsFreeRituals));
+	}
 	
 	@Override
-	public CharmSpecialMechanic readCharm(SpecialCharmTemplate dto, String id, ValueFactory valueFactory) {
-		ThaumaturgyTemplate template = dto.thaumaturgy;
-		return new ThaumaturgyMechanic(new CharmName(id),
-				template.grantsAccess,
-				valueFactory.getValueForTemplate(template.grantsFreeRituals));
-	}
-
-	@Override
-	public boolean supports(SpecialCharmTemplate dto) {
+	public boolean supports (SpecialCharmTemplate dto)
+	{
 		return dto.thaumaturgy != null;
 	}
-
 }

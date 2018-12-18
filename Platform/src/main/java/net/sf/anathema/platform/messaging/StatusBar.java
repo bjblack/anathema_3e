@@ -5,13 +5,13 @@ import net.sf.anathema.library.message.Message;
 
 import java.util.Collection;
 
-public interface StatusBar {
-
-  void setLatestMessage(Message message);
-
-  void whenAllMessagesAreRequested(Command command);
-
-  void showMessages(Collection<Message> messages);
-
-  void clear();
+public interface StatusBar
+{
+	void setLatestMessage (Message message);
+	
+	void whenAllMessagesAreRequested (Command command);
+	
+	void showMessages (Collection<Message> messages);
+	
+	void clear ();
 }

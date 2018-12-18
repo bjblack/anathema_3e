@@ -11,39 +11,46 @@ import java.util.List;
 
 import static net.sf.anathema.hero.traits.model.types.CommonTraitTypes.Willpower;
 
-public class WillpowerContent extends AbstractSubBoxContent {
-
-  private Hero hero;
-
-  public WillpowerContent(Resources resources, Hero hero) {
-    super(resources);
-    this.hero = hero;
-  }
-
-  @Override
-  public String getHeaderKey() {
-    return "Willpower";
-  }
-
-  public int getWillpowerValue() {
-    return SpiritualTraitModelFetcher.fetch(hero).getTrait(Willpower).getCurrentValue();
-  }
-
-  public String getWillpowerSpendingNote() {
-    return getString("Sheet.WillpowerSpendingNote");
-  }
-
-  public BulletList getWillpowerSpendingRules() {
-    return createBulletList("Sheet.WillpowerSpendingRules");
-  }
-
-  public BulletList getWillpowerRegainingRules() {
-    return createBulletList("Sheet.WillpowerRegainingRules");
-  }
-
-  private BulletList createBulletList(String resourceBase) {
-    String header = ListUtils.getRequiredString(getResources(), resourceBase);
-    List<String> items = ListUtils.getAvailableLineItems(getResources(), resourceBase);
-    return new BulletList(header, items);
-  }
+public class WillpowerContent extends AbstractSubBoxContent
+{
+	private Hero hero;
+	
+	public WillpowerContent (Resources resources, Hero hero)
+	{
+		super (resources);
+		this.hero = hero;
+	}
+	
+	@Override
+	public String getHeaderKey ()
+	{
+		return "Willpower";
+	}
+	
+	public int getWillpowerValue ()
+	{
+		return SpiritualTraitModelFetcher.fetch (hero).getTrait (Willpower).getCurrentValue ();
+	}
+	
+	public String getWillpowerSpendingNote ()
+	{
+		return getString ("Sheet.WillpowerSpendingNote");
+	}
+	
+	public BulletList getWillpowerSpendingRules ()
+	{
+		return createBulletList ("Sheet.WillpowerSpendingRules");
+	}
+	
+	public BulletList getWillpowerRegainingRules ()
+	{
+		return createBulletList ("Sheet.WillpowerRegainingRules");
+	}
+	
+	private BulletList createBulletList (String resourceBase)
+	{
+		String header = ListUtils.getRequiredString (getResources (), resourceBase);
+		List<String> items = ListUtils.getAvailableLineItems (getResources (), resourceBase);
+		return new BulletList (header, items);
+	}
 }

@@ -4,21 +4,24 @@ import net.sf.anathema.platform.tree.display.NodeInteractionListener;
 
 import org.jmock.example.announcer.Announcer;
 
-public class AggregatingInteractionListener implements NodeInteractionListener {
-  private final Announcer<NodeInteractionListener> interactionListeners = Announcer.to(NodeInteractionListener.class);
-
-  @Override
-  public void nodeSelected(String nodeId) {
-    interactionListeners.announce().nodeSelected(nodeId);
-  }
-
-  @Override
-  public void nodeDetailsDemanded(String nodeId) {
-    interactionListeners.announce().nodeDetailsDemanded(nodeId);
-
-  }
-
-  public void addNodeInteractionListener(NodeInteractionListener listener) {
-    interactionListeners.addListener(listener);
-  }
+public class AggregatingInteractionListener implements NodeInteractionListener
+{
+	private final Announcer<NodeInteractionListener> interactionListeners = Announcer.to (NodeInteractionListener.class);
+	
+	@Override
+	public void nodeSelected (String nodeId)
+	{
+		interactionListeners.announce ().nodeSelected (nodeId);
+	}
+	
+	@Override
+	public void nodeDetailsDemanded (String nodeId)
+	{
+		interactionListeners.announce ().nodeDetailsDemanded (nodeId);
+	}
+	
+	public void addNodeInteractionListener (NodeInteractionListener listener)
+	{
+		interactionListeners.addListener (listener);
+	}
 }

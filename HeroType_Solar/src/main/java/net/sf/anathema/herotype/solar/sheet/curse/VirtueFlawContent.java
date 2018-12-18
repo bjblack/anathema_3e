@@ -9,37 +9,44 @@ import net.sf.anathema.library.resources.Resources;
 
 import com.google.common.base.Strings;
 
-public class VirtueFlawContent extends AbstractSubBoxContent {
-
-  private Hero hero;
-
-  protected VirtueFlawContent(Hero hero, Resources resources) {
-    super(resources);
-    this.hero = hero;
-  }
-
-  @Override
-  public String getHeaderKey() {
-    return "GreatCurse.Solar";
-  }
-
-  public int getLimitValue() {
-    return getVirtueFlawModel().getLimitTrait().getCurrentValue();
-  }
-
-  public String getLimitTrigger() {
-    return getVirtueFlawModel().getLimitTrigger().getText();
-  }
-
-  public boolean isNameDefined() {
-    return false;
-  }
-
-  public boolean isConditionDefined() {
-    return !Strings.isNullOrEmpty(getLimitTrigger());
-  }
-
-  private DescriptiveLimitBreak getVirtueFlawModel() {
-    return ((DescriptiveLimitBreakModel) GreatCurseFetcher.fetch(hero)).getLimitBreak();
-  }
+public class VirtueFlawContent extends AbstractSubBoxContent
+{
+	private Hero hero;
+	
+	protected VirtueFlawContent (Hero hero, Resources resources)
+	{
+		super (resources);
+		this.hero = hero;
+	}
+	
+	@Override
+	public String getHeaderKey ()
+	{
+		return "GreatCurse.Solar";
+	}
+	
+	public int getLimitValue ()
+	{
+		return getVirtueFlawModel ().getLimitTrait ().getCurrentValue ();
+	}
+	
+	public String getLimitTrigger ()
+	{
+		return getVirtueFlawModel ().getLimitTrigger ().getText ();
+	}
+	
+	public boolean isNameDefined ()
+	{
+		return false;
+	}
+	
+	public boolean isConditionDefined ()
+	{
+		return !Strings.isNullOrEmpty (getLimitTrigger ());
+	}
+	
+	private DescriptiveLimitBreak getVirtueFlawModel ()
+	{
+		return ( (DescriptiveLimitBreakModel) GreatCurseFetcher.fetch (hero)).getLimitBreak ();
+	}
 }

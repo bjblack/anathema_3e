@@ -5,17 +5,19 @@ import net.sf.anathema.hero.sheet.pdf.session.ReportSession;
 import net.sf.anathema.library.dependencies.Produces;
 import net.sf.anathema.library.resources.Resources;
 
-@Produces(WillpowerContent.class)
-public class WillpowerContentFactory implements ReportContentFactory<WillpowerContent> {
-
-  private final Resources resources;
-
-  public WillpowerContentFactory(Resources resources) {
-    this.resources = resources;
-  }
-
-  @Override
-  public WillpowerContent create(ReportSession session) {
-    return new WillpowerContent(resources, session.getHero());
-  }
+@Produces (WillpowerContent.class)
+public class WillpowerContentFactory implements ReportContentFactory<WillpowerContent>
+{
+	private final Resources resources;
+	
+	public WillpowerContentFactory (Resources resources)
+	{
+		this.resources = resources;
+	}
+	
+	@Override
+	public WillpowerContent create (ReportSession session)
+	{
+		return new WillpowerContent (resources, session.getHero ());
+	}
 }

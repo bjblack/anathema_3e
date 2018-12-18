@@ -1,5 +1,6 @@
 package net.sf.anathema.library.fx.tool;
 
-public interface ImageClosure {
-  void run(ImageContainer image);
+public interface ImageClosure
+{
+	void run (ImageContainer image);
 }

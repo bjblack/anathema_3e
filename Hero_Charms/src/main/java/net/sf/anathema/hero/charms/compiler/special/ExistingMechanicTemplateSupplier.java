@@ -1,6 +1,7 @@
 package net.sf.anathema.hero.charms.compiler.special;
 
 
-public interface ExistingMechanicTemplateSupplier {
-	void applyMechanicsForTemplate(String id);
+public interface ExistingMechanicTemplateSupplier
+{
+	void applyMechanicsForTemplate (String id);
 }

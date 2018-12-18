@@ -13,59 +13,74 @@ import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 
-public class CharmCardData extends AbstractMagicCardData {
-  private Charm charm;
-  private CharmStats stats;
-
-  public CharmCardData(Charm charm, CharmStats stats, MagicDescription description, ICardReportResourceProvider fontProvider, Resources resources) {
-    super(charm, description, fontProvider, resources);
-    this.charm = charm;
-    this.stats = stats;
-  }
-
-  @Override
-  public Image getPrimaryIcon() {
-    return getResourceProvider().getTreeIcon(charm);
-  }
-
-  @Override
-  public Image getSecondaryIcon() {
-    return getResourceProvider().getCategoryIcon(charm);
-  }
-
-  @Override
-  public Paragraph getStats() {
-    Paragraph stats = new Paragraph();
-    stats.add(getCharmType(charm));
-    stats.add("\n");
-    stats.add(getCharmDuration(charm));
-    return stats;
-  }
-
-  @Override
-  public Element[] getBody(int contentHeight) {
-    Paragraph phrases = new Paragraph();
-    if (hasCost(charm)) {
-      phrases.add(getCostPhrase(hasDescription()));
-    }
-    if (hasDescription()) {
-      addDescriptionPhrases(phrases);
-    }
-    return new Element[]{phrases};
-  }
-
-  private Phrase getCharmType(Charm charm) {
-    String type = new CharmTypeContributor(getResources()).createTypeString(charm.getCharmType());
-    return new Phrase(8, type, getResourceProvider().getBoldFont());
-  }
-
-  private Phrase getCharmDuration(Charm charm) {
-    String duration = charm.getDuration().getText();
-    return new Phrase(duration, getResourceProvider().getNormalFont());
-  }
-
-  @Override
-  public String getKeywords() {
-    return Joiner.on(", ").join(stats.getDetailStrings(getResources()));
-  }
+public class CharmCardData extends AbstractMagicCardData
+{
+	private Charm charm;
+	private CharmStats stats;
+	
+	public CharmCardData (Charm charm, CharmStats stats, MagicDescription description, ICardReportResourceProvider fontProvider, Resources resources)
+	{
+		super (charm, description, fontProvider, resources);
+		this.charm = charm;
+		this.stats = stats;
+	}
+	
+	@Override
+	public Image getPrimaryIcon ()
+	{
+		return getResourceProvider ().getTreeIcon (charm);
+	}
+	
+	@Override
+	public Image getSecondaryIcon ()
+	{
+		return getResourceProvider ().getCategoryIcon (charm);
+	}
+	
+	@Override
+	public Paragraph getStats ()
+	{
+		Paragraph stats = new Paragraph ();
+		stats.add (getCharmType (charm));
+		stats.add ("\n");
+		stats.add (getCharmDuration (charm));
+		return stats;
+	}
+	
+	@Override
+	public Element[] getBody (int contentHeight)
+	{
+		Paragraph phrases = new Paragraph ();
+		if (hasCost (charm))
+		{
+			phrases.add (getCostPhrase (hasDescription ()));
+		}
+		if (hasDescription ())
+		{
+			addDescriptionPhrases (phrases);
+		}
+		return new Element[]
+		{
+			phrases
+		}
+		;
+	}
+	
+	private Phrase getCharmType (Charm charm)
+	{
+		String type = new CharmTypeContributor (getResources ()).createTypeString (charm.getCharmType ());
+		return new Phrase (8, type, getResourceProvider ().getBoldFont ());
+	}
+	
+	private Phrase getCharmDuration (Charm charm)
+	{
+		String duration = charm.getDuration ().getText ();
+		return new Phrase (duration, getResourceProvider ().getNormalFont ());
+	}
+	
+	@Override
+	public String getKeywords ()
+	{
+		return Joiner.on (", ").join (stats.getDetailStrings (getResources ()));
+	}
 }

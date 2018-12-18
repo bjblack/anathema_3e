@@ -5,11 +5,11 @@ import net.sf.anathema.hero.sheet.pdf.encoder.boxes.StatsModifierFactory;
 import net.sf.anathema.library.identifier.Identifier;
 import net.sf.anathema.library.identifier.SimpleIdentifier;
 
-public interface StatsModel extends HeroModel {
-
-  Identifier ID = new SimpleIdentifier("Stats");
-
-  void addModifierFactory(StatsModifierFactory factory);
-
-  Iterable<StatsModifierFactory> getModifierFactories();
+public interface StatsModel extends HeroModel
+{
+	Identifier ID = new SimpleIdentifier ("Stats");
+	
+	void addModifierFactory (StatsModifierFactory factory);
+	
+	Iterable<StatsModifierFactory> getModifierFactories ();
 }

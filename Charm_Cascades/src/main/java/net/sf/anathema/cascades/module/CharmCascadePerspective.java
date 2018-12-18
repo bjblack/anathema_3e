@@ -25,38 +25,44 @@ import net.sf.anathema.platform.utility.UtilityToggle;
 import org.tbee.javafx.scene.layout.MigPane;
 
 @UtilityAutoCollector
-@Weight(weight = 6000)
-public class CharmCascadePerspective implements UtilityPerspective {
-  @Override
-  public void configureToggle(UtilityToggle toggle) {
-    toggle.setIcon(new RelativePath("icons/toolbar/TaskBarCharms24.png"));
-    toggle.setTooltip("ItemType.CharmCascades.PrintName");
-  }
-
-  @Override
-  public void initContent(Container container, ApplicationModel applicationModel, Environment environment, UiEnvironment uiEnvironment) {
-    HeroEnvironment heroEnvironment = HeroEnvironmentFetcher.fetch(applicationModel);
-    MagicDescriptionProvider magicDescriptionProvider = getCharmDescriptionProvider(heroEnvironment);
-    FxCharmView cascadeView = new FxCharmView();
-    new CharmCascadesPresenterImpl(environment, heroEnvironment, cascadeView, magicDescriptionProvider,
-            new CharmTreeMap()).initPresentation();
-    MigPane content = createContentPane(cascadeView);
-    container.setContent(content);
-  }
-
-  @Override
-  public MessageCategory getMessageCategory() {
-    return new MessageCategory("Cascades");
-  }
-
-  private MigPane createContentPane(FxCharmView cascadeView) {
-    Node node = cascadeView.getNode();
-    MigPane content = new MigPane(new LC().fill());
-    content.add(node, new CC().grow().push());
-    return content;
-  }
-
-  private MagicDescriptionProvider getCharmDescriptionProvider(HeroEnvironment environment) {
-    return MagicDescriptionProviderExtractor.CreateFor(environment);
-  }
+@Weight (weight = 6000)
+public class CharmCascadePerspective implements UtilityPerspective
+{
+	@Override
+	public void configureToggle (UtilityToggle toggle)
+	{
+		toggle.setIcon (new RelativePath ("icons/toolbar/TaskBarCharms24.png"));
+		toggle.setTooltip ("ItemType.CharmCascades.PrintName");
+	}
+	
+	@Override
+	public void initContent (Container container, ApplicationModel applicationModel, Environment environment, UiEnvironment uiEnvironment)
+	{
+		HeroEnvironment heroEnvironment = HeroEnvironmentFetcher.fetch (applicationModel);
+		MagicDescriptionProvider magicDescriptionProvider = getCharmDescriptionProvider (heroEnvironment);
+		FxCharmView cascadeView = new FxCharmView ();
+		new CharmCascadesPresenterImpl (environment, heroEnvironment, cascadeView, magicDescriptionProvider,
+		new CharmTreeMap ()).initPresentation ();
+		MigPane content = createContentPane (cascadeView);
+		container.setContent (content);
+	}
+	
+	@Override
+	public MessageCategory getMessageCategory ()
+	{
+		return new MessageCategory ("Cascades");
+	}
+	
+	private MigPane createContentPane (FxCharmView cascadeView)
+	{
+		Node node = cascadeView.getNode ();
+		MigPane content = new MigPane (new LC ().fill ());
+		content.add (node, new CC ().grow ().push ());
+		return content;
+	}
+	
+	private MagicDescriptionProvider getCharmDescriptionProvider (HeroEnvironment environment)
+	{
+		return MagicDescriptionProviderExtractor.CreateFor (environment);
+	}
 }

@@ -7,24 +7,28 @@ import net.sf.anathema.library.fx.tool.FxBaseTool;
 import net.sf.anathema.library.interaction.model.ToggleTool;
 import net.sf.anathema.library.view.Style;
 
-public class HyperlinkToggleTool extends FxBaseTool implements ToggleTool {
-
-  public HyperlinkToggleTool() {
-    super(new Hyperlink(), new ImageView());
-  }
-
-  @Override
-  public void setStyle(Style style) {
-    getNode().getStyleClass().add(style.style);
-  }
-
-  @Override
-  public void select() {
-    getNode().setDisable(true);
-  }
-
-  @Override
-  public void deselect() {
-    getNode().setDisable(false);
-  }
+public class HyperlinkToggleTool extends FxBaseTool implements ToggleTool
+{
+	public HyperlinkToggleTool ()
+	{
+		super (new Hyperlink (), new ImageView ());
+	}
+	
+	@Override
+	public void setStyle (Style style)
+	{
+		getNode ().getStyleClass ().add (style.style);
+	}
+	
+	@Override
+	public void select ()
+	{
+		getNode ().setDisable (true);
+	}
+	
+	@Override
+	public void deselect ()
+	{
+		getNode ().setDisable (false);
+	}
 }

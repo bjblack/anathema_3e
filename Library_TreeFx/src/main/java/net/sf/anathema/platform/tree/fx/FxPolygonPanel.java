@@ -49,220 +49,267 @@ import static net.sf.anathema.platform.tree.view.interaction.MouseButton.Other;
 import static net.sf.anathema.platform.tree.view.interaction.MouseButton.Primary;
 import static net.sf.anathema.platform.tree.view.interaction.MouseButton.Secondary;
 
-public class FxPolygonPanel implements DisplayPolygonPanel {
-  private final ElementContainer container = new ElementContainer();
-  private final List<FxSpecialTrigger> specialControls = new ArrayList<>();
-  private final StackPane content = new StackPane();
-  private final Rectangle background = new Rectangle();
-  private final Group canvas = new Group();
-  private final Rectangle glasspane = new Rectangle();
-  private Tooltip tooltip = new Tooltip();
-  private AgnosticTransform transform = new AgnosticTransform();
-
-  public FxPolygonPanel() {
-    sizeLikeContentPane(background);
-    sizeLikeContentPane(glasspane);
-    clipToSize(content);
-    glasspane.setFill(Color.TRANSPARENT);
-    canvas.setManaged(false);
-    content.getChildren().addAll(background, canvas, glasspane);
-    setBackground(RGBColor.White);
-  }
-
-  @Override
-  public void refresh() {
-    canvas.getChildren().clear();
-    canvas.getTransforms().clear();
-    FxGroupCanvas fxGroupCanvas = new FxGroupCanvas(canvas);
-    Transform fxTransform = convert(transform);
-    canvas.getTransforms().add(fxTransform);
-    for (GraphicsElement graphicsElement : container) {
-      graphicsElement.paint(fxGroupCanvas);
-    }
-    for (FxSpecialTrigger specialControl : specialControls) {
-      specialControl.addTo(fxGroupCanvas);
-    }
-  }
-
-  @Override
-  public SpecialControlTrigger addSpecialControl() {
-    final FxSpecialTrigger specialControl = new FxSpecialTrigger();
-    specialControls.add(specialControl);
-    glasspane.addEventHandler(MOUSE_CLICKED, event -> {
-      MouseButton button = determineMouseButton(event);
-      Coordinate glasspaneCoordinate = determineCoordinate(event);
-      Coordinate coordinate = determineCoordinateInCanvas(glasspaneCoordinate);
-      if (specialControl.contains(coordinate) && button == MouseButton.Primary) {
-        specialControl.toggle();
-      }
-    });
-    return specialControl;
-  }
-
-  @Override
-  public void add(InteractiveGraphicsElement element) {
-    container.add(element);
-  }
-
-  @Override
-  public void add(GraphicsElement element) {
-    container.add(element);
-  }
-
-  @Override
-  public void changeCursor(Coordinate glassPaneCoordinates) {
-    Coordinate elementCoordinates = determineCoordinateInCanvas(glassPaneCoordinates);
-    container.onElementAtPoint(elementCoordinates).perform(new SetHandCursor()).orFallBackTo(new SetDefaultCursor());
-  }
-
-  @Override
-  public void clear() {
-    container.clear();
-    for (FxSpecialTrigger specialControl : specialControls) {
-      specialControl.remove();
-    }
-    specialControls.clear();
-    refresh();
-  }
-
-  @Override
-  public Executor onElementAtPoint(Coordinate glassPaneCoordinates) {
-    Coordinate elementCoordinates = determineCoordinateInCanvas(glassPaneCoordinates);
-    return container.onElementAtPoint(elementCoordinates);
-  }
-
-  @Override
-  public void addMousePressListener(final MousePressClosure listener) {
-    glasspane.addEventHandler(MOUSE_PRESSED, event -> listener.mousePressed(determineCoordinate(event)));
-  }
-
-  @Override
-  public void addMouseClickListener(final MouseClickClosure listener) {
-    glasspane.addEventHandler(MOUSE_CLICKED, event -> {
-      MouseButton button = determineMouseButton(event);
-      MetaKey key = determineMetaKey(event);
-      Coordinate coordinate = determineCoordinate(event);
-      listener.mouseClicked(button, key, coordinate, event.getClickCount());
-    });
-  }
-
-  @Override
-  public void addMouseWheelListener(final MouseWheelClosure listener) {
-    glasspane.addEventHandler(ScrollEvent.SCROLL, scrollEvent -> {
-      int wheelClicks = (int) scrollEvent.getDeltaY() / 40;
-      listener.mouseWheelMoved(wheelClicks, determineCoordinate(scrollEvent));
-    });
-  }
-
-  @Override
-  public void addMouseBorderListener(final MouseBorderClosure listener) {
-    glasspane.addEventHandler(MouseEvent.MOUSE_ENTERED, mouseEvent -> listener.mouseEntered());
-    glasspane.addEventHandler(MouseEvent.MOUSE_EXITED, mouseEvent -> listener.mouseExited());
-  }
-
-  @Override
-  public void addMouseMotionListener(final MouseMotionClosure listener) {
-    glasspane.addEventHandler(MouseEvent.MOUSE_MOVED, mouseEvent -> listener.mouseMoved(determineCoordinate(mouseEvent)));
-    glasspane.addEventHandler(MOUSE_DRAGGED, mouseEvent -> listener.mouseDragged(determineMouseButton(mouseEvent), determineCoordinate(mouseEvent)));
-  }
-
-  @Override
-  public void setBackground(RGBColor color) {
-    background.setFill(toFxColor(color));
-  }
-
-  @Override
-  public void showMoveCursor() {
-    glasspane.setCursor(MOVE);
-  }
-
-  @Override
-  public void resetAllTooltips() {
-    //TODO: Reset Tooltips (if FX requires this at all)
-  }
-
-  @Override
-  public void setTransformation(AgnosticTransform transform) {
-    this.transform = transform;
-    refresh();
-  }
-
-  @Override
-  public int getWidth() {
-    return (int) content.getWidth();
-  }
-
-  @Override
-  public int getHeight() {
-    return (int) content.getHeight();
-  }
-
-  @Override
-  public void setToolTipText(String toolTipText) {
-    if (toolTipText == null) {
-      Tooltip.uninstall(glasspane, tooltip);
-      return;
-    }
-    tooltip.setText(toolTipText);
-    Tooltip.install(glasspane, tooltip);
-  }
-
-  @Override
-  public StatefulTooltip createConfigurableTooltip() {
-    return new StatefulFxTooltip(glasspane);
-  }
-
-  private MouseButton determineMouseButton(MouseEvent event) {
-    if (event.getButton() == PRIMARY) {
-      return Primary;
-    }
-    if (event.getButton() == SECONDARY) {
-      return Secondary;
-    }
-    return Other;
-  }
-
-  private MetaKey determineMetaKey(MouseEvent event) {
-    if (event.isControlDown()) {
-      return MetaKey.CTRL;
-    }
-    return MetaKey.NONE;
-  }
-
-  private Coordinate determineCoordinate(MouseEvent event) {
-    return new Coordinate(event.getX(), event.getY());
-  }
-
-  private Coordinate determineCoordinate(ScrollEvent event) {
-    return new Coordinate(event.getX(), event.getY());
-  }
-
-  private Coordinate determineCoordinateInCanvas(Coordinate glassPaneCoordinate) {
-    Point2D sceneCoordinate = glasspane.localToScene(glassPaneCoordinate.x, glassPaneCoordinate.y);
-    Point2D point2D = canvas.sceneToLocal(sceneCoordinate);
-    return new Coordinate(point2D.getX(), point2D.getY());
-  }
-
-  public Node getNode() {
-    return content;
-  }
-
-  private void sizeLikeContentPane(Rectangle rectangle) {
-    rectangle.widthProperty().bind(content.widthProperty());
-    rectangle.heightProperty().bind(content.heightProperty());
-  }
-
-  private class SetHandCursor implements Closure {
-    @Override
-    public void execute(InteractiveGraphicsElement polygon) {
-      glasspane.setCursor(HAND);
-    }
-  }
-
-  private class SetDefaultCursor implements Runnable {
-    @Override
-    public void run() {
-      glasspane.setCursor(DEFAULT);
-    }
-  }
+public class FxPolygonPanel implements DisplayPolygonPanel
+{
+	private final ElementContainer container = new ElementContainer ();
+	private final List<FxSpecialTrigger> specialControls = new ArrayList<> ();
+	private final StackPane content = new StackPane ();
+	private final Rectangle background = new Rectangle ();
+	private final Group canvas = new Group ();
+	private final Rectangle glasspane = new Rectangle ();
+	private Tooltip tooltip = new Tooltip ();
+	private AgnosticTransform transform = new AgnosticTransform ();
+	
+	public FxPolygonPanel ()
+	{
+		sizeLikeContentPane (background);
+		sizeLikeContentPane (glasspane);
+		clipToSize (content);
+		glasspane.setFill (Color.TRANSPARENT);
+		canvas.setManaged (false);
+		content.getChildren ().addAll (background, canvas, glasspane);
+		setBackground (RGBColor.White);
+	}
+	
+	@Override
+	public void refresh ()
+	{
+		canvas.getChildren ().clear ();
+		canvas.getTransforms ().clear ();
+		FxGroupCanvas fxGroupCanvas = new FxGroupCanvas (canvas);
+		Transform fxTransform = convert (transform);
+		canvas.getTransforms ().add (fxTransform);
+		for (GraphicsElement graphicsElement : container)
+		{
+			graphicsElement.paint (fxGroupCanvas);
+		}
+		for (FxSpecialTrigger specialControl : specialControls)
+		{
+			specialControl.addTo (fxGroupCanvas);
+		}
+	}
+	
+	@Override
+	public SpecialControlTrigger addSpecialControl ()
+	{
+		final FxSpecialTrigger specialControl = new FxSpecialTrigger ();
+		specialControls.add (specialControl);
+		glasspane.addEventHandler (MOUSE_CLICKED, event ->
+		{
+			MouseButton button = determineMouseButton (event);
+			Coordinate glasspaneCoordinate = determineCoordinate (event);
+			Coordinate coordinate = determineCoordinateInCanvas (glasspaneCoordinate);
+			if (specialControl.contains (coordinate) && button == MouseButton.Primary)
+			{
+				specialControl.toggle ();
+			}
+		}
+		);
+		return specialControl;
+	}
+	
+	@Override
+	public void add (InteractiveGraphicsElement element)
+	{
+		container.add (element);
+	}
+	
+	@Override
+	public void add (GraphicsElement element)
+	{
+		container.add (element);
+	}
+	
+	@Override
+	public void changeCursor (Coordinate glassPaneCoordinates)
+	{
+		Coordinate elementCoordinates = determineCoordinateInCanvas (glassPaneCoordinates);
+		container.onElementAtPoint (elementCoordinates).perform (new SetHandCursor ()).orFallBackTo (new SetDefaultCursor ());
+	}
+	
+	@Override
+	public void clear ()
+	{
+		container.clear ();
+		for (FxSpecialTrigger specialControl : specialControls)
+		{
+			specialControl.remove ();
+		}
+		specialControls.clear ();
+		refresh ();
+	}
+	
+	@Override
+	public Executor onElementAtPoint (Coordinate glassPaneCoordinates)
+	{
+		Coordinate elementCoordinates = determineCoordinateInCanvas (glassPaneCoordinates);
+		return container.onElementAtPoint (elementCoordinates);
+	}
+	
+	@Override
+	public void addMousePressListener (final MousePressClosure listener)
+	{
+		glasspane.addEventHandler (MOUSE_PRESSED, event -> listener.mousePressed (determineCoordinate (event)));
+	}
+	
+	@Override
+	public void addMouseClickListener (final MouseClickClosure listener)
+	{
+		glasspane.addEventHandler (MOUSE_CLICKED, event ->
+		{
+			MouseButton button = determineMouseButton (event);
+			MetaKey key = determineMetaKey (event);
+			Coordinate coordinate = determineCoordinate (event);
+			listener.mouseClicked (button, key, coordinate, event.getClickCount ());
+		}
+		);
+	}
+	
+	@Override
+	public void addMouseWheelListener (final MouseWheelClosure listener)
+	{
+		glasspane.addEventHandler (ScrollEvent.SCROLL, scrollEvent ->
+		{
+			int wheelClicks = (int) scrollEvent.getDeltaY () / 40;
+			listener.mouseWheelMoved (wheelClicks, determineCoordinate (scrollEvent));
+		}
+		);
+	}
+	
+	@Override
+	public void addMouseBorderListener (final MouseBorderClosure listener)
+	{
+		glasspane.addEventHandler (MouseEvent.MOUSE_ENTERED, mouseEvent -> listener.mouseEntered ());
+		glasspane.addEventHandler (MouseEvent.MOUSE_EXITED, mouseEvent -> listener.mouseExited ());
+	}
+	
+	@Override
+	public void addMouseMotionListener (final MouseMotionClosure listener)
+	{
+		glasspane.addEventHandler (MouseEvent.MOUSE_MOVED, mouseEvent -> listener.mouseMoved (determineCoordinate (mouseEvent)));
+		glasspane.addEventHandler (MOUSE_DRAGGED, mouseEvent -> listener.mouseDragged (determineMouseButton (mouseEvent), determineCoordinate (mouseEvent)));
+	}
+	
+	@Override
+	public void setBackground (RGBColor color)
+	{
+		background.setFill (toFxColor (color));
+	}
+	
+	@Override
+	public void showMoveCursor ()
+	{
+		glasspane.setCursor (MOVE);
+	}
+	
+	@Override
+	public void resetAllTooltips ()
+	{
+		//TODO: Reset Tooltips (if FX requires this at all)
+	}
+	
+	@Override
+	public void setTransformation (AgnosticTransform transform)
+	{
+		this.transform = transform;
+		refresh ();
+	}
+	
+	@Override
+	public int getWidth ()
+	{
+		return (int) content.getWidth ();
+	}
+	
+	@Override
+	public int getHeight ()
+	{
+		return (int) content.getHeight ();
+	}
+	
+	@Override
+	public void setToolTipText (String toolTipText)
+	{
+		if (toolTipText == null)
+		{
+			Tooltip.uninstall (glasspane, tooltip);
+			return;
+		}
+		tooltip.setText (toolTipText);
+		Tooltip.install (glasspane, tooltip);
+	}
+	
+	@Override
+	public StatefulTooltip createConfigurableTooltip ()
+	{
+		return new StatefulFxTooltip (glasspane);
+	}
+	
+	private MouseButton determineMouseButton (MouseEvent event)
+	{
+		if (event.getButton () == PRIMARY)
+		{
+			return Primary;
+		}
+		if (event.getButton () == SECONDARY)
+		{
+			return Secondary;
+		}
+		return Other;
+	}
+	
+	private MetaKey determineMetaKey (MouseEvent event)
+	{
+		if (event.isControlDown ())
+		{
+			return MetaKey.CTRL;
+		}
+		return MetaKey.NONE;
+	}
+	
+	private Coordinate determineCoordinate (MouseEvent event)
+	{
+		return new Coordinate (event.getX (), event.getY ());
+	}
+	
+	private Coordinate determineCoordinate (ScrollEvent event)
+	{
+		return new Coordinate (event.getX (), event.getY ());
+	}
+	
+	private Coordinate determineCoordinateInCanvas (Coordinate glassPaneCoordinate)
+	{
+		Point2D sceneCoordinate = glasspane.localToScene (glassPaneCoordinate.x, glassPaneCoordinate.y);
+		Point2D point2D = canvas.sceneToLocal (sceneCoordinate);
+		return new Coordinate (point2D.getX (), point2D.getY ());
+	}
+	
+	public Node getNode ()
+	{
+		return content;
+	}
+	
+	private void sizeLikeContentPane (Rectangle rectangle)
+	{
+		rectangle.widthProperty ().bind (content.widthProperty ());
+		rectangle.heightProperty ().bind (content.heightProperty ());
+	}
+	
+	private class SetHandCursor implements Closure
+	{
+		@Override
+		public void execute (InteractiveGraphicsElement polygon)
+		{
+			glasspane.setCursor (HAND);
+		}
+	}
+	
+	private class SetDefaultCursor implements Runnable
+	{
+		@Override
+		public void run ()
+		{
+			glasspane.setCursor (DEFAULT);
+		}
+	}
 }

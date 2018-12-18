@@ -11,13 +11,14 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class I18nedIdentificateSorterTest {
-
-  @Test
-  public void worksOnEmptyLists() throws Exception {
-    I18nedIdentificateSorter sorter = new I18nedIdentificateSorter(null);
-    List<Identifier> originalGroup = Collections.emptyList();
-    List<Identifier> identificates = sorter.sortAscending(originalGroup);
-    assertThat(identificates.size(), is(0));
-  }
+public class I18nedIdentificateSorterTest
+{
+	@Test
+	public void worksOnEmptyLists () throws Exception
+	{
+		I18nedIdentificateSorter sorter = new I18nedIdentificateSorter (null);
+		List<Identifier> originalGroup = Collections.emptyList ();
+		List<Identifier> identificates = sorter.sortAscending (originalGroup);
+		assertThat (identificates.size (), is (0));
+	}
 }

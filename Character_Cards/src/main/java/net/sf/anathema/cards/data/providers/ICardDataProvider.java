@@ -6,7 +6,7 @@ import net.sf.anathema.hero.individual.model.Hero;
 
 import java.util.List;
 
-public interface ICardDataProvider {
-
-	List<ICardData> getCards(Hero hero, ICardReportResourceProvider resourceProvider);
+public interface ICardDataProvider
+{
+	List<ICardData> getCards (Hero hero, ICardReportResourceProvider resourceProvider);
 }

@@ -4,6 +4,7 @@ import net.sf.anathema.hero.individual.model.HeroModelFactory;
 
 import java.util.Collection;
 
-public interface ModelFactoryCollector {
-  Collection<HeroModelFactory> collect();
+public interface ModelFactoryCollector
+{
+	Collection<HeroModelFactory> collect ();
 }

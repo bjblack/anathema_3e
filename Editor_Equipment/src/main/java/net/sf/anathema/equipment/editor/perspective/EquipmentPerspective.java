@@ -19,34 +19,39 @@ import net.sf.anathema.platform.utility.UtilityAutoCollector;
 import net.sf.anathema.platform.utility.UtilityToggle;
 
 @UtilityAutoCollector
-@Weight(weight = 100)
-public class EquipmentPerspective implements UtilityPerspective {
-
-  @Override
-  public void configureToggle(UtilityToggle toggle) {
-    toggle.setIcon(new RelativePath("icons/EquipmentPerspective.png"));
-    toggle.setTooltip("EquipmentDatabase.Perspective.Name");
-  }
-
-  @Override
-  public void initContent(Container container, ApplicationModel applicationModel, Environment environment, UiEnvironment uiEnvironment) {
-    IEquipmentDatabaseManagement databaseManagement = createDatabaseManagement(applicationModel);
-    initInFx(container, environment, databaseManagement,uiEnvironment);
-  }
-
-  @Override
-  public MessageCategory getMessageCategory() {
-    return new MessageCategory("Equipment");
-  }
-
-  private void initInFx(Container container, Resources resources, IEquipmentDatabaseManagement databaseManagement, UiEnvironment uiEnvironment) {
-    FxEquipmentDatabaseView view = new FxEquipmentDatabaseView(uiEnvironment);
-    new EquipmentDatabasePresenter(resources, databaseManagement, view.view).initPresentation();
-    container.setContent(view.utilityPane.getNode());
-  }
-
-  private IEquipmentDatabaseManagement createDatabaseManagement(ApplicationModel model) {
-    IEquipmentDatabase database = GsonEquipmentDatabase.CreateFrom(model);
-    return new EquipmentDatabaseManagement(database);
-  }
+@Weight (weight = 100)
+public class EquipmentPerspective implements UtilityPerspective
+{
+	@Override
+	public void configureToggle (UtilityToggle toggle)
+	{
+		toggle.setIcon (new RelativePath ("icons/EquipmentPerspective.png"));
+		toggle.setTooltip ("EquipmentDatabase.Perspective.Name");
+	}
+	
+	@Override
+	public void initContent (Container container, ApplicationModel applicationModel, Environment environment, UiEnvironment uiEnvironment)
+	{
+		IEquipmentDatabaseManagement databaseManagement = createDatabaseManagement (applicationModel);
+		initInFx (container, environment, databaseManagement,uiEnvironment);
+	}
+	
+	@Override
+	public MessageCategory getMessageCategory ()
+	{
+		return new MessageCategory ("Equipment");
+	}
+	
+	private void initInFx (Container container, Resources resources, IEquipmentDatabaseManagement databaseManagement, UiEnvironment uiEnvironment)
+	{
+		FxEquipmentDatabaseView view = new FxEquipmentDatabaseView (uiEnvironment);
+		new EquipmentDatabasePresenter (resources, databaseManagement, view.view).initPresentation ();
+		container.setContent (view.utilityPane.getNode ());
+	}
+	
+	private IEquipmentDatabaseManagement createDatabaseManagement (ApplicationModel model)
+	{
+		IEquipmentDatabase database = GsonEquipmentDatabase.CreateFrom (model);
+		return new EquipmentDatabaseManagement (database);
+	}
 }

@@ -23,44 +23,49 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class TraitStateMapImplTest {
-
-  public static final TraitType ANY_TYPE = Archery;
-  private Hero hero;
-  private TraitStateMapImpl stateMap;
-  private Trait trait;
-  private DynamicMinimumMap minimumMap;
-  private TraitModel traitModel;
-
-  @Before
-  public void createStateMap() throws Exception {
-    hero = mock(Hero.class);
-    stateMap = new TraitStateMapImpl(hero);
-  }
-
-  @Before
-  public void createTraitModelWithMinimumMap() throws Exception {
-    traitModel = mock(TraitModelImpl.class);
-    minimumMap = mock(DynamicMinimumMap.class);
-    when(traitModel.getMinimumMap()).thenReturn(minimumMap);
-  }
-
-  @Before
-  public void createTraitOfAnyType() throws Exception {
-    trait = mock(TraitImpl.class);
-    when(trait.getType()).thenReturn(ANY_TYPE);
-  }
-
-  @Test
-  public void addsFavoredMinimumToTraitModel() throws Exception {
-    when(hero.getModel(TraitModel.ID)).thenReturn(traitModel);
-    stateMap.addState(trait, null);
-    verify(minimumMap).addMinimum(eq(Archery), Mockito.isA(FavoredMinimum.class));
-  }
-
-  @Test
-  public void returnsDefaultStateWhenTraitIsUnknown() throws Exception {
-    TraitState state = stateMap.getState(new TraitType("test"));
-    assertThat(state.getType(), is(DefaultTraitStateType.Default));
-  }
+public class TraitStateMapImplTest
+{
+	public static final TraitType ANY_TYPE = Archery;
+	private Hero hero;
+	private TraitStateMapImpl stateMap;
+	private Trait trait;
+	private DynamicMinimumMap minimumMap;
+	private TraitModel traitModel;
+	
+	@Before
+	public void createStateMap () throws Exception
+	{
+		hero = mock (Hero.class);
+		stateMap = new TraitStateMapImpl (hero);
+	}
+	
+	@Before
+	public void createTraitModelWithMinimumMap () throws Exception
+	{
+		traitModel = mock (TraitModelImpl.class);
+		minimumMap = mock (DynamicMinimumMap.class);
+		when (traitModel.getMinimumMap ()).thenReturn (minimumMap);
+	}
+	
+	@Before
+	public void createTraitOfAnyType () throws Exception
+	{
+		trait = mock (TraitImpl.class);
+		when (trait.getType ()).thenReturn (ANY_TYPE);
+	}
+	
+	@Test
+	public void addsFavoredMinimumToTraitModel () throws Exception
+	{
+		when (hero.getModel (TraitModel.ID)).thenReturn (traitModel);
+		stateMap.addState (trait, null);
+		verify (minimumMap).addMinimum (eq (Archery), Mockito.isA (FavoredMinimum.class));
+	}
+	
+	@Test
+	public void returnsDefaultStateWhenTraitIsUnknown () throws Exception
+	{
+		TraitState state = stateMap.getState (new TraitType ("test"));
+		assertThat (state.getType (), is (DefaultTraitStateType.Default));
+	}
 }

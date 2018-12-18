@@ -8,12 +8,14 @@ import net.sf.anathema.platform.menu.MenuEntry;
 
 import java.util.Collection;
 
-public class AnathemaCoreMenu {
-
-  public void add(Environment environment, UiEnvironment uiEnvironment, ApplicationModel model, MenuBar menubar) {
-    Collection<MenuEntry> collection = environment.getObjectFactory().instantiateOrdered(RegisteredMenuEntry.class, environment, uiEnvironment, model);
-    for (MenuEntry menuEntry : collection) {
-      menuEntry.addTo(menubar);
-    }
-  }
+public class AnathemaCoreMenu
+{
+	public void add (Environment environment, UiEnvironment uiEnvironment, ApplicationModel model, MenuBar menubar)
+	{
+		Collection<MenuEntry> collection = environment.getObjectFactory ().instantiateOrdered (RegisteredMenuEntry.class, environment, uiEnvironment, model);
+		for (MenuEntry menuEntry : collection)
+		{
+			menuEntry.addTo (menubar);
+		}
+	}
 }

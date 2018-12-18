@@ -2,10 +2,11 @@ package net.sf.anathema.library.view;
 
 import net.sf.anathema.library.interaction.model.Command;
 
-public interface OptionalEntryItemView {
-	void addButtonListener(Command command);
+public interface OptionalEntryItemView
+{
+	void addButtonListener (Command command);
 	
-	void setEnabled(boolean enable);
+	void setEnabled (boolean enable);
 	
-	void remove();
+	void remove ();
 }

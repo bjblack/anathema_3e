@@ -6,16 +6,17 @@ import net.sf.anathema.library.text.ITextView;
 
 import java.nio.file.Path;
 
-public interface RepositoryPreferenceView {
-  ITextView addRepositoryDisplay(String label);
-
-  Tool addTool();
-
-  void selectNewRepository(String prompt);
-
-  void whenRepositoryChangeIsRequested(ObjectChangedListener<Path> objectChangedListener);
-
-  void showInExplorer(Path repositoryPath);
-
-  boolean canOpenInExplorer();
+public interface RepositoryPreferenceView
+{
+	ITextView addRepositoryDisplay (String label);
+	
+	Tool addTool ();
+	
+	void selectNewRepository (String prompt);
+	
+	void whenRepositoryChangeIsRequested (ObjectChangedListener<Path> objectChangedListener);
+	
+	void showInExplorer (Path repositoryPath);
+	
+	boolean canOpenInExplorer ();
 }

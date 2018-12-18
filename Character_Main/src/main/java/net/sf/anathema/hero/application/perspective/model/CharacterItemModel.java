@@ -10,58 +10,69 @@ import net.sf.anathema.library.event.ChangeListener;
 
 import org.jmock.example.announcer.Announcer;
 
-public class CharacterItemModel {
-
-  private DescriptiveFeatures descriptiveFeatures;
-  private Item item;
-  private final Announcer<ChangeListener> featuresChangeAnnouncer = Announcer.to(ChangeListener.class);
-
-  public CharacterItemModel(DescriptiveFeatures descriptiveFeatures) {
-    this.descriptiveFeatures = descriptiveFeatures;
-  }
-
-  public CharacterItemModel(HeroIdentifier identifier, Item item) {
-    setItem(identifier, item);
-  }
-
-  public DescriptiveFeatures getDescriptiveFeatures() {
-    return descriptiveFeatures;
-  }
-
-  public void setItem(Item item) {
-    HeroIdentifier identifier = descriptiveFeatures.getIdentifier();
-    setItem(identifier, item);
-  }
-
-  private void setItem(HeroIdentifier identifier, Item item) {
-    this.item = item;
-    this.descriptiveFeatures = new LoadedDescriptiveFeatures(identifier, item);
-    Hero hero = (Hero) item.getItemData();
-    HeroConceptFetcher.fetch(hero).getCaste().addChangeListener(new AnnouncingChangeListener());
-    HeroDescriptionFetcher.fetch(hero).getName().addTextChangedListener(newValue -> featuresChangeAnnouncer.announce().changeOccurred());
-    item.getItemData().getChangeManagement().addDirtyListener(new AnnouncingChangeListener());
-  }
-
-  public boolean isLoaded() {
-    return item != null;
-  }
-
-  public Item getItem() {
-    return item;
-  }
-
-  public void whenFeaturesChange(ChangeListener listener) {
-    featuresChangeAnnouncer.addListener(listener);
-  }
-
-  public void stopListeningForFeatureChange(ChangeListener listener) {
-    featuresChangeAnnouncer.removeListener(listener);
-  }
-
-  private class AnnouncingChangeListener implements ChangeListener {
-    @Override
-    public void changeOccurred() {
-      featuresChangeAnnouncer.announce().changeOccurred();
-    }
-  }
+public class CharacterItemModel
+{
+	private DescriptiveFeatures descriptiveFeatures;
+	private Item item;
+	private final Announcer<ChangeListener> featuresChangeAnnouncer = Announcer.to (ChangeListener.class);
+	
+	public CharacterItemModel (DescriptiveFeatures descriptiveFeatures)
+	{
+		this.descriptiveFeatures = descriptiveFeatures;
+	}
+	
+	public CharacterItemModel (HeroIdentifier identifier, Item item)
+	{
+		setItem (identifier, item);
+	}
+	
+	public DescriptiveFeatures getDescriptiveFeatures ()
+	{
+		return descriptiveFeatures;
+	}
+	
+	public void setItem (Item item)
+	{
+		HeroIdentifier identifier = descriptiveFeatures.getIdentifier ();
+		setItem (identifier, item);
+	}
+	
+	private void setItem (HeroIdentifier identifier, Item item)
+	{
+		this.item = item;
+		this.descriptiveFeatures = new LoadedDescriptiveFeatures (identifier, item);
+		Hero hero = (Hero) item.getItemData ();
+		HeroConceptFetcher.fetch (hero).getCaste ().addChangeListener (new AnnouncingChangeListener ());
+		HeroDescriptionFetcher.fetch (hero).getName ().addTextChangedListener (newValue -> featuresChangeAnnouncer.announce ().changeOccurred ());
+		item.getItemData ().getChangeManagement ().addDirtyListener (new AnnouncingChangeListener ());
+	}
+	
+	public boolean isLoaded ()
+	{
+		return item != null;
+	}
+	
+	public Item getItem ()
+	{
+		return item;
+	}
+	
+	public void whenFeaturesChange (ChangeListener listener)
+	{
+		featuresChangeAnnouncer.addListener (listener);
+	}
+	
+	public void stopListeningForFeatureChange (ChangeListener listener)
+	{
+		featuresChangeAnnouncer.removeListener (listener);
+	}
+	
+	private class AnnouncingChangeListener implements ChangeListener
+	{
+		@Override
+		public void changeOccurred ()
+		{
+			featuresChangeAnnouncer.announce ().changeOccurred ();
+		}
+	}
 }

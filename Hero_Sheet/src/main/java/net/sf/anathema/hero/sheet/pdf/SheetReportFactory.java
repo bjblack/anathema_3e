@@ -12,15 +12,16 @@ import com.google.common.collect.Lists;
 import java.util.List;
 
 @RegisteredReportFactory
-@Weight(weight = 10)
-public class SheetReportFactory implements ReportFactory {
-
-  @Override
-  public List<Report> createReport(HeroEnvironment environment) {
-    PageSizePreference pageSizePreference = new PageSizePreference(environment);
-    return Lists.newArrayList(
-            new PortraitSimpleExaltSheetReport(environment, pageSizePreference),
-            new PortraitSimpleMortalSheetReport(environment, pageSizePreference),
-            new LandscapeExaltSheetReport(environment, pageSizePreference));
-  }
+@Weight (weight = 10)
+public class SheetReportFactory implements ReportFactory
+{
+	@Override
+	public List<Report> createReport (HeroEnvironment environment)
+	{
+		PageSizePreference pageSizePreference = new PageSizePreference (environment);
+		return Lists.newArrayList (
+		new PortraitSimpleExaltSheetReport (environment, pageSizePreference),
+		new PortraitSimpleMortalSheetReport (environment, pageSizePreference),
+		new LandscapeExaltSheetReport (environment, pageSizePreference));
+	}
 }

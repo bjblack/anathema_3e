@@ -8,16 +8,19 @@ import net.sf.anathema.hero.charms.model.special.CharmSpecialLearning;
 import net.sf.anathema.library.initialization.DoNotInstantiateAutomatically;
 
 @DoNotInstantiateAutomatically
-public class NullSpecialCharmBuilder implements CharmSpecialLearningBuilder {
-  @Override
-  public CharmSpecialLearning readCharm(SpecialCharmTemplate dto,
-  		AdditionalCharmFactory factory,
-  		ExistingMechanicTemplateSupplier supplier) {
-    return null;
-  }
-
-  @Override
-  public boolean supports(SpecialCharmTemplate dto) {
-    return false;
-  }
+public class NullSpecialCharmBuilder implements CharmSpecialLearningBuilder
+{
+	@Override
+	public CharmSpecialLearning readCharm (SpecialCharmTemplate dto,
+	AdditionalCharmFactory factory,
+	ExistingMechanicTemplateSupplier supplier)
+	{
+		return null;
+	}
+	
+	@Override
+	public boolean supports (SpecialCharmTemplate dto)
+	{
+		return false;
+	}
 }

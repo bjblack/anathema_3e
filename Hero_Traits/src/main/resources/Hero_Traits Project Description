@@ -1,0 +1,4 @@
+
+The Java Project Hero_Traits seems to have a kind of broad functionality in attaching qualities to characters. It is interesting to note that the project contains two TraitTypeList files, net.sf.anathema.hero.traits.TraitTypeList.java (a class), and net.sf.anathema.hero.traits.lists.TraitTypeList.java (an interface). It contains one hundred fifteen source files (excluding test files), with a cumulative total of twenty-one (21) line comments (fifteen of which say "nothing to do"), and no other comments.
+
+As a sub-project of Hero, which I am scrapping, I will scrap this project.

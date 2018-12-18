@@ -9,27 +9,32 @@ import net.sf.anathema.hero.traits.model.TraitType;
 
 import java.util.Collection;
 
-public class EquipmentHeroEvaluatorImpl implements EquipmentHeroEvaluator {
-
-  private Hero hero;
-
-  public EquipmentHeroEvaluatorImpl(Hero hero) {
-    this.hero = hero;
-  }
-
-  @Override
-  public Collection<Specialty> getSpecialties(TraitType trait) {
-    return new SpecialtiesCollectionImpl(hero).getSpecialties(trait);
-  }
-
-  @Override
-  public IEquipmentStatsOption getCharacterSpecialtyOption(String name, String type) {
-    TraitType trait = new TraitType(type);
-    for (Specialty specialty : getSpecialties(trait)) {
-      if (specialty.getDescription().equals(name)) {
-        return new EquipmentSpecialtyOption(specialty, trait);
-      }
-    }
-    return null;
-  }
+public class EquipmentHeroEvaluatorImpl implements EquipmentHeroEvaluator
+{
+	private Hero hero;
+	
+	public EquipmentHeroEvaluatorImpl (Hero hero)
+	{
+		this.hero = hero;
+	}
+	
+	@Override
+	public Collection<Specialty> getSpecialties (TraitType trait)
+	{
+		return new SpecialtiesCollectionImpl (hero).getSpecialties (trait);
+	}
+	
+	@Override
+	public IEquipmentStatsOption getCharacterSpecialtyOption (String name, String type)
+	{
+		TraitType trait = new TraitType (type);
+		for (Specialty specialty : getSpecialties (trait))
+		{
+			if (specialty.getDescription ().equals (name))
+			{
+				return new EquipmentSpecialtyOption (specialty, trait);
+			}
+		}
+		return null;
+	}
 }

@@ -22,33 +22,37 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 @ScenarioScoped
-public class EssenceSteps {
-
-  private final CharacterHolder persona;
-
-  @Inject
-  public EssenceSteps(CharacterHolder persona) {
-    this.persona = persona;
-  }
-
-  @Then("^the character has the trait '(.*?)'$")
-  public void the_character_has_the_trait(String name) throws Throwable {
-    QualityKey qualityKey = new QualityKey(ESSENCE, new Name(name));
-    QualityClosure closure = mock(QualityClosure.class);
-    persona.doFor(qualityKey, closure);
-    verify(closure, atLeastOnce()).execute(isNotNull(Quality.class));
-  }
-
-  @Then("^the character has the trait '(.*?)' at (\\d+)$")
-  public void the_character_has_the_trait(String name, int value) throws Throwable {
-    QualityKey qualityKey = new QualityKey(ESSENCE, new Name(name));
-    persona.doFor(qualityKey, new AssertValue(value));
-  }
-
-
-  @When("^I .*? the trait '(.*?)' to (\\d+)$")
-  public void I_increase_the_trait_to(String name, int value) throws Throwable {
-    QualityKey qualityKey = new QualityKey(ESSENCE, new Name(name));
-    persona.execute(new SetValue(qualityKey, new NumericValue(value)));
-  }
+public class EssenceSteps
+{
+	private final CharacterHolder persona;
+	
+	@Inject
+	public EssenceSteps (CharacterHolder persona)
+	{
+		this.persona = persona;
+	}
+	
+	@Then ("^the character has the trait '(.*?)'$")
+	public void the_character_has_the_trait (String name) throws Throwable
+	{
+		QualityKey qualityKey = new QualityKey (ESSENCE, new Name (name));
+		QualityClosure closure = mock (QualityClosure.class);
+		persona.doFor (qualityKey, closure);
+		verify (closure, atLeastOnce ()).execute (isNotNull (Quality.class));
+	}
+	
+	@Then ("^the character has the trait '(.*?)' at (\\d+)$")
+	public void the_character_has_the_trait (String name, int value) throws Throwable
+	{
+		QualityKey qualityKey = new QualityKey (ESSENCE, new Name (name));
+		persona.doFor (qualityKey, new AssertValue (value));
+	}
+	
+	
+	@When ("^I .*? the trait '(.*?)' to (\\d+)$")
+	public void I_increase_the_trait_to (String name, int value) throws Throwable
+	{
+		QualityKey qualityKey = new QualityKey (ESSENCE, new Name (name));
+		persona.execute (new SetValue (qualityKey, new NumericValue (value)));
+	}
 }

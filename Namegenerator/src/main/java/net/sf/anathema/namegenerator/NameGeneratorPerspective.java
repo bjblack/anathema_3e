@@ -17,25 +17,28 @@ import net.sf.anathema.platform.utility.UtilityAutoCollector;
 import net.sf.anathema.platform.utility.UtilityToggle;
 
 @UtilityAutoCollector
-@Weight(weight = 7000)
-public class NameGeneratorPerspective implements UtilityPerspective {
-
-  @Override
-  public void configureToggle(UtilityToggle toggle) {
-    toggle.setTooltip("ItemType.NameGenerator.PrintName");
-    toggle.setIcon(new RelativePath("icons/NameGeneratorPerspective.png"));
-  }
-
-  @Override
-  public void initContent(Container container, ApplicationModel applicationModel, Environment environment, UiEnvironment uiEnvironment) {
-    NameGeneratorView view = new FxNameGeneratorView();
-    INameGeneratorModel generatorModel = new ExaltedNameGeneratorModel();
-    new NameGeneratorPresenter(environment, view, generatorModel).initPresentation();
-    container.setContent(view.getNode());
-  }
-
-  @Override
-  public MessageCategory getMessageCategory() {
-    return new MessageCategory("NameGenerator");
-  }
+@Weight (weight = 7000)
+public class NameGeneratorPerspective implements UtilityPerspective
+{
+	@Override
+	public void configureToggle (UtilityToggle toggle)
+	{
+		toggle.setTooltip ("ItemType.NameGenerator.PrintName");
+		toggle.setIcon (new RelativePath ("icons/NameGeneratorPerspective.png"));
+	}
+	
+	@Override
+	public void initContent (Container container, ApplicationModel applicationModel, Environment environment, UiEnvironment uiEnvironment)
+	{
+		NameGeneratorView view = new FxNameGeneratorView ();
+		INameGeneratorModel generatorModel = new ExaltedNameGeneratorModel ();
+		new NameGeneratorPresenter (environment, view, generatorModel).initPresentation ();
+		container.setContent (view.getNode ());
+	}
+	
+	@Override
+	public MessageCategory getMessageCategory ()
+	{
+		return new MessageCategory ("NameGenerator");
+	}
 }

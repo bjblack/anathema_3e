@@ -7,40 +7,48 @@ import net.sf.anathema.hero.charms.model.special.CharmSpecialLearning;
 import net.sf.anathema.hero.charms.model.special.SpecialCharmList;
 import net.sf.anathema.platform.tree.display.TreeView;
 
-public class CharacterSpecialCharmPresenter implements SpecialCharmViewPresenter {
-  private final SpecialCharmList list;
-  private final CharmGroupInformer charmGroupInformer;
-  private final CharmDisplayModel charmModel;
-
-  public CharacterSpecialCharmPresenter(CharmGroupInformer informer, CharmDisplayModel charmModel, SpecialCharmList specialCharmList) {
-    this.charmGroupInformer = informer;
-    this.charmModel = charmModel;
-    this.list = specialCharmList;
-    VisibilityPredicate predicate = new VisibilityPredicate(charmModel.getCharmModel(), informer);
-    list.setVisibilityPredicate(predicate);
-  }
-
-  @Override
-  public void initPresentation() {
-    for (CharmSpecialLearning charm : getCharmModel().getOptions().getSpecialLearningCharms()) {
-      list.add(charm);
-    }
-  }
-
-  @Override
-  public void showSpecialViews() {
-    if (!charmGroupInformer.hasGroupSelected()) {
-      return;
-    }
-    list.showViews();
-  }
-
-  @Override
-  public void operateOn(TreeView treeView) {
-    list.operateOn(treeView);
-  }
-
-  private CharmsModel getCharmModel() {
-    return charmModel.getCharmModel();
-  }
+public class CharacterSpecialCharmPresenter implements SpecialCharmViewPresenter
+{
+	private final SpecialCharmList list;
+	private final CharmGroupInformer charmGroupInformer;
+	private final CharmDisplayModel charmModel;
+	
+	public CharacterSpecialCharmPresenter (CharmGroupInformer informer, CharmDisplayModel charmModel, SpecialCharmList specialCharmList)
+	{
+		this.charmGroupInformer = informer;
+		this.charmModel = charmModel;
+		this.list = specialCharmList;
+		VisibilityPredicate predicate = new VisibilityPredicate (charmModel.getCharmModel (), informer);
+		list.setVisibilityPredicate (predicate);
+	}
+	
+	@Override
+	public void initPresentation ()
+	{
+		for (CharmSpecialLearning charm : getCharmModel ().getOptions ().getSpecialLearningCharms ())
+		{
+			list.add (charm);
+		}
+	}
+	
+	@Override
+	public void showSpecialViews ()
+	{
+		if (!charmGroupInformer.hasGroupSelected ())
+		{
+			return;
+		}
+		list.showViews ();
+	}
+	
+	@Override
+	public void operateOn (TreeView treeView)
+	{
+		list.operateOn (treeView);
+	}
+	
+	private CharmsModel getCharmModel ()
+	{
+		return charmModel.getCharmModel ();
+	}
 }

@@ -12,48 +12,57 @@ import net.sf.anathema.magic.data.source.SourceBook;
 import java.util.Collections;
 import java.util.List;
 
-public class DummySpell implements Spell {
-
-  public DummySpell() {
-    // nothing to do
-  }
-  @Override
-  public CircleType getCircleType() {
-    return null;
-  }
-
-  @Override
-  public SpellName getName() {
-    return null;
-  }
-
-  @Override
-  public Iterable<MagicAttribute> getAttributes() {
-    return Collections.emptyList();
-  }
-
-  @Override
-  public List<SourceBook> getSources() {
-    throw new NotYetImplementedException();
-  }
-
-  @Override
-  public CostList getTemporaryCost() {
-    throw new NotYetImplementedException();
-  }
-
-  @Override
-  public boolean hasAttribute(Identifier attribute) {
-    return false;
-  }
-
+public class DummySpell implements Spell
+{
+	public DummySpell ()
+	{
+		// nothing to do
+	}
 	@Override
-	public String getDuration() {
-		throw new NotYetImplementedException();
+	public CircleType getCircleType ()
+	{
+		return null;
 	}
 	
 	@Override
-	public List<String> getKeywords() {
-		throw new NotYetImplementedException();
+	public SpellName getName ()
+	{
+		return null;
+	}
+	
+	@Override
+	public Iterable<MagicAttribute> getAttributes ()
+	{
+		return Collections.emptyList ();
+	}
+	
+	@Override
+	public List<SourceBook> getSources ()
+	{
+		throw new NotYetImplementedException ();
+	}
+	
+	@Override
+	public CostList getTemporaryCost ()
+	{
+		throw new NotYetImplementedException ();
+	}
+	
+	@Override
+	public boolean hasAttribute (Identifier attribute)
+	{
+		return false;
+	}
+	
+	@Override
+	public String getDuration ()
+	{
+		throw new NotYetImplementedException ();
+	}
+	
+	@Override
+	public List<String> getKeywords ()
+	{
+		throw new NotYetImplementedException ();
 	}
 }

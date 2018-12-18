@@ -1,11 +1,12 @@
 package net.sf.anathema.hero.equipment.display.presenter;
 
-public interface EquipmentPersonalizationModel {
-	void setTitle(String text);
+public interface EquipmentPersonalizationModel
+{
+	void setTitle (String text);
 	
-	void setDescription(String text);
+	void setDescription (String text);
 	
-	String getTitle();
+	String getTitle ();
 	
-	String getDescription();
+	String getDescription ();
 }

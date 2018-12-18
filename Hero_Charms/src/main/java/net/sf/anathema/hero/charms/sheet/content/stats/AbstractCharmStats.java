@@ -15,48 +15,57 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public abstract class AbstractCharmStats extends AbstractMagicStats<Charm> {
-
-  public AbstractCharmStats(Charm magic) {
-    super(magic);
-  }
-
-  @Override
-  public String getGroupName(Resources resources) {
-    return resources.getString(getMagic().getTreeReference().name.text);
-  }
-
-  @Override
-  public String getType(Resources resources) {
-    CharmType charmType = getMagic().getCharmType();
-    return new CharmTypeContributor(resources).createTypeString(charmType);
-  }
-
-  @Override
-  public String getDurationString(Resources resources) {
-    return getMagic().getDuration().getText();
-  }
-
-  @Override
-  public String getSourceString(Resources resources) {
-    IMagicSourceStringBuilder<Charm> stringBuilder = new MagicSourceContributor<>(resources);
-    return stringBuilder.createShortSourceString(getMagic());
-  }
-
-  protected Collection<String> getDetailKeys() {
-    List<String> details = new ArrayList<>();
-    for (MagicAttribute attribute : getMagic().getAttributes()) {
-      String attributeId = attribute.getId();
-      if (attribute.isVisualized()) {
-        details.add("Keyword." + attributeId);
-      }
-    }
-    return details;
-  }
-
-  @Override
-  public Collection<String> getDetailStrings(final Resources resources) {
-    Stream<String> keys = getDetailKeys().stream();
-    return keys.map(resources::getString).collect(Collectors.toList());
-  }
+public abstract class AbstractCharmStats extends AbstractMagicStats<Charm>
+{
+	public AbstractCharmStats (Charm magic)
+	{
+		super (magic);
+	}
+	
+	@Override
+	public String getGroupName (Resources resources)
+	{
+		return resources.getString (getMagic ().getTreeReference ().name.text);
+	}
+	
+	@Override
+	public String getType (Resources resources)
+	{
+		CharmType charmType = getMagic ().getCharmType ();
+		return new CharmTypeContributor (resources).createTypeString (charmType);
+	}
+	
+	@Override
+	public String getDurationString (Resources resources)
+	{
+		return getMagic ().getDuration ().getText ();
+	}
+	
+	@Override
+	public String getSourceString (Resources resources)
+	{
+		IMagicSourceStringBuilder<Charm> stringBuilder = new MagicSourceContributor<> (resources);
+		return stringBuilder.createShortSourceString (getMagic ());
+	}
+	
+	protected Collection<String> getDetailKeys ()
+	{
+		List<String> details = new ArrayList<> ();
+		for (MagicAttribute attribute : getMagic ().getAttributes ())
+		{
+			String attributeId = attribute.getId ();
+			if (attribute.isVisualized ())
+			{
+				details.add ("Keyword." + attributeId);
+			}
+		}
+		return details;
+	}
+	
+	@Override
+	public Collection<String> getDetailStrings (final Resources resources)
+	{
+		Stream<String> keys = getDetailKeys ().stream ();
+		return keys.map (resources::getString).collect (Collectors.toList ());
+	}
 }

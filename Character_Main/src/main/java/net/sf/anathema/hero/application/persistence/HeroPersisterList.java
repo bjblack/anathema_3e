@@ -12,25 +12,29 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-public class HeroPersisterList {
-
-  private final HeroModelPersisterAutoCollector persisterAutoCollector;
-
-  public HeroPersisterList(ObjectFactory objectFactory) {
-    this.persisterAutoCollector = new HeroModelPersisterAutoCollector(objectFactory);
-  }
-
-  public Iterable<HeroModelPersister> iterator(Hero hero) {
-    Collection<HeroModelPersister> allPersisters = persisterAutoCollector.collect();
-    List<HeroModelPersister> heroPersisters = new ArrayList<>();
-    for (HeroModel model : hero) {
-      Collection<HeroModelPersister> foundPersisters = findPersisters(allPersisters, model.getId());
-      heroPersisters.addAll(foundPersisters);
-    }
-    return heroPersisters;
-  }
-
-  private Collection<HeroModelPersister> findPersisters(Collection<HeroModelPersister> allPersisters, Identifier modelId) {
-    return allPersisters.stream().filter(persister -> persister.getModelId().equals(modelId)).collect(toList());
-  }
+public class HeroPersisterList
+{
+	private final HeroModelPersisterAutoCollector persisterAutoCollector;
+	
+	public HeroPersisterList (ObjectFactory objectFactory)
+	{
+		this.persisterAutoCollector = new HeroModelPersisterAutoCollector (objectFactory);
+	}
+	
+	public Iterable<HeroModelPersister> iterator (Hero hero)
+	{
+		Collection<HeroModelPersister> allPersisters = persisterAutoCollector.collect ();
+		List<HeroModelPersister> heroPersisters = new ArrayList<> ();
+		for (HeroModel model : hero)
+		{
+			Collection<HeroModelPersister> foundPersisters = findPersisters (allPersisters, model.getId ());
+			heroPersisters.addAll (foundPersisters);
+		}
+		return heroPersisters;
+	}
+	
+	private Collection<HeroModelPersister> findPersisters (Collection<HeroModelPersister> allPersisters, Identifier modelId)
+	{
+		return allPersisters.stream ().filter (persister -> persister.getModelId ().equals (modelId)).collect (toList ());
+	}
 }

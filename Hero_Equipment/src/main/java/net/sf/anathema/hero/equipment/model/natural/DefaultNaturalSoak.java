@@ -9,41 +9,48 @@ import net.sf.anathema.library.identifier.SimpleIdentifier;
 import java.util.Collection;
 import java.util.Collections;
 
-public class DefaultNaturalSoak extends AbstractCombatStats implements IArmourStats, NaturalSoak {
-
-  private final Trait stamina;
-
-  public DefaultNaturalSoak(Trait stamina) {
-    this.stamina = stamina;
-  }
-
-  @Override
-  public Integer getHardness() {
-    return null;
-  }
-
-  @Override
-  public Integer getMobilityPenalty() {
-    return null;
-  }
-
-  @Override
-  public Integer getSoak() {
-    return stamina.getCurrentValue();
-  }
-
-  @Override
-  public Collection<Identifier> getTags() {
-    return Collections.emptyList();
-  }
-
-  @Override
-  public Identifier getName() {
-    return new SimpleIdentifier("NaturalSoak");
-  }
-
-  @Override
-  public String getId() {
-    return getName().getId();
-  }
+public class DefaultNaturalSoak extends AbstractCombatStats implements IArmourStats, NaturalSoak
+{
+	private final Trait stamina;
+	
+	public DefaultNaturalSoak (Trait stamina)
+	{
+		this.stamina = stamina;
+	}
+	
+	@Override
+	public Integer getHardness ()
+	{
+		return null;
+	}
+	
+	@Override
+	public Integer getMobilityPenalty ()
+	{
+		return null;
+	}
+	
+	@Override
+	public Integer getSoak ()
+	{
+		return stamina.getCurrentValue ();
+	}
+	
+	@Override
+	public Collection<Identifier> getTags ()
+	{
+		return Collections.emptyList ();
+	}
+	
+	@Override
+	public Identifier getName ()
+	{
+		return new SimpleIdentifier ("NaturalSoak");
+	}
+	
+	@Override
+	public String getId ()
+	{
+		return getName ().getId ();
+	}
 }

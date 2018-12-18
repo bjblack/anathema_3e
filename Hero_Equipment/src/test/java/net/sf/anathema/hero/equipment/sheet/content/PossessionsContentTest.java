@@ -8,10 +8,11 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class PossessionsContentTest {
-
-  @Test
-  public void doesNotUseSingleLinePerItem() throws Exception {
-    assertThat(new PossessionsContent(new DummyHero(), new DummyResources()).useNewLineForEachEntry(), is(false));
-  }
+public class PossessionsContentTest
+{
+	@Test
+	public void doesNotUseSingleLinePerItem () throws Exception
+	{
+		assertThat (new PossessionsContent (new DummyHero (), new DummyResources ()).useNewLineForEachEntry (), is (false));
+	}
 }

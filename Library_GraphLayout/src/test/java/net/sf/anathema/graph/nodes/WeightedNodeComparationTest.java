@@ -6,32 +6,59 @@ import java.util.Arrays;
 
 import static org.junit.Assert.assertTrue;
 
-public class WeightedNodeComparationTest {
-
-  @Test
-  public void testLowerWeightFirst() throws Exception {
-    WeightedNode node1 = new WeightedNode(null, (double) 1);
-    WeightedNode node2 = new WeightedNode(null, (double) 2);
-    WeightedNode[] nodes = new WeightedNode[]{node2, node1};
-    Arrays.sort(nodes);
-    assertTrue(Arrays.equals(new WeightedNode[]{node1, node2}, nodes));
-  }
-
-  @Test
-  public void testNullNotReorderedFirst() throws Exception {
-    WeightedNode node1 = new WeightedNode(null, (double) 1);
-    WeightedNode node2 = new WeightedNode(null, null);
-    WeightedNode[] nodes = new WeightedNode[]{node2, node1};
-    Arrays.sort(nodes);
-    assertTrue(Arrays.equals(new WeightedNode[]{node2, node1}, nodes));
-  }
-
-  @Test
-  public void testNullNotReorderedLast() throws Exception {
-    WeightedNode node1 = new WeightedNode(null, null);
-    WeightedNode node2 = new WeightedNode(null, (double) 1);
-    WeightedNode[] nodes = new WeightedNode[]{node2, node1};
-    Arrays.sort(nodes);
-    assertTrue(Arrays.equals(new WeightedNode[]{node2, node1}, nodes));
-  }
+public class WeightedNodeComparationTest
+{
+	@Test
+	public void testLowerWeightFirst () throws Exception
+	{
+		WeightedNode node1 = new WeightedNode (null, (double) 1);
+		WeightedNode node2 = new WeightedNode (null, (double) 2);
+		WeightedNode[] nodes = new WeightedNode[]
+		{
+			node2, node1
+		}
+		;
+		Arrays.sort (nodes);
+		assertTrue (Arrays.equals (new WeightedNode[]
+		{
+			node1, node2
+		}
+		, nodes));
+	}
+	
+	@Test
+	public void testNullNotReorderedFirst () throws Exception
+	{
+		WeightedNode node1 = new WeightedNode (null, (double) 1);
+		WeightedNode node2 = new WeightedNode (null, null);
+		WeightedNode[] nodes = new WeightedNode[]
+		{
+			node2, node1
+		}
+		;
+		Arrays.sort (nodes);
+		assertTrue (Arrays.equals (new WeightedNode[]
+		{
+			node2, node1
+		}
+		, nodes));
+	}
+	
+	@Test
+	public void testNullNotReorderedLast () throws Exception
+	{
+		WeightedNode node1 = new WeightedNode (null, null);
+		WeightedNode node2 = new WeightedNode (null, (double) 1);
+		WeightedNode[] nodes = new WeightedNode[]
+		{
+			node2, node1
+		}
+		;
+		Arrays.sort (nodes);
+		assertTrue (Arrays.equals (new WeightedNode[]
+		{
+			node2, node1
+		}
+		, nodes));
+	}
 }

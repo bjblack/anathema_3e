@@ -9,19 +9,21 @@ import net.sf.anathema.hero.traits.sheet.content.PdfTraitEncoder;
 import net.sf.anathema.hero.traits.sheet.encoder.FavorableTraitContentEncoder;
 import net.sf.anathema.library.resources.Resources;
 
-@SuppressWarnings("UnusedDeclaration")
-public class AbilitiesWithCraftEncoderFactory extends GlobalEncoderFactory {
-
-  public AbilitiesWithCraftEncoderFactory() {
-    super(EncoderIds.ABILITIES_WITH_CRAFTS);
-  }
-
-  @Override
-  public ContentEncoder create(Resources resources, BasicContent content) {
-    FavorableTraitContentEncoder<AbilitiesContent> encoder = new FavorableTraitContentEncoder<>(AbilitiesContent.class);
-    PdfTraitEncoder traitEncoder = encoder.getTraitEncoder();
-    // todo bring back crafts ???
-    //encoder.addAdditionalEncoder(new SpecialtiesEncoder(resources, traitEncoder, 9));
-    return encoder;
-  }
+@SuppressWarnings ("UnusedDeclaration")
+public class AbilitiesWithCraftEncoderFactory extends GlobalEncoderFactory
+{
+	public AbilitiesWithCraftEncoderFactory ()
+	{
+		super (EncoderIds.ABILITIES_WITH_CRAFTS);
+	}
+	
+	@Override
+	public ContentEncoder create (Resources resources, BasicContent content)
+	{
+		FavorableTraitContentEncoder<AbilitiesContent> encoder = new FavorableTraitContentEncoder<> (AbilitiesContent.class);
+		PdfTraitEncoder traitEncoder = encoder.getTraitEncoder ();
+		// todo bring back crafts ???
+		//encoder.addAdditionalEncoder(new SpecialtiesEncoder(resources, traitEncoder, 9));
+		return encoder;
+	}
 }

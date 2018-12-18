@@ -10,16 +10,17 @@ import org.mockito.InOrder;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
 
-public class ShapeFillerTest {
-
-  @Test
-  public void fillsPolygonWithColor() throws Exception {
-    Canvas graphics = mock(Canvas.class);
-    Polygon polygon = new Polygon();
-    RGBColor color = RGBColor.White;
-    new ShapeFiller(polygon, color).fill(graphics);
-    InOrder inOrder = inOrder(graphics);
-    inOrder.verify(graphics).setColor(color);
-    inOrder.verify(graphics).fill(new TransformedShape(polygon));
-  }
+public class ShapeFillerTest
+{
+	@Test
+	public void fillsPolygonWithColor () throws Exception
+	{
+		Canvas graphics = mock (Canvas.class);
+		Polygon polygon = new Polygon ();
+		RGBColor color = RGBColor.White;
+		new ShapeFiller (polygon, color).fill (graphics);
+		InOrder inOrder = inOrder (graphics);
+		inOrder.verify (graphics).setColor (color);
+		inOrder.verify (graphics).fill (new TransformedShape (polygon));
+	}
 }

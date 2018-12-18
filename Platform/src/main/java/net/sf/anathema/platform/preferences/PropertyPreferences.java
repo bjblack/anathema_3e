@@ -7,17 +7,21 @@ import net.sf.anathema.library.preferences.Preferences;
 
 import java.util.Properties;
 
-public class PropertyPreferences implements Preferences {
-
-  public static final String PREFERENCES_PROPERTIES = "preferences.properties";
-  
-  @Override
-  public String getPreference(String key) {
-    try {
-      Properties properties = new PropertiesLoader(PREFERENCES_PROPERTIES).load();
-      return properties.getProperty(key);
-    } catch (ConfigurationFailedException e) {
-      return PREFERENCE_NOT_SET;
-    }
-  }
+public class PropertyPreferences implements Preferences
+{
+	public static final String PREFERENCES_PROPERTIES = "preferences.properties";
+	
+	@Override
+	public String getPreference (String key)
+	{
+		try
+		{
+			Properties properties = new PropertiesLoader (PREFERENCES_PROPERTIES).load ();
+			return properties.getProperty (key);
+		}
+		catch (ConfigurationFailedException e)
+		{
+			return PREFERENCE_NOT_SET;
+		}
+	}
 }

@@ -14,27 +14,32 @@ import net.sf.anathema.hero.spells.sheet.content.SpellStats;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpellCardDataProvider extends AbstractMagicCardDataProvider {
-
-  public SpellCardDataProvider(HeroEnvironment environment) {
-    super(environment);
-  }
-
-  @Override
-  public List<ICardData> getCards(Hero hero, ICardReportResourceProvider fontProvider) {
-    List<ICardData> cards = new ArrayList<>();
-    for (Spell spell : getCurrentSpells(hero)) {
-      cards.add(new SpellCardData(spell, createSpellStats(spell), getMagicDescription(spell), fontProvider, getResources()));
-    }
-    return cards;
-  }
-
-  private Spells getCurrentSpells(Hero hero) {
-    boolean experienced = ExperienceModelFetcher.fetch(hero).isExperienced();
-    return SpellsModelFetcher.fetch(hero).getLearnedSpells(experienced);
-  }
-
-  private SpellStats createSpellStats(Spell spell) {
-    return new SpellStats(spell);
-  }
+public class SpellCardDataProvider extends AbstractMagicCardDataProvider
+{
+	public SpellCardDataProvider (HeroEnvironment environment)
+	{
+		super (environment);
+	}
+	
+	@Override
+	public List<ICardData> getCards (Hero hero, ICardReportResourceProvider fontProvider)
+	{
+		List<ICardData> cards = new ArrayList<> ();
+		for (Spell spell : getCurrentSpells (hero))
+		{
+			cards.add (new SpellCardData (spell, createSpellStats (spell), getMagicDescription (spell), fontProvider, getResources ()));
+		}
+		return cards;
+	}
+	
+	private Spells getCurrentSpells (Hero hero)
+	{
+		boolean experienced = ExperienceModelFetcher.fetch (hero).isExperienced ();
+		return SpellsModelFetcher.fetch (hero).getLearnedSpells (experienced);
+	}
+	
+	private SpellStats createSpellStats (Spell spell)
+	{
+		return new SpellStats (spell);
+	}
 }

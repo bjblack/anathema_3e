@@ -10,25 +10,29 @@ import net.sf.anathema.library.initialization.Weight;
 
 import static net.sf.anathema.hero.individual.overview.HeroModelGroup.Background;
 
-@RegisteredInitializer(Background)
-@Weight(weight = 400)
-public class SpiritualTraitsInitializer implements HeroModelInitializer {
-  private HeroEnvironment environment;
-
-  @SuppressWarnings("UnusedParameters")
-  public SpiritualTraitsInitializer(HeroEnvironment environment) {
-    this.environment = environment;
-  }
-
-  @Override
-  public void initialize(SectionView sectionView, Hero hero) {
-    String header = new DefaultSpiritualTraitsViewProperties(environment.getResources()).getOverallHeader();
-    SpiritualTraitsView view = sectionView.addView(header, SpiritualTraitsView.class);
-    new BasicSpiritualTraitsPresenter(environment.getResources(), hero, view).initPresentation();
-  }
-
-  @Override
-  public boolean canWorkForHero(Hero hero) {
-    return SpiritualTraitModelFetcher.fetch(hero) != null;
-  }
+@RegisteredInitializer (Background)
+@Weight (weight = 400)
+public class SpiritualTraitsInitializer implements HeroModelInitializer
+{
+	private HeroEnvironment environment;
+	
+	@SuppressWarnings ("UnusedParameters")
+	public SpiritualTraitsInitializer (HeroEnvironment environment)
+	{
+		this.environment = environment;
+	}
+	
+	@Override
+	public void initialize (SectionView sectionView, Hero hero)
+	{
+		String header = new DefaultSpiritualTraitsViewProperties (environment.getResources ()).getOverallHeader ();
+		SpiritualTraitsView view = sectionView.addView (header, SpiritualTraitsView.class);
+		new BasicSpiritualTraitsPresenter (environment.getResources (), hero, view).initPresentation ();
+	}
+	
+	@Override
+	public boolean canWorkForHero (Hero hero)
+	{
+		return SpiritualTraitModelFetcher.fetch (hero) != null;
+	}
 }

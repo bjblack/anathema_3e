@@ -4,18 +4,21 @@ import net.sf.anathema.hero.application.environment.HeroEnvironmentExtension;
 import net.sf.anathema.platform.environment.Environment;
 import net.sf.anathema.platform.frame.ApplicationModel;
 
-public class HeroPoolInitializer {
-  private final ApplicationModel model;
-  private final Environment environment;
-
-  public HeroPoolInitializer(ApplicationModel model, Environment environment) {
-    this.model = model;
-    this.environment = environment;
-  }
-
-  public void initializeCharacterSystem() {
-    HeroEnvironmentExtensionImpl extension = new HeroEnvironmentExtensionImpl();
-    extension.initialize(model, environment);
-    model.getExtensionRegistry().register(HeroEnvironmentExtension.ID, extension);
-  }
+public class HeroPoolInitializer
+{
+	private final ApplicationModel model;
+	private final Environment environment;
+	
+	public HeroPoolInitializer (ApplicationModel model, Environment environment)
+	{
+		this.model = model;
+		this.environment = environment;
+	}
+	
+	public void initializeCharacterSystem ()
+	{
+		HeroEnvironmentExtensionImpl extension = new HeroEnvironmentExtensionImpl ();
+		extension.initialize (model, environment);
+		model.getExtensionRegistry ().register (HeroEnvironmentExtension.ID, extension);
+	}
 }

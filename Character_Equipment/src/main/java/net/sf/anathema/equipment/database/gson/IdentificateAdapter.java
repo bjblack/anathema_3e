@@ -9,15 +9,18 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 
-public class IdentificateAdapter extends TypeAdapter<Identifier> {
-  @Override
-  public void write(JsonWriter out, Identifier value) throws IOException {
-    out.value(value.getId());
-  }
-
-  @Override
-  public Identifier read(JsonReader in) throws IOException {
-    String id = in.nextString();
-    return new SimpleIdentifier(id);
-  }
+public class IdentificateAdapter extends TypeAdapter<Identifier>
+{
+	@Override
+	public void write (JsonWriter out, Identifier value) throws IOException
+	{
+		out.value (value.getId ());
+	}
+	
+	@Override
+	public Identifier read (JsonReader in) throws IOException
+	{
+		String id = in.nextString ();
+		return new SimpleIdentifier (id);
+	}
 }

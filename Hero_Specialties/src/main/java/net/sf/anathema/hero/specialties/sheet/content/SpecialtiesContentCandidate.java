@@ -8,16 +8,18 @@ import net.sf.anathema.hero.traits.model.TraitType;
 
 import java.util.Collection;
 
-public class SpecialtiesContentCandidate {
-
-  private Hero hero;
-
-  public SpecialtiesContentCandidate(Hero hero) {
-    this.hero = hero;
-  }
-
-  public Collection<Specialty> getSpecialties(TraitType traitType) {
-    SpecialtiesModel specialtyConfiguration = SpecialtiesModelFetcher.fetch(hero);
-    return null; //specialtyConfiguration.getAllSpecialtiesOfType(traitType);
-  }
+public class SpecialtiesContentCandidate
+{
+	private Hero hero;
+	
+	public SpecialtiesContentCandidate (Hero hero)
+	{
+		this.hero = hero;
+	}
+	
+	public Collection<Specialty> getSpecialties (TraitType traitType)
+	{
+		SpecialtiesModel specialtyConfiguration = SpecialtiesModelFetcher.fetch (hero);
+		return null; //specialtyConfiguration.getAllSpecialtiesOfType(traitType);
+	}
 }

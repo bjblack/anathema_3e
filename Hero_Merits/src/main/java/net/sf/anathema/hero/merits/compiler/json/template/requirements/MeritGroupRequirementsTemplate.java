@@ -7,17 +7,19 @@ import net.sf.anathema.platform.persistence.JsonType;
 import java.util.ArrayList;
 import java.util.List;
 
-@JsonType("group")
-public class MeritGroupRequirementsTemplate implements MeritRequirementsTemplate {
+@JsonType ("group")
+public class MeritGroupRequirementsTemplate implements MeritRequirementsTemplate
+{
+	public List<MeritRequirementsTemplate> requirements = new ArrayList<> ();
 	
-	public List<MeritRequirementsTemplate> requirements = new ArrayList<>();
-
 	@Override
-	public MeritRequirement generate() {
-		List<MeritRequirement> generatedRequirements = new ArrayList<>();
-		for (MeritRequirementsTemplate template : requirements) {
-			generatedRequirements.add(template.generate());
+	public MeritRequirement generate ()
+	{
+		List<MeritRequirement> generatedRequirements = new ArrayList<> ();
+		for (MeritRequirementsTemplate template : requirements)
+		{
+			generatedRequirements.add (template.generate ());
 		}
-		return new MeritGroupRequirement(generatedRequirements);
+		return new MeritGroupRequirement (generatedRequirements);
 	}
 }

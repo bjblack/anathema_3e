@@ -13,36 +13,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 @net.sf.anathema.platform.initialization.ExtensibleDataSetCompiler
-public class FlawCacheCompiler implements ExtensibleDataSetCompiler {
-
-  private static final String Flaw_File_Recognition_Pattern = ".+?\\.flaws";
-  private final List<ResourceFile> resourceFiles = new ArrayList<>();
-  @Inject
-  public InterfaceFinder finder;
-
-  @Override
-  public String getName() {
-    return "Flaws";
-  }
-
-  @Override
-  public String getRecognitionPattern() {
-    return Flaw_File_Recognition_Pattern;
-  }
-
-  @Override
-  public void registerFile(ResourceFile resource) {
-    resourceFiles.add(resource);
-  }
-
-  @Override
-  public ExtensibleDataSet build() {
-    TemplateLoader<FlawListTemplate> flawsLoader = new GenericTemplateLoader<>(FlawListTemplate.class);
-    FlawCacheBuilder flawsBuilder = new FlawCacheBuilder();
-    resourceFiles.forEach(resourceFile -> {
-      FlawListTemplate flawsTemplate = flawsLoader.load(resourceFile);
-      flawsBuilder.addTemplate(flawsTemplate);
-    });
-    return flawsBuilder.createCache();
-  }
+public class FlawCacheCompiler implements ExtensibleDataSetCompiler
+{
+	private static final String Flaw_File_Recognition_Pattern = ".+?\\.flaws";
+	private final List<ResourceFile> resourceFiles = new ArrayList<> ();
+	@Inject
+	public InterfaceFinder finder;
+	
+	@Override
+	public String getName ()
+	{
+		return "Flaws";
+	}
+	
+	@Override
+	public String getRecognitionPattern ()
+	{
+		return Flaw_File_Recognition_Pattern;
+	}
+	
+	@Override
+	public void registerFile (ResourceFile resource)
+	{
+		resourceFiles.add (resource);
+	}
+	
+	@Override
+	public ExtensibleDataSet build ()
+	{
+		TemplateLoader<FlawListTemplate> flawsLoader = new GenericTemplateLoader<> (FlawListTemplate.class);
+		FlawCacheBuilder flawsBuilder = new FlawCacheBuilder ();
+		resourceFiles.forEach (resourceFile ->
+		{
+			FlawListTemplate flawsTemplate = flawsLoader.load (resourceFile);
+			flawsBuilder.addTemplate (flawsTemplate);
+		}
+		);
+		return flawsBuilder.createCache ();
+	}
 }

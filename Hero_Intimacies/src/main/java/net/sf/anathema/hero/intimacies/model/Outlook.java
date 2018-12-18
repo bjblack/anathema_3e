@@ -1,5 +1,6 @@
 package net.sf.anathema.hero.intimacies.model;
 
-public enum Outlook {
-  Positive, Negative
+public enum Outlook
+{
+	Positive, Negative
 }

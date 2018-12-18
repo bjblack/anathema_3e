@@ -6,19 +6,19 @@ import net.sf.anathema.points.model.xp.ExperienceSelectionListener;
 
 import java.util.Collection;
 
-public interface ExperienceView {
-
-  void initGui(ExperienceViewProperties properties);
-
-  Tool addTool();
-
-  void addSelectionListener(ExperienceSelectionListener listener);
-
-  void addUpdateListener(ExperienceUpdateListener experienceUpdateListener);
-
-  void setEntries(Collection<ExperiencePointEntry> allEntries);
-
-  void setTotalValueLabel(int overallExperiencePoints);
-
-  void setSelection(ExperiencePointEntry entry);
+public interface ExperienceView
+{
+	void initGui (ExperienceViewProperties properties);
+	
+	Tool addTool ();
+	
+	void addSelectionListener (ExperienceSelectionListener listener);
+	
+	void addUpdateListener (ExperienceUpdateListener experienceUpdateListener);
+	
+	void setEntries (Collection<ExperiencePointEntry> allEntries);
+	
+	void setTotalValueLabel (int overallExperiencePoints);
+	
+	void setSelection (ExperiencePointEntry entry);
 }

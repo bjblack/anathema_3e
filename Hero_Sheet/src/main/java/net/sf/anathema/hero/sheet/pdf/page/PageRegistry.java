@@ -13,39 +13,50 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class PageRegistry {
-  private static final Logger logger = Logger.getLogger(PageRegistry.class);
-  private ObjectFactory objectFactory;
-
-  public PageRegistry(ObjectFactory objectFactory) {
-    this.objectFactory = objectFactory;
-  }
-
-  public List<PageEncoder> createEncoders(PageSize pageSize, EncoderRegistry encoderRegistry, Resources resources,
-          ReportSession session) {
-    return findFactory(session).create(encoderRegistry, resources, pageSize);
-  }
-
-  private PageFactory findFactory(ReportSession session) {
-    for (PageFactory factory : createPageFactories()) {
-      BasicContent basicContent = createBasicContent(session);
-      if (factory.supports(basicContent)) {
-        return factory;
-      }
-    }
-    return new NullPageFactory();
-  }
-
-  private Collection<PageFactory> createPageFactories() {
-    try {
-      return objectFactory.instantiateAll(RegisteredAdditionalPage.class);
-    } catch (InitializationException e) {
-      logger.error("Error instantiating additional pages.", e);
-      return Collections.emptyList();
-    }
-  }
-
-  private BasicContent createBasicContent(ReportSession session) {
-    return session.createContent(BasicContent.class);
-  }
+public class PageRegistry
+{
+	private static final Logger logger = Logger.getLogger (PageRegistry.class);
+	private ObjectFactory objectFactory;
+	
+	public PageRegistry (ObjectFactory objectFactory)
+	{
+		this.objectFactory = objectFactory;
+	}
+	
+	public List<PageEncoder> createEncoders (PageSize pageSize, EncoderRegistry encoderRegistry, Resources resources,
+	ReportSession session)
+	{
+		return findFactory (session).create (encoderRegistry, resources, pageSize);
+	}
+	
+	private PageFactory findFactory (ReportSession session)
+	{
+		for (PageFactory factory : createPageFactories ())
+		{
+			BasicContent basicContent = createBasicContent (session);
+			if (factory.supports (basicContent))
+			{
+				return factory;
+			}
+		}
+		return new NullPageFactory ();
+	}
+	
+	private Collection<PageFactory> createPageFactories ()
+	{
+		try
+		{
+			return objectFactory.instantiateAll (RegisteredAdditionalPage.class);
+		}
+		catch (InitializationException e)
+		{
+			logger.error ("Error instantiating additional pages.", e);
+			return Collections.emptyList ();
+		}
+	}
+	
+	private BasicContent createBasicContent (ReportSession session)
+	{
+		return session.createContent (BasicContent.class);
+	}
 }

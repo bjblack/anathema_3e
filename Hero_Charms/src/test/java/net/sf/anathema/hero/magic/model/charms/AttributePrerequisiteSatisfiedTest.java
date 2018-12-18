@@ -28,76 +28,90 @@ import java.util.Map;
 
 import static org.mockito.Mockito.when;
 
-public class AttributePrerequisiteSatisfiedTest {
-
-  private MagicAttributeImpl attribute;
-
-  @Before
-  public void createAttribute() {
-    this.attribute = new MagicAttributeImpl("Expected", false);
-  }
-
-  @Test
-  public void isNotFulfilledWithoutCharms() throws Exception {
-    AttributeKnownCharmPrerequisite requirement = new AttributeKnownCharmPrerequisite(attribute, 1);
-    Assert.assertFalse(isSatisfied(requirement, Collections.emptyList()));
-  }
-
-  @Test
-  public void isFulfilledIfAttributeIsPresent() throws Exception {
-    AttributeKnownCharmPrerequisite requirement = new AttributeKnownCharmPrerequisite(attribute, 1);
-    Charm charm = createAttributedDummyCharm();
-    Assert.assertTrue(isSatisfied(requirement, Lists.newArrayList(charm)));
-  }
-
-  @Test
-  public void isNotFulfilledWithoutCorrectAttribute() throws Exception {
-    AttributeKnownCharmPrerequisite requirement = new AttributeKnownCharmPrerequisite(attribute, 1);
-    DummyCharm charm = new DummyCharm();
-    Assert.assertFalse(isSatisfied(requirement, Lists.newArrayList(charm)));
-  }
-
-  @Test
-  public void isNotFulfilledWithoutCorrectCount() throws Exception {
-    AttributeKnownCharmPrerequisite requirement = new AttributeKnownCharmPrerequisite(attribute, 2);
-    Charm charm = createAttributedDummyCharm();
-    Assert.assertFalse(isSatisfied(requirement, Lists.newArrayList(charm)));
-  }
-
-  @Test
-  public void isNotFulfilledWithoutCorrectAttributesAndCount() throws Exception {
-    AttributeKnownCharmPrerequisite requirement = new AttributeKnownCharmPrerequisite(attribute, 2);
-    Charm charm = createAttributedDummyCharm();
-    Assert.assertFalse(isSatisfied(requirement, Lists.newArrayList(charm, new DummyCharm())));
-  }
-
-  @Test
-  public void isFulfilledEvenIfChainIsBroken() throws Exception {
-    AttributeKnownCharmPrerequisite requirement = new AttributeKnownCharmPrerequisite(attribute, 2);
-    Charm charm = createAttributedDummyCharm();
-    Assert.assertTrue(isSatisfied(requirement, Lists.newArrayList(charm, new DummyCharm(), charm)));
-  }
-
-  private boolean isSatisfied(AttributeKnownCharmPrerequisite requirement, Collection<Charm> charms) {
-    return IsSatisfied.isSatisfied(requirement, getLearnArbiter(charms));
-  }
-
-  private CharmLearnArbitrator getLearnArbiter(Collection<Charm> charms) {
-	  return new CharmLearnArbitrator() {
-
+public class AttributePrerequisiteSatisfiedTest
+{
+	private MagicAttributeImpl attribute;
+	
+	@Before
+	public void createAttribute ()
+	{
+		this.attribute = new MagicAttributeImpl ("Expected", false);
+	}
+	
+	@Test
+	public void isNotFulfilledWithoutCharms () throws Exception
+	{
+		AttributeKnownCharmPrerequisite requirement = new AttributeKnownCharmPrerequisite (attribute, 1);
+		Assert.assertFalse (isSatisfied (requirement, Collections.emptyList ()));
+	}
+	
+	@Test
+	public void isFulfilledIfAttributeIsPresent () throws Exception
+	{
+		AttributeKnownCharmPrerequisite requirement = new AttributeKnownCharmPrerequisite (attribute, 1);
+		Charm charm = createAttributedDummyCharm ();
+		Assert.assertTrue (isSatisfied (requirement, Lists.newArrayList (charm)));
+	}
+	
+	@Test
+	public void isNotFulfilledWithoutCorrectAttribute () throws Exception
+	{
+		AttributeKnownCharmPrerequisite requirement = new AttributeKnownCharmPrerequisite (attribute, 1);
+		DummyCharm charm = new DummyCharm ();
+		Assert.assertFalse (isSatisfied (requirement, Lists.newArrayList (charm)));
+	}
+	
+	@Test
+	public void isNotFulfilledWithoutCorrectCount () throws Exception
+	{
+		AttributeKnownCharmPrerequisite requirement = new AttributeKnownCharmPrerequisite (attribute, 2);
+		Charm charm = createAttributedDummyCharm ();
+		Assert.assertFalse (isSatisfied (requirement, Lists.newArrayList (charm)));
+	}
+	
+	@Test
+	public void isNotFulfilledWithoutCorrectAttributesAndCount () throws Exception
+	{
+		AttributeKnownCharmPrerequisite requirement = new AttributeKnownCharmPrerequisite (attribute, 2);
+		Charm charm = createAttributedDummyCharm ();
+		Assert.assertFalse (isSatisfied (requirement, Lists.newArrayList (charm, new DummyCharm ())));
+	}
+	
+	@Test
+	public void isFulfilledEvenIfChainIsBroken () throws Exception
+	{
+		AttributeKnownCharmPrerequisite requirement = new AttributeKnownCharmPrerequisite (attribute, 2);
+		Charm charm = createAttributedDummyCharm ();
+		Assert.assertTrue (isSatisfied (requirement, Lists.newArrayList (charm, new DummyCharm (), charm)));
+	}
+	
+	private boolean isSatisfied (AttributeKnownCharmPrerequisite requirement, Collection<Charm> charms)
+	{
+		return IsSatisfied.isSatisfied (requirement, getLearnArbiter (charms));
+	}
+	
+	private CharmLearnArbitrator getLearnArbiter (Collection<Charm> charms)
+	{
+		return new CharmLearnArbitrator ()
+		{
 			@Override
-			public boolean isLearned(Charm charm) {
-				return charms.contains(charm);
+			public boolean isLearned (Charm charm)
+			{
+				return charms.contains (charm);
 			}
-				
+			
 			@Override
-			public boolean hasLearnedThresholdCharmsWithKeyword(MagicAttribute attribute, int threshold) {
+			public boolean hasLearnedThresholdCharmsWithKeyword (MagicAttribute attribute, int threshold)
+			{
 				int count = 0;
-				for (Charm charm : charms) {
-					if (charm.hasAttribute(attribute)) {
+				for (Charm charm : charms)
+				{
+					if (charm.hasAttribute (attribute))
+					{
 						count++;
 					}
-					if (count >= threshold) {
+					if (count >= threshold)
+					{
 						return true;
 					}
 				}
@@ -105,53 +119,64 @@ public class AttributePrerequisiteSatisfiedTest {
 			}
 			
 			@Override
-			public boolean hasLearnedThresholdCharmsWithKeywordFromTree(
-					TreeReference tree, MagicAttribute attribute, int threshold) {
+			public boolean hasLearnedThresholdCharmsWithKeywordFromTree (
+			TreeReference tree, MagicAttribute attribute, int threshold)
+			{
 				int count = 0;
-				List<Charm> validCharms = new ArrayList<>(charms);
-				validCharms.removeIf(charm -> !charm.getTreeReference().equals(tree));
-				for (Charm charm : validCharms) {
-					if (charm.hasAttribute(attribute)) {
+				List<Charm> validCharms = new ArrayList<> (charms);
+				validCharms.removeIf (charm -> !charm.getTreeReference ().equals (tree));
+				for (Charm charm : validCharms)
+				{
+					if (charm.hasAttribute (attribute))
+					{
 						count++;
 					}
-					if (count >= threshold) {
+					if (count >= threshold)
+					{
 						return true;
 					}
 				}
 				return false;
 			}
-	
+			
 			@Override
-			public boolean hasLearnedThresholdCharmsOfTrait(List<TraitType> traits,
-					CategoryReference category, int threshold, int minimumEssence) {
+			public boolean hasLearnedThresholdCharmsOfTrait (List<TraitType> traits,
+			CategoryReference category, int threshold, int minimumEssence)
+			{
 				// TODO: Way to represent current Essence in the test
 				return false;
 			}
-
+			
 			@Override
-			public boolean hasLearnedThresholdCharmsOfAnyOneTrait(int threshold) {
-				Map<RequiredTraitType, Integer> groupCounts = new HashMap<>();
+			public boolean hasLearnedThresholdCharmsOfAnyOneTrait (int threshold)
+			{
+				Map<RequiredTraitType, Integer> groupCounts = new HashMap<> ();
 				
-				for (Charm charm : charms) {
-					RequiredTraitType group = charm.getPrerequisites().getPrimaryTraitType();
-					Integer currentCount = groupCounts.get(group);
-					if (currentCount == null) {
+				for (Charm charm : charms)
+				{
+					RequiredTraitType group = charm.getPrerequisites ().getPrimaryTraitType ();
+					Integer currentCount = groupCounts.get (group);
+					if (currentCount == null)
+					{
 						currentCount = 0;
-						groupCounts.put(group, currentCount);
+						groupCounts.put (group, currentCount);
 					}
-					if (++currentCount >= threshold) {
+					if (++currentCount >= threshold)
+					{
 						return true;
 					}
 				}
 				
 				return false;
 			}
-	  };
-  }
-
-  private Charm createAttributedDummyCharm() {
-    Charm charm = Mockito.mock(Charm.class);
-    when(charm.hasAttribute(Mockito.any())).thenReturn(true);
-    return charm;
-  }
+		}
+		;
+	}
+	
+	private Charm createAttributedDummyCharm ()
+	{
+		Charm charm = Mockito.mock (Charm.class);
+		when (charm.hasAttribute (Mockito.any ())).thenReturn (true);
+		return charm;
+	}
 }

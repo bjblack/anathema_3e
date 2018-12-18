@@ -11,17 +11,19 @@ import net.sf.anathema.hero.individual.model.SimpleModelTreeEntry;
 import net.sf.anathema.hero.merits.model.MeritsModel;
 import net.sf.anathema.hero.traits.model.TraitModel;
 
-@SuppressWarnings("UnusedDeclaration")
-public class HealthModelFactory extends SimpleModelTreeEntry implements HeroModelFactory {
-
-  public HealthModelFactory() {
-    super(HealthModel.ID, AbilitiesModel.ID, AttributeModel.ID, TraitModel.ID, ExperienceModel.ID, MeritsModel.ID);
-  }
-
-  @SuppressWarnings("unchecked")
-  @Override
-  public HealthModelImpl create(TemplateFactory templateFactory, String templateId) {
-    HealthTemplate healthTemplate = HealthTemplateLoader.loadTemplate(templateFactory, templateId);
-    return new HealthModelImpl(healthTemplate);
-  }
+@SuppressWarnings ("UnusedDeclaration")
+public class HealthModelFactory extends SimpleModelTreeEntry implements HeroModelFactory
+{
+	public HealthModelFactory ()
+	{
+		super (HealthModel.ID, AbilitiesModel.ID, AttributeModel.ID, TraitModel.ID, ExperienceModel.ID, MeritsModel.ID);
+	}
+	
+	@SuppressWarnings ("unchecked")
+	@Override
+	public HealthModelImpl create (TemplateFactory templateFactory, String templateId)
+	{
+		HealthTemplate healthTemplate = HealthTemplateLoader.loadTemplate (templateFactory, templateId);
+		return new HealthModelImpl (healthTemplate);
+	}
 }

@@ -6,7 +6,7 @@ import net.sf.anathema.library.identifier.SimpleIdentifier;
 import net.sf.anathema.library.model.property.OptionalPropertiesModel;
 
 public interface FlawsModel extends HeroModel,
-	OptionalPropertiesModel<FlawOption, Flaw> {
-
-  Identifier ID = new SimpleIdentifier("Flaws");
+OptionalPropertiesModel<FlawOption, Flaw>
+{
+	Identifier ID = new SimpleIdentifier ("Flaws");
 }

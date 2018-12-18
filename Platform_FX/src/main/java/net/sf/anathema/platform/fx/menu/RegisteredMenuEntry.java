@@ -1,5 +1,5 @@
 package net.sf.anathema.platform.fx.menu;
 
-public @interface RegisteredMenuEntry {
-  
+public @interface RegisteredMenuEntry
+{
 }

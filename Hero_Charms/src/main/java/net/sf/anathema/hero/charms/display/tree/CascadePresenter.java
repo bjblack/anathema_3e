@@ -29,150 +29,173 @@ import java.util.List;
 
 import static java.util.Collections.emptyList;
 
-public class CascadePresenter {
-
-  private final Resources resources;
-  private CharmTreeCollectionMap charmTreeCollectionMap;
-  private CharmMap charmMap;
-  private MagicDescriptionProvider magicDescriptionProvider;
-  private ICharmGroupChangeListener changeListener;
-  private CharmView view;
-  private CharmDye dye;
-  private CategoryCollection categoryCollection;
-  protected CharmTreeCollection charmTrees;
-  private SpecialCharmViewPresenter specialCharmPresenter = new NullSpecialCharmPresenter();
-  private AlienCharmPresenter alienPresenter = new NullAlienCharmPresenter();
-  private CharmInteractionPresenter interactionPresenter = new NullInteractionPresenter();
-  private SpecialCharmSet specialCharmSet;
-
-  public CascadePresenter(Resources resources, CharmMap charmMap,
-                          MagicDescriptionProvider magicDescriptionProvider) {
-    this.resources = resources;
-    this.charmMap = charmMap;
-    this.magicDescriptionProvider = magicDescriptionProvider;
-  }
-
-  public void initPresentation() {
-    ObjectSelectionView<CategoryReference> typeSelector = createCategorySelector();
-    ObjectSelectionView<CharmTree> groupSelector = createCharmTreeSelector();
-    addTreeView();
-    initListening(typeSelector, groupSelector);
-    specialCharmPresenter.initPresentation();
-    view.whenCursorLeavesCharmAreaResetAllPopups();
-    alienPresenter.initPresentation(typeSelector);
-    interactionPresenter.initPresentation();
-  }
-
-  private void addTreeView() {
-    DefaultFunctionalNodeProperties functionalNodeProperties = new DefaultFunctionalNodeProperties();
-    final TreeView treeView = view.addTreeView();
-    treeView.loadNodeNamesFrom(new DefaultNodePresentationProperties(resources, functionalNodeProperties, charmMap));
-    treeView.setCanvasBackground(RGBColor.White);
-    treeView.initToolTips(
-            new DefaultTooltipProperties(functionalNodeProperties, charmMap, resources, magicDescriptionProvider,
-                    specialCharmSet));
-    treeView.addCascadeLoadedListener(() -> {
-      treeView.initNodeNames();
-      dye.setCharmVisuals();
-      specialCharmPresenter.showSpecialViews();
-    });
-    changeListener.operateOn(treeView);
-    dye.operateOn(treeView);
-    interactionPresenter.operateOn(treeView);
-    specialCharmPresenter.operateOn(treeView);
-  }
-
-  private void initListening(final ObjectSelectionView<CategoryReference> typeSelector,
-                             final ObjectSelectionView<CharmTree> groupSelector) {
-    typeSelector.addObjectSelectionChangedListener(cascadeType -> handleTypeSelectionChange(cascadeType, groupSelector));
-    groupSelector.addObjectSelectionChangedListener(
-            newValue -> changeListener.valueChanged(newValue, typeSelector.getSelectedObject()));
-  }
-
-  protected Resources getResources() {
-    return resources;
-  }
-
-  private ObjectSelectionView<CategoryReference> createCategorySelector() {
-    List<CategoryReference> categories = categoryCollection.getCurrentCategories();
-    String title = getResources().getString("CharmTreeView.GUI.CharmType");
-    SelectObjectConfiguration<CategoryReference> config = new SelectObjectConfiguration<>(resources,
-            (i18nResources, category) -> i18nResources.getString(category.text));
-    ObjectSelectionView<CategoryReference> typeSelector = view.addSelectionView(title, config);
-    typeSelector.setObjects(categories);
-    typeSelector.setSelectedObject(null);
-    return typeSelector;
-  }
-
-  private ObjectSelectionView<CharmTree> createCharmTreeSelector() {
-    Collection<CharmTree> allGroups = charmTrees.getAllCharmTrees();
-    AgnosticUIConfiguration<CharmTree> config = new SelectObjectConfiguration<>(resources,
-            (i18nResources, tree) -> i18nResources.getString(tree.getReference().name.text));
-    String title = getResources().getString("CardView.CharmConfiguration.AlienCharms.CharmGroup");
-    ObjectSelectionView<CharmTree> selector = view.addSelectionViewAndSizeItFor(title, config, allGroups);
-    selector.setObjects(allGroups);
-    selector.setSelectedObject(null);
-    return selector;
-  }
-
-  private List<CharmTree> sortCharmGroups(Collection<CharmTree> originalGroups) {
-    ArrayList<CharmTree> filteredGroups = new ArrayList<>(originalGroups);
-    return new I18nedIdentificateSorter<CharmTree>(resources).sortAscending(filteredGroups);
-  }
-
-  protected void setSpecialPresenter(SpecialCharmViewPresenter presenter) {
-    this.specialCharmPresenter = presenter;
-  }
-
-  public void setView(CharmView view) {
-    this.view = view;
-  }
-
-  public void setChangeListener(ICharmGroupChangeListener charmGroupChangeListener) {
-    this.changeListener = charmGroupChangeListener;
-  }
-
-  public void setCharmDye(CharmDye dye) {
-    this.dye = dye;
-  }
-
-  public void setCategoryCollection(CategoryCollection types) {
-    this.categoryCollection = types;
-  }
-
-  private void handleTypeSelectionChange(CategoryReference cascadeType, ObjectSelectionView<CharmTree> groupSelector) {
-    if (cascadeType == null) {
-      groupSelector.setObjects(emptyList());
-      return;
-    }
-    CharmTreeCollection charmTree = charmTreeCollectionMap.getCharmTree(cascadeType);
-    if (charmTree == null) {
-      groupSelector.setObjects(emptyList());
-      return;
-    }
-    Collection<CharmTree> allCharmGroups = charmTree.getAllCharmTrees();
-    List<CharmTree> sortedGroups = sortCharmGroups(allCharmGroups);
-    groupSelector.setObjects(sortedGroups);
-    specialCharmPresenter.showSpecialViews();
-  }
-
-  protected void setAlienCharmPresenter(AlienCharmPresenter presenter) {
-    this.alienPresenter = presenter;
-  }
-
-  protected void setInteractionPresenter(CharmInteractionPresenter presenter) {
-    this.interactionPresenter = presenter;
-  }
-
-  public void setCharmTrees(CharmTreeCollection charmTrees) {
-    this.charmTrees = charmTrees;
-  }
-
-  public void setSpecialCharmSet(SpecialCharmSet specialCharmSet) {
-    this.specialCharmSet = specialCharmSet;
-  }
-
-  public void setCharmTreeCollectionMap(CharmTreeCollectionMap charmTreeCollectionMap) {
-    this.charmTreeCollectionMap = charmTreeCollectionMap;
-  }
+public class CascadePresenter
+{
+	private final Resources resources;
+	private CharmTreeCollectionMap charmTreeCollectionMap;
+	private CharmMap charmMap;
+	private MagicDescriptionProvider magicDescriptionProvider;
+	private ICharmGroupChangeListener changeListener;
+	private CharmView view;
+	private CharmDye dye;
+	private CategoryCollection categoryCollection;
+	protected CharmTreeCollection charmTrees;
+	private SpecialCharmViewPresenter specialCharmPresenter = new NullSpecialCharmPresenter ();
+	private AlienCharmPresenter alienPresenter = new NullAlienCharmPresenter ();
+	private CharmInteractionPresenter interactionPresenter = new NullInteractionPresenter ();
+	private SpecialCharmSet specialCharmSet;
+	
+	public CascadePresenter (Resources resources, CharmMap charmMap,
+	MagicDescriptionProvider magicDescriptionProvider)
+	{
+		this.resources = resources;
+		this.charmMap = charmMap;
+		this.magicDescriptionProvider = magicDescriptionProvider;
+	}
+	
+	public void initPresentation ()
+	{
+		ObjectSelectionView<CategoryReference> typeSelector = createCategorySelector ();
+		ObjectSelectionView<CharmTree> groupSelector = createCharmTreeSelector ();
+		addTreeView ();
+		initListening (typeSelector, groupSelector);
+		specialCharmPresenter.initPresentation ();
+		view.whenCursorLeavesCharmAreaResetAllPopups ();
+		alienPresenter.initPresentation (typeSelector);
+		interactionPresenter.initPresentation ();
+	}
+	
+	private void addTreeView ()
+	{
+		DefaultFunctionalNodeProperties functionalNodeProperties = new DefaultFunctionalNodeProperties ();
+		final TreeView treeView = view.addTreeView ();
+		treeView.loadNodeNamesFrom (new DefaultNodePresentationProperties (resources, functionalNodeProperties, charmMap));
+		treeView.setCanvasBackground (RGBColor.White);
+		treeView.initToolTips (
+		new DefaultTooltipProperties (functionalNodeProperties, charmMap, resources, magicDescriptionProvider,
+		specialCharmSet));
+		treeView.addCascadeLoadedListener ( () ->
+		{
+			treeView.initNodeNames ();
+			dye.setCharmVisuals ();
+			specialCharmPresenter.showSpecialViews ();
+		}
+		);
+		changeListener.operateOn (treeView);
+		dye.operateOn (treeView);
+		interactionPresenter.operateOn (treeView);
+		specialCharmPresenter.operateOn (treeView);
+	}
+	
+	private void initListening (final ObjectSelectionView<CategoryReference> typeSelector,
+	final ObjectSelectionView<CharmTree> groupSelector)
+	{
+		typeSelector.addObjectSelectionChangedListener (cascadeType -> handleTypeSelectionChange (cascadeType, groupSelector));
+		groupSelector.addObjectSelectionChangedListener (
+		newValue -> changeListener.valueChanged (newValue, typeSelector.getSelectedObject ()));
+	}
+	
+	protected Resources getResources ()
+	{
+		return resources;
+	}
+	
+	private ObjectSelectionView<CategoryReference> createCategorySelector ()
+	{
+		List<CategoryReference> categories = categoryCollection.getCurrentCategories ();
+		String title = getResources ().getString ("CharmTreeView.GUI.CharmType");
+		SelectObjectConfiguration<CategoryReference> config = new SelectObjectConfiguration<> (resources,
+		 (i18nResources, category) -> i18nResources.getString (category.text));
+		ObjectSelectionView<CategoryReference> typeSelector = view.addSelectionView (title, config);
+		typeSelector.setObjects (categories);
+		typeSelector.setSelectedObject (null);
+		return typeSelector;
+	}
+	
+	private ObjectSelectionView<CharmTree> createCharmTreeSelector ()
+	{
+		Collection<CharmTree> allGroups = charmTrees.getAllCharmTrees ();
+		AgnosticUIConfiguration<CharmTree> config = new SelectObjectConfiguration<> (resources,
+		 (i18nResources, tree) -> i18nResources.getString (tree.getReference ().name.text));
+		String title = getResources ().getString ("CardView.CharmConfiguration.AlienCharms.CharmGroup");
+		ObjectSelectionView<CharmTree> selector = view.addSelectionViewAndSizeItFor (title, config, allGroups);
+		selector.setObjects (allGroups);
+		selector.setSelectedObject (null);
+		return selector;
+	}
+	
+	private List<CharmTree> sortCharmGroups (Collection<CharmTree> originalGroups)
+	{
+		ArrayList<CharmTree> filteredGroups = new ArrayList<> (originalGroups);
+		return new I18nedIdentificateSorter<CharmTree> (resources).sortAscending (filteredGroups);
+	}
+	
+	protected void setSpecialPresenter (SpecialCharmViewPresenter presenter)
+	{
+		this.specialCharmPresenter = presenter;
+	}
+	
+	public void setView (CharmView view)
+	{
+		this.view = view;
+	}
+	
+	public void setChangeListener (ICharmGroupChangeListener charmGroupChangeListener)
+	{
+		this.changeListener = charmGroupChangeListener;
+	}
+	
+	public void setCharmDye (CharmDye dye)
+	{
+		this.dye = dye;
+	}
+	
+	public void setCategoryCollection (CategoryCollection types)
+	{
+		this.categoryCollection = types;
+	}
+	
+	private void handleTypeSelectionChange (CategoryReference cascadeType, ObjectSelectionView<CharmTree> groupSelector)
+	{
+		if (cascadeType == null)
+		{
+			groupSelector.setObjects (emptyList ());
+			return;
+		}
+		CharmTreeCollection charmTree = charmTreeCollectionMap.getCharmTree (cascadeType);
+		if (charmTree == null)
+		{
+			groupSelector.setObjects (emptyList ());
+			return;
+		}
+		Collection<CharmTree> allCharmGroups = charmTree.getAllCharmTrees ();
+		List<CharmTree> sortedGroups = sortCharmGroups (allCharmGroups);
+		groupSelector.setObjects (sortedGroups);
+		specialCharmPresenter.showSpecialViews ();
+	}
+	
+	protected void setAlienCharmPresenter (AlienCharmPresenter presenter)
+	{
+		this.alienPresenter = presenter;
+	}
+	
+	protected void setInteractionPresenter (CharmInteractionPresenter presenter)
+	{
+		this.interactionPresenter = presenter;
+	}
+	
+	public void setCharmTrees (CharmTreeCollection charmTrees)
+	{
+		this.charmTrees = charmTrees;
+	}
+	
+	public void setSpecialCharmSet (SpecialCharmSet specialCharmSet)
+	{
+		this.specialCharmSet = specialCharmSet;
+	}
+	
+	public void setCharmTreeCollectionMap (CharmTreeCollectionMap charmTreeCollectionMap)
+	{
+		this.charmTreeCollectionMap = charmTreeCollectionMap;
+	}
 }

@@ -9,17 +9,19 @@ import net.sf.anathema.hero.specialties.template.SpecialtyPointsTemplate;
 import net.sf.anathema.hero.specialties.template.SpecialtyPointsTemplateLoader;
 import net.sf.anathema.points.model.PointsModel;
 
-@SuppressWarnings("UnusedDeclaration")
-public class SpecialtiesPointsModelFactory extends SimpleModelTreeEntry implements HeroModelFactory {
-
-  public SpecialtiesPointsModelFactory() {
-    super(SpecialtiesPointsModel.ID, AbilitiesModel.ID, AttributeModel.ID, PointsModel.ID);
-  }
-
-  @SuppressWarnings("unchecked")
-  @Override
-  public SpecialtiesPointsModel create(TemplateFactory templateFactory, String templateId) {
-    SpecialtyPointsTemplate template = SpecialtyPointsTemplateLoader.loadTemplate(templateFactory, templateId);
-    return new SpecialtiesPointsModel(template);
-  }
+@SuppressWarnings ("UnusedDeclaration")
+public class SpecialtiesPointsModelFactory extends SimpleModelTreeEntry implements HeroModelFactory
+{
+	public SpecialtiesPointsModelFactory ()
+	{
+		super (SpecialtiesPointsModel.ID, AbilitiesModel.ID, AttributeModel.ID, PointsModel.ID);
+	}
+	
+	@SuppressWarnings ("unchecked")
+	@Override
+	public SpecialtiesPointsModel create (TemplateFactory templateFactory, String templateId)
+	{
+		SpecialtyPointsTemplate template = SpecialtyPointsTemplateLoader.loadTemplate (templateFactory, templateId);
+		return new SpecialtiesPointsModel (template);
+	}
 }

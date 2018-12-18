@@ -10,15 +10,15 @@ import net.sf.anathema.magic.data.reference.CategoryReference;
 import java.util.Collection;
 import java.util.List;
 
-public interface CharmOptions extends CharmTreeArbitrator {
-
-  CharmMap getCharmIdMap();
-
-  Collection<CharmSpecialLearning> getSpecialLearningCharms();
-
-  Collection<Charm> filterAvailableCharms(CharmTree tree);
-  
-  boolean isAlienCharmsAllowedForHero();
-
-  List<CategoryReference> getValidCategoryReferencesForHero();
+public interface CharmOptions extends CharmTreeArbitrator
+{
+	CharmMap getCharmIdMap ();
+	
+	Collection<CharmSpecialLearning> getSpecialLearningCharms ();
+	
+	Collection<Charm> filterAvailableCharms (CharmTree tree);
+	
+	boolean isAlienCharmsAllowedForHero ();
+	
+	List<CategoryReference> getValidCategoryReferencesForHero ();
 }

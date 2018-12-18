@@ -5,13 +5,13 @@ import net.sf.anathema.library.message.Message;
 
 import java.util.Collection;
 
-public interface MessageContainer {
-
-  void addChangeListener(ChangeListener listener);
-
-  Message getLatestMessage();
-
-  Collection<Message> getPermanentMessages();
-
-  boolean hasMessages();
+public interface MessageContainer
+{
+	void addChangeListener (ChangeListener listener);
+	
+	Message getLatestMessage ();
+	
+	Collection<Message> getPermanentMessages ();
+	
+	boolean hasMessages ();
 }

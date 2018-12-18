@@ -25,64 +25,76 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PortraitSimpleExaltSheetReport extends AbstractPdfReport {
-
-  private final Resources resources;
-  private final PageSizePreference pageSizePreference;
-  private HeroReportingRegistries moduleObject;
-
-  public PortraitSimpleExaltSheetReport(HeroEnvironment environment, PageSizePreference pageSizePreference) {
-    this.resources = environment.getResources();
-    this.pageSizePreference = pageSizePreference;
-    this.moduleObject = new HeroReportingRegistries(environment.getObjectFactory(), resources);
-  }
-
-  @Override
-  public String toString() {
-    return resources.getString("CharacterModule.Reporting.Sheet.Name");
-  }
-
-  @Override
-  public void performPrint(Hero hero, Document document, PdfWriter writer) throws ReportException {
-    PageSize pageSize = pageSizePreference.getPageSize();
-    PdfContentByte directContent = writer.getDirectContent();
-    PageConfiguration configuration = PageConfiguration.ForPortrait(pageSize);
-    try {
-      List<PageEncoder> encoderList = new ArrayList<>();
-      encoderList.add(new FirstPageEncoder(configuration));
-      ReportSession session = new ReportSession(getContentRegistry(), hero);
-      encoderList.addAll(findAdditionalPages(pageSize, session));
-      encoderList.add(new SecondPageEncoder());
-      Sheet sheet = new Sheet(document, getEncoderRegistry(), resources, pageSize);
-      for (PageEncoder encoder : encoderList) {
-        SheetGraphics graphics = SheetGraphics.WithHelvetica(directContent);
-        encoder.encode(sheet, graphics, session);
-      }
-    } catch (Exception e) {
-      throw new ReportException(e);
-    }
-  }
-
-  private List<PageEncoder> findAdditionalPages(PageSize pageSize, ReportSession session) {
-    PageRegistry additionalPageRegistry = getReportingModuleObject().getAdditionalPageRegistry();
-    return additionalPageRegistry.createEncoders(pageSize, getEncoderRegistry(), resources, session);
-  }
-
-  private EncoderRegistry getEncoderRegistry() {
-    return getReportingModuleObject().getEncoderRegistry();
-  }
-
-  private HeroReportingRegistries getReportingModuleObject() {
-    return moduleObject;
-  }
-
-  private ReportContentRegistry getContentRegistry() {
-    HeroReportingRegistries moduleObject = getReportingModuleObject();
-    return moduleObject.getContentRegistry();
-  }
-
-  @Override
-  public boolean supports(Hero hero) {
-    return hero.getSplat().getTemplateType().getHeroType().isEssenceUser();
-  }
+public class PortraitSimpleExaltSheetReport extends AbstractPdfReport
+{
+	private final Resources resources;
+	private final PageSizePreference pageSizePreference;
+	private HeroReportingRegistries moduleObject;
+	
+	public PortraitSimpleExaltSheetReport (HeroEnvironment environment, PageSizePreference pageSizePreference)
+	{
+		this.resources = environment.getResources ();
+		this.pageSizePreference = pageSizePreference;
+		this.moduleObject = new HeroReportingRegistries (environment.getObjectFactory (), resources);
+	}
+	
+	@Override
+	public String toString ()
+	{
+		return resources.getString ("CharacterModule.Reporting.Sheet.Name");
+	}
+	
+	@Override
+	public void performPrint (Hero hero, Document document, PdfWriter writer) throws ReportException
+	{
+		PageSize pageSize = pageSizePreference.getPageSize ();
+		PdfContentByte directContent = writer.getDirectContent ();
+		PageConfiguration configuration = PageConfiguration.ForPortrait (pageSize);
+		try
+		{
+			List<PageEncoder> encoderList = new ArrayList<> ();
+			encoderList.add (new FirstPageEncoder (configuration));
+			ReportSession session = new ReportSession (getContentRegistry (), hero);
+			encoderList.addAll (findAdditionalPages (pageSize, session));
+			encoderList.add (new SecondPageEncoder ());
+			Sheet sheet = new Sheet (document, getEncoderRegistry (), resources, pageSize);
+			for (PageEncoder encoder : encoderList)
+			{
+				SheetGraphics graphics = SheetGraphics.WithHelvetica (directContent);
+				encoder.encode (sheet, graphics, session);
+			}
+		}
+		catch (Exception e)
+		{
+			throw new ReportException (e);
+		}
+	}
+	
+	private List<PageEncoder> findAdditionalPages (PageSize pageSize, ReportSession session)
+	{
+		PageRegistry additionalPageRegistry = getReportingModuleObject ().getAdditionalPageRegistry ();
+		return additionalPageRegistry.createEncoders (pageSize, getEncoderRegistry (), resources, session);
+	}
+	
+	private EncoderRegistry getEncoderRegistry ()
+	{
+		return getReportingModuleObject ().getEncoderRegistry ();
+	}
+	
+	private HeroReportingRegistries getReportingModuleObject ()
+	{
+		return moduleObject;
+	}
+	
+	private ReportContentRegistry getContentRegistry ()
+	{
+		HeroReportingRegistries moduleObject = getReportingModuleObject ();
+		return moduleObject.getContentRegistry ();
+	}
+	
+	@Override
+	public boolean supports (Hero hero)
+	{
+		return hero.getSplat ().getTemplateType ().getHeroType ().isEssenceUser ();
+	}
 }

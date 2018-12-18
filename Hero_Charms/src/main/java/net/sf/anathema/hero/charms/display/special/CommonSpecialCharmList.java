@@ -11,48 +11,58 @@ import com.google.common.base.Predicates;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommonSpecialCharmList implements SpecialCharmList {
-  private final List<SpecialNodeView> specialCharmViews = new ArrayList<>();
-  private final SpecialCharmViewBuilder builder;
-  private Predicate<String> visibilityPredicate = Predicates.alwaysFalse();
-  private TreeView treeView;
-
-  public CommonSpecialCharmList(SpecialCharmViewBuilder specialViewBuilder) {
-    this.builder = specialViewBuilder;
-  }
-
-  @Override
-  public void add(CharmSpecialLearning charm) {
-    builder.reset();
-    builder.buildFor(charm);
-    if (builder.hasResult()) {
-      SpecialNodeView nodeView = builder.getResult();
-      specialCharmViews.add(nodeView);
-    }
-  }
-
-  @Override
-  public void showViews() {
-    for (SpecialNodeView charmView : specialCharmViews) {
-      boolean isVisible = isVisible(charmView);
-      if (isVisible){
-        treeView.addSpecialControl(charmView.getNodeId(), charmView);
-      }
-    }
-  }
-
-  @Override
-  public void setVisibilityPredicate(Predicate<String> predicate) {
-    this.visibilityPredicate = predicate;
-  }
-
-  @Override
-  public void operateOn(TreeView treeView) {
-    this.treeView = treeView;
-  }
-
-  private boolean isVisible(SpecialNodeView charmView) {
-    String nodeId = charmView.getNodeId();
-    return visibilityPredicate.apply(nodeId);
-  }
+public class CommonSpecialCharmList implements SpecialCharmList
+{
+	private final List<SpecialNodeView> specialCharmViews = new ArrayList<> ();
+	private final SpecialCharmViewBuilder builder;
+	private Predicate<String> visibilityPredicate = Predicates.alwaysFalse ();
+	private TreeView treeView;
+	
+	public CommonSpecialCharmList (SpecialCharmViewBuilder specialViewBuilder)
+	{
+		this.builder = specialViewBuilder;
+	}
+	
+	@Override
+	public void add (CharmSpecialLearning charm)
+	{
+		builder.reset ();
+		builder.buildFor (charm);
+		if (builder.hasResult ())
+		{
+			SpecialNodeView nodeView = builder.getResult ();
+			specialCharmViews.add (nodeView);
+		}
+	}
+	
+	@Override
+	public void showViews ()
+	{
+		for (SpecialNodeView charmView : specialCharmViews)
+		{
+			boolean isVisible = isVisible (charmView);
+			if (isVisible)
+			{
+				treeView.addSpecialControl (charmView.getNodeId (), charmView);
+			}
+		}
+	}
+	
+	@Override
+	public void setVisibilityPredicate (Predicate<String> predicate)
+	{
+		this.visibilityPredicate = predicate;
+	}
+	
+	@Override
+	public void operateOn (TreeView treeView)
+	{
+		this.treeView = treeView;
+	}
+	
+	private boolean isVisible (SpecialNodeView charmView)
+	{
+		String nodeId = charmView.getNodeId ();
+		return visibilityPredicate.apply (nodeId);
+	}
 }

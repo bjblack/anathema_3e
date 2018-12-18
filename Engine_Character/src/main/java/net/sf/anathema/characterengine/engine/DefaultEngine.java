@@ -11,43 +11,49 @@ import net.sf.anathema.characterengine.quality.TypeClosure;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DefaultEngine implements Engine {
-
-  private final Map<Type, QualityFactory> factoryMap = new HashMap<>();
-
-  @Override
-  public void setFactory(Type type, QualityFactory factory) {
-    factoryMap.put(type, factory);
-  }
-
-  @Override
-  public Persona createCharacter() {
-    return new DefaultPersona(new DefaultQualities(this));
-  }
-
-  @Override
-  public Quality createQuality(QualityKey key) {
-    FindFactory findFactory = new FindFactory();
-    key.withTypeDo(findFactory);
-    return findFactory.create(key);
-  }
-
-  private class FindFactory implements TypeClosure {
-
-    private QualityFactory factory;
-    private Quality quality;
-
-    @Override
-    public void execute(Type type) {
-      if (!factoryMap.containsKey(type)) {
-        throw new RuntimeException("Unknown Quality Type: " + type);
-      }
-      factory = factoryMap.get(type);
-    }
-
-    public Quality create(QualityKey key) {
-      key.withNameDo(name -> quality = factory.create(name));
-      return quality;
-    }
-  }
+public class DefaultEngine implements Engine
+{
+	private final Map<Type, QualityFactory> factoryMap = new HashMap<> ();
+	
+	@Override
+	public void setFactory (Type type, QualityFactory factory)
+	{
+		factoryMap.put (type, factory);
+	}
+	
+	@Override
+	public Persona createCharacter ()
+	{
+		return new DefaultPersona (new DefaultQualities (this));
+	}
+	
+	@Override
+	public Quality createQuality (QualityKey key)
+	{
+		FindFactory findFactory = new FindFactory ();
+		key.withTypeDo (findFactory);
+		return findFactory.create (key);
+	}
+	
+	private class FindFactory implements TypeClosure
+	{
+		private QualityFactory factory;
+		private Quality quality;
+		
+		@Override
+		public void execute (Type type)
+		{
+			if (!factoryMap.containsKey (type))
+			{
+				throw new RuntimeException ("Unknown Quality Type: " + type);
+			}
+			factory = factoryMap.get (type);
+		}
+		
+		public Quality create (QualityKey key)
+		{
+			key.withNameDo (name -> quality = factory.create (name));
+			return quality;
+		}
+	}
 }

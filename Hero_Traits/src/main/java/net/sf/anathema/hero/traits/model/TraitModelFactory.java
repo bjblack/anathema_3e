@@ -6,17 +6,19 @@ import net.sf.anathema.hero.individual.model.HeroModelFactory;
 import net.sf.anathema.hero.individual.model.SimpleModelTreeEntry;
 import net.sf.anathema.hero.individual.persistence.NullTemplateModel;
 
-@SuppressWarnings("UnusedDeclaration")
+@SuppressWarnings ("UnusedDeclaration")
 @NullTemplateModel
-public class TraitModelFactory extends SimpleModelTreeEntry implements HeroModelFactory {
-
-  public TraitModelFactory() {
-    super(TraitModel.ID, ExperienceModel.ID);
-  }
-
-  @SuppressWarnings("unchecked")
-  @Override
-  public TraitModelImpl create(TemplateFactory templateFactory, String templateId) {
-    return new TraitModelImpl();
-  }
+public class TraitModelFactory extends SimpleModelTreeEntry implements HeroModelFactory
+{
+	public TraitModelFactory ()
+	{
+		super (TraitModel.ID, ExperienceModel.ID);
+	}
+	
+	@SuppressWarnings ("unchecked")
+	@Override
+	public TraitModelImpl create (TemplateFactory templateFactory, String templateId)
+	{
+		return new TraitModelImpl ();
+	}
 }

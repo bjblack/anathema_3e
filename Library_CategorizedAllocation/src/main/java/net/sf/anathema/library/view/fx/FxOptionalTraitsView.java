@@ -19,36 +19,41 @@ import static net.sf.anathema.library.fx.layout.LayoutUtils.fillWithoutInsets;
 import static net.sf.anathema.library.fx.layout.LayoutUtils.withoutInsets;
 
 public class FxOptionalTraitsView<
-	O extends OptionalTraitOption>
-	implements OptionalTraitsView, NodeHolder {
-  private final MigPane content = new MigPane(fillWithoutInsets());
-  private final MigPane creationPane = new MigPane(withoutInsets());
-  private final SimpleDotViewPanel entryPanel = new SimpleDotViewPanel();
-
-  public FxOptionalTraitsView() {
-    MigPane mainPanel = new MigPane(fillWithoutInsets().wrapAfter(1));
-    mainPanel.add(creationPane, new CC().growX());
-    mainPanel.add(entryPanel.getNode(), new CC().alignY("top").growX());
-    content.add(mainPanel, new CC().alignY("top").growX());
-  }
-
-  @Override
-  public Node getNode() {
-    return content;
-  }
-
-  @Override
-  public OptionalPropertyEntryView addSelectionView() {
-    FxOptionalEntriesInputView view = new FxOptionalEntriesInputView();
-    creationPane.add(view.getNode());
-    return view;
-  }
-
-  @Override
-  public OptionalTraitItemView addItemView(String label, int maxValue, RelativePath removeIcon) {
-    FxDotView view = FxDotView.WithDefaultLayout(label, maxValue);
-    FxOptionalTraitItemView itemView = new FxOptionalTraitItemView(view, removeIcon);
-    itemView.addTo(entryPanel);
-    return itemView;
-  }
+O extends OptionalTraitOption>
+implements OptionalTraitsView, NodeHolder
+{
+	private final MigPane content = new MigPane (fillWithoutInsets ());
+	private final MigPane creationPane = new MigPane (withoutInsets ());
+	private final SimpleDotViewPanel entryPanel = new SimpleDotViewPanel ();
+	
+	public FxOptionalTraitsView ()
+	{
+		MigPane mainPanel = new MigPane (fillWithoutInsets ().wrapAfter (1));
+		mainPanel.add (creationPane, new CC ().growX ());
+		mainPanel.add (entryPanel.getNode (), new CC ().alignY ("top").growX ());
+		content.add (mainPanel, new CC ().alignY ("top").growX ());
+	}
+	
+	@Override
+	public Node getNode ()
+	{
+		return content;
+	}
+	
+	@Override
+	public OptionalPropertyEntryView addSelectionView ()
+	{
+		FxOptionalEntriesInputView view = new FxOptionalEntriesInputView ();
+		creationPane.add (view.getNode ());
+		return view;
+	}
+	
+	@Override
+	public OptionalTraitItemView addItemView (String label, int maxValue, RelativePath removeIcon)
+	{
+		FxDotView view = FxDotView.WithDefaultLayout (label, maxValue);
+		FxOptionalTraitItemView itemView = new FxOptionalTraitItemView (view, removeIcon);
+		itemView.addTo (entryPanel);
+		return itemView;
+	}
 }

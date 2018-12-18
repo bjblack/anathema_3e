@@ -6,10 +6,12 @@ import net.sf.anathema.hero.sheet.pdf.encoder.boxes.PreferredHeight;
 
 import static net.sf.anathema.hero.sheet.pdf.page.IVoidStateFormatConstants.WEAPON_HEIGHT_SECOND_EDITION;
 
-public class PreferredWeaponryHeight implements PreferredHeight {
-  @Override
-  public float getValue(EncodingMetrics metrics, float width) {
-    float boxHeight = WEAPON_HEIGHT_SECOND_EDITION;
-    return BoxBoundsFactory.getContentHeight(boxHeight);
-  }
+public class PreferredWeaponryHeight implements PreferredHeight
+{
+	@Override
+	public float getValue (EncodingMetrics metrics, float width)
+	{
+		float boxHeight = WEAPON_HEIGHT_SECOND_EDITION;
+		return BoxBoundsFactory.getContentHeight (boxHeight);
+	}
 }

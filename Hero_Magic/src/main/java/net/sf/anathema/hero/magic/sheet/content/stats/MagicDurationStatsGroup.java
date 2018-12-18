@@ -8,27 +8,31 @@ import net.sf.anathema.library.resources.Resources;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.pdf.PdfPTable;
 
-public class MagicDurationStatsGroup extends AbstractTextStatsGroup<IMagicStats> {
-
-  private final Resources resources;
-
-  public MagicDurationStatsGroup(Resources resources) {
-    this.resources = resources;
-  }
-
-  @Override
-  public void addContent(PdfPTable table, Font font, IMagicStats stats) {
-    String text = stats == null ? null : stats.getDurationString(resources);
-    table.addCell(createTextCell(font, text));
-  }
-
-  @Override
-  public TableColumns getColumnWeights() {
-    return TableColumns.singleColumn(3);
-  }
-
-  @Override
-  public String getTitle() {
-    return resources.getString("Sheet.Magic.Duration");
-  }
+public class MagicDurationStatsGroup extends AbstractTextStatsGroup<IMagicStats>
+{
+	private final Resources resources;
+	
+	public MagicDurationStatsGroup (Resources resources)
+	{
+		this.resources = resources;
+	}
+	
+	@Override
+	public void addContent (PdfPTable table, Font font, IMagicStats stats)
+	{
+		String text = stats == null ? null : stats.getDurationString (resources);
+		table.addCell (createTextCell (font, text));
+	}
+	
+	@Override
+	public TableColumns getColumnWeights ()
+	{
+		return TableColumns.singleColumn (3);
+	}
+	
+	@Override
+	public String getTitle ()
+	{
+		return resources.getString ("Sheet.Magic.Duration");
+	}
 }

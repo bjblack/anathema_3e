@@ -10,26 +10,31 @@ import net.sf.anathema.library.identifier.Identifier;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MappedTraitGroup implements TraitGroup {
-  private final TraitMap traitMap;
-  private final IdentifiedTraitTypeList typeGroup;
-
-  public MappedTraitGroup(TraitMap traitMap, IdentifiedTraitTypeList typeGroup) {
-    this.traitMap = traitMap;
-    this.typeGroup = typeGroup;
-  }
-
-  @Override
-  public Iterable<Trait> getGroupTraits() {
-    List<Trait> traits = new ArrayList<>();
-    for (TraitType type : typeGroup.getAll()) {
-      traits.add(traitMap.getTrait(type));
-    }
-    return traits;
-  }
-
-  @Override
-  public Identifier getGroupId() {
-    return typeGroup.getListId();
-  }
+public class MappedTraitGroup implements TraitGroup
+{
+	private final TraitMap traitMap;
+	private final IdentifiedTraitTypeList typeGroup;
+	
+	public MappedTraitGroup (TraitMap traitMap, IdentifiedTraitTypeList typeGroup)
+	{
+		this.traitMap = traitMap;
+		this.typeGroup = typeGroup;
+	}
+	
+	@Override
+	public Iterable<Trait> getGroupTraits ()
+	{
+		List<Trait> traits = new ArrayList<> ();
+		for (TraitType type : typeGroup.getAll ())
+		{
+			traits.add (traitMap.getTrait (type));
+		}
+		return traits;
+	}
+	
+	@Override
+	public Identifier getGroupId ()
+	{
+		return typeGroup.getListId ();
+	}
 }

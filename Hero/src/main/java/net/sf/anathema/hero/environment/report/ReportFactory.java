@@ -6,7 +6,7 @@ import net.sf.anathema.library.dependencies.IsAutoCollected;
 import java.util.List;
 
 @IsAutoCollected // via annotation @RegisteredReportFactory
-public interface ReportFactory {
-
-  List<Report> createReport(HeroEnvironment environment);
+public interface ReportFactory
+{
+	List<Report> createReport (HeroEnvironment environment);
 }

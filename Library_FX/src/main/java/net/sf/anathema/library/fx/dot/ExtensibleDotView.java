@@ -4,15 +4,15 @@ import net.sf.anathema.library.interaction.model.ToggleTool;
 import net.sf.anathema.library.interaction.model.Tool;
 import net.sf.anathema.library.view.IntValueView;
 
-public interface ExtensibleDotView {
-
-  IntValueView getIntValueView();
-
-  ToggleTool addToggleInFront();
-
-  ToggleTool addToggleBehind();
-
-  Tool addToolBehind();
-
-  void remove();
+public interface ExtensibleDotView
+{
+	IntValueView getIntValueView ();
+	
+	ToggleTool addToggleInFront ();
+	
+	ToggleTool addToggleBehind ();
+	
+	Tool addToolBehind ();
+	
+	void remove ();
 }

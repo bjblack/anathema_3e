@@ -6,22 +6,22 @@ import net.sf.anathema.library.resources.Resources;
 
 import java.util.Collection;
 
-public interface IMagicStats extends IStats {
-
-  @Override
-  Identifier getName();
-
-  String getCostString(Resources resources);
-
-  String getGroupName(Resources resources);
-
-  String getType(Resources resources);
-
-  String getDurationString(Resources resources);
-
-  String getSourceString(Resources resources);
-
-  Collection<String> getDetailStrings(Resources resources);
-
-  String getNameString(Resources resources);
+public interface IMagicStats extends IStats
+{
+	@Override
+	Identifier getName ();
+	
+	String getCostString (Resources resources);
+	
+	String getGroupName (Resources resources);
+	
+	String getType (Resources resources);
+	
+	String getDurationString (Resources resources);
+	
+	String getSourceString (Resources resources);
+	
+	Collection<String> getDetailStrings (Resources resources);
+	
+	String getNameString (Resources resources);
 }

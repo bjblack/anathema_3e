@@ -8,39 +8,39 @@ import net.sf.anathema.library.event.ChangeListener;
 
 import java.util.List;
 
-public interface IEquipmentTemplateEditModel {
-
-  void addStatistics(IEquipmentStats stats);
-
-  void removeStatistics(IEquipmentStats... stats);
-
-  IItemDescription getDescription();
-
-  List<IEquipmentStats> getStats();
-
-  boolean isDirty();
-
-  void setEditTemplate(String templateId);
-
-  void addStatsChangeListener(ChangeListener changeListener);
-
-  IEquipmentTemplate createTemplate();
-
-  String getEditTemplateId();
-
-  void setNewTemplate();
-  
-  void copyNewTemplate( String salt );
-  
-  void addCostChangeListener(ChangeListener listener);
-  
-  void setCost(ItemCost cost);
-  
-  ItemCost getCost();
-
-  void addMagicalMaterialChangeListener(ChangeListener listener);
-
-  void addCompositionChangeListener(ChangeListener listener);
-
-  void replaceStatistics(IEquipmentStats selectedStats, IEquipmentStats equipmentStats);
+public interface IEquipmentTemplateEditModel
+{
+	void addStatistics (IEquipmentStats stats);
+	
+	void removeStatistics (IEquipmentStats... stats);
+	
+	IItemDescription getDescription ();
+	
+	List<IEquipmentStats> getStats ();
+	
+	boolean isDirty ();
+	
+	void setEditTemplate (String templateId);
+	
+	void addStatsChangeListener (ChangeListener changeListener);
+	
+	IEquipmentTemplate createTemplate ();
+	
+	String getEditTemplateId ();
+	
+	void setNewTemplate ();
+	
+	void copyNewTemplate ( String salt );
+	
+	void addCostChangeListener (ChangeListener listener);
+	
+	void setCost (ItemCost cost);
+	
+	ItemCost getCost ();
+	
+	void addMagicalMaterialChangeListener (ChangeListener listener);
+	
+	void addCompositionChangeListener (ChangeListener listener);
+	
+	void replaceStatistics (IEquipmentStats selectedStats, IEquipmentStats equipmentStats);
 }

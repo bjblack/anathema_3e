@@ -9,22 +9,25 @@ import net.sf.anathema.hero.merits.model.MeritsModelFetcher;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MeritSupernaturalMeritsRequirement implements MeritRequirement {
-
+public class MeritSupernaturalMeritsRequirement implements MeritRequirement
+{
 	@Override
-	public boolean isSatisfied(Hero hero) {
-		MeritsModel merits = MeritsModelFetcher.fetch(hero);
-		for (Merit merit : merits.getEntries()) {
-			if (merit.getBaseOption().getCategory() == MeritCategory.Supernatural) {
+	public boolean isSatisfied (Hero hero)
+	{
+		MeritsModel merits = MeritsModelFetcher.fetch (hero);
+		for (Merit merit : merits.getEntries ())
+		{
+			if (merit.getBaseOption ().getCategory () == MeritCategory.Supernatural)
+			{
 				return true;
 			}
 		}
 		return false;
 	}
-
+	
 	@Override
-	public List<String> getContingentTraitTypes() {
-		return new ArrayList<String>();
+	public List<String> getContingentTraitTypes ()
+	{
+		return new ArrayList<String> ();
 	}
-
 }

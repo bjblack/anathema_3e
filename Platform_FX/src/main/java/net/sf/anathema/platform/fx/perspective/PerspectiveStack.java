@@ -12,38 +12,45 @@ import net.sf.anathema.platform.fx.environment.UiEnvironment;
 
 import org.tbee.javafx.scene.layout.MigPane;
 
-public class PerspectiveStack {
-  private final MigPane cardPanel = new MigPane(LayoutUtils.fillWithoutInsets());
-  private final FxStack perspectiveStack = new FxStack(cardPanel);
-  private final ApplicationModel model;
-  private final Environment environment;
-  private final UiEnvironment uiEnvironment;
-
-  public PerspectiveStack(ApplicationModel model, Environment environment, UiEnvironment uiEnvironment) {
-    this.model = model;
-    this.environment = environment;
-    this.uiEnvironment = uiEnvironment;
-  }
-
-  public void add(Perspective perspective) {
-    Container container = new CardContainer(getIdFor(perspective), perspectiveStack);
-    perspective.initContent(container, model, environment, uiEnvironment);
-  }
-
-  public void show(Perspective perspective) {
-    model.getMessaging().activateCategory(perspective.getMessageCategory());
-    perspectiveStack.show(getIdFor(perspective));
-  }
-
-  private Identifier getIdFor(Perspective perspective) {
-    return new SimpleIdentifier(perspective.getClass().getCanonicalName());
-  }
-
-  public Node getContent() {
-    return cardPanel;
-  }
-
-  public void showFirst() {
-    perspectiveStack.showFirst();
-  }
+public class PerspectiveStack
+{
+	private final MigPane cardPanel = new MigPane (LayoutUtils.fillWithoutInsets ());
+	private final FxStack perspectiveStack = new FxStack (cardPanel);
+	private final ApplicationModel model;
+	private final Environment environment;
+	private final UiEnvironment uiEnvironment;
+	
+	public PerspectiveStack (ApplicationModel model, Environment environment, UiEnvironment uiEnvironment)
+	{
+		this.model = model;
+		this.environment = environment;
+		this.uiEnvironment = uiEnvironment;
+	}
+	
+	public void add (Perspective perspective)
+	{
+		Container container = new CardContainer (getIdFor (perspective), perspectiveStack);
+		perspective.initContent (container, model, environment, uiEnvironment);
+	}
+	
+	public void show (Perspective perspective)
+	{
+		model.getMessaging ().activateCategory (perspective.getMessageCategory ());
+		perspectiveStack.show (getIdFor (perspective));
+	}
+	
+	private Identifier getIdFor (Perspective perspective)
+	{
+		return new SimpleIdentifier (perspective.getClass ().getCanonicalName ());
+	}
+	
+	public Node getContent ()
+	{
+		return cardPanel;
+	}
+	
+	public void showFirst ()
+	{
+		perspectiveStack.showFirst ();
+	}
 }

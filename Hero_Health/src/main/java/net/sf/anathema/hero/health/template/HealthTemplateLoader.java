@@ -8,12 +8,13 @@ import net.sf.anathema.hero.individual.persistence.GenericTemplateLoader;
 import net.sf.anathema.library.identifier.Identifier;
 import net.sf.anathema.library.identifier.SimpleIdentifier;
 
-public class HealthTemplateLoader {
-
-  public static HealthTemplate loadTemplate(TemplateFactory templateFactory, String templateName) {
-    Identifier templateId = new SimpleIdentifier(templateName);
-    GenericAdapter<HealthLevelType> adapter = new GenericAdapter<>(HealthLevelType.class, new HealthLevelReader());
-    TemplateLoader<HealthTemplate> loader = new GenericTemplateLoader<>(HealthTemplate.class, adapter);
-    return templateFactory.loadModelTemplate(templateId, loader);
-  }
+public class HealthTemplateLoader
+{
+	public static HealthTemplate loadTemplate (TemplateFactory templateFactory, String templateName)
+	{
+		Identifier templateId = new SimpleIdentifier (templateName);
+		GenericAdapter<HealthLevelType> adapter = new GenericAdapter<> (HealthLevelType.class, new HealthLevelReader ());
+		TemplateLoader<HealthTemplate> loader = new GenericTemplateLoader<> (HealthTemplate.class, adapter);
+		return templateFactory.loadModelTemplate (templateId, loader);
+	}
 }

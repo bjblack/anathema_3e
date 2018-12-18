@@ -9,28 +9,32 @@ import net.sf.anathema.magic.data.Magic;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MagicCreationData implements MagicCosts {
-
-  private Map<Boolean, MagicPointsStrategy> strategyByFavored = new HashMap<>();
-  private MagicPointsTemplate template;
-
-  public MagicCreationData(MagicPointsTemplate template) {
-    this.template = template;
-    strategyByFavored.put(true, new MagicPointsStrategy(template.favoredCreationPoints));
-    strategyByFavored.put(false, new MagicPointsStrategy(template.generalCreationPoints));
-  }
-
-  @Override
-  public int getMagicCosts(Magic magic, CostAnalyzer analyzer) {
-    boolean favored = analyzer.isMagicFavored(magic);
-    return strategyByFavored.get(favored).getMagicCosts(magic);
-  }
-
-  public int getFavoredMagicPicks() {
-    return template.favoredCreationPoints.freePicks;
-  }
-
-  public int getGeneralMagicPicks() {
-    return template.generalCreationPoints.freePicks;
-  }
+public class MagicCreationData implements MagicCosts
+{
+	private Map<Boolean, MagicPointsStrategy> strategyByFavored = new HashMap<> ();
+	private MagicPointsTemplate template;
+	
+	public MagicCreationData (MagicPointsTemplate template)
+	{
+		this.template = template;
+		strategyByFavored.put (true, new MagicPointsStrategy (template.favoredCreationPoints));
+		strategyByFavored.put (false, new MagicPointsStrategy (template.generalCreationPoints));
+	}
+	
+	@Override
+	public int getMagicCosts (Magic magic, CostAnalyzer analyzer)
+	{
+		boolean favored = analyzer.isMagicFavored (magic);
+		return strategyByFavored.get (favored).getMagicCosts (magic);
+	}
+	
+	public int getFavoredMagicPicks ()
+	{
+		return template.favoredCreationPoints.freePicks;
+	}
+	
+	public int getGeneralMagicPicks ()
+	{
+		return template.generalCreationPoints.freePicks;
+	}
 }

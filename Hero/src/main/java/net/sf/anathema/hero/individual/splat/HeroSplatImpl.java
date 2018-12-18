@@ -9,25 +9,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class HeroSplatImpl implements HeroSplat {
-  private final SplatTypeImpl templateType;
-  private final List<ConfiguredModel> models = new ArrayList<>();
-
-  public HeroSplatImpl(HeroTemplate heroTemplate, HeroTypes heroTypes) {
-    HeroType type = heroTypes.findById(heroTemplate.characterType);
-    this.templateType = new SplatTypeImpl(type, new SimpleIdentifier(heroTemplate.template));
-    for (Map.Entry<String, String> entry : heroTemplate.models.entrySet()) {
-      models.add(new ConfiguredModel(entry.getKey(), entry.getValue()));
-    }
-  }
-
-  @Override
-  public SplatType getTemplateType() {
-    return templateType;
-  }
-
-  @Override
-  public List<ConfiguredModel> getModels() {
-    return models;
-  }
+public class HeroSplatImpl implements HeroSplat
+{
+	private final SplatTypeImpl templateType;
+	private final List<ConfiguredModel> models = new ArrayList<> ();
+	
+	public HeroSplatImpl (HeroTemplate heroTemplate, HeroTypes heroTypes)
+	{
+		HeroType type = heroTypes.findById (heroTemplate.characterType);
+		this.templateType = new SplatTypeImpl (type, new SimpleIdentifier (heroTemplate.template));
+		for (Map.Entry<String, String> entry : heroTemplate.models.entrySet ())
+		{
+			models.add (new ConfiguredModel (entry.getKey (), entry.getValue ()));
+		}
+	}
+	
+	@Override
+	public SplatType getTemplateType ()
+	{
+		return templateType;
+	}
+	
+	@Override
+	public List<ConfiguredModel> getModels ()
+	{
+		return models;
+	}
 }

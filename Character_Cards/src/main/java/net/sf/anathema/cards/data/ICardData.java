@@ -4,20 +4,21 @@ import com.itextpdf.text.Element;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 
-public interface ICardData {
-	String getTitle();
+public interface ICardData
+{
+	String getTitle ();
 	
-	Image getPrimaryIcon();
+	Image getPrimaryIcon ();
 	
-	Image getSecondaryIcon();
+	Image getSecondaryIcon ();
 	
-	Paragraph getStats();
+	Paragraph getStats ();
 	
-	String getKeywords();
+	String getKeywords ();
 	
-	Element[] getBody(int contentHeight);
+	Element[] getBody (int contentHeight);
 	
-	String getSource();
+	String getSource ();
 	
-	boolean wantsNewPage();
+	boolean wantsNewPage ();
 }

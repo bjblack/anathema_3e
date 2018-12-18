@@ -5,19 +5,19 @@ import net.sf.anathema.library.interaction.model.Tool;
 
 import java.util.List;
 
-public interface MagicLearnView {
-
-  void setAvailableMagic(List magics);
-
-  void setLearnedMagic(List magics);
-
-  Tool addMainTool();
-
-  List getSelectedLearnedValues();
-
-  List getSelectedAvailableValues();
-
-  void addAvailableMagicSelectedListener(ChangeListener changeListener);
-
-  void addLearnedMagicSelectedListener(ChangeListener changeListener);
+public interface MagicLearnView
+{
+	void setAvailableMagic (List magics);
+	
+	void setLearnedMagic (List magics);
+	
+	Tool addMainTool ();
+	
+	List getSelectedLearnedValues ();
+	
+	List getSelectedAvailableValues ();
+	
+	void addAvailableMagicSelectedListener (ChangeListener changeListener);
+	
+	void addLearnedMagicSelectedListener (ChangeListener changeListener);
 }

@@ -1,0 +1,8 @@
+
+The Java Project Library_GraphLayout seems to be a system for graphing charm cascades. It contains thirty-two source files (excluding test files), with a cumulative total of five (5) line comments (four of which say "nothing to do"), and no other comments.
+
+Class and function names and a comment in the test files refer to someone named Sugiyama, and a book he wrote.
+
+The package is net.sf.anathema.graph, instead of net.sf.anathema.library.graph, which might have been a better fit to naming conventions.
+
+I will set this project aside for reference purposes.

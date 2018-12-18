@@ -6,11 +6,12 @@ import net.sf.anathema.hero.individual.persistence.GenericTemplateLoader;
 import net.sf.anathema.library.identifier.Identifier;
 import net.sf.anathema.library.identifier.SimpleIdentifier;
 
-public class GroupedTraitsTemplateLoader {
-
-  public static GroupedTraitsTemplate loadTemplate(TemplateFactory templateFactory, String templateName) {
-    Identifier templateId = new SimpleIdentifier(templateName);
-    TemplateLoader<GroupedTraitsTemplate> loader = new GenericTemplateLoader<>(GroupedTraitsTemplate.class);
-    return templateFactory.loadModelTemplate(templateId, loader);
-  }
+public class GroupedTraitsTemplateLoader
+{
+	public static GroupedTraitsTemplate loadTemplate (TemplateFactory templateFactory, String templateName)
+	{
+		Identifier templateId = new SimpleIdentifier (templateName);
+		TemplateLoader<GroupedTraitsTemplate> loader = new GenericTemplateLoader<> (GroupedTraitsTemplate.class);
+		return templateFactory.loadModelTemplate (templateId, loader);
+	}
 }

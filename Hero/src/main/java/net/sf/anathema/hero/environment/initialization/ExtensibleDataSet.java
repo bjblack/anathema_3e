@@ -1,5 +1,6 @@
 package net.sf.anathema.hero.environment.initialization;
 
-public interface ExtensibleDataSet {
+public interface ExtensibleDataSet
+{
 	// nothing to do
 }

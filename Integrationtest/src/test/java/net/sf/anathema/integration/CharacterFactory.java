@@ -20,53 +20,61 @@ import net.sf.anathema.platform.frame.ApplicationModel;
 
 import java.io.File;
 
-public class CharacterFactory {
-
-  private HeroTypes heroTypes;
-  private ApplicationModel model;
-  private HeroEnvironment heroEnvironment;
-
-  public void startAnathema() {
-    TestInitializer initializer = TestInitializer.Create();
-    this.model = initializer.initialize();
-    new HeroPoolInitializer(model,initializer.getEnvironment()).initializeCharacterSystem();
-    heroEnvironment = HeroEnvironmentFetcher.fetch(model);
-    this.heroTypes = heroEnvironment.getHeroTypes();
-  }
-
-  public HeroItemData createCharacter(String type, String subtype) {
-    HeroSplat characterTemplate = loadTemplateForType(type, subtype);
-    return createCharacter(characterTemplate);
-  }
-
-  public HeroItemData saveAndReload(HeroItemData heroItemData) throws  Exception{
-    CharacterPersistenceModel persistenceModel = new CharacterPersistenceModel(model, heroEnvironment);
-    HeroItem heroItem = new HeroItem(heroItemData);
-    persistenceModel.save(heroItem);
-    String repositoryId = heroItem.getRepositoryLocation().getId();
-    Item loadItem = persistenceModel.loadItem(new HeroIdentifier(repositoryId));
-    return (HeroItemData) loadItem.getItemData();
-  }
-
-  private HeroSplat loadTemplateForType(String type, String subtype) {
-    HeroEnvironment generics = getCharacterGenerics();
-    return generics.getTemplateRegistry().getTemplate(new SplatTypeImpl(heroTypes.findById(type), new SimpleIdentifier(subtype)));
-  }
-
-  private HeroItemData createCharacter(HeroSplat template) {
-    RepositoryItemPersister itemPersister = new HeroItemPersister(getCharacterGenerics(), model.getMessaging());
-    Item item = itemPersister.createNew(template);
-    return (HeroItemData) item.getItemData();
-  }
-
-  private HeroEnvironment getCharacterGenerics() {
-    return HeroEnvironmentFetcher.fetch(model);
-  }
-
-  public void tearDownRepository() throws Throwable{
-    File repositoryDirectory = new File(model.getRepository().getRepositoryPath());
-      if (repositoryDirectory.exists()) {
-        InputOutput.deleteDirectory(repositoryDirectory);
-      }
-   }
+public class CharacterFactory
+{
+	private HeroTypes heroTypes;
+	private ApplicationModel model;
+	private HeroEnvironment heroEnvironment;
+	
+	public void startAnathema ()
+	{
+		TestInitializer initializer = TestInitializer.Create ();
+		this.model = initializer.initialize ();
+		new HeroPoolInitializer (model,initializer.getEnvironment ()).initializeCharacterSystem ();
+		heroEnvironment = HeroEnvironmentFetcher.fetch (model);
+		this.heroTypes = heroEnvironment.getHeroTypes ();
+	}
+	
+	public HeroItemData createCharacter (String type, String subtype)
+	{
+		HeroSplat characterTemplate = loadTemplateForType (type, subtype);
+		return createCharacter (characterTemplate);
+	}
+	
+	public HeroItemData saveAndReload (HeroItemData heroItemData) throws  Exception
+	{
+		CharacterPersistenceModel persistenceModel = new CharacterPersistenceModel (model, heroEnvironment);
+		HeroItem heroItem = new HeroItem (heroItemData);
+		persistenceModel.save (heroItem);
+		String repositoryId = heroItem.getRepositoryLocation ().getId ();
+		Item loadItem = persistenceModel.loadItem (new HeroIdentifier (repositoryId));
+		return (HeroItemData) loadItem.getItemData ();
+	}
+	
+	private HeroSplat loadTemplateForType (String type, String subtype)
+	{
+		HeroEnvironment generics = getCharacterGenerics ();
+		return generics.getTemplateRegistry ().getTemplate (new SplatTypeImpl (heroTypes.findById (type), new SimpleIdentifier (subtype)));
+	}
+	
+	private HeroItemData createCharacter (HeroSplat template)
+	{
+		RepositoryItemPersister itemPersister = new HeroItemPersister (getCharacterGenerics (), model.getMessaging ());
+		Item item = itemPersister.createNew (template);
+		return (HeroItemData) item.getItemData ();
+	}
+	
+	private HeroEnvironment getCharacterGenerics ()
+	{
+		return HeroEnvironmentFetcher.fetch (model);
+	}
+	
+	public void tearDownRepository () throws Throwable
+	{
+		File repositoryDirectory = new File (model.getRepository ().getRepositoryPath ());
+		if (repositoryDirectory.exists ())
+		{
+			InputOutput.deleteDirectory (repositoryDirectory);
+		}
+	}
 }

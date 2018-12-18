@@ -26,82 +26,97 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 @ScenarioScoped
-public class AttributeSteps {
-
-  private final static List<TraitType> Attributes = Lists.newArrayList(Strength, Dexterity, Stamina, Charisma, Manipulation, Appearance, Perception, Intelligence, Wits);
-  public static final TraitType ANY_ATTRIBUTE_TYPE = Dexterity;
-  private final IntegrationAttributes attributes;
-  private CharacterHolder character;
-
-  @Inject
-  public AttributeSteps(CharacterHolder character) {
-    this.character = character;
-    this.attributes = new IntegrationAttributes(character);
-  }
-
-  @When("^I set any of her attributes to (\\d+)$")
-  public void setAnyOfHerAttributesTo(int value) throws Throwable {
-    attributes.getAttribute(ANY_ATTRIBUTE_TYPE).setCurrentValue(value);
-  }
-
-  @And("^I set the attribute to (\\d+)$")
-  public void setTheAttributeTo(int value) throws Throwable {
-    setAnyOfHerAttributesTo(value);
-  }
-
-  @Then("^she has (\\d+) dots in attribute (.*)$")
-  public void she_has_dots_in_attribute(int value, String traitId) throws Throwable {
-    TraitType type = new TraitType(traitId);
-    assertThatAttributeHasValueOf(type, value);
-  }
-
-  public void she_has_dots_in_the_attribute(int value) throws Throwable {
-    assertThatAttributeHasValueOf(ANY_ATTRIBUTE_TYPE, value);
-  }
-
-  public void she_has_dots_in_all_her_attributes(int value) throws Throwable {
-    for (TraitType type : Attributes) {
-      assertThatAttributeHasValueOf(type, value);
-    }
-  }
-
-  @When("^she spends all her Attribute Freebies$")
-  public void she_spends_all_attribute_freebies() {
-    String type = character.getHero().getSplat().getTemplateType().getHeroType().getId();
-    new AttributeFreebiesMap().spendAllFreebies(type, attributes);
-  }
-
-  @When("^she spends one additional dot in Primary Attributes$")
-  public void she_spends_one_additional_dot_in_Primary_Attributes() throws Throwable {
-    new AttributeFreebiesMap().spentADotOnPrimary(attributes);
-  }
-
-  @When("^she spends one additional dot in Secondary Attributes$")
-  public void she_spends_one_additional_dot_in_Secondary_Attributes() throws Throwable {
-    new AttributeFreebiesMap().spentADotOnSecondary(attributes);
-  }
-
-  @When("^she spends one additional dot in Tertiary Attributes$")
-  public void she_spends_one_additional_dot_in_Tertiary_Attributes() throws Throwable {
-    new AttributeFreebiesMap().spentADotOnTertiary(attributes);
-  }
-
-  @When("^she spends (\\d+) points on Mental Attributes$")
-  public void she_spends_points_on_Mental_Attributes(int amount) throws Throwable {
-    attributes.spendDotsOnAttributes(amount, Intelligence, Wits, Perception);
-  }
-
-  @When("^she spends (\\d+) points on Social Attributes$")
-  public void she_spends_points_on_Social_Attributes(int amount) throws Throwable {
-    attributes.spendDotsOnAttributes(amount, Appearance, Charisma, Manipulation);
-  }
-
-  @When("^she spends (\\d+) points on Physical Attributes$")
-  public void she_spends_points_on_Physical_Attributes(int amount) throws Throwable {
-    attributes.spendDotsOnAttributes(amount, Strength, Dexterity, Stamina);
-  }
-
-  private void assertThatAttributeHasValueOf(TraitType type, int value) {
-    assertThat("Attribute type " + type, attributes.getAttribute(type).getCurrentValue(), is(value));
-  }
+public class AttributeSteps
+{
+	private final static List<TraitType> Attributes = Lists.newArrayList (Strength, Dexterity, Stamina, Charisma, Manipulation, Appearance, Perception, Intelligence, Wits);
+	public static final TraitType ANY_ATTRIBUTE_TYPE = Dexterity;
+	private final IntegrationAttributes attributes;
+	private CharacterHolder character;
+	
+	@Inject
+	public AttributeSteps (CharacterHolder character)
+	{
+		this.character = character;
+		this.attributes = new IntegrationAttributes (character);
+	}
+	
+	@When ("^I set any of her attributes to (\\d+)$")
+	public void setAnyOfHerAttributesTo (int value) throws Throwable
+	{
+		attributes.getAttribute (ANY_ATTRIBUTE_TYPE).setCurrentValue (value);
+	}
+	
+	@And ("^I set the attribute to (\\d+)$")
+	public void setTheAttributeTo (int value) throws Throwable
+	{
+		setAnyOfHerAttributesTo (value);
+	}
+	
+	@Then ("^she has (\\d+) dots in attribute (.*)$")
+	public void she_has_dots_in_attribute (int value, String traitId) throws Throwable
+	{
+		TraitType type = new TraitType (traitId);
+		assertThatAttributeHasValueOf (type, value);
+	}
+	
+	public void she_has_dots_in_the_attribute (int value) throws Throwable
+	{
+		assertThatAttributeHasValueOf (ANY_ATTRIBUTE_TYPE, value);
+	}
+	
+	public void she_has_dots_in_all_her_attributes (int value) throws Throwable
+	{
+		for (TraitType type : Attributes)
+		{
+			assertThatAttributeHasValueOf (type, value);
+		}
+	}
+	
+	@When ("^she spends all her Attribute Freebies$")
+	public void she_spends_all_attribute_freebies ()
+	{
+		String type = character.getHero ().getSplat ().getTemplateType ().getHeroType ().getId ();
+		new AttributeFreebiesMap ().spendAllFreebies (type, attributes);
+	}
+	
+	@When ("^she spends one additional dot in Primary Attributes$")
+	public void she_spends_one_additional_dot_in_Primary_Attributes () throws Throwable
+	{
+		new AttributeFreebiesMap ().spentADotOnPrimary (attributes);
+	}
+	
+	@When ("^she spends one additional dot in Secondary Attributes$")
+	public void she_spends_one_additional_dot_in_Secondary_Attributes () throws Throwable
+	{
+		new AttributeFreebiesMap ().spentADotOnSecondary (attributes);
+	}
+	
+	@When ("^she spends one additional dot in Tertiary Attributes$")
+	public void she_spends_one_additional_dot_in_Tertiary_Attributes () throws Throwable
+	{
+		new AttributeFreebiesMap ().spentADotOnTertiary (attributes);
+	}
+	
+	@When ("^she spends (\\d+) points on Mental Attributes$")
+	public void she_spends_points_on_Mental_Attributes (int amount) throws Throwable
+	{
+		attributes.spendDotsOnAttributes (amount, Intelligence, Wits, Perception);
+	}
+	
+	@When ("^she spends (\\d+) points on Social Attributes$")
+	public void she_spends_points_on_Social_Attributes (int amount) throws Throwable
+	{
+		attributes.spendDotsOnAttributes (amount, Appearance, Charisma, Manipulation);
+	}
+	
+	@When ("^she spends (\\d+) points on Physical Attributes$")
+	public void she_spends_points_on_Physical_Attributes (int amount) throws Throwable
+	{
+		attributes.spendDotsOnAttributes (amount, Strength, Dexterity, Stamina);
+	}
+	
+	private void assertThatAttributeHasValueOf (TraitType type, int value)
+	{
+		assertThat ("Attribute type " + type, attributes.getAttribute (type).getCurrentValue (), is (value));
+	}
 }

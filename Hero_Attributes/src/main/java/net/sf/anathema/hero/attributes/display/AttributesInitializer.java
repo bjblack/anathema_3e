@@ -11,27 +11,30 @@ import net.sf.anathema.library.initialization.Weight;
 
 import static net.sf.anathema.hero.individual.overview.HeroModelGroup.Mundane;
 
-@RegisteredInitializer(Mundane)
-@Weight(weight = 0)
-public class AttributesInitializer implements HeroModelInitializer {
-
-  private HeroEnvironment environment;
-
-  @SuppressWarnings("UnusedParameters")
-  public AttributesInitializer(HeroEnvironment environment) {
-    this.environment = environment;
-  }
-
-  @Override
-  public void initialize(SectionView sectionView, Hero hero) {
-    String attributeHeader = environment.getResources().getString("CardView.AttributeConfiguration.Title");
-    GroupedStatedDotsView attributeView =
-            sectionView.addView(attributeHeader, GroupedStatedDotsView.class);
-    new AttributesPresenter(hero, environment.getResources(), attributeView).initPresentation();
-  }
-
-  @Override
-  public boolean canWorkForHero(Hero hero) {
-    return AttributesModelFetcher.fetch(hero) != null;
-  }
+@RegisteredInitializer (Mundane)
+@Weight (weight = 0)
+public class AttributesInitializer implements HeroModelInitializer
+{
+	private HeroEnvironment environment;
+	
+	@SuppressWarnings ("UnusedParameters")
+	public AttributesInitializer (HeroEnvironment environment)
+	{
+		this.environment = environment;
+	}
+	
+	@Override
+	public void initialize (SectionView sectionView, Hero hero)
+	{
+		String attributeHeader = environment.getResources ().getString ("CardView.AttributeConfiguration.Title");
+		GroupedStatedDotsView attributeView =
+		sectionView.addView (attributeHeader, GroupedStatedDotsView.class);
+		new AttributesPresenter (hero, environment.getResources (), attributeView).initPresentation ();
+	}
+	
+	@Override
+	public boolean canWorkForHero (Hero hero)
+	{
+		return AttributesModelFetcher.fetch (hero) != null;
+	}
 }

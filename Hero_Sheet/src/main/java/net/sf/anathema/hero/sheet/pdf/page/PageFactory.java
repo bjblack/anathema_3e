@@ -7,9 +7,9 @@ import net.sf.anathema.library.resources.Resources;
 
 import java.util.List;
 
-public interface PageFactory {
-
-  List<PageEncoder> create(EncoderRegistry encoderRegistry, Resources resources, PageSize pageSize);
-
-  boolean supports(BasicContent content);
+public interface PageFactory
+{
+	List<PageEncoder> create (EncoderRegistry encoderRegistry, Resources resources, PageSize pageSize);
+	
+	boolean supports (BasicContent content);
 }

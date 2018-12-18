@@ -25,80 +25,94 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
-public class CharmImpl extends AbstractMagic implements Charm {
-
-  private List<Charm> children = new ArrayList<>();
-  private PrerequisiteListImpl prerequisiteList;
-  private final CategoryReference category;
-  private final TreeName tree;
-  private CharmName name;
-  private final CharmTemplate template;
-
-  public CharmImpl(CategoryReference category, TreeName tree, CharmName name, CharmTemplate template) {
-    this.category = category;
-    this.tree = tree;
-    this.name = name;
-    this.template = template;
-    this.prerequisiteList = new PrerequisiteListImpl(template);
-    template.keywords.forEach(tag -> addMagicAttribute(new MagicAttributeImpl(tag, true)));
-    template.internalTags.forEach(tag -> addMagicAttribute(new MagicAttributeImpl(tag, false)));
-  }
-
-  @Override
-  public CharmName getName() {
-    return name;
-  }
-
-  @Override
-  public TreeReference getTreeReference() {
-    return new TreeReference(category, tree);
-  }
-
-  @Override
-  public List<SourceBook> getSources() {
-    Stream<String> sourceStrings = template.sources.stream();
-    return sourceStrings.map(SourceBookImpl::new).collect(toList());
-  }
-
-  @Override
-  public CharmType getCharmType() {
-    for (CharmType type: CharmType.values()) {
-      if (hasAttribute(new SimpleIdentifier(type.name()))) {
-        return type;
-      }
-    }
-    return CharmType.Simple;
-  }
-
-  @Override
-  public Duration getDuration() {
-    return new Duration(template.duration);
-  }
-
-  @Override
-  public CostList getTemporaryCost() {
-    return new CostParser().parse(template.cost);
-  }
-
-  @Override
-  public void forEachChild(Consumer<Charm> consumer) {
-    children.stream().forEach(consumer);
-  }
-
-  @Override
-  public PrerequisiteList getPrerequisites() {
-    return prerequisiteList;
-  }
-
-  public void addChild(CharmImpl charm) {
-    children.add(charm);
-  }
-
-  public void addCharmPrerequisite(CharmPrerequisite prerequisite) {
-    prerequisiteList.addCharmPrerequisite(prerequisite);
-  }
-  
-  public void clearPrerequisites() {
-  	prerequisiteList.clearPrerequisites();
-  }
+public class CharmImpl extends AbstractMagic implements Charm
+{
+	private List<Charm> children = new ArrayList<> ();
+	private PrerequisiteListImpl prerequisiteList;
+	private final CategoryReference category;
+	private final TreeName tree;
+	private CharmName name;
+	private final CharmTemplate template;
+	
+	public CharmImpl (CategoryReference category, TreeName tree, CharmName name, CharmTemplate template)
+	{
+		this.category = category;
+		this.tree = tree;
+		this.name = name;
+		this.template = template;
+		this.prerequisiteList = new PrerequisiteListImpl (template);
+		template.keywords.forEach (tag -> addMagicAttribute (new MagicAttributeImpl (tag, true)));
+		template.internalTags.forEach (tag -> addMagicAttribute (new MagicAttributeImpl (tag, false)));
+	}
+	
+	@Override
+	public CharmName getName ()
+	{
+		return name;
+	}
+	
+	@Override
+	public TreeReference getTreeReference ()
+	{
+		return new TreeReference (category, tree);
+	}
+	
+	@Override
+	public List<SourceBook> getSources ()
+	{
+		Stream<String> sourceStrings = template.sources.stream ();
+		return sourceStrings.map (SourceBookImpl::new).collect (toList ());
+	}
+	
+	@Override
+	public CharmType getCharmType ()
+	{
+		for (CharmType type: CharmType.values ())
+		{
+			if (hasAttribute (new SimpleIdentifier (type.name ())))
+			{
+				return type;
+			}
+		}
+		return CharmType.Simple;
+	}
+	
+	@Override
+	public Duration getDuration ()
+	{
+		return new Duration (template.duration);
+	}
+	
+	@Override
+	public CostList getTemporaryCost ()
+	{
+		return new CostParser ().parse (template.cost);
+	}
+	
+	@Override
+	public void forEachChild (Consumer<Charm> consumer)
+	{
+		children.stream ().forEach (consumer);
+	}
+	
+	@Override
+	public PrerequisiteList getPrerequisites ()
+	{
+		return prerequisiteList;
+	}
+	
+	public void addChild (CharmImpl charm)
+	{
+		children.add (charm);
+	}
+	
+	public void addCharmPrerequisite (CharmPrerequisite prerequisite)
+	{
+		prerequisiteList.addCharmPrerequisite (prerequisite);
+	}
+	
+	public void clearPrerequisites ()
+	{
+		prerequisiteList.clearPrerequisites ();
+	}
 }

@@ -7,18 +7,20 @@ import net.sf.anathema.library.collection.MultiEntryMap;
 import java.util.Collections;
 import java.util.List;
 
-class TestLayeredGraph implements LayeredGraph {
-
-  public final MultiEntryMap<Integer, ISimpleNode> nodesByLayer = new MultiEntryMap<>();
-
-  @Override
-  public ISimpleNode[] getNodesByLayer(int layer) {
-    List<ISimpleNode> nodes = nodesByLayer.get(layer);
-    return nodes.toArray(new ISimpleNode[nodes.size()]);
-  }
-
-  @Override
-  public int getDeepestLayer() {
-    return Collections.max(nodesByLayer.keySet());
-  }
+class TestLayeredGraph implements LayeredGraph
+{
+	public final MultiEntryMap<Integer, ISimpleNode> nodesByLayer = new MultiEntryMap<> ();
+	
+	@Override
+	public ISimpleNode[] getNodesByLayer (int layer)
+	{
+		List<ISimpleNode> nodes = nodesByLayer.get (layer);
+		return nodes.toArray (new ISimpleNode[nodes.size ()]);
+	}
+	
+	@Override
+	public int getDeepestLayer ()
+	{
+		return Collections.max (nodesByLayer.keySet ());
+	}
 }

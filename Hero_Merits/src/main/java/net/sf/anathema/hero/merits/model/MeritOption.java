@@ -7,19 +7,19 @@ import net.sf.anathema.library.model.trait.OptionalTraitOption;
 
 import java.util.List;
 
-public interface MeritOption extends OptionalTraitOption {
-
-  int MAX_MERIT_RATING = 5;
-
-  MeritCategory getCategory();
-
-  boolean allowsRepurchase();
-
-  boolean isHeroEligible(Hero hero);
-
-  List<String> getContingentTraitTypes();
-
-  List<MechanicalDetail> getMechanics();
-
-  boolean isReferencedBy(OptionalEntryReference reference);
+public interface MeritOption extends OptionalTraitOption
+{
+	int MAX_MERIT_RATING = 5;
+	
+	MeritCategory getCategory ();
+	
+	boolean allowsRepurchase ();
+	
+	boolean isHeroEligible (Hero hero);
+	
+	List<String> getContingentTraitTypes ();
+	
+	List<MechanicalDetail> getMechanics ();
+	
+	boolean isReferencedBy (OptionalEntryReference reference);
 }

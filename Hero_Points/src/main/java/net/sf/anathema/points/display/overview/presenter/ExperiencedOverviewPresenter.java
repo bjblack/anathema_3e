@@ -16,71 +16,84 @@ import net.sf.anathema.points.model.overview.IValueModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExperiencedOverviewPresenter {
-
-  private final ExperiencePointManagement management;
-  private final CategorizedOverview view;
-  private final Hero hero;
-  private MessageToken token;
-  private final Resources resources;
-  private final List<IOverviewSubPresenter> presenters = new ArrayList<>();
-
-  private LabelledAllotmentView totalView;
-
-  public ExperiencedOverviewPresenter(Resources resources, Hero hero, CategorizedOverview overview,
-                                      ExperiencePointManagement experiencePoints, MessageToken token) {
-    this.resources = resources;
-    this.hero = hero;
-    this.token = token;
-    hero.getChangeAnnouncer().addListener(flavor -> {
-      if (ExperienceModelFetcher.fetch(hero).isExperienced()) {
-        calculateXPCost();
-      }
-    });
-    this.management = experiencePoints;
-    this.view = overview;
-  }
-
-  public void initPresentation() {
-    OverviewCategory category = view.addOverviewCategory(getString("Overview.Experience.Title"));
-    for (IValueModel<Integer> model : management.getAllModels()) {
-      StyledValueView<Integer> valueView = category.addIntegerValueView(getString("Overview.Experience." + model.getId()), 2);
-      presenters.add(new ValueSubPresenter(model, valueView));
-    }
-    presenters.add(new TotalExperiencePresenter(hero, resources, token, management));
-    initTotal(category);
-    calculateXPCost();
-  }
-
-  private void initTotal(OverviewCategory category) {
-    totalView = category.addAllotmentView(getString("Overview.Experience.Total"), 4);
-    PointModelFetcher.fetch(hero).getExperiencePoints().addExperiencePointConfigurationListener(this::calculateXPCost);
-  }
-
-  private void calculateXPCost() {
-    for (IOverviewSubPresenter presenter : presenters) {
-      presenter.update();
-    }
-    totalView.setAllotment(getTotalXP());
-    setTotalViewColor();
-    totalView.setValue(management.getTotalCosts());
-    setTotalViewColor();
-  }
-
-  private void setTotalViewColor() {
-    boolean overspent = management.getTotalCosts() > getTotalXP();
-    totalView.setTextColor(overspent ? LegalityColorProvider.COLOR_HIGH : LegalityColorProvider.COLOR_OKAY);
-  }
-
-  private int getTotalXP() {
-    return PointModelFetcher.fetch(hero).getExperiencePoints().getTotalExperiencePoints();
-  }
-
-  private String getString(String string) {
-    return resources.getString(string);
-  }
-
-  public void refresh() {
-    calculateXPCost();
-  }
+public class ExperiencedOverviewPresenter
+{
+	private final ExperiencePointManagement management;
+	private final CategorizedOverview view;
+	private final Hero hero;
+	private MessageToken token;
+	private final Resources resources;
+	private final List<IOverviewSubPresenter> presenters = new ArrayList<> ();
+	
+	private LabelledAllotmentView totalView;
+	
+	public ExperiencedOverviewPresenter (Resources resources, Hero hero, CategorizedOverview overview,
+	ExperiencePointManagement experiencePoints, MessageToken token)
+	{
+		this.resources = resources;
+		this.hero = hero;
+		this.token = token;
+		hero.getChangeAnnouncer ().addListener (flavor ->
+		{
+			if (ExperienceModelFetcher.fetch (hero).isExperienced ())
+			{
+				calculateXPCost ();
+			}
+		}
+		);
+		this.management = experiencePoints;
+		this.view = overview;
+	}
+	
+	public void initPresentation ()
+	{
+		OverviewCategory category = view.addOverviewCategory (getString ("Overview.Experience.Title"));
+		for (IValueModel<Integer> model : management.getAllModels ())
+		{
+			StyledValueView<Integer> valueView = category.addIntegerValueView (getString ("Overview.Experience." + model.getId ()), 2);
+			presenters.add (new ValueSubPresenter (model, valueView));
+		}
+		presenters.add (new TotalExperiencePresenter (hero, resources, token, management));
+		initTotal (category);
+		calculateXPCost ();
+	}
+	
+	private void initTotal (OverviewCategory category)
+	{
+		totalView = category.addAllotmentView (getString ("Overview.Experience.Total"), 4);
+		PointModelFetcher.fetch (hero).getExperiencePoints ().addExperiencePointConfigurationListener (this::calculateXPCost);
+	}
+	
+	private void calculateXPCost ()
+	{
+		for (IOverviewSubPresenter presenter : presenters)
+		{
+			presenter.update ();
+		}
+		totalView.setAllotment (getTotalXP ());
+		setTotalViewColor ();
+		totalView.setValue (management.getTotalCosts ());
+		setTotalViewColor ();
+	}
+	
+	private void setTotalViewColor ()
+	{
+		boolean overspent = management.getTotalCosts () > getTotalXP ();
+		totalView.setTextColor (overspent ? LegalityColorProvider.COLOR_HIGH : LegalityColorProvider.COLOR_OKAY);
+	}
+	
+	private int getTotalXP ()
+	{
+		return PointModelFetcher.fetch (hero).getExperiencePoints ().getTotalExperiencePoints ();
+	}
+	
+	private String getString (String string)
+	{
+		return resources.getString (string);
+	}
+	
+	public void refresh ()
+	{
+		calculateXPCost ();
+	}
 }

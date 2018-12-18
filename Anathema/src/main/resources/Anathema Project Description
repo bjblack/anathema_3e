@@ -1,0 +1,10 @@
+
+The Java Project Anathema contains the main () method, the program's entry point. This is within the AnathemaBootLoader class, that appropriately loads things on boot. The other classes in this project are helper classes; I believe that no other Projects use them.
+
+It contains five source files, which altogether contain one note, regarding the original source of PropertiesLoader.
+
+Specifically, AnathemaBootLoader may use EasyLoader and PropertiesLoader. EasyLoader may use FilesOnly, and PropertiesLoader may throw ConfigurationFailedException.
+
+Ultimately, this Project loads the Anathema class (in Project Platform_FX), and runs its startApplication method.
+
+I assess this project to be fine as-is; aside from documenting the code and passing command-line arguments, I intend to make no changes.

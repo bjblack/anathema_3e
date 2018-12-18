@@ -8,70 +8,87 @@ import net.sf.anathema.library.resources.Resources;
 
 import static net.sf.anathema.hero.traits.model.types.CommonTraitTypes.Essence;
 
-public class SimpleEssenceContent extends AbstractSubBoxContent {
-
-  private Hero hero;
-
-  public SimpleEssenceContent(Resources resources, Hero hero) {
-    super(resources);
-    this.hero = hero;
-  }
-
-  @Override
-  public String getHeaderKey() {
-    return "Essence";
-  }
-
-  @Override
-  public boolean hasContent() {
-    return true;
-  }
-
-  public int getEssenceValue() {
-    return SpiritualTraitModelFetcher.fetch(hero).getTrait(Essence).getCurrentValue();
-  }
-
-  public int getEssenceMax() {
-    return SpiritualTraitModelFetcher.fetch(hero).getEssenceLimitation().getAbsoluteLimit(hero);
-  }
-
-  public int getNumberOfPoolLines() {
-    return (hasPersonalPool() ? 1 : 0) + (hasPeripheralPool() ? 1 : 0);
-  }
-
-  public boolean hasPeripheralPool() {
-    return getPeripheralPool() != null;
-  }
-
-  public boolean hasPersonalPool() {
-    return getPersonalPool() != null;
-  }
-
-  public String getPeripheralPool() {
-    try {
-      return EssencePoolModelFetcher.fetch(hero).getPeripheralPool();
-    } catch (IllegalArgumentException e) {
-      return null;
-    }
-  }
-
-  public String getPersonalPool() {
-    return EssencePoolModelFetcher.fetch(hero).getPersonalPool();
-  }
-
-  public String getPersonalPoolLabel() {
-    return getResources().getString("Sheet.Essence.PersonalPool");
-  }
-
-  public String getPeripheralPoolLabel() {
-    return getResources().getString("Sheet.Essence.PeripheralPool");
-  }
-
-  public String getAvailableText() {
-    return " " + getResources().getString("Sheet.Essence.Available");
-  }
-
-  public String getTotalString(String poolValue) {
-    return poolValue + " " + getResources().getString("Sheet.Essence.Total") + " / ";
-  }
+public class SimpleEssenceContent extends AbstractSubBoxContent
+{
+	private Hero hero;
+	
+	public SimpleEssenceContent (Resources resources, Hero hero)
+	{
+		super (resources);
+		this.hero = hero;
+	}
+	
+	@Override
+	public String getHeaderKey ()
+	{
+		return "Essence";
+	}
+	
+	@Override
+	public boolean hasContent ()
+	{
+		return true;
+	}
+	
+	public int getEssenceValue ()
+	{
+		return SpiritualTraitModelFetcher.fetch (hero).getTrait (Essence).getCurrentValue ();
+	}
+	
+	public int getEssenceMax ()
+	{
+		return SpiritualTraitModelFetcher.fetch (hero).getEssenceLimitation ().getAbsoluteLimit (hero);
+	}
+	
+	public int getNumberOfPoolLines ()
+	{
+		return (hasPersonalPool () ? 1 : 0) + (hasPeripheralPool () ? 1 : 0);
+	}
+	
+	public boolean hasPeripheralPool ()
+	{
+		return getPeripheralPool () != null;
+	}
+	
+	public boolean hasPersonalPool ()
+	{
+		return getPersonalPool () != null;
+	}
+	
+	public String getPeripheralPool ()
+	{
+		try
+		{
+			return EssencePoolModelFetcher.fetch (hero).getPeripheralPool ();
+		}
+		catch (IllegalArgumentException e)
+		{
+			return null;
+		}
+	}
+	
+	public String getPersonalPool ()
+	{
+		return EssencePoolModelFetcher.fetch (hero).getPersonalPool ();
+	}
+	
+	public String getPersonalPoolLabel ()
+	{
+		return getResources ().getString ("Sheet.Essence.PersonalPool");
+	}
+	
+	public String getPeripheralPoolLabel ()
+	{
+		return getResources ().getString ("Sheet.Essence.PeripheralPool");
+	}
+	
+	public String getAvailableText ()
+	{
+		return " " + getResources ().getString ("Sheet.Essence.Available");
+	}
+	
+	public String getTotalString (String poolValue)
+	{
+		return poolValue + " " + getResources ().getString ("Sheet.Essence.Total") + " / ";
+	}
 }

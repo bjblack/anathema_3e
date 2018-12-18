@@ -12,27 +12,30 @@ import net.sf.anathema.library.initialization.Weight;
 import net.sf.anathema.library.presenter.CategorizedOptionalPropertyPresenter;
 import net.sf.anathema.library.view.property.OptionalPropertiesView;
 
-@RegisteredInitializer(HeroModelGroup.Perks)
-@Weight(weight = 400)
-public class FlawsInitializer implements HeroModelInitializer {
-
-  private HeroEnvironment environment;
-
-  @SuppressWarnings("UnusedParameters")
-  public FlawsInitializer(HeroEnvironment environment) {
-    this.environment = environment;
-  }
-
-  @Override
-  public void initialize(SectionView sectionView, Hero hero) {
-    String viewName = environment.getResources().getString("AdditionalTemplateView.TabName.Flaws");
-    OptionalPropertiesView view = sectionView.addView(viewName, OptionalPropertiesView.class);
-    FlawsModel flawsModel = FlawsModelFetcher.fetch(hero);
-    new CategorizedOptionalPropertyPresenter(hero, flawsModel, view, environment.getResources()).initPresentation();
-  }
-
-  @Override
-  public boolean canWorkForHero(Hero hero) {
-    return FlawsModelFetcher.fetch(hero) != null;
-  }
+@RegisteredInitializer (HeroModelGroup.Perks)
+@Weight (weight = 400)
+public class FlawsInitializer implements HeroModelInitializer
+{
+	private HeroEnvironment environment;
+	
+	@SuppressWarnings ("UnusedParameters")
+	public FlawsInitializer (HeroEnvironment environment)
+	{
+		this.environment = environment;
+	}
+	
+	@Override
+	public void initialize (SectionView sectionView, Hero hero)
+	{
+		String viewName = environment.getResources ().getString ("AdditionalTemplateView.TabName.Flaws");
+		OptionalPropertiesView view = sectionView.addView (viewName, OptionalPropertiesView.class);
+		FlawsModel flawsModel = FlawsModelFetcher.fetch (hero);
+		new CategorizedOptionalPropertyPresenter (hero, flawsModel, view, environment.getResources ()).initPresentation ();
+	}
+	
+	@Override
+	public boolean canWorkForHero (Hero hero)
+	{
+		return FlawsModelFetcher.fetch (hero) != null;
+	}
 }

@@ -5,15 +5,18 @@ import net.sf.anathema.hero.individual.persistence.values.Value;
 import net.sf.anathema.hero.traits.model.TraitModelFetcher;
 import net.sf.anathema.hero.traits.model.TraitType;
 
-public class TraitValue implements Value {
+public class TraitValue implements Value
+{
 	private final TraitType trait;
 	
-	public TraitValue(TraitType trait) {
+	public TraitValue (TraitType trait)
+	{
 		this.trait = trait;
 	}
-
+	
 	@Override
-	public int getValueForHero(Hero hero) {
-		return TraitModelFetcher.fetch(hero).getTrait(trait).getCurrentValue();
+	public int getValueForHero (Hero hero)
+	{
+		return TraitModelFetcher.fetch (hero).getTrait (trait).getCurrentValue ();
 	}
 }

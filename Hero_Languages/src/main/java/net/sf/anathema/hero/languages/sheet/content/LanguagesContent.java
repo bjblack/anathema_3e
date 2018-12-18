@@ -12,29 +12,33 @@ import net.sf.anathema.library.resources.Resources;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LanguagesContent extends AbstractSubBoxContent implements ListSubBoxContent {
-
-  private Hero hero;
-
-  public LanguagesContent(Hero hero, Resources resources) {
-    super(resources);
-    this.hero = hero;
-  }
-
-  @Override
-  public String getHeaderKey() {
-    return "Languages";
-  }
-
-  @Override
-  public List<String> getPrintEntries() {
-    MeritsModel model = MeritsModelFetcher.fetch(hero);
-    List<Merit> languageMerits = model.getMeritsMatchingReference(new OptionalEntryReference("Language"));
-    return languageMerits.stream().map(Merit::getDescription).collect(Collectors.toList());
-  }
-
-  @Override
-  public boolean useNewLineForEachEntry() {
-    return false;
-  }
+public class LanguagesContent extends AbstractSubBoxContent implements ListSubBoxContent
+{
+	private Hero hero;
+	
+	public LanguagesContent (Hero hero, Resources resources)
+	{
+		super (resources);
+		this.hero = hero;
+	}
+	
+	@Override
+	public String getHeaderKey ()
+	{
+		return "Languages";
+	}
+	
+	@Override
+	public List<String> getPrintEntries ()
+	{
+		MeritsModel model = MeritsModelFetcher.fetch (hero);
+		List<Merit> languageMerits = model.getMeritsMatchingReference (new OptionalEntryReference ("Language"));
+		return languageMerits.stream ().map (Merit::getDescription).collect (Collectors.toList ());
+	}
+	
+	@Override
+	public boolean useNewLineForEachEntry ()
+	{
+		return false;
+	}
 }

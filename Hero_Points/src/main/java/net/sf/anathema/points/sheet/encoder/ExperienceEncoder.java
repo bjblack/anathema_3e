@@ -11,16 +11,18 @@ import com.itextpdf.text.Phrase;
 
 import static net.sf.anathema.hero.sheet.pdf.page.IVoidStateFormatConstants.FONT_SIZE;
 
-public class ExperienceEncoder extends AbstractContentEncoder<ExperienceContent> {
-
-  public ExperienceEncoder() {
-    super(ExperienceContent.class);
-  }
-
-  @Override
-  public void encode(SheetGraphics graphics, ReportSession reportSession, Bounds bounds) throws DocumentException {
-    ExperienceContent content = createContent(reportSession);
-    Phrase phrase = new Phrase(content.getExperienceText(), graphics.createTextFont());
-    graphics.createSimpleColumn(bounds).withLeading((float) (FONT_SIZE + 4)).andTextPart(phrase).encode();
-  }
+public class ExperienceEncoder extends AbstractContentEncoder<ExperienceContent>
+{
+	public ExperienceEncoder ()
+	{
+		super (ExperienceContent.class);
+	}
+	
+	@Override
+	public void encode (SheetGraphics graphics, ReportSession reportSession, Bounds bounds) throws DocumentException
+	{
+		ExperienceContent content = createContent (reportSession);
+		Phrase phrase = new Phrase (content.getExperienceText (), graphics.createTextFont ());
+		graphics.createSimpleColumn (bounds).withLeading ( (float) (FONT_SIZE + 4)).andTextPart (phrase).encode ();
+	}
 }

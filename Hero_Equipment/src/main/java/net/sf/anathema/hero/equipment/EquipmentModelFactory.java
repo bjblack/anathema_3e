@@ -8,16 +8,18 @@ import net.sf.anathema.hero.merits.model.MeritsModel;
 import net.sf.anathema.hero.sheet.pdf.content.stats.StatsModel;
 import net.sf.anathema.hero.specialties.model.SpecialtiesModel;
 
-@SuppressWarnings("UnusedDeclaration")
-public class EquipmentModelFactory extends SimpleModelTreeEntry implements HeroModelFactory {
-
-  public EquipmentModelFactory() {
-    super(EquipmentModel.ID, AbilitiesModel.ID, SpecialtiesModel.ID, StatsModel.ID, MeritsModel.ID);
-  }
-
-  @SuppressWarnings("unchecked")
-  @Override
-  public EquipmentModel create(TemplateFactory templateFactory, String templateId) {
-    return new EquipmentModelImpl();
-  }
+@SuppressWarnings ("UnusedDeclaration")
+public class EquipmentModelFactory extends SimpleModelTreeEntry implements HeroModelFactory
+{
+	public EquipmentModelFactory ()
+	{
+		super (EquipmentModel.ID, AbilitiesModel.ID, SpecialtiesModel.ID, StatsModel.ID, MeritsModel.ID);
+	}
+	
+	@SuppressWarnings ("unchecked")
+	@Override
+	public EquipmentModel create (TemplateFactory templateFactory, String templateId)
+	{
+		return new EquipmentModelImpl ();
+	}
 }

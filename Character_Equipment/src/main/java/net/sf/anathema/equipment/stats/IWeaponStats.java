@@ -6,29 +6,29 @@ import net.sf.anathema.library.identifier.Identifier;
 
 import java.util.Collection;
 
-public interface IWeaponStats extends IEquipmentStats {
-
-  int getAccuracy();
-
-  int getDamage();
-
-  HealthType getDamageType();
-
-  Collection<Identifier> getTags();
-
-  TraitType getTraitType();
-
-  Integer getDefence();
-
-  TraitType getDamageTraitType();
-
-  boolean inflictsNoDamage();
-
-  boolean isRangedCombat();
-  
-  int getMobilityPenalty();
-
-  ItemStatsSet getViews();
-
-  int getOverwhelmingValue();
+public interface IWeaponStats extends IEquipmentStats
+{
+	int getAccuracy ();
+	
+	int getDamage ();
+	
+	HealthType getDamageType ();
+	
+	Collection<Identifier> getTags ();
+	
+	TraitType getTraitType ();
+	
+	Integer getDefence ();
+	
+	TraitType getDamageTraitType ();
+	
+	boolean inflictsNoDamage ();
+	
+	boolean isRangedCombat ();
+	
+	int getMobilityPenalty ();
+	
+	ItemStatsSet getViews ();
+	
+	int getOverwhelmingValue ();
 }

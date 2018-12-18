@@ -14,15 +14,16 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class ControlledFileChooserTest {
-
-  private final FileChooserConfiguration configuration = new FileChooserConfiguration(new FileExtension("description", "filter"), "name");
-
-  @Test
-  public void findsFileViaRegisteredFileChooser() throws Exception {
-    Path expectation = Paths.get(".");
-    SingleFileChooser singleFileChooser = mock(SingleFileChooser.class);
-    when(singleFileChooser.selectSaveFile(configuration)).thenReturn(expectation);
-    assertThat(new ControlledFileChooser(singleFileChooser, configuration).getPrintFile(), is(expectation));
-  }
+public class ControlledFileChooserTest
+{
+	private final FileChooserConfiguration configuration = new FileChooserConfiguration (new FileExtension ("description", "filter"), "name");
+	
+	@Test
+	public void findsFileViaRegisteredFileChooser () throws Exception
+	{
+		Path expectation = Paths.get (".");
+		SingleFileChooser singleFileChooser = mock (SingleFileChooser.class);
+		when (singleFileChooser.selectSaveFile (configuration)).thenReturn (expectation);
+		assertThat (new ControlledFileChooser (singleFileChooser, configuration).getPrintFile (), is (expectation));
+	}
 }

@@ -5,20 +5,23 @@ import net.sf.anathema.library.resources.RelativePath;
 import net.sf.anathema.library.tooltip.ConfigurableTooltip;
 import net.sf.anathema.platform.repository.PrintNameFile;
 
-public class ScrollUi implements AgnosticUIConfiguration<PrintNameFile> {
-
-  @Override
-  public RelativePath getIconsRelativePath(PrintNameFile value) {
-    return NO_ICON;
-  }
-
-  @Override
-  public String getLabel(PrintNameFile value) {
-    return value.getPrintName();
-  }
-
-  @Override
-  public void configureTooltip(PrintNameFile item, ConfigurableTooltip configurableTooltip) {
-    //nothing to do
-  }
+public class ScrollUi implements AgnosticUIConfiguration<PrintNameFile>
+{
+	@Override
+	public RelativePath getIconsRelativePath (PrintNameFile value)
+	{
+		return NO_ICON;
+	}
+	
+	@Override
+	public String getLabel (PrintNameFile value)
+	{
+		return value.getPrintName ();
+	}
+	
+	@Override
+	public void configureTooltip (PrintNameFile item, ConfigurableTooltip configurableTooltip)
+	{
+		//nothing to do
+	}
 }

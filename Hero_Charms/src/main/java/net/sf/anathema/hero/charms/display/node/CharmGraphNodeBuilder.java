@@ -7,11 +7,13 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class CharmGraphNodeBuilder {
-  public static Collection<IIdentifiedRegularNode> createNodesFromCharms(Collection<Charm> groupCharms) {
-    Map<String, IIdentifiedRegularNode> charmNodesById = new LinkedHashMap<>();
-    CharmNodeBuilder.buildNodes(groupCharms, charmNodesById);
-    CharmNodeConnector.connectNodes(groupCharms, charmNodesById);
-    return charmNodesById.values();
-  }
+public class CharmGraphNodeBuilder
+{
+	public static Collection<IIdentifiedRegularNode> createNodesFromCharms (Collection<Charm> groupCharms)
+	{
+		Map<String, IIdentifiedRegularNode> charmNodesById = new LinkedHashMap<> ();
+		CharmNodeBuilder.buildNodes (groupCharms, charmNodesById);
+		CharmNodeConnector.connectNodes (groupCharms, charmNodesById);
+		return charmNodesById.values ();
+	}
 }

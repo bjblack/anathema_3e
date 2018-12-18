@@ -9,10 +9,12 @@ import net.sf.anathema.platform.item.ItemTypePresentationFactory;
 
 import static net.sf.anathema.scribe.scroll.ScrollItemType.SCROLL_ITEM_TYPE_ID;
 
-@ForItemType(SCROLL_ITEM_TYPE_ID)
-public class ScrollPresentationFactory implements ItemTypePresentationFactory {
-  @Override
-  public IItemTypeViewProperties createItemTypeCreationProperties(ApplicationModel anathemaModel, Resources resources) {
-    return new ScrollPresentation();
-  }
+@ForItemType (SCROLL_ITEM_TYPE_ID)
+public class ScrollPresentationFactory implements ItemTypePresentationFactory
+{
+	@Override
+	public IItemTypeViewProperties createItemTypeCreationProperties (ApplicationModel anathemaModel, Resources resources)
+	{
+		return new ScrollPresentation ();
+	}
 }

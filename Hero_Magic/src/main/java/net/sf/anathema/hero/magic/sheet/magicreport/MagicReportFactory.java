@@ -10,11 +10,12 @@ import java.util.Collections;
 import java.util.List;
 
 @RegisteredReportFactory
-@Weight(weight = 30)
-public class MagicReportFactory implements ReportFactory {
-
-  @Override
-  public List<Report> createReport(HeroEnvironment environment) {
-    return Collections.singletonList(new MagicReport(environment));
-  }
+@Weight (weight = 30)
+public class MagicReportFactory implements ReportFactory
+{
+	@Override
+	public List<Report> createReport (HeroEnvironment environment)
+	{
+		return Collections.singletonList (new MagicReport (environment));
+	}
 }

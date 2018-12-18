@@ -1,0 +1,4 @@
+
+The Java Project Hero_Abilities seems to implement ability scores without favor/caste/supernal mods (although some functions can accept these mods as arguments). It contains forty-one source files (excluding test files), with a cumulative total of four (4) line comments (one of which says "nothing to do"), and zero (0) other comments.
+
+As a sub-project of Hero, which I am scrapping, I will scrap this project.

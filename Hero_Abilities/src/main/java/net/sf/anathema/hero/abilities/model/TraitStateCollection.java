@@ -6,9 +6,9 @@ import net.sf.anathema.hero.traits.model.state.TraitStateChangedListener;
 
 import java.util.function.Consumer;
 
-public interface TraitStateCollection {
-
-  void addTraitStateChangedListener(Trait trait, TraitStateChangedListener listener);
-
-  void forEach(Consumer<TraitState> consumer);
+public interface TraitStateCollection
+{
+	void addTraitStateChangedListener (Trait trait, TraitStateChangedListener listener);
+	
+	void forEach (Consumer<TraitState> consumer);
 }

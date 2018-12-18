@@ -5,7 +5,7 @@ import net.sf.anathema.hero.charms.model.learn.CharmLearnableArbitrator;
 import net.sf.anathema.hero.charms.model.special.CharmSpecialLearning;
 import net.sf.anathema.hero.charms.model.special.CharmSpecialist;
 
-public interface IMultipleEffectCharm extends CharmSpecialLearning {
-
-  SubEffects buildSubEffects(CharmSpecialist specialist, CharmLearnableArbitrator arbitrator, Charm charm);
+public interface IMultipleEffectCharm extends CharmSpecialLearning
+{
+	SubEffects buildSubEffects (CharmSpecialist specialist, CharmLearnableArbitrator arbitrator, Charm charm);
 }

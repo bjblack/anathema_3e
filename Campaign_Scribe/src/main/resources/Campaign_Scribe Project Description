@@ -1,0 +1,4 @@
+
+The Java Project Campaign_Scribe seems to be an incomplete system for recording, displaying, and editing campaign narratives. It contains thirty-eight source files (excluding test packages), that altogether contain two notes (both "nothing to do").
+
+My preliminary assessment is that this whole project ought to be deleted; better to start from scratch than muddle through incomplete, undocumented code.

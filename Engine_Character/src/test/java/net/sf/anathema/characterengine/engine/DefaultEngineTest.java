@@ -14,26 +14,28 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class DefaultEngineTest {
-
-  private DefaultEngine engine = new DefaultEngine();
-  private Name name = new Name("name");
-
-  @Test
-  public void createsQualityFromFactory() throws Exception {
-    QualityFactory factory = mock(QualityFactory.class);
-    Quality expected = new NumericQuality(new NumericValue(0));
-    Name name = new Name("name");
-    Type type = new Type("type");
-    when(factory.create(name)).thenReturn(expected);
-    engine.setFactory(type, factory);
-    Quality quality = engine.createQuality(new QualityKey(type, name));
-    assertThat(quality, is(expected));
-  }
-
-  @Test(expected = RuntimeException.class)
-  public void throwsUnknownQualityType() throws Exception {
-    Type type = new Type("unknownType");
-    engine.createQuality(new QualityKey(type, name));
-  }
+public class DefaultEngineTest
+{
+	private DefaultEngine engine = new DefaultEngine ();
+	private Name name = new Name ("name");
+	
+	@Test
+	public void createsQualityFromFactory () throws Exception
+	{
+		QualityFactory factory = mock (QualityFactory.class);
+		Quality expected = new NumericQuality (new NumericValue (0));
+		Name name = new Name ("name");
+		Type type = new Type ("type");
+		when (factory.create (name)).thenReturn (expected);
+		engine.setFactory (type, factory);
+		Quality quality = engine.createQuality (new QualityKey (type, name));
+		assertThat (quality, is (expected));
+	}
+	
+	@Test (expected = RuntimeException.class)
+	public void throwsUnknownQualityType () throws Exception
+	{
+		Type type = new Type ("unknownType");
+		engine.createQuality (new QualityKey (type, name));
+	}
 }

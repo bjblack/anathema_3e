@@ -1,4 +1,5 @@
 package net.sf.anathema.framework.environment.dependencies;
 
-public @interface DummyAnnotation {
+public @interface DummyAnnotation
+{
 }

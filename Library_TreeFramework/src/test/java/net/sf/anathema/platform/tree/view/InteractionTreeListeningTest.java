@@ -19,54 +19,61 @@ import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class InteractionTreeListeningTest {
-
-  PolygonPanel panel = mock(PolygonPanel.class);
-  private Cascade cascade = mock(Cascade.class);
-  private NodeInteractionListener interactionListener = mock(NodeInteractionListener.class);
-  InteractionTreeListening listening = new InteractionTreeListening(cascade, panel, interactionListener);
-
-  @Test
-  public void addsPanListenerForDragAndClick() throws Exception {
-    listening.initialize();
-    ArgumentCaptor<LeftClickPanner> captor = ArgumentCaptor.forClass(LeftClickPanner.class);
-    verify(panel, atLeastOnce()).addMouseMotionListener(captor.capture());
-    verify(panel).addMousePressListener(captor.getAllValues().get(0));
-  }
-
-  @Test
-  public void addsToggleListenerForLeftClick() throws Exception {
-    listening.initialize();
-    verify(panel).addMouseClickListener(isA(LeftClickSelector.class));
-  }
-
-  @Test
-  public void addsResetListenerForRightClick() throws Exception {
-    listening.initialize();
-    verify(panel).addMouseClickListener(isA(RightClickResetter.class));
-  }
-
-  @Test
-  public void addsCenterListenerForRightClick() throws Exception {
-    listening.initialize();
-    verify(panel).addMouseClickListener(isA(RightClickCenterer.class));
-  }
-
-  @Test
-  public void addsScalerForWheel() throws Exception {
-    listening.initialize();
-    verify(panel).addMouseWheelListener(isA(WheelScaler.class));
-  }
-
-  @Test
-  public void addsCursorChanger() throws Exception {
-    listening.initialize();
-    verify(panel).addMouseMotionListener(isA(CursorChanger.class));
-  }
-
-  @Test
-  public void addsDetailRequesterForCtrlLeftClick() throws Exception {
-    listening.initialize();
-    verify(panel).addMouseClickListener(isA(CtrlLeftClickDetailsRequester.class));
-  }
+public class InteractionTreeListeningTest
+{
+	PolygonPanel panel = mock (PolygonPanel.class);
+	private Cascade cascade = mock (Cascade.class);
+	private NodeInteractionListener interactionListener = mock (NodeInteractionListener.class);
+	InteractionTreeListening listening = new InteractionTreeListening (cascade, panel, interactionListener);
+	
+	@Test
+	public void addsPanListenerForDragAndClick () throws Exception
+	{
+		listening.initialize ();
+		ArgumentCaptor<LeftClickPanner> captor = ArgumentCaptor.forClass (LeftClickPanner.class);
+		verify (panel, atLeastOnce ()).addMouseMotionListener (captor.capture ());
+		verify (panel).addMousePressListener (captor.getAllValues ().get (0));
+	}
+	
+	@Test
+	public void addsToggleListenerForLeftClick () throws Exception
+	{
+		listening.initialize ();
+		verify (panel).addMouseClickListener (isA (LeftClickSelector.class));
+	}
+	
+	@Test
+	public void addsResetListenerForRightClick () throws Exception
+	{
+		listening.initialize ();
+		verify (panel).addMouseClickListener (isA (RightClickResetter.class));
+	}
+	
+	@Test
+	public void addsCenterListenerForRightClick () throws Exception
+	{
+		listening.initialize ();
+		verify (panel).addMouseClickListener (isA (RightClickCenterer.class));
+	}
+	
+	@Test
+	public void addsScalerForWheel () throws Exception
+	{
+		listening.initialize ();
+		verify (panel).addMouseWheelListener (isA (WheelScaler.class));
+	}
+	
+	@Test
+	public void addsCursorChanger () throws Exception
+	{
+		listening.initialize ();
+		verify (panel).addMouseMotionListener (isA (CursorChanger.class));
+	}
+	
+	@Test
+	public void addsDetailRequesterForCtrlLeftClick () throws Exception
+	{
+		listening.initialize ();
+		verify (panel).addMouseClickListener (isA (CtrlLeftClickDetailsRequester.class));
+	}
 }

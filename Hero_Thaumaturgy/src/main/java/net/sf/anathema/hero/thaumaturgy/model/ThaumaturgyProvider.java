@@ -1,7 +1,8 @@
 package net.sf.anathema.hero.thaumaturgy.model;
 
-public interface ThaumaturgyProvider {
-	public boolean grantsThaumaturgy();
+public interface ThaumaturgyProvider
+{
+	public boolean grantsThaumaturgy ();
 	
-	public int numberOfRitualsProvided();
+	public int numberOfRitualsProvided ();
 }

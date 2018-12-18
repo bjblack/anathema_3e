@@ -1,0 +1,4 @@
+
+The Java Project Hero_Points seems to be the system for attaching experience points (and, during character creation, bonus points) to characters. It also has implementations of its interfaces outside of this project that cover other points, such as merit points and specialty points. It most definitely does not have implementations for Solar Experience or crafting experience. It contains seventy-four source files, with a cumulative total of four (4) line comments (two of which say "nothing to do"), and no other comments.
+
+As a sub-project of Hero, which I am scrapping, I will scrap this project.

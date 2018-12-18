@@ -5,36 +5,41 @@ import net.sf.anathema.library.interaction.view.InteractionView;
 import net.sf.anathema.library.io.SingleFileChooser;
 import net.sf.anathema.platform.environment.Environment;
 
-public class HeroInteractionPresenter {
-
-  private ItemSelectionModel model;
-  private InteractionView view;
-  private final Environment environment;
-  private final SingleFileChooser fileChooser;
-
-  public HeroInteractionPresenter(ItemSelectionModel model, InteractionView view, Environment environment,
-                                  SingleFileChooser fileChooser) {
-    this.model = model;
-    this.view = view;
-    this.environment = environment;
-    this.fileChooser = fileChooser;
-  }
-
-  public void initPresentation() {
-    initSaveInteraction();
-    initControlledPrintInteraction();
-    initExperiencedInteraction();
-  }
-
-  private void initSaveInteraction() {
-    new SaveInteractionPresenter(model, view.addTool(), environment).initPresentation();
-  }
-
-  private void initControlledPrintInteraction() {
-    new PrintInteractionPresenter(model, view.addMenuTool(), environment, fileChooser).initPresentation();
-  }
-
-  private void initExperiencedInteraction() {
-    new ExperiencedInteractionPresenter(model, view.addToggleTool(), environment).initPresentation();
-  }
+public class HeroInteractionPresenter
+{
+	private ItemSelectionModel model;
+	private InteractionView view;
+	private final Environment environment;
+	private final SingleFileChooser fileChooser;
+	
+	public HeroInteractionPresenter (ItemSelectionModel model, InteractionView view, Environment environment,
+	SingleFileChooser fileChooser)
+	{
+		this.model = model;
+		this.view = view;
+		this.environment = environment;
+		this.fileChooser = fileChooser;
+	}
+	
+	public void initPresentation ()
+	{
+		initSaveInteraction ();
+		initControlledPrintInteraction ();
+		initExperiencedInteraction ();
+	}
+	
+	private void initSaveInteraction ()
+	{
+		new SaveInteractionPresenter (model, view.addTool (), environment).initPresentation ();
+	}
+	
+	private void initControlledPrintInteraction ()
+	{
+		new PrintInteractionPresenter (model, view.addMenuTool (), environment, fileChooser).initPresentation ();
+	}
+	
+	private void initExperiencedInteraction ()
+	{
+		new ExperiencedInteractionPresenter (model, view.addToggleTool (), environment).initPresentation ();
+	}
 }

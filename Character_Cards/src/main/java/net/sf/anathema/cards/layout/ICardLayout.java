@@ -4,12 +4,13 @@ import net.sf.anathema.cards.ICard;
 
 import com.itextpdf.text.DocumentException;
 
-public interface ICardLayout {
-	void drawCard(ICard card) throws DocumentException;
+public interface ICardLayout
+{
+	void drawCard (ICard card) throws DocumentException;
 	
-	ICardReportResourceProvider getResourceProvider();
+	ICardReportResourceProvider getResourceProvider ();
 	
-	int getCardWidth();
+	int getCardWidth ();
 	
-	int getCardHeight();
+	int getCardHeight ();
 }

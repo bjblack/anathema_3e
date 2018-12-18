@@ -13,23 +13,27 @@ import net.sf.anathema.hero.individual.model.Hero;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CharmCardDataProvider extends AbstractMagicCardDataProvider {
-
-  public CharmCardDataProvider(HeroEnvironment environment) {
-    super(environment);
-  }
-
-  @Override
-  public List<ICardData> getCards(Hero hero, ICardReportResourceProvider fontProvider) {
-    List<ICardData> cards = new ArrayList<>();
-    for (Charm charm : CharmsModelFetcher.fetch(hero).getLearningModel().getCurrentlyLearnedCharms()) {
-      cards.add(new CharmCardData(charm, createCharmStats(hero, charm), getMagicDescription(charm), fontProvider,
-        getResources()));
-    }
-    return cards;
-  }
-
-  private CharmStats createCharmStats(Hero hero, Charm charm) {
-    return new CharmStats(charm, new CharmContentHelper(hero));
-  }
+public class CharmCardDataProvider extends AbstractMagicCardDataProvider
+{
+	public CharmCardDataProvider (HeroEnvironment environment)
+	{
+		super (environment);
+	}
+	
+	@Override
+	public List<ICardData> getCards (Hero hero, ICardReportResourceProvider fontProvider)
+	{
+		List<ICardData> cards = new ArrayList<> ();
+		for (Charm charm : CharmsModelFetcher.fetch (hero).getLearningModel ().getCurrentlyLearnedCharms ())
+		{
+			cards.add (new CharmCardData (charm, createCharmStats (hero, charm), getMagicDescription (charm), fontProvider,
+			getResources ()));
+		}
+		return cards;
+	}
+	
+	private CharmStats createCharmStats (Hero hero, Charm charm)
+	{
+		return new CharmStats (charm, new CharmContentHelper (hero));
+	}
 }

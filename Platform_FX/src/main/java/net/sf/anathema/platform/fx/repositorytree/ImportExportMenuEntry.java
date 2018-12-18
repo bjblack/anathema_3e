@@ -10,23 +10,25 @@ import net.sf.anathema.platform.menu.MenuBar;
 import net.sf.anathema.platform.menu.MenuEntry;
 
 @RegisteredMenuEntry
-@Weight(weight = 10)
-public class ImportExportMenuEntry implements MenuEntry {
-
-  private final Environment environment;
-  private final ApplicationModel model;
-  private final UiEnvironment uiEnvironment;
-
-  public ImportExportMenuEntry(Environment environment, UiEnvironment uiEnvironment, ApplicationModel model) {
-    this.environment = environment;
-    this.uiEnvironment = uiEnvironment;
-    this.model = model;
-  }
-
-  @Override
-  public void addTo(MenuBar menu) {
-    Command action = new RepositoryViewAction(model, environment, uiEnvironment);
-    String name = environment.getString("AnathemaCore.Tools.ExportImport.Name") + "\u2026";
-    menu.getMainMenu().addMenuItem(action, name);
-  }
+@Weight (weight = 10)
+public class ImportExportMenuEntry implements MenuEntry
+{
+	private final Environment environment;
+	private final ApplicationModel model;
+	private final UiEnvironment uiEnvironment;
+	
+	public ImportExportMenuEntry (Environment environment, UiEnvironment uiEnvironment, ApplicationModel model)
+	{
+		this.environment = environment;
+		this.uiEnvironment = uiEnvironment;
+		this.model = model;
+	}
+	
+	@Override
+	public void addTo (MenuBar menu)
+	{
+		Command action = new RepositoryViewAction (model, environment, uiEnvironment);
+		String name = environment.getString ("AnathemaCore.Tools.ExportImport.Name") + "\u2026";
+		menu.getMainMenu ().addMenuItem (action, name);
+	}
 }

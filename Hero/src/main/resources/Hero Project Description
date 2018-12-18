@@ -1,0 +1,4 @@
+
+The Java Project Hero seems to be a system for basic character functionality, with relatively easy extension. Interestingly, Hero is an interface, and there are no classes implementing it in this package. It contains 65 source files (excluding test files), with a cumulative total of four (4) line comments (two of which say "nothing to do"), and one (1) JavaDoc comments.
+
+My implementation of characters will incorporate much more user customization; I will scrap this project.

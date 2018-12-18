@@ -15,35 +15,41 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
-public class TraitStateMapImpl implements TraitStateMap, TraitStateCollection {
-
-  private final Hero hero;
-  private final Map<TraitType, TraitState> statesByType = new HashMap<>();
-
-  public TraitStateMapImpl(Hero hero) {
-    this.hero = hero;
-  }
-
-  public void addState(Trait trait, TraitState state) {
-    statesByType.put(trait.getType(), state);
-    DynamicMinimum favoredMinimum = new FavoredMinimum(this, trait);
-    TraitModelFetcher.fetch(hero).getMinimumMap().addMinimum(trait.getType(), favoredMinimum);
-  }
-
-  public void addTraitStateChangedListener(Trait trait, TraitStateChangedListener listener) {
-    getState(trait).addTraitStateChangedListener(listener);
-  }
-
-  public void forEach(Consumer<TraitState> consumer) {
-    statesByType.values().forEach(consumer);
-  }
-
-  public TraitState getState(Trait trait) {
-    return getState(trait.getType());
-  }
-
-  @Override
-  public TraitState getState(TraitType traitType) {
-    return Functions.forMap(statesByType, new NullTraitState()).apply(traitType);
-  }
+public class TraitStateMapImpl implements TraitStateMap, TraitStateCollection
+{
+	private final Hero hero;
+	private final Map<TraitType, TraitState> statesByType = new HashMap<> ();
+	
+	public TraitStateMapImpl (Hero hero)
+	{
+		this.hero = hero;
+	}
+	
+	public void addState (Trait trait, TraitState state)
+	{
+		statesByType.put (trait.getType (), state);
+		DynamicMinimum favoredMinimum = new FavoredMinimum (this, trait);
+		TraitModelFetcher.fetch (hero).getMinimumMap ().addMinimum (trait.getType (), favoredMinimum);
+	}
+	
+	public void addTraitStateChangedListener (Trait trait, TraitStateChangedListener listener)
+	{
+		getState (trait).addTraitStateChangedListener (listener);
+	}
+	
+	public void forEach (Consumer<TraitState> consumer)
+	{
+		statesByType.values ().forEach (consumer);
+	}
+	
+	public TraitState getState (Trait trait)
+	{
+		return getState (trait.getType ());
+	}
+	
+	@Override
+	public TraitState getState (TraitType traitType)
+	{
+		return Functions.forMap (statesByType, new NullTraitState ()).apply (traitType);
+	}
 }

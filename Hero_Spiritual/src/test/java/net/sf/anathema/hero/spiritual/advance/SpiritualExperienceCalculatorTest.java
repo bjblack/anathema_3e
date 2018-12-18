@@ -11,14 +11,15 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class SpiritualExperienceCalculatorTest {
-
-  private SpiritualExperienceData experienceCosts = mock(SpiritualExperienceData.class);
-  private SpiritualExperienceCalculator calculator = new SpiritualExperienceCalculator(experienceCosts);
-
-  @Test
-  public void testWillpowerCosts() throws Exception {
-    when(experienceCosts.getWillpowerCost()).thenReturn(new MultiplyRatingCost(1));
-    assertEquals(3, calculator.getWillpowerCosts(DummyTrait.createLearnTrait(Willpower, 3, 4)));
-  }
+public class SpiritualExperienceCalculatorTest
+{
+	private SpiritualExperienceData experienceCosts = mock (SpiritualExperienceData.class);
+	private SpiritualExperienceCalculator calculator = new SpiritualExperienceCalculator (experienceCosts);
+	
+	@Test
+	public void testWillpowerCosts () throws Exception
+	{
+		when (experienceCosts.getWillpowerCost ()).thenReturn (new MultiplyRatingCost (1));
+		assertEquals (3, calculator.getWillpowerCosts (DummyTrait.createLearnTrait (Willpower, 3, 4)));
+	}
 }

@@ -8,17 +8,19 @@ import net.sf.anathema.library.fx.dot.ColumnCount;
 import net.sf.anathema.library.fx.dot.GroupedStatedDotsView;
 import net.sf.anathema.library.resources.Resources;
 
-public class AbilitiesPresenter {
-
-  private final StatedTraitModelPresenter presenter;
-
-  public AbilitiesPresenter(Hero hero, Resources resources, GroupedStatedDotsView view) {
-    AbilitiesModel abilitiesModel = AbilitiesModelFetcher.fetch(hero);
-    view.initGui(new ColumnCount(3));
-    this.presenter = new StatedTraitModelPresenter(hero, abilitiesModel, view, resources);
-  }
-
-  public void initPresentation() {
-    presenter.init("AbilityGroup");
-  }
+public class AbilitiesPresenter
+{
+	private final StatedTraitModelPresenter presenter;
+	
+	public AbilitiesPresenter (Hero hero, Resources resources, GroupedStatedDotsView view)
+	{
+		AbilitiesModel abilitiesModel = AbilitiesModelFetcher.fetch (hero);
+		view.initGui (new ColumnCount (3));
+		this.presenter = new StatedTraitModelPresenter (hero, abilitiesModel, view, resources);
+	}
+	
+	public void initPresentation ()
+	{
+		presenter.init ("AbilityGroup");
+	}
 }

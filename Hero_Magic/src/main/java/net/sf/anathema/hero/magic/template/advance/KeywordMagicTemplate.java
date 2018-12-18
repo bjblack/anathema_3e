@@ -1,7 +1,7 @@
 package net.sf.anathema.hero.magic.template.advance;
 
-public class KeywordMagicTemplate {
-
-  public String keyword;
-  public int costs;
+public class KeywordMagicTemplate
+{
+	public String keyword;
+	public int costs;
 }

@@ -1,5 +1,6 @@
 package net.sf.anathema.platform.tree.display.shape;
 
-public interface AgnosticShape {
-  void accept(ShapeVisitor visitor);
+public interface AgnosticShape
+{
+	void accept (ShapeVisitor visitor);
 }

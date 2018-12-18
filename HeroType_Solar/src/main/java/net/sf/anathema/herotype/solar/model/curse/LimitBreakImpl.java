@@ -9,26 +9,30 @@ import net.sf.anathema.hero.traits.model.state.FriendlyIncrementChecker;
 import net.sf.anathema.hero.traits.template.TraitTemplate;
 import net.sf.anathema.hero.traits.template.TraitTemplateFactory;
 
-public class LimitBreakImpl implements LimitBreak {
-
-  private Trait limitTrait;
-  private Hero hero;
-
-  public LimitBreakImpl(Hero hero) {
-    this.hero = hero;
-  }
-
-  @Override
-  public Trait getLimitTrait() {
-    if (limitTrait == null) {
-      TraitType traitType = new TraitType(getLimitString());
-      TraitTemplate limitedTemplate = TraitTemplateFactory.createStaticLimitedTemplate(0, 10, ModificationType.Free);
-      limitTrait = new LimitedTraitImpl(hero, traitType, limitedTemplate, new FriendlyIncrementChecker());
-    }
-    return limitTrait;
-  }
-
-  protected String getLimitString() {
-    return "VirtueFlaw.LimitTrait";
-  }
+public class LimitBreakImpl implements LimitBreak
+{
+	private Trait limitTrait;
+	private Hero hero;
+	
+	public LimitBreakImpl (Hero hero)
+	{
+		this.hero = hero;
+	}
+	
+	@Override
+	public Trait getLimitTrait ()
+	{
+		if (limitTrait == null)
+		{
+			TraitType traitType = new TraitType (getLimitString ());
+			TraitTemplate limitedTemplate = TraitTemplateFactory.createStaticLimitedTemplate (0, 10, ModificationType.Free);
+			limitTrait = new LimitedTraitImpl (hero, traitType, limitedTemplate, new FriendlyIncrementChecker ());
+		}
+		return limitTrait;
+	}
+	
+	protected String getLimitString ()
+	{
+		return "VirtueFlaw.LimitTrait";
+	}
 }

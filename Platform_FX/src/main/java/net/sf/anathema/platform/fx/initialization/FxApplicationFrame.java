@@ -21,58 +21,66 @@ import net.sf.anathema.platform.messaging.StatusBar;
 import org.controlsfx.control.NotificationPane;
 import org.tbee.javafx.scene.layout.MigPane;
 
-public class FxApplicationFrame implements ApplicationFrameView {
-  private final Stage stage;
-  private final AnathemaViewProperties properties;
-  private final ViewFactory contentFactory;
-  private final MainMenuBar menu;
-  private final NotificationPane notificationPane = new NotificationPane();
-  private final PopInStatusBar statusBar = new PopInStatusBar(notificationPane);
-
-  public FxApplicationFrame(Stage stage, AnathemaViewProperties viewProperties, ViewFactory factory) {
-    this.stage = stage;
-    this.properties = viewProperties;
-    this.contentFactory = factory;
-    this.menu = new MainMenuBar(properties.getMainMenuName(), properties.getHelpMenuName());
-    Parent contentPane = createContentPane();
-    notificationPane.setContent(contentPane);
-    Scene scene = new Scene(notificationPane);
-    scene.getStylesheets().add("skin/platform/anathema.css");
-    stage.setScene(scene);
-  }
-
-  public void show() {
-    stage.setMaximized(true);
-    stage.setTitle(properties.getDefaultFrameTitle());
-    stage.getIcons().add(getFrameIcon());
-    stage.show();
-  }
-
-  private Image getFrameIcon() {
-    ImageView imageView = new ImageView();
-    ImageContainer container = new LoadImage(properties.getFrameIcon()).run();
-    container.displayIn(imageView);
-    return imageView.getImage();
-  }
-
-  @Override
-  public ApplicationFrame getWindow() {
-    return this;
-  }
-
-  public MainMenuBar getMenuBar() {
-    return menu;
-  }
-
-  public StatusBar getStatusBar() {
-    return statusBar;
-  }
-
-
-  private Parent createContentPane() {
-    MigPane contentPane = new MigPane(new LC().fill().wrapAfter(1));
-    contentPane.add(menu.getMenuBar(), new CC().dockNorth());
-    contentPane.add(contentFactory.createContent(), new CC().grow().push());
-    return contentPane;
-  }
+public class FxApplicationFrame implements ApplicationFrameView
+{
+	private final Stage stage;
+	private final AnathemaViewProperties properties;
+	private final ViewFactory contentFactory;
+	private final MainMenuBar menu;
+	private final NotificationPane notificationPane = new NotificationPane ();
+	private final PopInStatusBar statusBar = new PopInStatusBar (notificationPane);
+	
+	public FxApplicationFrame (Stage stage, AnathemaViewProperties viewProperties, ViewFactory factory)
+	{
+		this.stage = stage;
+		this.properties = viewProperties;
+		this.contentFactory = factory;
+		this.menu = new MainMenuBar (properties.getMainMenuName (), properties.getHelpMenuName ());
+		Parent contentPane = createContentPane ();
+		notificationPane.setContent (contentPane);
+		Scene scene = new Scene (notificationPane);
+		scene.getStylesheets ().add ("skin/platform/anathema.css");
+		stage.setScene (scene);
+	}
+	
+	public void show ()
+	{
+		stage.setMaximized (true);
+		stage.setTitle (properties.getDefaultFrameTitle ());
+		stage.getIcons ().add (getFrameIcon ());
+		stage.show ();
+	}
+	
+	private Image getFrameIcon ()
+	{
+		ImageView imageView = new ImageView ();
+		ImageContainer container = new LoadImage (properties.getFrameIcon ()).run ();
+		container.displayIn (imageView);
+		return imageView.getImage ();
+	}
+	
+	@Override
+	public ApplicationFrame getWindow ()
+	{
+		return this;
+	}
+	
+	public MainMenuBar getMenuBar ()
+	{
+		return menu;
+	}
+	
+	public StatusBar getStatusBar ()
+	{
+		return statusBar;
+	}
+	
+	
+	private Parent createContentPane ()
+	{
+		MigPane contentPane = new MigPane (new LC ().fill ().wrapAfter (1));
+		contentPane.add (menu.getMenuBar (), new CC ().dockNorth ());
+		contentPane.add (contentFactory.createContent (), new CC ().grow ().push ());
+		return contentPane;
+	}
 }

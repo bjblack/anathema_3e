@@ -11,15 +11,15 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class NativeHeroTypeTest {
-
-  @Test
-  public void returnsNativeTypeFromTemplate() throws Exception {
-    HeroType expectedType = new DummyMundaneHeroType();
-    Hero hero = mock(Hero.class);
-    when(hero.getSplat()).thenReturn(new DummyHeroSplat());
-    HeroType type = NativeCharacterType.get(hero);
-    assertThat(type, is(expectedType));
-
-  }
+public class NativeHeroTypeTest
+{
+	@Test
+	public void returnsNativeTypeFromTemplate () throws Exception
+	{
+		HeroType expectedType = new DummyMundaneHeroType ();
+		Hero hero = mock (Hero.class);
+		when (hero.getSplat ()).thenReturn (new DummyHeroSplat ());
+		HeroType type = NativeCharacterType.get (hero);
+		assertThat (type, is (expectedType));
+	}
 }

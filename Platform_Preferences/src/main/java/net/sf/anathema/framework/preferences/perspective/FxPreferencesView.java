@@ -10,19 +10,22 @@ import net.sf.anathema.library.fx.NodeHolder;
 
 import org.tbee.javafx.scene.layout.MigPane;
 
-public class FxPreferencesView implements PreferencesView {
-  private final MigPane node = new MigPane(new LC().fill());
-
-  public Node getNode() {
-    return node;
-  }
-
-  public void show(String title, NodeHolder view) {
-    node.getChildren().clear();
-    Label label = new Label(title);
-    label.setStyle("-fx-font-weight: bold");
-    node.add(label, new CC().split(2));
-    node.add(new Separator(), new CC().pushX().growX().wrap());
-    node.add(view.getNode(), new CC().pushY().growY());
-  }
+public class FxPreferencesView implements PreferencesView
+{
+	private final MigPane node = new MigPane (new LC ().fill ());
+	
+	public Node getNode ()
+	{
+		return node;
+	}
+	
+	public void show (String title, NodeHolder view)
+	{
+		node.getChildren ().clear ();
+		Label label = new Label (title);
+		label.setStyle ("-fx-font-weight: bold");
+		node.add (label, new CC ().split (2));
+		node.add (new Separator (), new CC ().pushX ().growX ().wrap ());
+		node.add (view.getNode (), new CC ().pushY ().growY ());
+	}
 }

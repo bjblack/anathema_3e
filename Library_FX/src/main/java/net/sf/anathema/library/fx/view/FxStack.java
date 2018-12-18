@@ -10,36 +10,42 @@ import org.tbee.javafx.scene.layout.MigPane;
 import java.util.LinkedHashMap;
 import java.util.Optional;
 
-public class FxStack {
-
-  private final LinkedHashMap<Identifier, Node> namedNodes = new LinkedHashMap<>();
-  private MigPane parent;
-
-  public FxStack(MigPane parent) {
-    this.parent = parent;
-  }
-
-  public void add(Identifier name, Node node) {
-    namedNodes.put(name, node);
-  }
-
-  public void showFirst() {
-    Identifier first = findFirstKey();
-    show(first);
-  }
-
-  public void show(Identifier name) {
-    parent.getChildren().clear();
-    Node selectedNode = namedNodes.get(name);
-    parent.add(selectedNode, new CC().push().grow());
-  }
-
-  public boolean isEmpty() {
-    return namedNodes.isEmpty();
-  }
-
-  private Identifier findFirstKey() {
-    Optional<Identifier> first = namedNodes.keySet().stream().findFirst();
-    return first.orElseThrow(() -> new IllegalStateException("No perspectives found"));
-  }
+public class FxStack
+{
+	private final LinkedHashMap<Identifier, Node> namedNodes = new LinkedHashMap<> ();
+	private MigPane parent;
+	
+	public FxStack (MigPane parent)
+	{
+		this.parent = parent;
+	}
+	
+	public void add (Identifier name, Node node)
+	{
+		namedNodes.put (name, node);
+	}
+	
+	public void showFirst ()
+	{
+		Identifier first = findFirstKey ();
+		show (first);
+	}
+	
+	public void show (Identifier name)
+	{
+		parent.getChildren ().clear ();
+		Node selectedNode = namedNodes.get (name);
+		parent.add (selectedNode, new CC ().push ().grow ());
+	}
+	
+	public boolean isEmpty ()
+	{
+		return namedNodes.isEmpty ();
+	}
+	
+	private Identifier findFirstKey ()
+	{
+		Optional<Identifier> first = namedNodes.keySet ().stream ().findFirst ();
+		return first.orElseThrow ( () -> new IllegalStateException ("No perspectives found"));
+	}
 }

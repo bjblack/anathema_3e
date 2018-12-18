@@ -4,13 +4,15 @@ import net.sf.anathema.cards.data.ICardData;
 
 import com.itextpdf.text.pdf.PdfContentByte;
 
-public class Card implements ICard {
+public class Card implements ICard
+{
 	private final PdfContentByte directContent;
 	private final ICardData data;
 	private final float upperleftX;
 	private final float upperleftY;
 	
-	public Card(PdfContentByte directContent, float upperleftX, float upperleftY, ICardData data) {
+	public Card (PdfContentByte directContent, float upperleftX, float upperleftY, ICardData data)
+	{
 		this.directContent = directContent;
 		this.upperleftX = upperleftX;
 		this.upperleftY = upperleftY;
@@ -18,22 +20,26 @@ public class Card implements ICard {
 	}
 	
 	@Override
-    public PdfContentByte getPdfContent() {
+	public PdfContentByte getPdfContent ()
+	{
 		return directContent;
 	}
 	
 	@Override
-    public float getX() {
+	public float getX ()
+	{
 		return upperleftX;
 	}
 	
 	@Override
-    public float getY() {
+	public float getY ()
+	{
 		return upperleftY;
 	}
 	
 	@Override
-    public ICardData getData() {
+	public ICardData getData ()
+	{
 		return data;
 	}
 }

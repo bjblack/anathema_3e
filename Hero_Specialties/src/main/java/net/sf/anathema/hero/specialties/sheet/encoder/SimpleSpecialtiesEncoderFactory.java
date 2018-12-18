@@ -6,15 +6,17 @@ import net.sf.anathema.hero.sheet.pdf.encoder.boxes.ContentEncoder;
 import net.sf.anathema.hero.sheet.pdf.encoder.boxes.GlobalEncoderFactory;
 import net.sf.anathema.library.resources.Resources;
 
-@SuppressWarnings("UnusedDeclaration")
-public class SimpleSpecialtiesEncoderFactory extends GlobalEncoderFactory {
-
-  public SimpleSpecialtiesEncoderFactory() {
-    super(EncoderIds.SPECIALTIES_SIMPLE);
-  }
-
-  @Override
-  public ContentEncoder create(Resources resources, BasicContent content) {
-    return new SimpleSpecialtiesEncoder(resources);
-  }
+@SuppressWarnings ("UnusedDeclaration")
+public class SimpleSpecialtiesEncoderFactory extends GlobalEncoderFactory
+{
+	public SimpleSpecialtiesEncoderFactory ()
+	{
+		super (EncoderIds.SPECIALTIES_SIMPLE);
+	}
+	
+	@Override
+	public ContentEncoder create (Resources resources, BasicContent content)
+	{
+		return new SimpleSpecialtiesEncoder (resources);
+	}
 }

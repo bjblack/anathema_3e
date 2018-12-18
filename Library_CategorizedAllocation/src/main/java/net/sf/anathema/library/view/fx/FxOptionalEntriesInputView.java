@@ -9,24 +9,29 @@ import net.sf.anathema.library.text.ITextView;
 import net.sf.anathema.library.view.ObjectSelectionView;
 import net.sf.anathema.library.view.OptionalPropertyEntryView;
 
-public class FxOptionalEntriesInputView implements OptionalPropertyEntryView {
-  private final FxConfigurableSingleLineView view = new FxConfigurableSingleLineView();
-
-  public Tool addTool() {
-    return view.addEditAction();
-  }
-
-  @Override
-  public <T> ObjectSelectionView<T> addSelection(AgnosticUIConfiguration<T> uiConfiguration) {
-    return view.addSelectionView("", uiConfiguration);
-  }
-
-  public Node getNode() {
-    return view.getNode();
-  }
-
-  @Override
-  public ITextView addDescriptionBox(String label) {
-    return view.addLineView(label);
-  }
+public class FxOptionalEntriesInputView implements OptionalPropertyEntryView
+{
+	private final FxConfigurableSingleLineView view = new FxConfigurableSingleLineView ();
+	
+	public Tool addTool ()
+	{
+		return view.addEditAction ();
+	}
+	
+	@Override
+	public <T> ObjectSelectionView<T> addSelection (AgnosticUIConfiguration<T> uiConfiguration)
+	{
+		return view.addSelectionView ("", uiConfiguration);
+	}
+	
+	public Node getNode ()
+	{
+		return view.getNode ();
+	}
+	
+	@Override
+	public ITextView addDescriptionBox (String label)
+	{
+		return view.addLineView (label);
+	}
 }

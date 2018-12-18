@@ -1,10 +1,10 @@
 package net.sf.anathema.points.model;
 
-public interface BonusPointCalculator {
-
-  void recalculate();
-
-  int getBonusPointCost();
-
-  int getBonusPointsGranted();
+public interface BonusPointCalculator
+{
+	void recalculate ();
+	
+	int getBonusPointCost ();
+	
+	int getBonusPointsGranted ();
 }

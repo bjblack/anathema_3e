@@ -13,28 +13,32 @@ import net.sf.anathema.library.resources.Resources;
 
 import java.util.List;
 
-public class AttributeTextEncoder extends AbstractTraitTextEncoder {
-
-  public AttributeTextEncoder(PdfReportUtils utils, Resources resources) {
-    super(utils, resources);
-  }
-
-  @Override
-  protected TraitTypeList getTypes(Hero hero) {
-    TraitTypeList traitTypes = new TraitTypeList();
-    AttributeModel attributeModel = AttributesModelFetcher.fetch(hero);
-    List<TraitType> attributeTypes = attributeModel.getAllAttributeTypes();
-    traitTypes.addAll(attributeTypes);
-    return traitTypes;
-  }
-
-  @Override
-  protected TraitState getTraitState(Hero hero, Trait trait) {
-    return AttributesModelFetcher.fetch(hero).getState(trait);
-  }
-
-  @Override
-  protected String getLabelKey() {
-    return "TextDescription.Label.Attributes";
-  }
+public class AttributeTextEncoder extends AbstractTraitTextEncoder
+{
+	public AttributeTextEncoder (PdfReportUtils utils, Resources resources)
+	{
+		super (utils, resources);
+	}
+	
+	@Override
+	protected TraitTypeList getTypes (Hero hero)
+	{
+		TraitTypeList traitTypes = new TraitTypeList ();
+		AttributeModel attributeModel = AttributesModelFetcher.fetch (hero);
+		List<TraitType> attributeTypes = attributeModel.getAllAttributeTypes ();
+		traitTypes.addAll (attributeTypes);
+		return traitTypes;
+	}
+	
+	@Override
+	protected TraitState getTraitState (Hero hero, Trait trait)
+	{
+		return AttributesModelFetcher.fetch (hero).getState (trait);
+	}
+	
+	@Override
+	protected String getLabelKey ()
+	{
+		return "TextDescription.Label.Attributes";
+	}
 }

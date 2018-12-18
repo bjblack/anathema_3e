@@ -15,23 +15,23 @@ import net.sf.anathema.magic.data.reference.CategoryReference;
 import java.util.Collection;
 
 public interface CharmsModel extends HeroModel, IExtendedCharmLearnableArbitrator, CharmMap,
-        SpecialCharmLearnArbitrator {
-
-  Identifier ID = new SimpleIdentifier("Charms");
-
-  void addLearnableListener(ChangeListener listener);
-
-  CharmSpecialLearningModel getCharmSpecialLearningModel(Charm charm);
-
-  LearningModel getLearningModel();
-
-  void forgetAllAlienCharms();
-
-  Collection<CharmTree> getTreesFor(CategoryReference type);
-
-  Collection<CharmTree> getAllTrees();
-
-  CharmOptions getOptions();
-
-  boolean isAlienCharm(Charm charm);
+SpecialCharmLearnArbitrator
+{
+	Identifier ID = new SimpleIdentifier ("Charms");
+	
+	void addLearnableListener (ChangeListener listener);
+	
+	CharmSpecialLearningModel getCharmSpecialLearningModel (Charm charm);
+	
+	LearningModel getLearningModel ();
+	
+	void forgetAllAlienCharms ();
+	
+	Collection<CharmTree> getTreesFor (CategoryReference type);
+	
+	Collection<CharmTree> getAllTrees ();
+	
+	CharmOptions getOptions ();
+	
+	boolean isAlienCharm (Charm charm);
 }

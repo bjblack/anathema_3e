@@ -8,13 +8,13 @@ import net.sf.anathema.library.identifier.SimpleIdentifier;
 
 import java.util.List;
 
-public interface AbilitiesModel extends GroupedTraitsModel {
-
-  Identifier ID = new SimpleIdentifier("Abilities");
-
-  int getTraitPicksForState(TraitStateType state);
-
-  Iterable<TraitStateType> getAvailableTraitStates();
-
-  List<TraitType> getAllAbilityTypes();
+public interface AbilitiesModel extends GroupedTraitsModel
+{
+	Identifier ID = new SimpleIdentifier ("Abilities");
+	
+	int getTraitPicksForState (TraitStateType state);
+	
+	Iterable<TraitStateType> getAvailableTraitStates ();
+	
+	List<TraitType> getAllAbilityTypes ();
 }

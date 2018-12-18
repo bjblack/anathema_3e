@@ -5,20 +5,23 @@ import javafx.scene.shape.Rectangle;
 
 import net.miginfocom.layout.LC;
 
-public class LayoutUtils {
-
-  public static LC withoutInsets() {
-    return new LC().insets("0");
-  }
-
-  public static LC fillWithoutInsets() {
-    return withoutInsets().fill();
-  }
-  
-  public static void clipToSize(Region region){
-    Rectangle clip = new Rectangle(0, 0);
-    region.setClip(clip);
-    clip.widthProperty().bind(region.widthProperty());
-    clip.heightProperty().bind(region.heightProperty());
-  }
+public class LayoutUtils
+{
+	public static LC withoutInsets ()
+	{
+		return new LC ().insets ("0");
+	}
+	
+	public static LC fillWithoutInsets ()
+	{
+		return withoutInsets ().fill ();
+	}
+	
+	public static void clipToSize (Region region)
+	{
+		Rectangle clip = new Rectangle (0, 0);
+		region.setClip (clip);
+		clip.widthProperty ().bind (region.widthProperty ());
+		clip.heightProperty ().bind (region.heightProperty ());
+	}
 }

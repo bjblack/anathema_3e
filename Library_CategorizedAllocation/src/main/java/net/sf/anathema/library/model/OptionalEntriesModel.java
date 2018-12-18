@@ -8,46 +8,46 @@ import java.util.Collection;
 import java.util.List;
 
 public interface OptionalEntriesModel<
-	O extends OptionalEntryOption,
-	T extends PossessedOptionalEntry<O>> extends RemovableEntryModel<T>, HeroModel {
+O extends OptionalEntryOption,
+T extends PossessedOptionalEntry<O>> extends RemovableEntryModel<T>, HeroModel
+{
+	List<O> getAllEntryOptions ();
 	
-	List<O> getAllEntryOptions();
+	List<O> getCurrentEntryOptions ();
 	
-	List<O> getCurrentEntryOptions();
+	List<O> getCurrentEntryOptionsFromAllCategories ();
 	
-	List<O> getCurrentEntryOptionsFromAllCategories();
+	O getSelectedEntryOption ();
 	
-	O getSelectedEntryOption();
+	void setSelectedEntryOption (O option);
 	
-	void setSelectedEntryOption(O option);
+	void selectFirstEntryOption ();
 	
-	void selectFirstEntryOption();
+	void whenSelectedOptionChanges (ChangeListener listener);
 	
-	void whenSelectedOptionChanges(ChangeListener listener);
+	O findOptionByReference (OptionalEntryReference reference);
 	
-	O findOptionByReference(OptionalEntryReference reference);
+	Collection<String> getSuggestedDescriptions ();
 	
-	Collection<String> getSuggestedDescriptions();
+	List<OptionalEntryCategory> getAvailableCategories ();
 	
-	List<OptionalEntryCategory> getAvailableCategories();
+	OptionalEntryCategory getCurrentCategory ();
 	
-	OptionalEntryCategory getCurrentCategory();
+	void setCurrentCategory (OptionalEntryCategory category);
 	
-	void setCurrentCategory(OptionalEntryCategory category);
+	void whenCategoryChanges (ChangeListener listener);
 	
-	void whenCategoryChanges(ChangeListener listener);
+	void setCurrentDescription (String text);
 	
-	void setCurrentDescription(String text);
+	void resetCurrentEntry ();
 	
-	void resetCurrentEntry();
+	List<Trait> getContingentTraits ();
 	
-	List<Trait> getContingentTraits();
-
-	boolean hasCategories();
+	boolean hasCategories ();
 	
-	boolean forget(T entry);
+	boolean forget (T entry);
 	
-	boolean isEntryAllowed();
+	boolean isEntryAllowed ();
 	
-	boolean isRemovalAllowed(T entry);
+	boolean isRemovalAllowed (T entry);
 }

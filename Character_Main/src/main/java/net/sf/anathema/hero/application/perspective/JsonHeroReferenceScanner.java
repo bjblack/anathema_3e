@@ -21,61 +21,76 @@ import java.util.Map;
 import static net.sf.anathema.hero.application.item.HeroItemTypeRetrieval.retrieveCharacterItemType;
 import static net.sf.anathema.hero.concept.model.concept.CasteType.NULL_CASTE_TYPE;
 
-public class JsonHeroReferenceScanner implements HeroReferenceScanner {
-
-  private final Map<CharacterReference, SplatType> typesByFile = new HashMap<>();
-  private final Map<CharacterReference, Identifier> castesByFile = new HashMap<>();
-  private final IRepositoryFileResolver resolver;
-  private final HeroTypes heroTypes;
-
-  public JsonHeroReferenceScanner(HeroTypes heroTypes, IRepositoryFileResolver repositoryFileResolver) {
-    this.heroTypes = heroTypes;
-    this.resolver = repositoryFileResolver;
-  }
-
-  private void scan(CharacterReference reference) throws IOException {
-    File scanFile = resolver.getMainFile(retrieveCharacterItemType().getRepositoryConfiguration(), reference.repositoryId.getStringRepresentation());
-    try (FileInputStream stream = new FileInputStream(scanFile)) {
-      HeroMainFileDto mainFileDto = new HeroMainFilePersister().load(stream);
-      HeroType heroType = heroTypes.findById(mainFileDto.characterType.characterType);
-      SimpleIdentifier subType = new SimpleIdentifier(mainFileDto.characterType.subType);
-      typesByFile.put(reference, new SplatTypeImpl(heroType, subType));
-      castesByFile.put(reference, NULL_CASTE_TYPE);
-    }
-  }
-
-  @Override
-  public HeroType getCharacterType(CharacterReference reference) {
-    SplatType splatType = getTemplateType(reference);
-    if (splatType == null) {
-      return null;
-    }
-    return splatType.getHeroType();
-  }
-
-  @Override
-  public SplatType getTemplateType(CharacterReference reference) {
-    if (typesByFile.containsKey(reference)) {
-      return typesByFile.get(reference);
-    }
-    try {
-      scan(reference);
-      return typesByFile.get(reference);
-    } catch (IOException e) {
-      return null;
-    }
-  }
-
-  @Override
-  public Identifier getCasteType(CharacterReference reference) {
-    if (castesByFile.containsKey(reference)) {
-      return castesByFile.get(reference);
-    }
-    try {
-      scan(reference);
-      return castesByFile.get(reference);
-    } catch (IOException e) {
-      return NULL_CASTE_TYPE;
-    }
-  }
+public class JsonHeroReferenceScanner implements HeroReferenceScanner
+{
+	private final Map<CharacterReference, SplatType> typesByFile = new HashMap<> ();
+	private final Map<CharacterReference, Identifier> castesByFile = new HashMap<> ();
+	private final IRepositoryFileResolver resolver;
+	private final HeroTypes heroTypes;
+	
+	public JsonHeroReferenceScanner (HeroTypes heroTypes, IRepositoryFileResolver repositoryFileResolver)
+	{
+		this.heroTypes = heroTypes;
+		this.resolver = repositoryFileResolver;
+	}
+	
+	private void scan (CharacterReference reference) throws IOException
+	{
+		File scanFile = resolver.getMainFile (retrieveCharacterItemType ().getRepositoryConfiguration (), reference.repositoryId.getStringRepresentation ());
+		try (FileInputStream stream = new FileInputStream (scanFile))
+		{
+			HeroMainFileDto mainFileDto = new HeroMainFilePersister ().load (stream);
+			HeroType heroType = heroTypes.findById (mainFileDto.characterType.characterType);
+			SimpleIdentifier subType = new SimpleIdentifier (mainFileDto.characterType.subType);
+			typesByFile.put (reference, new SplatTypeImpl (heroType, subType));
+			castesByFile.put (reference, NULL_CASTE_TYPE);
+		}
+	}
+	
+	@Override
+	public HeroType getCharacterType (CharacterReference reference)
+	{
+		SplatType splatType = getTemplateType (reference);
+		if (splatType == null)
+		{
+			return null;
+		}
+		return splatType.getHeroType ();
+	}
+	
+	@Override
+	public SplatType getTemplateType (CharacterReference reference)
+	{
+		if (typesByFile.containsKey (reference))
+		{
+			return typesByFile.get (reference);
+		}
+		try
+		{
+			scan (reference);
+			return typesByFile.get (reference);
+		}
+		catch (IOException e)
+		{
+			return null;
+		}
+	}
+	
+	@Override
+	public Identifier getCasteType (CharacterReference reference)
+	{
+		if (castesByFile.containsKey (reference))
+		{
+			return castesByFile.get (reference);
+		}
+		try
+		{
+			scan (reference);
+			return castesByFile.get (reference);
+		}
+		catch (IOException e)
+		{
+			return NULL_CASTE_TYPE;
+		}
+	}
 }

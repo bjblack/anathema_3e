@@ -8,54 +8,67 @@ import java.util.List;
 
 import static java.lang.Integer.valueOf;
 
-public class EssenceExpressionParser {
-
-  private int base = 0;
-  private final ArrayList<PoolPartTemplate> partTemplates = new ArrayList<>();
-
-  public EssenceExpressionParser(String expression) {
-    if (expression.isEmpty()) {
-      return;
-    }
-    String[] split = expression.split("\\+");
-    for (String summand : split) {
-      parseSummand(summand);
-    }
-  }
-
-  public int getBase() {
-    return base;
-  }
-
-  public List<PoolPartTemplate> getPartTemplates() {
-    return partTemplates;
-  }
-
-  private void parseSummand(String expression) {
-    try {
-      this.base = valueOf(expression);
-    } catch (Exception e) {
-      parsePartTemplate(expression);
-    }
-  }
-
-  private void parsePartTemplate(String expression) {
-    PoolPartTemplate template = new PoolPartTemplate();
-    template.traitType = findTrait(expression);
-    template.multiplier = findMultiplier(expression);
-    partTemplates.add(template);
-  }
-
-  private TraitType findTrait(String expression) {
-    String[] split = expression.split("\\*");
-    return new TraitType(split[0]);
-  }
-
-  private int findMultiplier(String expression) {
-    String[] split = expression.split("\\*");
-    if (split.length == 1) {
-      return 1;
-    }
-    return valueOf(split[1]);
-  }
+public class EssenceExpressionParser
+{
+	private int base = 0;
+	private final ArrayList<PoolPartTemplate> partTemplates = new ArrayList<> ();
+	
+	public EssenceExpressionParser (String expression)
+	{
+		if (expression.isEmpty ())
+		{
+			return;
+		}
+		String[] split = expression.split ("\\+");
+		for (String summand : split)
+		{
+			parseSummand (summand);
+		}
+	}
+	
+	public int getBase ()
+	{
+		return base;
+	}
+	
+	public List<PoolPartTemplate> getPartTemplates ()
+	{
+		return partTemplates;
+	}
+	
+	private void parseSummand (String expression)
+	{
+		try
+		{
+			this.base = valueOf (expression);
+		}
+		catch (Exception e)
+		{
+			parsePartTemplate (expression);
+		}
+	}
+	
+	private void parsePartTemplate (String expression)
+	{
+		PoolPartTemplate template = new PoolPartTemplate ();
+		template.traitType = findTrait (expression);
+		template.multiplier = findMultiplier (expression);
+		partTemplates.add (template);
+	}
+	
+	private TraitType findTrait (String expression)
+	{
+		String[] split = expression.split ("\\*");
+		return new TraitType (split[0]);
+	}
+	
+	private int findMultiplier (String expression)
+	{
+		String[] split = expression.split ("\\*");
+		if (split.length == 1)
+		{
+			return 1;
+		}
+		return valueOf (split[1]);
+	}
 }

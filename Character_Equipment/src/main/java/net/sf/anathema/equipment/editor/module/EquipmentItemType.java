@@ -10,15 +10,16 @@ import net.sf.anathema.platform.repository.SingleFileConfiguration;
 
 
 @RegisteredItemTypeConfiguration
-@Weight(weight=40)
-public class EquipmentItemType implements ItemTypeConfiguration {
-
-  private static final String EQUIPMENT_DATABASE_ITEM_TYPE_ID = "EquipmentDatabase";
-  private static final RepositoryConfiguration REPOSITORY_CONFIGURATION = new SingleFileConfiguration(".item", "equipment/");
-  private static final IItemType ITEM_TYPE = new ItemType(EQUIPMENT_DATABASE_ITEM_TYPE_ID, REPOSITORY_CONFIGURATION, false);
-
-  @Override
-  public IItemType getItemType() {
-    return ITEM_TYPE;
-  }
+@Weight (weight=40)
+public class EquipmentItemType implements ItemTypeConfiguration
+{
+	private static final String EQUIPMENT_DATABASE_ITEM_TYPE_ID = "EquipmentDatabase";
+	private static final RepositoryConfiguration REPOSITORY_CONFIGURATION = new SingleFileConfiguration (".item", "equipment/");
+	private static final IItemType ITEM_TYPE = new ItemType (EQUIPMENT_DATABASE_ITEM_TYPE_ID, REPOSITORY_CONFIGURATION, false);
+	
+	@Override
+	public IItemType getItemType ()
+	{
+		return ITEM_TYPE;
+	}
 }

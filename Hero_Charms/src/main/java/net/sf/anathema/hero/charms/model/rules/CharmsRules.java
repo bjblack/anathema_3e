@@ -6,13 +6,13 @@ import net.sf.anathema.hero.concept.model.concept.CasteType;
 
 import java.util.List;
 
-public interface CharmsRules {
-
-  boolean isAllowedAlienCharms(CasteType caste);
-
-  boolean isAlienCharm(Charm charm);
-
-  boolean isAlienCategory(CategoryReference category);
-
-  List<CategoryReference> getNativeCategories();
+public interface CharmsRules
+{
+	boolean isAllowedAlienCharms (CasteType caste);
+	
+	boolean isAlienCharm (Charm charm);
+	
+	boolean isAlienCategory (CategoryReference category);
+	
+	List<CategoryReference> getNativeCategories ();
 }

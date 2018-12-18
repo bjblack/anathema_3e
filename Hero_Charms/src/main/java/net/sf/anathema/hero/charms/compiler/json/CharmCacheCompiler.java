@@ -22,50 +22,56 @@ import java.util.ArrayList;
 import java.util.List;
 
 @net.sf.anathema.platform.initialization.ExtensibleDataSetCompiler
-@Weight(weight = 50)
-public class CharmCacheCompiler implements ExtensibleDataSetCompiler {
-
-  private static final String Charm_File_Recognition_Pattern = ".+?\\.charms";
-  private final List<ResourceFile> resourceFiles = new ArrayList<>();
-
-  @Inject
-  public ObjectFactory objectFactory;
-  @Inject
-  public InterfaceFinder finder;
-
-  @Override
-  public String getName() {
-    return "Charms";
-  }
-
-  @Override
-  public String getRecognitionPattern() {
-    return Charm_File_Recognition_Pattern;
-  }
-
-  @Override
-  public void registerFile(ResourceFile resource) {
-    resourceFiles.add(resource);
-  }
-
-  @Override
-  public ExtensibleDataSet build() {
-    RuntimeTypeAdapterFactory[] charmFactories =
-            new PolymorphicTypeAdapterFactoryFactory(finder).generateFactories(CharmPrerequisiteTemplate.class);
-    RuntimeTypeAdapterFactory[] specialFactories =
-            new PolymorphicTypeAdapterFactoryFactory(finder).generateFactories(Repurchase.class, ValueTemplate.class);
-    GenericTemplateLoader<CharmListTemplate> charmsLoader = new GenericTemplateLoader<>(CharmListTemplate.class, charmFactories);
-    GenericTemplateLoader<SpecialCharmListTemplate> specialsLoader = new GenericTemplateLoader<>(SpecialCharmListTemplate.class, specialFactories);
-    CharmCacheBuilderImpl charmsBuilder = new CharmCacheBuilderImpl();
-    SpecialCharmsBuilder specialBuilder = new SpecialCharmsBuilder(objectFactory);
-    resourceFiles.forEach(resourceFile -> {
-      CharmListTemplate charmTemplate = charmsLoader.load(resourceFile);
-      charmsBuilder.addTemplate(charmTemplate);
-      SpecialCharmListTemplate specialsTemplate = specialsLoader.load(resourceFile);
-      specialBuilder.addTemplate(specialsTemplate, new AdditionalCharmFactory(charmsBuilder, charmTemplate));
-    });
-    CharmCacheImpl charmCache = charmsBuilder.createCache();
-    specialBuilder.addToCache(charmCache);
-    return charmCache;
-  }
+@Weight (weight = 50)
+public class CharmCacheCompiler implements ExtensibleDataSetCompiler
+{
+	private static final String Charm_File_Recognition_Pattern = ".+?\\.charms";
+	private final List<ResourceFile> resourceFiles = new ArrayList<> ();
+	
+	@Inject
+	public ObjectFactory objectFactory;
+	@Inject
+	public InterfaceFinder finder;
+	
+	@Override
+	public String getName ()
+	{
+		return "Charms";
+	}
+	
+	@Override
+	public String getRecognitionPattern ()
+	{
+		return Charm_File_Recognition_Pattern;
+	}
+	
+	@Override
+	public void registerFile (ResourceFile resource)
+	{
+		resourceFiles.add (resource);
+	}
+	
+	@Override
+	public ExtensibleDataSet build ()
+	{
+		RuntimeTypeAdapterFactory[] charmFactories =
+		new PolymorphicTypeAdapterFactoryFactory (finder).generateFactories (CharmPrerequisiteTemplate.class);
+		RuntimeTypeAdapterFactory[] specialFactories =
+		new PolymorphicTypeAdapterFactoryFactory (finder).generateFactories (Repurchase.class, ValueTemplate.class);
+		GenericTemplateLoader<CharmListTemplate> charmsLoader = new GenericTemplateLoader<> (CharmListTemplate.class, charmFactories);
+		GenericTemplateLoader<SpecialCharmListTemplate> specialsLoader = new GenericTemplateLoader<> (SpecialCharmListTemplate.class, specialFactories);
+		CharmCacheBuilderImpl charmsBuilder = new CharmCacheBuilderImpl ();
+		SpecialCharmsBuilder specialBuilder = new SpecialCharmsBuilder (objectFactory);
+		resourceFiles.forEach (resourceFile ->
+		{
+			CharmListTemplate charmTemplate = charmsLoader.load (resourceFile);
+			charmsBuilder.addTemplate (charmTemplate);
+			SpecialCharmListTemplate specialsTemplate = specialsLoader.load (resourceFile);
+			specialBuilder.addTemplate (specialsTemplate, new AdditionalCharmFactory (charmsBuilder, charmTemplate));
+		}
+		);
+		CharmCacheImpl charmCache = charmsBuilder.createCache ();
+		specialBuilder.addToCache (charmCache);
+		return charmCache;
+	}
 }

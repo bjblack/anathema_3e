@@ -6,35 +6,40 @@ import net.sf.anathema.scribe.editor.presenter.TextTypedListener;
 
 import org.jmock.example.announcer.Announcer;
 
-public class ScrollEditorDummy implements ScrollEditor {
-
-  public final Announcer<TextTypedListener> contentChangedAnnouncer = new Announcer<>(TextTypedListener.class);
-  public final Announcer<TextTypedListener> titleChangedAnnouncer = new Announcer<>(TextTypedListener.class);
-  public WikiText text;
-  public String title;
-
-  @Override
-  public void setWikiText(WikiText text) {
-    this.text = text;
-  }
-
-  @Override
-  public void setTitlePrompt(String prompt) {
-    //nothing to do
-  }
-
-  @Override
-  public void setTitle(String title) {
-    this.title = title;
-  }
-
-  @Override
-  public void whenContentTyped(TextTypedListener listener) {
-    contentChangedAnnouncer.addListener(listener);
-  }
-
-  @Override
-  public void whenTitleTyped(TextTypedListener listener) {
-    titleChangedAnnouncer.addListener(listener);
-  }
+public class ScrollEditorDummy implements ScrollEditor
+{
+	public final Announcer<TextTypedListener> contentChangedAnnouncer = new Announcer<> (TextTypedListener.class);
+	public final Announcer<TextTypedListener> titleChangedAnnouncer = new Announcer<> (TextTypedListener.class);
+	public WikiText text;
+	public String title;
+	
+	@Override
+	public void setWikiText (WikiText text)
+	{
+		this.text = text;
+	}
+	
+	@Override
+	public void setTitlePrompt (String prompt)
+	{
+		//nothing to do
+	}
+	
+	@Override
+	public void setTitle (String title)
+	{
+		this.title = title;
+	}
+	
+	@Override
+	public void whenContentTyped (TextTypedListener listener)
+	{
+		contentChangedAnnouncer.addListener (listener);
+	}
+	
+	@Override
+	public void whenTitleTyped (TextTypedListener listener)
+	{
+		titleChangedAnnouncer.addListener (listener);
+	}
 }

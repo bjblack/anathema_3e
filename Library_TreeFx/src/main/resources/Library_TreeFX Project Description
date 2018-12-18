@@ -1,0 +1,6 @@
+
+The Java Project Library_TreeFX seems to be a system for displaying charm cascades in the GUI. It contains eight source files, with a cumulative total of three (3) line comments (two of which say "nothing to do"), and no other comments.
+
+The package is net.sf.anathema.platform.tree, instead of net.sf.anathema.library.tree, which might have been a better fit to naming conventions. Not that the distinction between platform and library is clear to begin with.
+
+I will scrap this project.

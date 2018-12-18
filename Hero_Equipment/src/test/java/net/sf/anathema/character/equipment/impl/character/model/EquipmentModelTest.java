@@ -25,50 +25,54 @@ import org.junit.Test;
 import static net.sf.anathema.hero.traits.model.types.CommonTraitTypes.Essence;
 import static org.mockito.Mockito.mock;
 
-public class EquipmentModelTest {
-
-  private EquipmentModelImpl model;
-
-  @Before
-  public void setUp() throws Exception {
-    DummyHero hero = createCharacterWithEssence(2);
-    hero.addModel(new EssencePoolModelImpl(new EssencePoolTemplate()));
-    hero.addModel(new SpecialtiesModelImpl());
-    hero.addModel(new StatsModelImpl());
-    hero.addModel(new TraitModelImpl());
-    hero.addModel(new AbilitiesModelImpl(new AbilitiesTemplate()));
-    AttributeModel attributeModel = createAttributeModelWithStamina();
-    DummyHeroEnvironment context = new DummyHeroEnvironment();
-    attributeModel.initialize(context, hero);
-    model = new EquipmentModelImpl();
-    model.initialize(context, hero);
-  }
-
-  private DummyHero createCharacterWithEssence(int currentValue) {
-    DummyHero hero = new DummyHero();
-    DummySpiritualTraitModel traitModel = new DummySpiritualTraitModel();
-    hero.addModel(traitModel);
-    hero.addModel(new DummyHeroConcept());
-    hero.addModel(new DummyTraitModel());
-    traitModel.getTrait(Essence).setCurrentValue(currentValue);
-    return hero;
-  }
-
-  private AttributeModelImpl createAttributeModelWithStamina() {
-    GroupedTraitsTemplate template = new GroupedTraitsTemplate();
-    Group physicalAttributes = new Group();
-    physicalAttributes.id = "Physical";
-    physicalAttributes.traits.add("Stamina");
-    template.groups.add(physicalAttributes);
-    return new AttributeModelImpl(template);
-  }
-
-  @Test
-  public void removesStatsWithoutNpe() throws Exception {
-    DummyEquipmentItem fromItem = new DummyEquipmentItem("from", "");
-    IEquipmentStats stats = mock(IEquipmentStats.class);
-    fromItem.addEquipment(stats);
-    DummyEquipmentItem toItem = new DummyEquipmentItem("to", "");
-    model.transferOptions(fromItem, toItem);
-  }
+public class EquipmentModelTest
+{
+	private EquipmentModelImpl model;
+	
+	@Before
+	public void setUp () throws Exception
+	{
+		DummyHero hero = createCharacterWithEssence (2);
+		hero.addModel (new EssencePoolModelImpl (new EssencePoolTemplate ()));
+		hero.addModel (new SpecialtiesModelImpl ());
+		hero.addModel (new StatsModelImpl ());
+		hero.addModel (new TraitModelImpl ());
+		hero.addModel (new AbilitiesModelImpl (new AbilitiesTemplate ()));
+		AttributeModel attributeModel = createAttributeModelWithStamina ();
+		DummyHeroEnvironment context = new DummyHeroEnvironment ();
+		attributeModel.initialize (context, hero);
+		model = new EquipmentModelImpl ();
+		model.initialize (context, hero);
+	}
+	
+	private DummyHero createCharacterWithEssence (int currentValue)
+	{
+		DummyHero hero = new DummyHero ();
+		DummySpiritualTraitModel traitModel = new DummySpiritualTraitModel ();
+		hero.addModel (traitModel);
+		hero.addModel (new DummyHeroConcept ());
+		hero.addModel (new DummyTraitModel ());
+		traitModel.getTrait (Essence).setCurrentValue (currentValue);
+		return hero;
+	}
+	
+	private AttributeModelImpl createAttributeModelWithStamina ()
+	{
+		GroupedTraitsTemplate template = new GroupedTraitsTemplate ();
+		Group physicalAttributes = new Group ();
+		physicalAttributes.id = "Physical";
+		physicalAttributes.traits.add ("Stamina");
+		template.groups.add (physicalAttributes);
+		return new AttributeModelImpl (template);
+	}
+	
+	@Test
+	public void removesStatsWithoutNpe () throws Exception
+	{
+		DummyEquipmentItem fromItem = new DummyEquipmentItem ("from", "");
+		IEquipmentStats stats = mock (IEquipmentStats.class);
+		fromItem.addEquipment (stats);
+		DummyEquipmentItem toItem = new DummyEquipmentItem ("to", "");
+		model.transferOptions (fromItem, toItem);
+	}
 }

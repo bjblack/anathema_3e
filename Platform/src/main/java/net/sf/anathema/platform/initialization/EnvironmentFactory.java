@@ -18,41 +18,49 @@ import net.sf.anathema.platform.resources.LocaleResources;
 
 import java.util.Set;
 
-public class EnvironmentFactory {
-
-  private final ExceptionHandler exceptionHandler;
-
-  public EnvironmentFactory(ExceptionHandler exceptionHandler) {
-    this.exceptionHandler = exceptionHandler;
-  }
-
-  public Environment create() {
-    Preferences preferences = new PropertyPreferences();
-    DefaultAnathemaReflections reflections = new DefaultAnathemaReflections();
-    ResourceFileLoader loader = createResourceLoaderForInternalAndCustomResources(exceptionHandler, reflections, preferences);
-    ObjectFactory objectFactory = new ReflectionObjectFactory(reflections, reflections);
-    LocaleResources resources = initResources(loader);
-    return new ApplicationEnvironment(resources, exceptionHandler, loader, objectFactory, preferences, reflections);
-  }
-
-  private LocaleResources initResources(ResourceFileLoader loader) {
-    LocaleResources resources = new LocaleResources();
-    Set<ResourceFile> resourcesInPaths = loader.getResourcesMatching(".*\\.properties");
-    for (ResourceFile resource : resourcesInPaths) {
-      resources.addResourceBundle(resource);
-    }
-    return resources;
-  }
-
-  private ResourceFileLoader createResourceLoaderForInternalAndCustomResources(ExceptionHandler exceptionHandler, DefaultAnathemaReflections reflections, Preferences preferences) {
-    try {
-      PreferencesBasedRepositoryLocation location = new PreferencesBasedRepositoryLocation(preferences);
-      RepositoryLocationResolver resolver = new RepositoryLocationResolver(location);
-      CustomDataResourceFileLoader customLoader = new CustomDataResourceFileLoader(resolver);
-      return new AggregatedResourceFileLoader(reflections, customLoader);
-    } catch (RuntimeException e) {
-      exceptionHandler.handle(e);
-      return new AggregatedResourceFileLoader(reflections);
-    }
-  }
+public class EnvironmentFactory
+{
+	private final ExceptionHandler exceptionHandler;
+	
+	public EnvironmentFactory (ExceptionHandler exceptionHandler)
+	{
+		this.exceptionHandler = exceptionHandler;
+	}
+	
+	public Environment create ()
+	{
+		Preferences preferences = new PropertyPreferences ();
+		DefaultAnathemaReflections reflections = new DefaultAnathemaReflections ();
+		ResourceFileLoader loader = createResourceLoaderForInternalAndCustomResources (exceptionHandler, reflections, preferences);
+		ObjectFactory objectFactory = new ReflectionObjectFactory (reflections, reflections);
+		LocaleResources resources = initResources (loader);
+		return new ApplicationEnvironment (resources, exceptionHandler, loader, objectFactory, preferences, reflections);
+	}
+	
+	private LocaleResources initResources (ResourceFileLoader loader)
+	{
+		LocaleResources resources = new LocaleResources ();
+		Set<ResourceFile> resourcesInPaths = loader.getResourcesMatching (".*\\.properties");
+		for (ResourceFile resource : resourcesInPaths)
+		{
+			resources.addResourceBundle (resource);
+		}
+		return resources;
+	}
+	
+	private ResourceFileLoader createResourceLoaderForInternalAndCustomResources (ExceptionHandler exceptionHandler, DefaultAnathemaReflections reflections, Preferences preferences)
+	{
+		try
+		{
+			PreferencesBasedRepositoryLocation location = new PreferencesBasedRepositoryLocation (preferences);
+			RepositoryLocationResolver resolver = new RepositoryLocationResolver (location);
+			CustomDataResourceFileLoader customLoader = new CustomDataResourceFileLoader (resolver);
+			return new AggregatedResourceFileLoader (reflections, customLoader);
+		}
+		catch (RuntimeException e)
+		{
+			exceptionHandler.handle (e);
+			return new AggregatedResourceFileLoader (reflections);
+		}
+	}
 }

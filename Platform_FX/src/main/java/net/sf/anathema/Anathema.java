@@ -15,42 +15,50 @@ import net.sf.anathema.platform.fx.initialization.GuiInitializer;
 import net.sf.anathema.platform.fx.repositorytree.FxFileChooser;
 import net.sf.anathema.platform.initialization.EnvironmentFactory;
 
-public class Anathema extends Application {
-
-  private Environment environment;
-  private ExtensibleExceptionHandler exceptionHandler;
-  private FxUiEnvironment uiEnvironment;
-
-  /*Called by the boot loader using reflection.*/
-  @SuppressWarnings("UnusedDeclaration")
-  public void startApplication() throws Exception {
-    launch();
-  }
-
-  @Override
-  public void init() throws Exception {
-    Logger.getLogger(Anathema.class).info("Launching Anathema");
-    this.exceptionHandler = new ExceptionHandling().create();
-    this.environment = new EnvironmentFactory(exceptionHandler).create();
-    this.uiEnvironment = new FxUiEnvironment();
-  }
-
-  @Override
-  public void start(Stage stage) throws Exception {
-    try {
-      displayStatus("Initializing Environment...");
-      uiEnvironment.setFileChooser(new FxFileChooser(stage));
-      displayStatus("Starting Platform...");
-      ApplicationFrame applicationFrame = new GuiInitializer(stage, environment, uiEnvironment, exceptionHandler).initialize().getWindow();
-      uiEnvironment.setAcceleratorMap(new FxAcceleratorMap(stage.getScene().getAccelerators()));
-      displayStatus("Done.");
-      applicationFrame.show();
-    } catch (InitializationException e) {
-      environment.handle(e);
-    }
-  }
-
-  private void displayStatus(String message) {
-    ProxySplashscreen.getInstance().displayStatusMessage(message);
-  }
+public class Anathema extends Application
+{
+	private Environment environment;
+	private ExtensibleExceptionHandler exceptionHandler;
+	private FxUiEnvironment uiEnvironment;
+	
+	/*Called by the boot loader using reflection.*/
+	@SuppressWarnings ("UnusedDeclaration")
+	public void startApplication (String[] args) throws Exception
+	{
+		// B.J. Black: This function now passes the command-line arguments into launch ().
+		launch (args);
+	}
+	
+	@Override
+	public void init () throws Exception
+	{
+		Logger.getLogger (Anathema.class).info ("Launching Anathema");
+		this.exceptionHandler = new ExceptionHandling ().create ();
+		this.environment = new EnvironmentFactory (exceptionHandler).create ();
+		this.uiEnvironment = new FxUiEnvironment ();
+	}
+	
+	@Override
+	public void start (Stage stage) throws Exception
+	{
+		try
+		{
+			displayStatus ("Initializing Environment...");
+			uiEnvironment.setFileChooser (new FxFileChooser (stage));
+			displayStatus ("Starting Platform...");
+			ApplicationFrame applicationFrame = new GuiInitializer (stage, environment, uiEnvironment, exceptionHandler).initialize ().getWindow ();
+			uiEnvironment.setAcceleratorMap (new FxAcceleratorMap (stage.getScene ().getAccelerators ()));
+			displayStatus ("Done.");
+			applicationFrame.show ();
+		}
+		catch (InitializationException e)
+		{
+			environment.handle (e);
+		}
+	}
+	
+	private void displayStatus (String message)
+	{
+		ProxySplashscreen.getInstance ().displayStatusMessage (message);
+	}
 }

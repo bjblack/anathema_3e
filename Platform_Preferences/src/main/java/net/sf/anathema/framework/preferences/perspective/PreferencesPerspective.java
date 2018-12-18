@@ -15,26 +15,30 @@ import net.sf.anathema.platform.utility.UtilityToggle;
 import static net.sf.anathema.platform.preferences.PropertyPreferences.PREFERENCES_PROPERTIES;
 
 @UtilityAutoCollector
-@Weight(weight = 8000)
-public class PreferencesPerspective implements UtilityPerspective {
-  @Override
-  public void configureToggle(UtilityToggle toggle) {
-    toggle.setIcon(new RelativePath("icons/preferences.png"));
-    toggle.setTooltip("Preferences.Perspective");
-  }
-
-  @Override
-  public void initContent(Container container, ApplicationModel applicationModel, Environment environment, UiEnvironment uiEnvironment) {
-    PreferencesSystemView view = new PreferencesSystemView(environment.getObjectFactory());
-    container.setContent(view.utilityPane.getNode());
-    PreferencesModel model = new CollectingPreferencesModel(environment.getObjectFactory());
-    PreferencesPersister persister = new PropertiesPreferencesPersister(PREFERENCES_PROPERTIES);
-    PreferencesPresenter presenter = new PreferencesPresenter(environment, view.preferencesNavigation, model, persister, environment.getObjectFactory());
-    presenter.initialize();
-  }
-
-  @Override
-  public MessageCategory getMessageCategory() {
-    return new MessageCategory("Preferences");
-  }
+@Weight (weight = 8000)
+public class PreferencesPerspective implements UtilityPerspective
+{
+	@Override
+	public void configureToggle (UtilityToggle toggle)
+	{
+		toggle.setIcon (new RelativePath ("icons/preferences.png"));
+		toggle.setTooltip ("Preferences.Perspective");
+	}
+	
+	@Override
+	public void initContent (Container container, ApplicationModel applicationModel, Environment environment, UiEnvironment uiEnvironment)
+	{
+		PreferencesSystemView view = new PreferencesSystemView (environment.getObjectFactory ());
+		container.setContent (view.utilityPane.getNode ());
+		PreferencesModel model = new CollectingPreferencesModel (environment.getObjectFactory ());
+		PreferencesPersister persister = new PropertiesPreferencesPersister (PREFERENCES_PROPERTIES);
+		PreferencesPresenter presenter = new PreferencesPresenter (environment, view.preferencesNavigation, model, persister, environment.getObjectFactory ());
+		presenter.initialize ();
+	}
+	
+	@Override
+	public MessageCategory getMessageCategory ()
+	{
+		return new MessageCategory ("Preferences");
+	}
 }

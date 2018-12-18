@@ -8,11 +8,12 @@ import net.sf.anathema.library.initialization.Weight;
 import net.sf.anathema.library.resources.Resources;
 
 @RegisteredTextEncoderFactory
-@Weight(weight = 100)
-public class HeroDescriptionTextEncoderFactory implements HeroTextEncoderFactory {
-
-  @Override
-  public HeroTextEncoder create(PdfReportUtils utils, Resources resources) {
-    return new HeroDescriptionTextEncoder(utils, resources);
-  }
+@Weight (weight = 100)
+public class HeroDescriptionTextEncoderFactory implements HeroTextEncoderFactory
+{
+	@Override
+	public HeroTextEncoder create (PdfReportUtils utils, Resources resources)
+	{
+		return new HeroDescriptionTextEncoder (utils, resources);
+	}
 }

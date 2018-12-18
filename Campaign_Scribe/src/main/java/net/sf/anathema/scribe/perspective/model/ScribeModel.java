@@ -10,17 +10,20 @@ import net.sf.anathema.scribe.scroll.persistence.SystemClock;
 
 import java.util.Collection;
 
-public class ScribeModel {
-  public final ScrollPersister scrollPersister;
-  public final ScrollModel scrollModel;
-
-  public ScribeModel(ApplicationModel applicationModel) {
-    Clock clock = new SystemClock();
-    this.scrollPersister =  new RepositoryScrollPersister(applicationModel.getRepository(), clock);
-    this.scrollModel = new ScrollModel(scrollPersister);
-  }
-
-  public Collection<ScrollReference> collectAllScrolls() {
-    return scrollPersister.listAll();
-  }
+public class ScribeModel
+{
+	public final ScrollPersister scrollPersister;
+	public final ScrollModel scrollModel;
+	
+	public ScribeModel (ApplicationModel applicationModel)
+	{
+		Clock clock = new SystemClock ();
+		this.scrollPersister =  new RepositoryScrollPersister (applicationModel.getRepository (), clock);
+		this.scrollModel = new ScrollModel (scrollPersister);
+	}
+	
+	public Collection<ScrollReference> collectAllScrolls ()
+	{
+		return scrollPersister.listAll ();
+	}
 }
